@@ -35,7 +35,7 @@ ffmpegopts = {
 }
 
 ytdl = YoutubeDL(ytdlopts)
-
+ytdl.cache.remove()
 
 class VoiceConnectionError(commands.CommandError):
     """Custom Exception class for connection errors."""
