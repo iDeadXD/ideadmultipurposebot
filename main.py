@@ -57,4 +57,4 @@ async def supported(ctx):
     
     await ctx.send(embed=embed)
 
-client.run(os.getenv('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg'))
+client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
