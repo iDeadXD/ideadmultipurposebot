@@ -28,6 +28,7 @@ Logged in as {0.user}'''.format(client))
 
 @client.command() #ping
 async def ping(ctx):
+    """Showing Bot Latency and YouTube Server Status"""
     pings = requests.get("https://youtube.com")
     titles = "Pong!!"
     selflatency = str(f" {round(client.latency * 1000)}ms")
@@ -44,6 +45,7 @@ async def ping(ctx):
 
 @client.command() #supported_link
 async def supported(ctx):
+    """Checking supported music links"""
     titles = "Supported Platform for Music Player"
     desc = "For Now, Only Support YouTube Link"
     author = ctx.message.author.name
@@ -55,4 +57,4 @@ async def supported(ctx):
     
     await ctx.send(embed=embed)
 
-client.run('TOKEN')
+client.run(os.getenv('TOKEN'))
