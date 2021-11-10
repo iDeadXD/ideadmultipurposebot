@@ -35,7 +35,7 @@ ffmpegopts = {
 }
 
 ytdl = YoutubeDL(ytdlopts)
-ytdl.cache.remove()
+
 
 class VoiceConnectionError(commands.CommandError):
     """Custom Exception class for connection errors."""
@@ -88,7 +88,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         else:
             return {'webpage_url': data['webpage_url'], 'requester': ctx.author, 'title': data['title']}
 
-        return cls(discord.FFmpegPCMAudio(source), data=data, requester=ctx.author)
+        return cls(discord.FFmpegOpusAudio(source), data=data, requester=ctx.author)
 
     @classmethod
     async def regather_stream(cls, data, *, loop):
@@ -100,7 +100,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         to_run = partial(ytdl.extract_info, url=data['webpage_url'], download=False)
         data = await loop.run_in_executor(None, to_run)
 
-        return cls(discord.FFmpegPCMAudio(data['url']), data=data, requester=requester)
+        return cls(discord.FFmpegOpusAudio(data['url']), data=data, requester=requester)
 
 
 class MusicPlayer:
@@ -122,7 +122,7 @@ class MusicPlayer:
         self.next = asyncio.Event()
 
         self.np = None  # Now playing message
-        self.volume = 2.0
+        self.volume = 1.5
         self.current = None
 
         ctx.bot.loop.create_task(self.player_loop())
@@ -274,6 +274,7 @@ class Music(commands.Cog):
         player = self.get_player(ctx)
 
         # If download is False, source will be a dict which will be used later to regather the stream.
+        # If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
         # If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
