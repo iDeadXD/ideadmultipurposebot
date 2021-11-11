@@ -1,5 +1,6 @@
 import os
 import discord
+import datetime
 from discord.ext import commands
 import music
 import requests
@@ -39,6 +40,21 @@ async def ping(ctx):
     )
     embed.add_field(name="Your Latency", value=selflatency)
     embed.add_field(name="YouTube Server Status", value=ytlatency)
+    embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
+@client.command()
+async def time(ctx):
+    time1 = datetime.now()
+    time1utc = datetime.utcnow()
+    titles = "Current Time (Local/UTC)"
+    
+    embed = discord.Embed(
+        title=titles,
+    )
+    embed.add_field(name="Local Time", value=time1)
+    embed.add_field(name="UTC Time", value=time1utc)
     embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
