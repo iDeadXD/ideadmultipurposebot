@@ -80,6 +80,7 @@ async def time(ctx):
     time1 = datetime.now()
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
+    author = ctx.message.author.name
     
     embed = discord.Embed(
         title=titles,
