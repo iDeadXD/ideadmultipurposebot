@@ -47,7 +47,7 @@ async def ping(ctx):
 @client.command()
 async def time(ctx):
     time1 = datetime.datetime.now()
-    time1utc = datetime.utcnow()
+    time1utc = datetime.datetime.utcnow()
     titles = "Current Time (Local/UTC)"
     
     embed = discord.Embed(
