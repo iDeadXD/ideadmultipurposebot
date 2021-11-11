@@ -1,6 +1,6 @@
 import os
+from datetime import datetime
 import discord
-import datetime
 from discord.ext import commands
 import music
 import requests
@@ -13,6 +13,25 @@ cogs = [music]
 welcome = f"""I'm Online Right Now.
 Author: @iDead"""
 
+pagi = discord.Embed(
+    title="--- AutoSend ---"
+    description="Good Morning, y'all"
+)
+siang = discord.Embed(
+    title="--- AutoSend ---"
+    description="Good Afternoon, friends"
+)
+malam = discord.Embed(
+    title="--- AutoSend ---"
+    description="Good Evening, Bois"
+)
+tengah_malam = discord.Embed(
+    title="--- AutoSend ---"
+    description="Good Night, everyone"
+)
+
+ping1 = str(f"Bot Latency: {round(client.latency * 1000)}ms")
+
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
@@ -20,12 +39,26 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
+    current_time = datetime.utcnow().strftime("%H:%M")
     channel1 = client.get_channel(851806673232199730)
     channel2 = client.get_channel(905017361353035806)
     await channel1.send(welcome)
-    await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
+    await channel1.send(ping1)
     await channel2.send(welcome)
-    await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
+    await channel2.send(ping1)
+    
+    if current_time == "07:00":
+        await channel1.send(embed=pagi)
+        await channel2.send(embed=pagi)
+    elif current_time == "11:00":
+        await channel1.send(embed=siang)
+        await channel2.send(embed=siang)
+    elif current_time == "19:00":
+        await channel1.send(embed=malam)
+        await channel2.send(embed=malam)
+    elif current_time == "23:00":
+        await channel1.send(embed=tengah_malam)
+        await channel2.send(embed=tengah_malam)
 
 @client.command() #ping
 async def ping(ctx):
@@ -46,10 +79,9 @@ async def ping(ctx):
 
 @client.command()
 async def time(ctx):
-    time1 = datetime.datetime.now()
-    time1utc = datetime.datetime.utcnow()
+    time1 = datetime.now()
+    time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
-    author = ctx.message.author.name
     
     embed = discord.Embed(
         title=titles,
