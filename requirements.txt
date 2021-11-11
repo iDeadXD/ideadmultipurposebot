@@ -3,4 +3,5 @@ asyncio
 youtube-dl
 PyNaCl
 requests
+schedule
 
