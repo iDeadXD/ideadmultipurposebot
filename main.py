@@ -15,7 +15,7 @@ Author: @iDead"""
 
 pagi = discord.Embed(
     title="--- AutoSend ---"
-    description="Good Morning, y'all"
+    description="Good Morning, everyone"
 )
 siang = discord.Embed(
     title="--- AutoSend ---"
