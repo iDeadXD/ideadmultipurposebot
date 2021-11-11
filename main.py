@@ -30,8 +30,6 @@ tengah_malam = discord.Embed(
     description="Good Night, everyone",
 )
 
-ping1 = str(f"Bot Latency: {round(client.latency * 1000)}ms")
-
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
@@ -43,9 +41,9 @@ Logged in as {0.user}'''.format(client))
     channel1 = client.get_channel(851806673232199730)
     channel2 = client.get_channel(905017361353035806)
     await channel1.send(welcome)
-    await channel1.send(ping1)
+    await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await channel2.send(welcome)
-    await channel2.send(ping1)
+    await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     
     if current_time == "07:00":
         await channel1.send(embed=pagi)
