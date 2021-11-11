@@ -16,19 +16,19 @@ Author: @iDead"""
 pagi = discord.Embed(
     title="--- AutoSend ---"
     description="Good Morning, everyone"
-)
+    )
 siang = discord.Embed(
     title="--- AutoSend ---"
     description="Good Afternoon, friends"
-)
+    )
 malam = discord.Embed(
     title="--- AutoSend ---"
     description="Good Evening, Bois"
-)
+    )
 tengah_malam = discord.Embed(
     title="--- AutoSend ---"
     description="Good Night, everyone"
-)
+    )
 
 ping1 = str(f"Bot Latency: {round(client.latency * 1000)}ms")
 
