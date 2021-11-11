@@ -46,7 +46,7 @@ async def ping(ctx):
 
 @client.command()
 async def time(ctx):
-    time1 = datetime.now()
+    time1 = datetime.datetime.now()
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
     
