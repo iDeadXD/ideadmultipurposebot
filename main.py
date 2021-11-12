@@ -118,8 +118,8 @@ async def reminder():
     await schedule.every().day.at("23:00").do(tengah_malam)
         
     while True:
-        schedule.run_pending()
-        time.sleep(1)
+        await schedule.run_pending()
+        await time.sleep(1)
 
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
 reminder()
