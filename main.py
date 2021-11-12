@@ -122,4 +122,4 @@ async def tengah_malam():
     await channel1.send(embed=tengah_malam1)
     await channel2.send(embed=tengah_malam1)
 
-client.run(os.getenv('TOKEN'))
+client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
