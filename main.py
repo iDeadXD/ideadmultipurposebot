@@ -83,8 +83,8 @@ async def reminder():
     await client.wait_until_ready()
     ch1 = client.get_channel(channel1)
     ch2 = client.get_channel(channel2)
-    hour = int(datetime.now().time().strftime("%H"))
-    minute = int(datetime.now().time().strftime("%M"))
+    hour = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%H"))
+    minute = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%M"))
     if hour == 7:
         pagi1 = discord.Embed(
             title="--- AutoSend ---",
