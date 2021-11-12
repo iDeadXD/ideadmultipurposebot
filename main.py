@@ -49,8 +49,8 @@ async def ping(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command()
-async def time_now(ctx):
+@client.command(name="time")
+async def time_(ctx):
     time1 = datetime.now()
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
