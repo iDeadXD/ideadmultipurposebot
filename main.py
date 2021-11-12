@@ -22,7 +22,7 @@ for i in range(len(cogs)):
     cogs[i].setup(client)
 
 @client.event
-async def on_ready():
+async def on_ready(self):
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
     channel1 = client.get_channel(851806673232199730)
@@ -31,6 +31,7 @@ Logged in as {0.user}'''.format(client))
     await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await channel2.send(welcome)
     await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
+    await self.reminder()
 
 @client.command() #ping
 async def ping(ctx):
@@ -122,4 +123,3 @@ async def reminder():
         await time.sleep(1)
 
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
-reminder()
