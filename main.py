@@ -18,8 +18,6 @@ Author: @iDead"""
 channel1 = client.get_channel(851806673232199730)
 channel2 = client.get_channel(905017361353035806)
 
-ping1 = str(f"Bot Latency: {round(client.latency * 1000)}ms")
-
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
@@ -29,9 +27,9 @@ async def on_ready():
 Logged in as {0.user}'''.format(client))
     current_time = datetime.utcnow().strftime("%H:%M")
     await channel1.send(welcome)
-    await channel1.send(ping1)
+    await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await channel2.send(welcome)
-    await channel2.send(ping1)
+    await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     
     schedule.every().day.at("07:00").do(pagi)
     schedule.every().day.at("11:30").do(siang)
