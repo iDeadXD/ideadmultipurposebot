@@ -25,6 +25,7 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to >help"))
     ch1 = client.get_channel(851806673232199730)
     ch2 = client.get_channel(905017361353035806)
     await ch1.send(welcome)
