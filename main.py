@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 import discord
-import schedule
 from discord.ext import commands
 import music
 import requests
@@ -15,8 +14,8 @@ cogs = [music]
 welcome = f"""I'm Online Right Now.
 Author: @iDead"""
 
-channel1 = client.get_channel(851806673232199730)
-channel2 = client.get_channel(905017361353035806)
+channel1 = "851806673232199730"
+channel2 = "905017361353035806"
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
@@ -25,13 +24,12 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
-    channel1 = client.get_channel(851806673232199730)
-    channel2 = client.get_channel(905017361353035806)
-    await channel1.send(welcome)
-    await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
-    await channel2.send(welcome)
-    await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
-    await reminder()
+    ch1 = client.get_channel(channel1)
+    ch2 = client.get_channel(channel2)
+    await ch1.send(welcome)
+    await ch1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
+    await ch2.send(welcome)
+    await ch2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.command() #ping
 async def ping(ctx):
@@ -50,8 +48,8 @@ async def ping(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command(name="time")
-async def time_(ctx):
+@client.command()
+async def time(ctx):
     time1 = datetime.now()
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
@@ -79,47 +77,42 @@ async def supported(ctx):
     embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
-    
-async def pagi():
-    pagi1 = discord.Embed(
-        title="--- AutoSend ---",
-        description="Good Morning, everyone",
-    )
-    await channel1.send(embed=pagi1)
-    await channel2.send(embed=pagi1)
-
-async def siang():
-    siang1 = discord.Embed(
-        title="--- AutoSend ---",
-        description="Good Afternoon, friends",
-    )
-    await channel1.send(embed=siang1)
-    await channel2.send(embed=siang1)
-
-async def malam():
-    malam1 = discord.Embed(
-        title="--- AutoSend ---",
-        description="Good Evening, Bois",
-    )
-    await channel1.send(embed=malam1)
-    await channel2.send(embed=malam1)
-
-async def tengah_malam():
-    tengah_malam1 = discord.Embed(
-        title="--- AutoSend ---",
-        description="Good Night, everyone",
-    )
-    await channel1.send(embed=tengah_malam1)
-    await channel2.send(embed=tengah_malam1)
 
 async def reminder():
-    schedule.every().day.at("07:00").do(pagi)
-    schedule.every().day.at("11:30").do(siang)
-    schedule.every().day.at("19:00").do(malam)
-    schedule.every().day.at("23:00").do(tengah_malam)
-        
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    await client.wait_until_ready()
+    ch1 = client.get_channel(channel1)
+    ch2 = client.get_channel(channel2)
+    hour = int(datetime.now().time().strftime("%H"))
+    minute = int(datetime.now().time().strftime("%M"))
+    if hour == 7:
+        pagi1 = discord.Embed(
+            title="--- AutoSend ---",
+            description="Good Morning, everyone",
+        )
+        await ch1.send(embed=pagi1)
+        await ch2.send(embed=pagi1)
+    if hour == 11 and minute == 30:
+        siang1 = discord.Embed(
+            title="--- AutoSend ---",
+            description="Good Afternoon, friends",
+        )
+        await ch1.send(embed=siang1)
+        await ch2.send(embed=siang1)
+    if hour == 19:
+        malam1 = discord.Embed(
+            title="--- AutoSend ---",
+            description="Good Evening, Bois",
+        )
+        await ch1.send(embed=malam1)
+        await ch2.send(embed=malam1)
+    if hour = 23 and minute == 30:
+        tengah_malam1 = discord.Embed(
+            title="--- AutoSend ---",
+            description="Good Night, everyone",
+        )
+        await ch1.send(embed=tengah_malam1)
+        await ch2.send(embed=tengah_malam1)
+    await asyncio.sleep(30)
 
+client.loop.create_task(reminder())
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
