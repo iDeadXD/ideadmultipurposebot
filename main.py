@@ -90,7 +90,7 @@ async def supported(ctx):
     
     await ctx.send(embed=embed)
     
-def pagi():
+async def pagi():
     pagi1 = discord.Embed(
         title="--- AutoSend ---",
         description="Good Morning, everyone",
@@ -98,7 +98,7 @@ def pagi():
     await channel1.send(embed=pagi1)
     await channel2.send(embed=pagi1)
 
-def siang():
+async def siang():
     siang1 = discord.Embed(
         title="--- AutoSend ---",
         description="Good Afternoon, friends",
@@ -106,7 +106,7 @@ def siang():
     await channel1.send(embed=siang1)
     await channel2.send(embed=siang1)
     
-def malam():
+async def malam():
     malam1 = discord.Embed(
         title="--- AutoSend ---",
         description="Good Evening, Bois",
@@ -114,7 +114,7 @@ def malam():
     await channel1.send(embed=malam1)
     await channel2.send(embed=malam1)
     
-def tengah_malam():
+async def tengah_malam():
     tengah_malam1 = discord.Embed(
         title="--- AutoSend ---",
         description="Good Night, everyone",
