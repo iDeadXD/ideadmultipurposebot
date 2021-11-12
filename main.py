@@ -3,6 +3,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
+import pytz
 import requests
 import time
 import asyncio
@@ -50,7 +51,7 @@ async def ping(ctx):
 
 @client.command()
 async def time(ctx):
-    time1 = datetime.now()
+    time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
     author = ctx.message.author.name
