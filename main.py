@@ -50,7 +50,7 @@ async def ping(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
-async def time(ctx):
+async def time_now(ctx):
     time1 = datetime.now()
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
