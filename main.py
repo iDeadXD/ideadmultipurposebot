@@ -24,8 +24,8 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
-    ch1 = client.get_channel(channel1)
-    ch2 = client.get_channel(channel2)
+    ch1 = client.get_channel(851806673232199730)
+    ch2 = client.get_channel(905017361353035806)
     await ch1.send(welcome)
     await ch1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome)
