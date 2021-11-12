@@ -25,20 +25,12 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
+    channel1 = client.get_channel(851806673232199730)
+    channel2 = client.get_channel(905017361353035806)
     await channel1.send(welcome)
     await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await channel2.send(welcome)
     await channel2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
-    
-    schedule.every().day.at("07:00").do(pagi)
-    schedule.every().day.at("11:30").do(siang)
-    schedule.every().day.at("19:00").do(malam)
-    schedule.every().day.at("23:00").do(tengah_malam1)
-    
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
 
 @client.command() #ping
 async def ping(ctx):
@@ -102,7 +94,7 @@ async def siang():
     )
     await channel1.send(embed=siang1)
     await channel2.send(embed=siang1)
-    
+
 async def malam():
     malam1 = discord.Embed(
         title="--- AutoSend ---",
@@ -110,7 +102,7 @@ async def malam():
     )
     await channel1.send(embed=malam1)
     await channel2.send(embed=malam1)
-    
+
 async def tengah_malam():
     tengah_malam1 = discord.Embed(
         title="--- AutoSend ---",
@@ -118,5 +110,13 @@ async def tengah_malam():
     )
     await channel1.send(embed=tengah_malam1)
     await channel2.send(embed=tengah_malam1)
+schedule.every().day.at("07:00").do(pagi)
+schedule.every().day.at("11:30").do(siang)
+schedule.every().day.at("19:00").do(malam)
+schedule.every().day.at("23:00").do(tengah_malam1)
+    
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
