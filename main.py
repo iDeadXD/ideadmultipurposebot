@@ -25,7 +25,6 @@ for i in range(len(cogs)):
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
-    current_time = datetime.utcnow().strftime("%H:%M")
     await channel1.send(welcome)
     await channel1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await channel2.send(welcome)
