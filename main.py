@@ -105,7 +105,7 @@ async def reminder():
         )
         await ch1.send(embed=malam1)
         await ch2.send(embed=malam1)
-    if hour = 23 and minute == 30:
+    if hour == 23 and minute == 30:
         tengah_malam1 = discord.Embed(
             title="--- AutoSend ---",
             description="Good Night, everyone",
