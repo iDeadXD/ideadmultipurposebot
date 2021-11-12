@@ -111,13 +111,15 @@ async def tengah_malam():
     await channel1.send(embed=tengah_malam1)
     await channel2.send(embed=tengah_malam1)
 
-schedule.every().day.at("07:00").do(pagi)
-schedule.every().day.at("11:30").do(siang)
-schedule.every().day.at("19:00").do(malam)
-schedule.every().day.at("23:00").do(tengah_malam)
-    
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+def reminder():
+    await schedule.every().day.at("07:00").do(pagi)
+    await schedule.every().day.at("11:30").do(siang)
+    await schedule.every().day.at("19:00").do(malam)
+    await schedule.every().day.at("23:00").do(tengah_malam)
+        
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
+reminder()
