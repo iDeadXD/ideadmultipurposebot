@@ -85,7 +85,7 @@ async def reminder():
     while not client.is_closed():
         hour = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%H"))
         minute = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%M"))
-        if hour == 07 and minute == 00:
+        if hour == 7 and minute == 00:
             ch1 = client.get_channel(851806673232199730)
             ch2 = client.get_channel(905017361353035806)
             pagi1 = discord.Embed(
