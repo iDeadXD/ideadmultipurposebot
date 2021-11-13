@@ -3,6 +3,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
+import json
 import pytz
 import requests
 import time
@@ -14,9 +15,6 @@ cogs = [music]
 
 welcome = f"""I'm Online Right Now.
 Author: @iDead"""
-
-channel1 = "851806673232199730"
-channel2 = "905017361353035806"
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
@@ -32,6 +30,46 @@ Logged in as {0.user}'''.format(client))
     await ch1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome)
     await ch2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
+
+@client.event
+async def on_member_join(member):
+    with open('users.json', 'r') as f:
+        users = json.load(f)
+    
+    await update_data(users, member)
+    
+    with open('users.json', 'w') as f:
+        json.dump(users, f)
+
+@client.event
+async def on_message(message):
+    with open('users.json', 'r') as f:
+        users = json.load(f)
+    
+    await update_data(users, message.author)
+    await add_experience(users, message.author, 5)
+    await level_up(users, message.author, message.channel)
+    
+    with open('users.json', 'w') as f:
+        json.dump(users, f)
+
+async def update_data(users, user):
+    if not user.id in users:
+        users[user.id] = {}
+        users[user.id]['experience'] = 0
+        users[user.id]['level'] = 0
+
+async def add_experience(users, user, exp):
+    users[user.id]['experience'] += exp
+
+async def level_up(users, user, channel):
+    experience = users[user.id]['experience']
+    lvl_start = users[user.id]['level']
+    lvl_end = int(experience **(1/4))
+    
+    if lvl_start < lvl_end:
+        await client.send_message(channel, '{} has leveled up to level {}'.format(user.mention, lvl_end))
+        users[user.id]['level'] = lvl_end
 
 @client.command() #ping
 async def ping(ctx):
@@ -98,48 +136,4 @@ async def avatar_(ctx, avamem : discord.Member=None):
     
     await ctx.send(embed=embed)
 
-async def reminder(): #failed_function
-    await client.wait_until_ready()
-    while not client.is_closed():
-        hour = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%H"))
-        minute = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%M"))
-        if hour == 7 and minute == 00:
-            ch1 = client.get_channel(851806673232199730)
-            ch2 = client.get_channel(905017361353035806)
-            pagi1 = discord.Embed(
-                title="--- AutoSend ---",
-                description="Good Morning, everyone",
-            )
-            await ch1.send(embed=pagi1)
-            await ch2.send(embed=pagi1)
-        elif hour == 11 and minute == 30:
-            ch1 = client.get_channel(851806673232199730)
-            ch2 = client.get_channel(905017361353035806)
-            siang1 = discord.Embed(
-                title="--- AutoSend ---",
-                description="Good Afternoon, friends",
-            )
-            await ch1.send(embed=siang1)
-            await ch2.send(embed=siang1)
-        elif hour == 19 and minute == 00:
-            ch1 = client.get_channel(851806673232199730)
-            ch2 = client.get_channel(905017361353035806)
-            malam1 = discord.Embed(
-                title="--- AutoSend ---",
-                description="Good Evening, Bois",
-            )
-            await ch1.send(embed=malam1)
-            await ch2.send(embed=malam1)
-        elif hour == 23 and minute == 30:
-            ch1 = client.get_channel(851806673232199730)
-            ch2 = client.get_channel(905017361353035806)
-            tengah_malam1 = discord.Embed(
-                title="--- AutoSend ---",
-                description="Good Night, everyone",
-            )
-            await ch1.send(embed=tengah_malam1)
-            await ch2.send(embed=tengah_malam1)
-        await asyncio.sleep(3600)
-
-client.loop.create_task(reminder())
 client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
