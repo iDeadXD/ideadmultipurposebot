@@ -80,6 +80,21 @@ async def supported(ctx):
     
     await ctx.send(embed=embed)
 
+@client.command(name="avatar")
+async def avatar_(ctx, avamem : discord.Member=None):
+    if avamem is None:
+        avamem = ctx.author
+    useravatar = avamem.avatar_url
+    author = ctx.message.author.name
+    embed = discord.Embed(
+        color=discord.Color.green()
+        title=f"<@{avamem.id}> Avatar",
+    )
+    embed.set_image(url=useravatar)
+    embed.set_footer(text=f"Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
 async def reminder():
     await client.wait_until_ready()
     while not client.is_closed():
