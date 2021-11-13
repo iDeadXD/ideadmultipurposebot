@@ -48,8 +48,8 @@ async def waifu(ctx):
     data = r.json()
     img_url = data['url']
     embed = discord.Embed(
-        title="--- Random Waifu Images ---"
-        description=f"Waifu for {author}"
+        title="--- Random Waifu Images ---",
+        description=f"Waifu for {author}",
     )
     embed.set_image(url=img_url)
     embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
