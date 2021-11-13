@@ -21,7 +21,7 @@ channel2 = "905017361353035806"
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-@client.event
+@client.event #bot_event
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
@@ -50,8 +50,9 @@ async def ping(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command()
+@client.command() #current_time
 async def time(ctx):
+    """Showing Current Time (Local/UTC)"""
     time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
@@ -80,15 +81,16 @@ async def supported(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command(name="avatar")
+@client.command(name="avatar") #avatar_command
 async def avatar_(ctx, avamem : discord.Member=None):
+    """Get Avatar Image from Specified User"""
     if avamem is None:
         avamem = ctx.author
     useravatar = avamem.avatar_url
     author = ctx.message.author.name
     embed = discord.Embed(
         color=discord.Color.green(),
-        title="\u200b",
+        title="--- Avatar ---",
         description=f"{avamem.mention} Avatar",
     )
     embed.set_image(url=useravatar)
@@ -96,7 +98,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
     
     await ctx.send(embed=embed)
 
-async def reminder():
+async def reminder(): #failed_function
     await client.wait_until_ready()
     while not client.is_closed():
         hour = int(datetime.now(pytz.timezone('Asia/Jakarta')).time().strftime("%H"))
