@@ -91,7 +91,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
         title=f"<@{avamem.id}> Avatar",
     )
     embed.set_image(url=useravatar)
-    embed.set_footer(text=f"Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
