@@ -3,6 +3,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
+import json
 import pytz
 import requests
 import time
@@ -30,6 +31,31 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome)
     await ch2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
 
+@client.command()
+async def waifu(ctx):
+    async with ctx.typing():
+        img_url = "https://api.waifu.pics/sfw/waifu"
+        embed = discord.Embed(
+            title="--- Random Waifu ---"
+        )
+
+@client.command()
+async def waifu(ctx):
+    """Waifu images for you"""
+    url = "https://api.waifu.pics/sfw/waifu"
+    author = ctx.message.author.mention
+    r = requests.get(url)
+    data = r.json()
+    img_url = data['url']
+    embed = discord.Embed(
+        title="--- Random Waifu Images ---"
+        description=f"Waifu for {author}"
+    )
+    embed.set_image(url=img_url)
+    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
 @client.command() #ping
 async def ping(ctx):
     """Showing Bot Latency and YouTube Server Status"""
@@ -47,8 +73,8 @@ async def ping(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command(name="time") #current_time
-async def time_(ctx):
+@client.command() #current_time
+async def time(ctx):
     """Showing Current Time (Local/UTC)"""
     time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
     time1utc = datetime.utcnow()
