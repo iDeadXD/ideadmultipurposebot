@@ -95,4 +95,4 @@ async def avatar_(ctx, avamem : discord.Member=None):
     
     await ctx.send(embed=embed)
 
-client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.8Bt_jbhu432HFbMjsc26BM53hjg')
+client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.5MpGgosOjwIYlz0iXFPSTVPwyqI')
