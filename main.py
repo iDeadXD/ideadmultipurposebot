@@ -33,14 +33,6 @@ Logged in as {0.user}'''.format(client))
 
 @client.command()
 async def waifu(ctx):
-    async with ctx.typing():
-        img_url = "https://api.waifu.pics/sfw/waifu"
-        embed = discord.Embed(
-            title="--- Random Waifu ---"
-        )
-
-@client.command()
-async def waifu(ctx):
     """Waifu images for you"""
     url = "https://api.waifu.pics/sfw/waifu"
     author = ctx.message.author.mention
