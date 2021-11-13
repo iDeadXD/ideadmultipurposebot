@@ -87,7 +87,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
     useravatar = avamem.avatar_url
     author = ctx.message.author.name
     embed = discord.Embed(
-        color=discord.Color.green()
+        color=discord.Color.green(),
         title=f"<@{avamem.id}> Avatar",
     )
     embed.set_image(url=useravatar)
