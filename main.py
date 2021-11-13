@@ -3,7 +3,6 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
-import json
 import pytz
 import requests
 import time
@@ -31,46 +30,6 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome)
     await ch2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
 
-@client.event
-async def on_member_join(member):
-    with open('users.json', 'r') as f:
-        users = json.load(f)
-    
-    await update_data(users, member)
-    
-    with open('users.json', 'w') as f:
-        json.dump(users, f)
-
-@client.event
-async def on_message(message):
-    with open('users.json', 'r') as f:
-        users = json.load(f)
-    
-    await update_data(users, message.author)
-    await add_experience(users, message.author, 5)
-    await level_up(users, message.author, message.channel)
-    
-    with open('users.json', 'w') as f:
-        json.dump(users, f)
-
-async def update_data(users, user):
-    if not user.id in users:
-        users[user.id] = {}
-        users[user.id]['experience'] = 0
-        users[user.id]['level'] = 0
-
-async def add_experience(users, user, exp):
-    users[user.id]['experience'] += exp
-
-async def level_up(users, user, channel):
-    experience = users[user.id]['experience']
-    lvl_start = users[user.id]['level']
-    lvl_end = int(experience **(1/4))
-    
-    if lvl_start < lvl_end:
-        await client.send_message(channel, '{} has leveled up to level {}'.format(user.mention, lvl_end))
-        users[user.id]['level'] = lvl_end
-
 @client.command() #ping
 async def ping(ctx):
     """Showing Bot Latency and YouTube Server Status"""
@@ -88,8 +47,8 @@ async def ping(ctx):
     
     await ctx.send(embed=embed)
 
-@client.command() #current_time
-async def time(ctx):
+@client.command(name="time") #current_time
+async def time_(ctx):
     """Showing Current Time (Local/UTC)"""
     time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
     time1utc = datetime.utcnow()
