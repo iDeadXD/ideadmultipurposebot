@@ -14,10 +14,8 @@ client = commands.Bot(command_prefix=">", intents = discord.Intents.all())
 
 cogs = [music]
 
-bot_author = client.get_user(843132313562513408)
-
 welcome = f"""I'm Online Right Now.
-Author: {bot_author.mention}."""
+Author: iDead#9496."""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
