@@ -35,51 +35,36 @@ Logged in as {0.user}'''.format(client))
 @client.command()
 async def hentai(ctx):
     """Uncensored Anime Image (18+ Warning)"""
-    chid = client.get_channel(909283710665379911)
-    
     async with ctx.typing():
-        if ctx.channel.id is not chid.id:
-            await ctx.send('Write this command in {}'.format(chid.mention))
-    
-        url1 = "https://api.waifu.pics/nsfw/waifu"
-        url2 = "https://api.waifu.pics/nsfw/neko"
-        url3 = "https://api.waifu.pics/nsfw/blowjob"
-        author = ctx.message.author.mention
-        r1 = requests.get(url1)
-        r2 = requests.get(url2)
-        r3 = requests.get(url3)
-        data1 = r1.json()
-        data2 = r2.json()
-        data3 = r3.json()
-        img_url1 = data1['url']
-        img_url2 = data2['url']
-        img_url3 = data3['url']
-        randimg = random.choice(img_url1, img_url2, img_url3)
-        embed = discord.Embed(
-            title="--- 18+ Hentai Image ---",
-            description=f"Are you satisfied, {author}",
-        )
-        embed.set_image(url=randimg)
-        embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
-        
-        await ctx.send(embed=embed)
-
-@client.command()
-async def waifu(ctx):
-    """Waifu images for you"""
-    url = "https://api.waifu.pics/sfw/waifu"
-    author = ctx.message.author.mention
-    r = requests.get(url)
-    data = r.json()
-    img_url = data['url']
-    embed = discord.Embed(
-        title="--- Random Waifu Images ---",
-        description=f"Waifu for {author}",
-    )
-    embed.set_image(url=img_url)
-    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
-    
-    await ctx.send(embed=embed)
+        if ctx.channel.is_nsfw():
+            url1 = "https://api.waifu.pics/nsfw/waifu"
+            url2 = "https://api.waifu.pics/nsfw/neko"
+            url3 = "https://api.waifu.pics/nsfw/blowjob"
+            author = ctx.message.author.mention
+            r1 = requests.get(url1)
+            r2 = requests.get(url2)
+            r3 = requests.get(url3)
+            data1 = r1.json()
+            data2 = r2.json()
+            data3 = r3.json()
+            img_url1 = data1['url']
+            img_url2 = data2['url']
+            img_url3 = data3['url']
+            imgdata = [
+                img_url1,
+                img_url2,
+                img_url3,
+            ]
+            embed = discord.Embed(
+                title="--- 18+ Hentai Image ---",
+                description=f"Are you satisfied, {author}",
+            )
+            embed.set_image(url=random.choice(imgdata))
+            embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+            
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send('Write this command in NSFW channel')
 
 @client.command() #ping
 async def ping(ctx):
