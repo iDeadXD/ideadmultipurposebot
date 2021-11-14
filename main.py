@@ -15,7 +15,8 @@ client = commands.Bot(command_prefix=">", intents = discord.Intents.all())
 cogs = [music]
 
 welcome = f"""I'm Online Right Now.
-Author: @iDead"""
+Author: @iDead
+Bot Latency: {round(client.latency * 1000)}ms"""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
@@ -25,12 +26,10 @@ async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
-    ch1 = client.get_channel(851806673232199730)
-    ch2 = client.get_channel(905017361353035806)
+    ch1 = client.get_channel(840594344939356184)
+    ch2 = client.get_channel(909301287517040640)
     await ch1.send(welcome)
-    await ch1.send(f"Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome)
-    await ch2.send(f"Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.command()
 async def hentai(ctx):
