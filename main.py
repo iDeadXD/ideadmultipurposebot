@@ -60,8 +60,8 @@ async def hentai(ctx):
     img_url3 = data3['url']
     randimg = random.choice(img_url1, img_url2, img_url3)
     embed = discord.Embed(
-        title="--- 18+ Hentai Image ---"
-        description=f"Are you satisfied, {author}"
+        title="--- 18+ Hentai Image ---",
+        description=f"Are you satisfied, {author}",
     )
     embed.set_image(url=randimg)
     embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
