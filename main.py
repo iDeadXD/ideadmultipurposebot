@@ -16,7 +16,7 @@ cogs = [music]
 
 welcome = f"""I'm Online Right Now.
 Author: @iDead
-Bot Latency: {int(round(client.latency * 1000))}ms"""
+Bot Latency: {float(round(client.latency * 1000))}ms"""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
