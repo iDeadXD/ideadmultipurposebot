@@ -36,6 +36,7 @@ async def waifu(ctx):
     async with ctx.typing():
         if ctx.channel.is_nsfw():
             await ctx.send('Note: Write this command outside the NSFW channel')
+            return
         url = "https://api.waifu.pics/sfw/waifu"
         r = requests.get(url)
         data = r.json()
