@@ -31,6 +31,39 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.command()
+async def waifu(ctx):
+    """Waifu Image for You"""
+    async with ctx.typing():
+        if ctx.channel.is_nsfw():
+            await ctx.send('Note: Write this command outside the NSFW channel')
+        url = "https://api.waifu.pics/sfw/waifu"
+        r = requests.get(url)
+        data = r.json()
+        img_url = data['url']
+        author = ctx.message.author.mention
+        desc1 = [
+            f"Do you love me, {author}?",
+            f"I love you, {author}",
+            f"Do you love her, {author}?",
+            f"Do you want her to be your girlfriend, {author}?",
+            f"Please make me your bride, {author}",
+            f"Take her to dinner, {author}",
+            f"I will be your girlfriend, {author}",
+            f"Hey, {author}. Can you give me some love?",
+            f"Hey {author}, you're my boyfriend right?",
+            f"She's your girlfriend right, {author}?",
+        ]
+        embed = discord.Embed(
+            color=discord.Color.green(),
+            title="--- Random Waifu Image ---",
+            description=random.choice(desc1)
+        )
+        embed.set_image(url=img_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+        
+        await ctx.send(embed=embed)
+
+@client.command()
 async def hentai(ctx):
     """Uncensored Anime Image (18+ Warning)"""
     async with ctx.typing():
@@ -53,16 +86,22 @@ async def hentai(ctx):
                 img_url2,
                 img_url3,
             ]
+            titles = [
+                f"Are you satisfied, {author}",
+                f"You're horny right?, {author}"",
+                f"I think, you're pervert {author}",
+                f"You got a good one, {author}"
+            ]
             embed = discord.Embed(
                 title="--- 18+ Hentai Image ---",
-                description=f"Are you satisfied, {author}",
+                description=random.choice(titles),
             )
             embed.set_image(url=random.choice(imgdata))
             embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
             
             await ctx.send(embed=embed)
         else:
-            await ctx.send('Write this command in NSFW channel')
+            await ctx.send('Note: Write this command in NSFW channel')
 
 @client.command() #ping
 async def ping(ctx):
