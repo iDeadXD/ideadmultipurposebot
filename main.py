@@ -88,7 +88,7 @@ async def hentai(ctx):
             ]
             titles = [
                 f"Are you satisfied, {author}",
-                f"You're horny right?, {author}"",
+                f"You're horny right?, {author}",
                 f"I think, you're pervert {author}",
                 f"You got a good one, {author}"
             ]
