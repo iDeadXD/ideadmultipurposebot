@@ -9,8 +9,9 @@ import pytz
 import requests
 import time
 import asyncio
+from config import CONFIG
 
-client = commands.Bot(command_prefix=">", intents = discord.Intents.all())
+client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
 cogs = [music]
 
@@ -169,4 +170,4 @@ async def avatar_(ctx, avamem : discord.Member=None):
     
     await ctx.send(embed=embed)
 
-client.run('OTA0MTU2MDI2ODUxNDU1MDA2.YX3a6w.5MpGgosOjwIYlz0iXFPSTVPwyqI')
+client.run(CONFIG['token'])
