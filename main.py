@@ -10,8 +10,9 @@ import requests
 import time
 import asyncio
 from config import CONFIG
+from imgapi import API
 
-client = commands.Bot(command_prefix = CONFIG['prefix'], intents = discord.Intents.all())
+client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
 cogs = [music]
 
@@ -38,7 +39,7 @@ async def waifu(ctx):
         if ctx.channel.is_nsfw():
             await ctx.send('Note: Write this command outside the NSFW channel')
             return
-        url = "https://api.waifu.pics/sfw/waifu"
+        url = API['waifu1']
         r = requests.get(url)
         data = r.json()
         img_url = data['url']
@@ -70,9 +71,9 @@ async def hentai(ctx):
     """Uncensored Anime Image (18+ Warning)"""
     async with ctx.typing():
         if ctx.channel.is_nsfw():
-            url1 = "https://api.waifu.pics/nsfw/waifu"
-            url2 = "https://api.waifu.pics/nsfw/neko"
-            url3 = "https://api.waifu.pics/nsfw/blowjob"
+            url1 = API['hentai1']
+            url2 = API['hentai2']
+            url3 = API['hentai3']
             author = ctx.message.author.mention
             r1 = requests.get(url1)
             r2 = requests.get(url2)
@@ -109,7 +110,7 @@ async def hentai(ctx):
 async def slap(ctx, member : discord.Member=None):
     if member is None:
         member = ctx.author
-    url4 = "https://api.waifu.pics/sfw/slap"
+    url4 = API['slap1']
     r4 = requests.get(url4)
     data4 = r4.json()
     imgdata = data4['url']
@@ -124,7 +125,7 @@ async def slap(ctx, member : discord.Member=None):
         description=random.choice(desc),
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
