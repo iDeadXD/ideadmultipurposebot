@@ -472,8 +472,9 @@ class Music(commands.Cog):
         await self.cleanup(ctx.guild)
     
     @commands.command(name="loop")
-    async def loop_(ctx):
+    async def loop_(self, ctx):
         """Looping current song/queue"""
+        vc = ctx.voice_client
         player = self.get_player(guild_id=ctx.guild.id)
         song = await player.toggle_song_loop()
         
