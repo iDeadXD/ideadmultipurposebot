@@ -471,6 +471,31 @@ class Music(commands.Cog):
 
         await self.cleanup(ctx.guild)
     
+    @commands.command(name="loop")
+    async def loop_(ctx):
+        """Looping current song/queue"""
+        player = self.get_player(ctx)
+        song = await player.toggle_song_loop()
+        
+        embed1 = discord.Embed(
+            title="Loop Toggle",
+            description=f"[{vc.source.title}]({vc.source.web_url}) [{vc.source.requester.mention}] | `{duration}`", color=discord.Color.green()
+        )
+        embed1.add_field(name="--- Loop Mode ---", value=f"[{vc.source.title}] is looping.")
+        embed1.set_footer(text="Author: {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+        
+        embed2 = discord.Embed(
+            title="Loop Toggle",
+            description=f"[{vc.source.title}]({vc.source.web_url}) [{vc.source.requester.mention}] | `{duration}`", color=discord.Color.green()
+        )
+        embed2.add_field(name="--- Loop Mode ---", value=f"[{vc.source.title}] is not looping.")
+        embed2.set_footer(text="Author: {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+        
+        if song.is_looping:
+            return await ctx.send(embed=embed1)
+        else:
+            return await ctx.send(embed=embed2)
+    
     @commands.command(name='lyrics', description="showing the current song lyrics")
     async def lyrics(self, ctx, *, arg):
         """Displaying Lyrics for a Song."""
