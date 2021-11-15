@@ -16,6 +16,8 @@ from youtube_dl import YoutubeDL
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
 
+musics = DiscordUtils.Music()
+
 ytdlopts = {
     'format': 'bestaudio/best',
     'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -473,10 +475,10 @@ class Music(commands.Cog):
         await self.cleanup(ctx.guild)
     
     @commands.command(name="loop")
-    async def loop_(self, ctx):
+    async def loop_(ctx):
         """Looping current song/queue"""
         vc = ctx.voice_client
-        player = self.get_player(ctx)
+        player = musics.get_player(guild_id=ctx.guild.id)
         song = await player.toggle_song_loop()
         
         embed1 = discord.Embed(
