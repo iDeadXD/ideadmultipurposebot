@@ -474,7 +474,7 @@ class Music(commands.Cog):
     @commands.command(name="loop")
     async def loop_(ctx):
         """Looping current song/queue"""
-        player = self.get_player(ctx)
+        player = self.get_player(guild_id=ctx.guild.id)
         song = await player.toggle_song_loop()
         
         embed1 = discord.Embed(
