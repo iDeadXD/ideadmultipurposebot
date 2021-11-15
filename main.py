@@ -105,6 +105,29 @@ async def hentai(ctx):
         else:
             await ctx.send('Note: Write this command in NSFW channel')
 
+@client.command()
+async def slap(ctx, member : discord.Member=None):
+    if member is None:
+        member = ctx.author
+    url4 = "https://api.waifu.pics/sfw/slap"
+    r4 = requests.get(url4)
+    data4 = r4.json()
+    imgdata = data4['url']
+    author = ctx.message.author.mention
+    desc = [
+        f"{author} slapped {member.mention}",
+        f"{author}: I got you, {member.mention}",
+    ]
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Slap Someone ---",
+        description=random.choice(desc),
+    )
+    embed.set_image(url=imgdata)
+    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
 @client.command() #ping
 async def ping(ctx):
     """Showing Bot Latency and YouTube Server Status"""
