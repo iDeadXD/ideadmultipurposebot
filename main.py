@@ -124,7 +124,7 @@ async def slap(ctx, member : discord.Member=None):
         description=random.choice(desc),
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
