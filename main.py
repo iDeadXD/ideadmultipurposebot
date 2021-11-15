@@ -11,7 +11,7 @@ import time
 import asyncio
 from config import CONFIG
 
-client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
+client = commands.Bot(command_prefix = CONFIG['prefix'], intents = discord.Intents.all())
 
 cogs = [music]
 
