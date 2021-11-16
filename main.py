@@ -51,7 +51,7 @@ async def waifu(ctx, member : discord.Member=None):
         f"Do you love her, {member.mention}?",
         f"Do you want her to be your girlfriend, {member.mention}?",
         f"Please make me your bride, {member.mention}",
-        f"Take her to dinner, {member.mentiona}",
+        f"Take her to dinner, {member.mention}",
         f"I will be your girlfriend, {member.mention}",
         f"Hey, {member.mention}. Can you give me some love?",
         f"Hey {member.mention}, you're my boyfriend right?",
