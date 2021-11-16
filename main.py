@@ -12,7 +12,6 @@ import asyncio
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
-from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE
 
 client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
@@ -41,7 +40,7 @@ async def waifu(ctx, member : discord.Member=None):
         member = ctx.author
     if ctx.channel.is_nsfw():
         await ctx.send('Note: Write this command outside the NSFW channel')
-        return
+            return
     if ctx.channel.id is not int(CHANNEL['channel3']):
         await ctx.send(f"Note: Write this command in {client.get_channel(int(CHANNEL['channel'])).mention}")
         return
@@ -50,16 +49,25 @@ async def waifu(ctx, member : discord.Member=None):
     data = r.json()
     img_url = data['url']
     desc = [
-        str(W_MESSAGE['w_msg1']),
-        str(W_MESSAGE['w_msg2']),
-        str(W_MESSAGE['w_msg3']),
-        str(W_MESSAGE['w_msg4']),
-        str(W_MESSAGE['w_msg5']),
-        str(W_MESSAGE['w_msg6']),
-        str(W_MESSAGE['w_msg7']),
-        str(W_MESSAGE['w_msg8']),
-        str(W_MESSAGE['w_msg9']),
-        str(W_MESSAGE['w_msg10'])
+        f"Do you love me, {member.mention}?",
+        f"I love you, {member.mention}",
+        f"Do you love her, {member.mention}?",
+        f"Do you want her to be your girlfriend, {member.mention}?",
+        f"Please make me your bride, {member.mention}",
+        f"Take her to dinner, {author}",
+        f"I will be your girlfriend, {member.mention}",
+        f"Hey, {member.mention}. Can you give me some love?",
+        f"Hey {member.mention}, you're my boyfriend right?",
+        f"She's your girlfriend right, {member.mention}?"f"Do you love me, {member.mention}?",
+        f"I love you, {member.mention}",
+        f"Do you love her, {member.mention}?",
+        f"Do you want her to be your girlfriend, {member.mention}?",
+        f"Please make me your bride, {member.mention}",
+        f"Take her to dinner, {author}",
+        f"I will be your girlfriend, {member.mention}",
+        f"Hey, {member.mention}. Can you give me some love?",
+        f"Hey {member.mention}, you're my boyfriend right?",
+        f"She's your girlfriend right, {member.mention}?",tr
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -94,10 +102,10 @@ async def hentai(ctx):
             img_url3,
         ]
         desc = [
-            str(H_MESSAGE['h_msg1']),
-            str(H_MESSAGE['h_msg2']),
-            str(H_MESSAGE['h_msg3']),
-            str(H_MESSAGE['h_msg4'])
+            f"Are you satisfied, {author}",
+            f"You're horny right?, {author}",
+            f"I think, you're pervert {author}",
+            f"You got a good one, {author}"
         ]
         embed = discord.Embed(
             color=discord.Color.green(),
@@ -121,8 +129,8 @@ async def slap(ctx, member : discord.Member=None):
     data4 = r4.json()
     imgdata = data4['url']
     desc = [
-        str(S_MESSAGE['s_msg1']),
-        str(S_MESSAGE['s_msg2'])
+        f"{author} slapped {member.mention}",
+        f"{author}: I got you, {member.mention}",
     ]
     author = ctx.message.author.mention
     embed = discord.Embed(
@@ -145,9 +153,9 @@ async def bonk(ctx, member : discord.Member=None):
     data5 = r5.json()
     imgdata = data5['url']
     desc = [
-        str(B_MESSAGE['b_msg1']),
-        str(B_MESSAGE['b_msg2']),
-        str(B_MESSAGE['b_msg3'])
+        f"{author} bonk to {member.mention}",
+        f"{author}: I'll bonk you, {member.mention}",
+        f"BONK!!!!, {member.mention}"
     ]
     author = ctx.message.author.mention
     embed = discord.Embed(
@@ -169,10 +177,10 @@ async def meme(ctx):
     data6 = r6.json()
     imgdata = data6['url']
     desc = [
-        str(M_MESSAGE['m_msg1']),
-        str(M_MESSAGE['m_msg2']),
-        str(M_MESSAGE['m_msg3']),
-        str(M_MESSAGE['m_msg4'])
+        f"Laugh for today, {author}!! (If the meme is funny)",
+        f"Memes for you today, {author}",
+        f"Is this funny, {author}?",
+        f"Laugh, Laugh, Laugh,  {author}"
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
