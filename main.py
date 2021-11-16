@@ -12,6 +12,7 @@ import asyncio
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
+from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE
 
 client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
@@ -40,31 +41,22 @@ async def waifu(ctx, member : discord.Member=None):
         member = ctx.author
     if ctx.channel.is_nsfw():
         await ctx.send('Note: Write this command outside the NSFW channel')
-        return
+            return
     url = SFW['waifu1']
     r = requests.get(url)
     data = r.json()
     img_url = data['url']
     desc = [
-        f"Do you love me, {member.mention}?",
-        f"I love you, {member.mention}",
-        f"Do you love her, {member.mention}?",
-        f"Do you want her to be your girlfriend, {member.mention}?",
-        f"Please make me your bride, {member.mention}",
-        f"Take her to dinner, {member.mention}",
-        f"I will be your girlfriend, {member.mention}",
-        f"Hey, {member.mention}. Can you give me some love?",
-        f"Hey {member.mention}, you're my boyfriend right?",
-        f"She's your girlfriend right, {member.mention}?"f"Do you love me, {member.mention}?",
-        f"I love you, {member.mention}",
-        f"Do you love her, {member.mention}?",
-        f"Do you want her to be your girlfriend, {member.mention}?",
-        f"Please make me your bride, {member.mention}",
-        f"Take her to dinner, {member.mention}",
-        f"I will be your girlfriend, {member.mention}",
-        f"Hey, {member.mention}. Can you give me some love?",
-        f"Hey {member.mention}, you're my boyfriend right?",
-        f"She's your girlfriend right, {member.mention}?",
+        str(W_MESSAGE['w_msg1']).format(member.mention),
+        str(W_MESSAGE['w_msg2']).format(member.mention),
+        str(W_MESSAGE['w_msg3']).format(member.mention),
+        str(W_MESSAGE['w_msg4']).format(member.mention),
+        str(W_MESSAGE['w_msg5']).format(member.mention),
+        str(W_MESSAGE['w_msg6']).format(member.mention),
+        str(W_MESSAGE['w_msg7']).format(member.mention),
+        str(W_MESSAGE['w_msg8']).format(member.mention),
+        str(W_MESSAGE['w_msg9']).format(member.mention),
+        str(W_MESSAGE['w_msg10']).format(member.mention)
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -83,7 +75,6 @@ async def hentai(ctx):
         url1 = NSFW['hentai1']
         url2 = NSFW['hentai2']
         url3 = NSFW['hentai3']
-        author = ctx.message.author.mention
         r1 = requests.get(url1)
         r2 = requests.get(url2)
         r3 = requests.get(url3)
@@ -99,10 +90,10 @@ async def hentai(ctx):
             img_url3,
         ]
         desc = [
-            f"Are you satisfied, {author}",
-            f"You're horny right?, {author}",
-            f"I think, you're pervert {author}",
-            f"You got a good one, {author}"
+            str(H_MESSAGE['h_msg1']).format(member.mention),
+            str(H_MESSAGE['h_msg2']).format(member.mention),
+            str(H_MESSAGE['h_msg3']).format(member.mention),
+            str(H_MESSAGE['h_msg4']).format(member.mention),
         ]
         embed = discord.Embed(
             color=discord.Color.green(),
@@ -126,8 +117,8 @@ async def slap(ctx, member : discord.Member=None):
     data4 = r4.json()
     imgdata = data4['url']
     desc = [
-        f"{ctx.message.author.mention} slapped {member.mention}",
-        f"{ctx.message.author.mention}: I got you, {member.mention}",
+        str(S_MESSAGE['s_msg1']).format(ctx.message.author.mention, member.mention),
+        str(S_MESSAGE['s_msg2']).format(ctx.message.author.mention, member.mention),
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -135,7 +126,7 @@ async def slap(ctx, member : discord.Member=None):
         description=random.choice(desc),
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(ctx.message.author.mention), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -149,9 +140,9 @@ async def bonk(ctx, member : discord.Member=None):
     data5 = r5.json()
     imgdata = data5['url']
     desc = [
-        f"{ctx.message.author.mention} bonk to {member.mention}",
-        f"{ctx.message.author.mention}: I will bonk you, {member.mention}",
-        f"BONK!!!!, {member.mention}"
+        str(B_MESSAGE['b_msg1']).format(ctx.message.author.mention, member.mention),
+        str(B_MESSAGE['b_msg2']).format(ctx.message.author.mention, member.mention),
+        str(B_MESSAGE['b_msg3']).format(member.mention),
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -168,14 +159,13 @@ async def meme(ctx):
     """Random Meme Image"""
     url6 = MEME['meme1']
     r6 = requests.get(url6)
-    author = ctx.message.author.mention
     data6 = r6.json()
     imgdata = data6['url']
     desc = [
-        f"Laugh for today, {author}!! (If the meme is funny)",
-        f"Memes for you today, {author}",
-        f"Is this funny, {author}?",
-        f"Laugh, Laugh, Laugh,  {author}"
+        str(M_MESSAGE['m_msg1']).format(ctx.message.author.mention),
+        str(M_MESSAGE['m_msg2']).format(ctx.message.author.mention),
+        str(M_MESSAGE['m_msg3']).format(ctx.message.author.mention),
+        str(M_MESSAGE['m_msg4']).format(ctx.message.author.mention),
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -245,7 +235,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Avatar ---",
-        description=f"{avamem.mention} Avatar",
+        description=f"{avamem.mention} Profile Avatar",
     )
     embed.set_image(url=useravatar)
     embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
