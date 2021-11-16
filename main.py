@@ -34,8 +34,10 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.command()
-async def waifu(ctx):
+async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
+    if member is None:
+        member = ctx.author
     async with ctx.typing():
         if ctx.channel.is_nsfw():
             await ctx.send('Note: Write this command outside the NSFW channel')
@@ -44,18 +46,17 @@ async def waifu(ctx):
         r = requests.get(url)
         data = r.json()
         img_url = data['url']
-        author = ctx.message.author.mention
         desc1 = [
-            f"Do you love me, {author}?",
-            f"I love you, {author}",
-            f"Do you love her, {author}?",
-            f"Do you want her to be your girlfriend, {author}?",
-            f"Please make me your bride, {author}",
+            f"Do you love me, {member.mention}?",
+            f"I love you, {member.mention}",
+            f"Do you love her, {member.mention}?",
+            f"Do you want her to be your girlfriend, {member.mention}?",
+            f"Please make me your bride, {member.mention}",
             f"Take her to dinner, {author}",
-            f"I will be your girlfriend, {author}",
-            f"Hey, {author}. Can you give me some love?",
-            f"Hey {author}, you're my boyfriend right?",
-            f"She's your girlfriend right, {author}?",
+            f"I will be your girlfriend, {member.mention}",
+            f"Hey, {member.mention}. Can you give me some love?",
+            f"Hey {member.mention}, you're my boyfriend right?",
+            f"She's your girlfriend right, {member.mention}?",
         ]
         embed = discord.Embed(
             color=discord.Color.green(),
@@ -184,14 +185,13 @@ async def avatar_(ctx, avamem : discord.Member=None):
     if avamem is None:
         avamem = ctx.author
     useravatar = avamem.avatar_url
-    author = ctx.message.author.name
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Avatar ---",
-        description=f"{avamem.mention} Avatar",
+        description=f"{avamem.mention} Profile Avatar",
     )
     embed.set_image(url=useravatar)
-    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
