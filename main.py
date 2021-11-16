@@ -42,7 +42,7 @@ async def waifu(ctx, member : discord.Member=None):
         await ctx.send('Note: Write this command outside the NSFW channel')
         return
     if ctx.channel.id is not int(CHANNEL['channel3']):
-        await ctx.send(f"Note: Write this command in {client.get_channel(int(CHANNEL['channel'])).mention}")
+        await ctx.send(f"Note: Write this command in {client.get_channel(int(CHANNEL['channel3'])).mention}")
         return
     url = SFW['waifu1']
     r = requests.get(url)
