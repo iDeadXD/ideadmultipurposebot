@@ -126,17 +126,16 @@ async def slap(ctx, member : discord.Member=None):
     data4 = r4.json()
     imgdata = data4['url']
     desc = [
-        f"{author} slapped {member.mention}",
-        f"{author}: I got you, {member.mention}",
+        f"{ctx.message.author.mention} slapped {member.mention}",
+        f"{ctx.message.author.mention}: I got you, {member.mention}",
     ]
-    author = ctx.message.author.mention
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Slap Someone ---",
         description=random.choice(desc),
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -150,11 +149,10 @@ async def bonk(ctx, member : discord.Member=None):
     data5 = r5.json()
     imgdata = data5['url']
     desc = [
-        f"{author} bonk to {member.mention}",
-        f"{author}: I will bonk you, {member.mention}",
+        f"{ctx.message.author.mention} bonk to {member.mention}",
+        f"{ctx.message.author.mention}: I will bonk you, {member.mention}",
         f"BONK!!!!, {member.mention}"
     ]
-    author = ctx.message.author.mention
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Bonk!! ---",
