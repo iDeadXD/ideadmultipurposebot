@@ -41,7 +41,7 @@ async def waifu(ctx, member : discord.Member=None):
         member = ctx.author
     if ctx.channel.is_nsfw():
         await ctx.send('Note: Write this command outside the NSFW channel')
-            return
+        return
     url = SFW['waifu1']
     r = requests.get(url)
     data = r.json()
