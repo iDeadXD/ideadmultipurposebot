@@ -40,6 +40,9 @@ async def waifu(ctx, member : discord.Member=None):
     ch3 = client.get_channel(int(CHANNEL['channel3']))
     if ctx.channel.id is not ch3:
         await ctx.send("Note: Write this command in {}".format(ch3.mention))
+        return
+    else:
+        await client.process_commands(ctx.message)
     
     if member is None:
         member = ctx.author
