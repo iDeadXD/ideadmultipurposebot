@@ -28,8 +28,8 @@ async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
-    ch1 = client.get_channel(CHANNEL['channel1'])
-    ch2 = client.get_channel(CHANNEL['channel2'])
+    ch1 = client.get_channel(int(CHANNEL['channel1']))
+    ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
