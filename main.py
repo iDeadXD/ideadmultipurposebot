@@ -51,7 +51,7 @@ async def waifu(ctx, member : discord.Member=None):
         f"Do you love her, {member.mention}?",
         f"Do you want her to be your girlfriend, {member.mention}?",
         f"Please make me your bride, {member.mention}",
-        f"Take her to dinner, {author}",
+        f"Take her to dinner, {member.mentiona}",
         f"I will be your girlfriend, {member.mention}",
         f"Hey, {member.mention}. Can you give me some love?",
         f"Hey {member.mention}, you're my boyfriend right?",
@@ -151,7 +151,7 @@ async def bonk(ctx, member : discord.Member=None):
     imgdata = data5['url']
     desc = [
         f"{author} bonk to {member.mention}",
-        f"{author}: I'll bonk you, {member.mention}",
+        f"{author}: I will bonk you, {member.mention}",
         f"BONK!!!!, {member.mention}"
     ]
     author = ctx.message.author.mention
