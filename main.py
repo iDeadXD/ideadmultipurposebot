@@ -36,9 +36,6 @@ Logged in as {0.user}'''.format(client))
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
-    if ctx.channel.id is not 906005326086692904:
-        await ctx.send(f"Note: Write this command in {client.get_channel(906005326086692904).mention}")
-        return
     if member is None:
         member = ctx.author
     if ctx.channel.is_nsfw():
