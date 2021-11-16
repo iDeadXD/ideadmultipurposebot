@@ -1,6 +1,7 @@
 SFW = {
     "waifu1": "https://api.waifu.pics/sfw/waifu",
     "slap1": "https://api.waifu.pics/sfw/slap",
+    "bonk1": "https://api.waifu.pics/sfw/bonk"
 }
 
 NSFW = {
@@ -8,3 +9,8 @@ NSFW = {
     "hentai2": "https://api.waifu.pics/nsfw/neko",
     "hentai3": "https://api.waifu.pics/nsfw/blowjob",
 }
+
+MEME = {
+    "meme1": "https://meme-api.herokuapp.com/gimme"
+}
+
