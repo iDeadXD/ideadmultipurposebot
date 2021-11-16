@@ -64,7 +64,7 @@ async def waifu(ctx, member : discord.Member=None):
         f"I will be your girlfriend, {member.mention}",
         f"Hey, {member.mention}. Can you give me some love?",
         f"Hey {member.mention}, you're my boyfriend right?",
-        f"She's your girlfriend right, {member.mention}?",tr
+        f"She's your girlfriend right, {member.mention}?",
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
