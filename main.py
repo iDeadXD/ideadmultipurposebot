@@ -37,8 +37,8 @@ Logged in as {0.user}'''.format(client))
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
-     ch3 = client.get_channel(int(CHANNEL['channel3']))
-     if ctx.channel.id is not ch3:
+    ch3 = client.get_channel(int(CHANNEL['channel3']))
+    if ctx.channel.id is not ch3:
         await ctx.send("Note: Write this command in {}".format(ch3.mention))
         return
     
