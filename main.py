@@ -41,7 +41,7 @@ async def waifu(ctx, member : discord.Member=None):
         member = ctx.author
     if ctx.channel.is_nsfw():
         await ctx.send('Note: Write this command outside the NSFW channel')
-            return
+        return
     if ctx.channel.id is not int(CHANNEL['channel3']):
         await ctx.send(f"Note: Write this command in {client.get_channel(int(CHANNEL['channel'])).mention}")
         return
