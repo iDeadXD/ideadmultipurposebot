@@ -36,9 +36,10 @@ Logged in as {0.user}'''.format(client))
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
-    if member is None:
-        member = ctx.author
+    
     async with ctx.typing():
+        if member is None:
+            member = ctx.author
         if ctx.channel.is_nsfw():
             await ctx.send('Note: Write this command outside the NSFW channel')
             return
