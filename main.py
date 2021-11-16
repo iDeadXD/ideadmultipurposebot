@@ -95,10 +95,10 @@ async def hentai(ctx):
             img_url3,
         ]
         desc = [
-            str(H_MESSAGE['h_msg1']).format(member.mention),
-            str(H_MESSAGE['h_msg2']).format(member.mention),
-            str(H_MESSAGE['h_msg3']).format(member.mention),
-            str(H_MESSAGE['h_msg4']).format(member.mention),
+            str(H_MESSAGE['h_msg1']).format(ctx.message.author.mention),
+            str(H_MESSAGE['h_msg2']).format(ctx.message.author.mention),
+            str(H_MESSAGE['h_msg3']).format(ctx.message.author.mention),
+            str(H_MESSAGE['h_msg4']).format(ctx.message.author.mention),
         ]
         embed = discord.Embed(
             color=discord.Color.green(),
