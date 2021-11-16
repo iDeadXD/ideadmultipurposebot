@@ -11,6 +11,7 @@ import time
 import asyncio
 from config import CONFIG
 from imgapi import SFW, NSFW
+from msg_channel import CHANNEL
 
 client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
@@ -27,8 +28,8 @@ async def on_ready():
     print('''Welcome to Discord Music Player Bot.
 Logged in as {0.user}'''.format(client))
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
-    ch1 = client.get_channel(840594344939356184)
-    ch2 = client.get_channel(909301287517040640)
+    ch1 = client.get_channel(CHANNEL['channel1'])
+    ch2 = client.get_channel(CHANNEL['channel2'])
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
