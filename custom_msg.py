@@ -5,7 +5,7 @@ W_MESSAGE = {
     "w_msg3": "Do you love her, {}?",
     "w_msg4": "Do you want her to be your girlfriend, {}?",
     "w_msg5": "Please make me your bride, {}",
-    "w_msg6": "Take her to dinner, {author}",
+    "w_msg6": "Take her to dinner, {}",
     "w_msg7": "I will be your girlfriend, {}",
     "w_msg8": "Hey, {}. Can you give me some love?",
     "w_msg9": "Hey {}, you're my boyfriend right?",
