@@ -239,7 +239,7 @@ async def localmsg(ctx, member : discord.Member=None):
                 from_ = int(SENDER['secret']),
                 body = "{} - {}".format(ctx.message.author.name, ctx.message.content)
             )
-        print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
+            print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
         elif member is user2:
             twilioClient.messages.create(
                 to = int(PHONE['rafi']),
