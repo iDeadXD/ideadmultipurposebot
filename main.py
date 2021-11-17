@@ -40,8 +40,8 @@ Logged in as {0.user}'''.format(client))
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
     ch3 = client.get_channel(int(CHANNEL['channel3']))
-    for guild in client.get_guild(840594344939356181).channels:
-        if ctx.channel is not ch3:
+    for channel in client.get_guild(840594344939356181).channels:
+        if channel is not ch3:
             await ctx.send("Note: Write this command in {}".format(ch3.mention))
             return
     
