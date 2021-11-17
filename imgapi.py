@@ -1,7 +1,8 @@
 SFW = {
     "waifu1": "https://api.waifu.pics/sfw/waifu",
     "slap1": "https://api.waifu.pics/sfw/slap",
-    "bonk1": "https://api.waifu.pics/sfw/bonk"
+    "bonk1": "https://api.waifu.pics/sfw/bonk",
+    "kiss1": "https://api.waifu.pics/sfw/kiss",
 }
 
 NSFW = {
@@ -12,5 +13,11 @@ NSFW = {
 
 MEME = {
     "meme1": "https://meme-api.herokuapp.com/gimme"
+}
+
+WELCOME = {
+    "welcome1": "https://tenor.com/blSkd.gif",
+    "welcome2": "https://cdnb.artstation.com/p/assets/images/images/023/138/759/original/helena-viana-anime-girl-welcome-by-ell.gif?1578239624",
+    "welcome3": "https://tenor.com/beVz7.gif",
 }
 
