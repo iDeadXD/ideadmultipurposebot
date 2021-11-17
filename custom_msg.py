@@ -5,7 +5,7 @@ W_MESSAGE = {
     "w_msg3": "Do you love her, {}?",
     "w_msg4": "Do you want her to be your girlfriend, {}?",
     "w_msg5": "Please make me your bride, {}",
-    "w_msg6": "Take her to dinner, {}",
+    "w_msg6": "Take her to dinner, {author}",
     "w_msg7": "I will be your girlfriend, {}",
     "w_msg8": "Hey, {}. Can you give me some love?",
     "w_msg9": "Hey {}, you're my boyfriend right?",
@@ -40,3 +40,18 @@ M_MESSAGE = {
     "m_msg3": "Is this funny, {}?",
     "m_msg4": "Laugh, Laugh, Laugh,  {}"
 } #Coming Soon!!
+
+#Join Message
+J_MESSAGE = {
+    "j_msg1": "Glad to see you here, {}",
+    "j_msg2": "Hey {}, Welcome to this Server",
+    "j_msg3": "You're new in here, {}. Welcome!!",
+    "j_msg3": "Thank you for joining this Server, {}"
+}
+
+#Kiss Message
+K_MESSAGE = {
+    "k_msg1": "Hey {}, who will you kiss?. Are you sure it's {} that you will kiss",
+    "k_msg2": "Kiss from {} to {} !!!",
+    "k_msg3": "Are you kissing yourself, {}?"
+}
