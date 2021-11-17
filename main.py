@@ -39,9 +39,9 @@ Logged in as {0.user}'''.format(client))
 async def on_member_join(member):
     ch3 = client.get_channel(int(CHANNEL['channel4']))
     imgdata = [
-        str(WELCOME['welcome1']),
-        str(WELCOME['welcome2']),
-        str(WELCOME['welcome3'])
+        "welcome1": "https://tenor.com/blSkd.gif",
+        "welcome2": "https://cdnb.artstation.com/p/assets/images/images/023/138/759/original/helena-viana-anime-girl-welcome-by-ell.gif?1578239624",
+        "welcome3": "https://tenor.com/beVz7.gif"
     ]
     desc = [
         str(J_MESSAGE['j_msg1']).format(member.mention),
