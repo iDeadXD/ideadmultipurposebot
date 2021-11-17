@@ -40,9 +40,10 @@ Logged in as {0.user}'''.format(client))
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
     ch3 = client.get_channel(int(CHANNEL['channel3']))
-    if ctx.channel is not ch3:
-        await ctx.send("Note: Write this command in {}".format(ch3.mention))
-        return
+    for channel in client.get_guild(840594344939356181):
+        if ctx.channel is not ch3:
+            await ctx.send("Note: Write this command in {}".format(ch3.mention))
+            return
     
     if member is None:
         member = ctx.author
@@ -244,25 +245,6 @@ async def avatar_(ctx, avamem : discord.Member=None):
         description=f"{avamem.mention} Profile Avatar",
     )
     embed.set_image(url=useravatar)
-    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
-    
-    await ctx.send(embed=embed)
-
-@client.command()
-async def showimg(ctx, *, search):
-    """Search Image using Google Search API"""
-    ran = random.randint(0,9)
-    resource = build("customsearch", "v1", developerKey=CONFIG['google_api_key']).cse()
-    result = resource.list(
-        q=f"{search}", cx="4891a95939270d95", searchType="image"
-    ).execute()
-    imgdata = result["items"][ran]["link"]
-    embed = discord.Embed(
-        color=discord.Color.green(),
-        title="--- Image Search ---",
-        description=f"Here your Image ({search})"
-    )
-    embed.set_image(url=imgdata)
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
