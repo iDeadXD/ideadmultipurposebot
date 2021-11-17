@@ -9,6 +9,7 @@ import pytz
 import requests
 import time
 import asyncio
+from googleapiclient.discovery import build
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
@@ -23,6 +24,7 @@ Author: iDead#9496."""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
+
 
 @client.event #bot_event
 async def on_ready():
@@ -69,7 +71,7 @@ async def waifu(ctx, member : discord.Member=None):
         description=random.choice(desc)
     )
     embed.set_image(url=img_url)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
 
@@ -106,7 +108,7 @@ async def hentai(ctx):
             description=random.choice(desc),
         )
         embed.set_image(url=random.choice(imgdata))
-        embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
     else:
@@ -131,7 +133,7 @@ async def slap(ctx, member : discord.Member=None):
         description=random.choice(desc),
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.mention), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -155,7 +157,7 @@ async def bonk(ctx, member : discord.Member=None):
         description=random.choice(desc)
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
 
@@ -178,7 +180,7 @@ async def meme(ctx):
         description=random.choice(desc)
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {}".format(ctx.message.author.name), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -195,7 +197,7 @@ async def ping(ctx):
     )
     embed.add_field(name="Your Latency", value=selflatency)
     embed.add_field(name="YouTube Server Status", value=ytlatency)
-    embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Author: {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -226,7 +228,7 @@ async def supported(ctx):
         title=titles,
         description=desc,
     )
-    embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Author: {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
@@ -236,14 +238,33 @@ async def avatar_(ctx, avamem : discord.Member=None):
     if avamem is None:
         avamem = ctx.author
     useravatar = avamem.avatar_url
-    author = ctx.message.author.name
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Avatar ---",
         description=f"{avamem.mention} Profile Avatar",
     )
     embed.set_image(url=useravatar)
-    embed.set_footer(text="Requested by {}".format(author), icon_url=ctx.message.author.avatar_url)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
+@client.command()
+async def showimg(ctx):
+    ran = random.randint[0,9]
+    resource = build("customsearch","v1",developerKey=CONFIG['google_api_key']).cse()
+    result = resource.list(
+        q=f"{search}",
+        cx="4891a95939270d95",
+        searchType="image"
+    ).execute()
+    imgdata = result["items"][ran]["link"]
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Image Search ---",
+        description=f"Here your Image ({search.title()})"
+    )
+    embed.set_image(url=imgdata)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
 
