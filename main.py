@@ -9,7 +9,6 @@ import pytz
 import requests
 import time
 import asyncio
-from twilio.rest import Client
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
@@ -219,44 +218,6 @@ async def time(ctx):
     embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
-
-@client.command()
-async def localmsg(ctx, member : discord.Member=None):
-    """Send message outside Discord"""
-    user1 = client.get_user(int(USERS['dafa']))
-    user2 = client.get_user(int(USERS['rafi']))
-    user3 = client.get_user(int(USERS['wafi']))
-    
-    if member is None:
-        await ctx.send("Note: You must tag someone before send")
-        return
-    
-    try:
-        if member is user1:
-            twilioClient.messages.create(
-                to = int(PHONE['dafa']),
-                from_ = int(SENDER['secret']),
-                body = "{} - {}".format(ctx.message.author.name, ctx.message.content)
-            )
-            print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
-        elif member is user2:
-            twilioClient.messages.create(
-                to = int(PHONE['rafi']),
-                from_ = int(SENDER['secret']),
-                body = "{} - {}".format(ctx.message.author.name, ctx.message.content)
-            )
-            print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
-        elif member is user3:
-            twilioClient.messages.create(
-                to = int(PHONE['wafi']),
-                from_ = int(SENDER['secret']),
-                body = "{} - {}".format(ctx.message.author.name, ctx.message.content)
-            )
-            print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
-    except Exception as e:
-        await ctx.send("Note: You must verify your(target) number. DM to {} for helping verify target number".format(user2.mention))
-        print("Error occured | "+str(e))
-    
 
 @client.command() #supported_link
 async def supported(ctx):
