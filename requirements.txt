@@ -5,6 +5,5 @@ PyNaCl
 requests
 schedule
 pytz
-DiscordUtils
-twilio
+google-api-python-client
 
