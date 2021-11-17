@@ -13,7 +13,6 @@ from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE
-from saved_number import PHONE, USERS, SENDER
 
 client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
@@ -24,8 +23,6 @@ Author: iDead#9496."""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
-
-twilioClient = Client(CONFIG['twilio_sid'], CONFIG['twilio_token'])
 
 @client.event #bot_event
 async def on_ready():
