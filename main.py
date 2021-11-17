@@ -249,7 +249,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
     await ctx.send(embed=embed)
 
 @client.command()
-async def showimg(ctx):
+async def showimg(ctx, *, search):
     ran = random.randint[0,9]
     resource = build("customsearch","v1",developerKey=CONFIG['google_api_key']).cse()
     result = resource.list(
