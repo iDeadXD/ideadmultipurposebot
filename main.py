@@ -142,23 +142,29 @@ async def kiss(ctx, member : discord.Member=None):
         str(K_MESSAGE['k_msg1']).format(ctx.message.author.mention, member.mention),
         str(K_MESSAGE['k_msg2']).format(ctx.message.author.mention, member.mention),
     ]
-    embed = discord.Embed(
+    embed1 = discord.Embed(
         color=discord.Color.green(),
         title="--- Kiss for You ---",
         description=random.choice(desc)
     )
+    
+    embed2 = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Kiss for You ---",
+        description=str(K_MESSAGE['k_msg3']).format(member.mention)
+    )
+    
+    embed1.set_image(url=imgdata)
+    embed1.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
+    embed2.set_image(url=imgdata)
+    embed2.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
     if member is None:
         member = ctx.author
-        embed = discord.Embed(
-            color=discord.Color.green(),
-            title="--- Kiss for You ---",
-            description=str(K_MESSAGE['k_msg3']).format(member.mention)
-        )
-    
-    embed.set_image(url=imgdata)
-    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
-    
-    await ctx.send(embed=embed)
+        await ctx.send(embed=embed2)
+    else:
+        await ctx.send(embed=embed1)
 
 @client.command()
 async def slap(ctx, member : discord.Member=None):
