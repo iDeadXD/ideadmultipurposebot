@@ -9,7 +9,7 @@ import pytz
 import requests
 import time
 import asyncio
-from twilio import Client
+from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
