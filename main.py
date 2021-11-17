@@ -37,7 +37,7 @@ Logged in as {0.user}'''.format(client))
 
 @client.event
 async def on_member_join(member):
-    ch3 = client.get_channel(int(CHANNEL['channel3']))
+    ch3 = client.get_channel(int(CHANNEL['channel4']))
     imgdata = [
         str(WELCOME['welcome1']),
         str(WELCOME['welcome2']),
