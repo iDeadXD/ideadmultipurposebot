@@ -152,7 +152,7 @@ async def kiss(ctx, member : discord.Member=None):
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Kiss for You ---",
-            description=str(K_MESSAGE['k_msg3']).format(ctx.author.mention)
+            description=str(K_MESSAGE['k_msg3']).format(member.mention)
         )
     
     embed.set_image(url=imgdata)
