@@ -250,18 +250,17 @@ async def avatar_(ctx, avamem : discord.Member=None):
 
 @client.command()
 async def showimg(ctx, *, search):
-    ran = random.randint[0,9]
-    resource = build("customsearch","v1",developerKey=CONFIG['google_api_key']).cse()
+    """Search Image using Google Search API"""
+    ran = random.randint(0,9)
+    resource = build("customsearch", "v1", developerKey=CONFIG['google_api_key']).cse()
     result = resource.list(
-        q=f"{search}",
-        cx="4891a95939270d95",
-        searchType="image"
+        q=f"{search}", cx="4891a95939270d95", searchType="image"
     ).execute()
     imgdata = result["items"][ran]["link"]
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Image Search ---",
-        description=f"Here your Image ({search.title()})"
+        description=f"Here your Image ({search})"
     )
     embed.set_image(url=imgdata)
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
