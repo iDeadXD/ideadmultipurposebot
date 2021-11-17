@@ -46,7 +46,7 @@ J_MESSAGE = {
     "j_msg1": "Glad to see you here, {}",
     "j_msg2": "Hey {}, Welcome to this Server",
     "j_msg3": "You're new in here, {}. Welcome!!",
-    "j_msg3": "Thank you for joining this Server, {}"
+    "j_msg4": "Thank you for joining this Server, {}"
 }
 
 #Kiss Message
