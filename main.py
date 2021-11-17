@@ -154,7 +154,7 @@ async def kiss(ctx, member : discord.Member=None):
     embed.set_image(url=imgdata)
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
-    await ctx.send(embed=embed1)
+    await ctx.send(embed=embed)
 
 @client.command()
 async def slap(ctx, member : discord.Member=None):
