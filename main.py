@@ -10,7 +10,6 @@ import requests
 import time
 import asyncio
 from twilio.rest import Client
-from twilio.base.exceptions import TwilioRestException
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
 from msg_channel import CHANNEL
@@ -254,7 +253,7 @@ async def localmsg(ctx, member : discord.Member=None):
                 body = "{} - {}".format(ctx.message.author.name, ctx.message.content)
             )
             print("Sent Message: {} - {}".format(ctx.message.author.name, ctx.message.content))
-    except TwilioRestException as e:
+    except Exception as e:
         await ctx.send("Note: You must verify your(target) number. DM to {} for helping verify target number".format(user2.mention))
         print("Error occured | "+str(e))
     
