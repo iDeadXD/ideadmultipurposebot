@@ -55,7 +55,7 @@ async def on_member_join(member):
         description=random.choice(desc)
     )
     embed.set_image(url=imgdata)
-    embed.set_footer(text="Joined on: Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    embed.set_footer(text="Joined on: Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
     
     await ch3.send(embed=embed)
 
