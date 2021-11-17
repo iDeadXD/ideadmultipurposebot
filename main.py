@@ -9,11 +9,10 @@ import pytz
 import requests
 import time
 import asyncio
-from googleapiclient.discovery import build
 from config import CONFIG
-from imgapi import SFW, NSFW, MEME
+from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
-from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE
+from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, J_MESSAGE, K_MESSAGE
 
 client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
 
@@ -35,6 +34,30 @@ Logged in as {0.user}'''.format(client))
     ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
+
+@client.event
+async def on_member_join(member):
+    ch3 = client.get_channel(int(CHANNEL['channel3']))
+    imgdata = [
+        str(WELCOME['welcome1']),
+        str(WELCOME['welcome2']),
+        str(WELCOME['welcome3'])
+    ]
+    desc = [
+        str(J_MESSAGE['j_msg1']).format(member.mention),
+        str(J_MESSAGE['j_msg2']).format(member.mention),
+        str(J_MESSAGE['j_msg3']).format(member.mention),
+        str(J_MESSAGE['j_msg4']).format(member.mention),
+    ]
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Someone has joined ---",
+        description=random.choice(desc)
+    )
+    embed.set_image(url=imgdata)
+    embed.set_footer(text="Joined on: Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    
+    await ch3.send(embed=embed)
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
@@ -108,6 +131,34 @@ async def hentai(ctx):
         await ctx.send(embed=embed)
     else:
         await ctx.send('Note: Write this command in NSFW channel')
+
+@client.command()
+async def kiss(ctx, member : discord.Member=None):
+    url7 = SFW['kiss1']
+    r7 = requests.get(url7)
+    data7 = r7.json()
+    imgdata = data7['url']
+    desc = [
+        str(K_MESSAGE['k_msg1']),
+        str(K_MESSAGE['k_msg2']),
+    ]
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Kiss for You ---",
+        description=random.choice(desc)
+    )
+    if member is None:
+        member = ctx.author
+        embed = discord.Embed(
+            color=discord.Color.green(),
+            title="--- Kiss for You ---",
+            description=str(K_MESSAGE['k_msg3'])
+        )
+    
+    embed.set_image(url=imgdata)
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
 
 @client.command()
 async def slap(ctx, member : discord.Member=None):
