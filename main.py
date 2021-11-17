@@ -9,7 +9,7 @@ import pytz
 import requests
 import time
 import asyncio
-from twilio.rest import TwilioRestClient
+from twilio import Client
 from twilio.base.exceptions import TwilioRestException
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME
@@ -27,7 +27,7 @@ Author: iDead#9496."""
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-twilioClient = TwilioRestClient(CONFIG['twilio_sid'], CONFIG['twilio_token'])
+twilioClient = Client(CONFIG['twilio_sid'], CONFIG['twilio_token'])
 
 @client.event #bot_event
 async def on_ready():
