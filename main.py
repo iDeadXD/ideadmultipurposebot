@@ -139,8 +139,8 @@ async def kiss(ctx, member : discord.Member=None):
     data7 = r7.json()
     imgdata = data7['url']
     desc = [
-        str(K_MESSAGE['k_msg1']),
-        str(K_MESSAGE['k_msg2']),
+        str(K_MESSAGE['k_msg1']).format(ctx.message.author.mention, member.mention),
+        str(K_MESSAGE['k_msg2']).format(ctx.message.author.mention, member.mention),
     ]
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -152,7 +152,7 @@ async def kiss(ctx, member : discord.Member=None):
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Kiss for You ---",
-            description=str(K_MESSAGE['k_msg3'])
+            description=str(K_MESSAGE['k_msg3']).format(ctx.author.mention)
         )
     
     embed.set_image(url=imgdata)
