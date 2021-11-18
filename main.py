@@ -296,13 +296,13 @@ async def avatar_(ctx, avamem : discord.Member=None):
 @client.command()
 async def serverinfo(ctx):
     """Showing Info of Server"""
-    member = ctx.guild.members.guild_permissions.administrator
+    owner = ctx.guild.owner
     role_count = len(ctx.guild.roles)
     list_of_bots = [client.mention for bot in ctx.guild.members if client.bot]
     
     embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
     embed2.add_field(name='Name', value=f"{ctx.guild.name}", inline=False)
-    embed2.add_field(name='Owner', value=f"{member.mention}", inline=False)
+    embed2.add_field(name='Owner', value=f"{owner.mention}", inline=False)
     embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level), inline=False)
     embed2.add_field(name='Highest role', value=ctx.guild.roles[-2], inline=False)
     
