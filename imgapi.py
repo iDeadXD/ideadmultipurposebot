@@ -17,7 +17,7 @@ MEME = {
 
 WELCOME = {
     "welcome1": "https://tenor.com/blSkd.gif",
-    "welcome2": "https://cdnb.artstation.com/p/assets/images/images/023/138/759/original/helena-viana-anime-girl-welcome-by-ell.gif?1578239624",
+    "welcome2": "https://cdnb.artstation.com/p/assets/images/images/023/138/759/original/helena-viana-anime-girl-welcome-by-ell.gif",
     "welcome3": "https://tenor.com/beVz7.gif",
 }
 
