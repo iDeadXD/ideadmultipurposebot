@@ -22,7 +22,7 @@ welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
 
 for i in range(len(cogs)):
-    cogs[i].setup(clie
+    cogs[i].setup(client)
 
 
 @client.event #bot_event
@@ -34,6 +34,32 @@ Logged in as {0.user}'''.format(client))
     ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
+
+@client.event
+async def on_member_join(member):
+    ch3 = client.get_channel(int(CHANNEL['channel3']))
+    imgdata = [
+        "welcome1": "https://tenor.com/blSkd.gif",
+        "welcome2": "https://cdnb.artstation.com/p/assets/images/images/023/138/759/original/helena-viana-anime-girl-welcome-by-ell.gif?1578239624",
+        "welcome3": "https://tenor.com/beVz7.gif"
+    ]
+    
+    desc = [
+        str(J_MESSAGE['j_msg1']).format(member.mention),
+        str(J_MESSAGE['j_msg2']).format(member.mention),
+        str(J_MESSAGE['j_msg3']).format(member.mention),
+        str(J_MESSAGE['j_msg4']).format(member.mention)
+    ]
+    
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Someone has joined ---",
+        description=random.choice(desc)
+    )
+    embed.set_image(url=random.choice(imgdata))
+    embed.set_footer(text="Joined: Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    
+    await ch3.send(embed=embed)
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
