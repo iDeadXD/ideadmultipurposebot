@@ -43,10 +43,9 @@ M_MESSAGE = {
 
 #Join Message
 J_MESSAGE = {
-    "j_msg1": "Glad to see you here, {}",
-    "j_msg2": "Hey {}, Welcome to this Server",
-    "j_msg3": "You're new in here, {}. Welcome!!",
-    "j_msg4": "Thank you for joining this Server, {}"
+    "j_msg1": "Hey {}, Welcome to {}",
+    "j_msg2": "You're new in {}, {}. Welcome!!",
+    "j_msg3": "Thank you for joining {}, {}"
 }
 
 #Kiss Message
