@@ -54,7 +54,7 @@ async def on_member_join(member):
     embed = discord.Embed(
         color=discord.Color.purple(),
         title="--- New Member Join!! ---",
-        desc=random.choice(desc)
+        description=random.choice(desc)
     )
     embed.set_thumbnail(url=member.avatar_url)
     embed.set_image(url=random.choice(imgdata))
