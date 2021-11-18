@@ -298,7 +298,7 @@ async def serverinfo(ctx):
     """Showing Info of Server"""
     owner = ctx.guild.owner
     role_count = len(ctx.guild.roles)
-    list_of_bots = [client.mention for bot in ctx.guild.members if client.bot]
+    list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
     
     embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
     embed2.add_field(name='Name', value=f"{ctx.guild.name}", inline=False)
