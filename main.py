@@ -293,4 +293,26 @@ async def avatar_(ctx, avamem : discord.Member=None):
     
     await ctx.send(embed=embed)
 
+@client.command()
+async def serverinfo(ctx):
+    """Showing Info of Server"""
+    member = ctx.guild.members.guild_permissions.administrator
+    role_count = len(ctx.guild.roles)
+    list_of_bots = [client.mention for bot in ctx.guild.members if client.bot]
+    
+    embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
+    embed2.add_field(name='Name', value=f"{ctx.guild.name}", inline=False)
+    embed2.add_field(name='Owner', value=f"{member.mention}", inline=False)
+    embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level), inline=False)
+    embed2.add_field(name='Highest role', value=ctx.guild.roles[-2], inline=False)
+    
+    embed2.add_field(name='Number of roles', value=str(role_count), inline=False)
+    embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
+    embed2.add_field(name='Bots:', value=(', '.join(list_of_bots)))
+    embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
+    embed2.set_thumbnail(url=ctx.guild.icon_url)
+    embed2.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed2)
+
 client.run(CONFIG['token'])
