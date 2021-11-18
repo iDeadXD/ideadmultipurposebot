@@ -10,7 +10,7 @@ import requests
 import time
 import asyncio
 from config import CONFIG
-from imgapi import SFW, NSFW, MEME
+from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, J_MESSAGE, K_MESSAGE
 
@@ -34,6 +34,34 @@ Logged in as {0.user}'''.format(client))
     ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
+
+@client.event #Send message when someone join
+async def on_member_join(member):
+    ch3 = client.get_channel(int(CHANNEL['channel4']))
+    guild = member.guild
+    desc = [
+        str(J_MESSAGE['j_msg1']).format(member.mention, guild),
+        str(J_MESSAGE['j_msg2']).format(guild, member.mention),
+        str(J_MESSAGE['j_msg3']).format(guild, member.mention)
+    ]
+    
+    imgdata = [
+        str(WELCOME['welcome1']),
+        str(WELCOME['welcome2']),
+        str(WELCOME['welcome3']),
+        str(WELCOME['welcome4'])
+    ]
+    
+    embed = discord.Embed(
+        color=discord.Color.purple(),
+        title="--- New Member Join!! ---",
+        desc=random.choice(desc)
+    )
+    embed.set_thumbnail(url=member.avatar_url)
+    embed.set_image(url=random.choice(imgdata))
+    embed.set_footer(text="Joined on: Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    
+    await ch3.send(embed=embed)
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
