@@ -14,7 +14,7 @@ from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, J_MESSAGE, K_MESSAGE
 
-client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
+client = commands.Bot(command_prefix=[CONFIG['prefix1'], CONFIG['prefix2']], intents = discord.Intents.all())
 
 cogs = [music]
 
