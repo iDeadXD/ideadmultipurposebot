@@ -69,6 +69,7 @@ async def waifu(ctx, member : discord.Member=None):
         member = ctx.author
     if ctx.channel.is_nsfw():
         await ctx.send('Note: Write this command outside the NSFW channel')
+        await ctx.message.delete()
         return
     url = SFW['waifu1']
     r = requests.get(url)
@@ -95,6 +96,7 @@ async def waifu(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 @client.command()
 async def hentai(ctx):
@@ -132,13 +134,16 @@ async def hentai(ctx):
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
                 
         await ctx.send(embed=embed)
+        await ctx.message.delete()
     else:
         await ctx.send('Note: Write this command in NSFW channel')
+        await ctx.message.delete()
 
 @client.command()
 async def kiss(ctx, member : discord.Member=None):
     if member is None:
         await ctx.send("Note: No G*Y/Selfkiss!!! You must tag someone for your kiss partner")
+        await ctx.message.delete()
         return
     url7 = SFW['kiss1']
     r7 = requests.get(url7)
@@ -158,6 +163,7 @@ async def kiss(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 @client.command()
 async def slap(ctx, member : discord.Member=None):
@@ -181,6 +187,7 @@ async def slap(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 @client.command()
 async def bonk(ctx, member : discord.Member=None):
@@ -205,6 +212,7 @@ async def bonk(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 @client.command()
 async def meme(ctx):
@@ -228,6 +236,7 @@ async def meme(ctx):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 @client.command() #ping
 async def ping(ctx):
