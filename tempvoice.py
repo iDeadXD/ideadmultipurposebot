@@ -74,7 +74,7 @@ class voice(commands.Cog):
         conn.close()
 
     @commands.command()
-    async def help(self, ctx):
+    async def voicehelp(self, ctx):
         embed = discord.Embed(title="Help", description="",color=0x7289da)
         embed.set_author(name=f"{ctx.guild.me.display_name}",url="https://discordbots.org/bot/472911936951156740", icon_url=f"{ctx.guild.me.avatar_url}")
         embed.add_field(name=f'**Commands**', value=f'**Lock your channel by using the following command:**\n\n`.voice lock`\n\n------------\n\n'
