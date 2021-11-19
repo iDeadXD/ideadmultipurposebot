@@ -16,7 +16,7 @@ from imgapi import WELCOME
 from msg_channel import CHANNEL
 from custom_msg import J_MESSAGE
 
-client = commands.Bot(command_prefix=CONFIG['prefix'], intents = discord.Intents.all())
+client = commands.Bot(command_prefix=[CONFIG['prefix1'], CONFIG['prefix2']], intents = discord.Intents.all())
 
 cogs = [music]
 cogs1 = [imgcogs]
