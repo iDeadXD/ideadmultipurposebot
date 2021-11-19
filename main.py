@@ -332,7 +332,7 @@ async def botinfo(ctx):
     )
     embed.set_thumbnail(url=client.user.avatar_url)
     embed.add_field(name="Bot Name", value=f"{client.user.mention}", inline=False)
-    embed.add_field(name="Real Bot Name", value="Music Player.py#6361")
+    embed.add_field(name="Real Bot Name", value="Music Player.py#6361", inline=False)
     embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
     embed.add_field(name='Created At', value=client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
     embed.add_field(name="Coded in", value="Python3 (discord.py Module)", inline=False)
