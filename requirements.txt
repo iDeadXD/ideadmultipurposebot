@@ -3,8 +3,4 @@ asyncio
 youtube-dl
 PyNaCl
 requests
-schedule
 pytz
-google-api-python-client
-validators
-
