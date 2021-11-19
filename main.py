@@ -277,7 +277,7 @@ async def supported(ctx):
         
     await ctx.send(embed=embed)
 
- @commands.command(name="avatar") #avatar_command
+@client.command(name="avatar") #avatar_command
 async def avatar_(ctx, avamem : discord.Member=None):
     """Get Avatar Image from Specified User"""
     if avamem is None:
