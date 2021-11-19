@@ -310,7 +310,7 @@ async def serverinfo(ctx):
     embed2.add_field(name='Bots:', value=(', '.join(list_of_bots)))
     embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
     embed2.set_thumbnail(url=ctx.guild.icon_url)
-    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    embed2.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed2)
 
