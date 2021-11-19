@@ -323,4 +323,25 @@ async def serverinfo(ctx):
         
     await ctx.send(embed=embed2)
 
+@client.command()
+async def botinfo(ctx):
+    botdev = client.get_user(843132313562513408)
+    embed = discord.Embed(
+        color=ctx.author.color,
+        title="--- Bot Information ---"
+    )
+    embed.set_thumbnail(url=client.user.avatar_url)
+    embed.add_field(name="Bot Name", value=f"{client.user.mention}", inline=False)
+    embed.add_field(name="Real Bot Name", value="Music Player.py#6361")
+    embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
+    embed.add_field(name='Created At', value=client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
+    embed.add_field(name="Coded in", value="Python3 (discord.py Module)", inline=False)
+    embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
+    embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
+    embed.add_field(name="Available Commands", value="Check using >help or .help", inline=False)
+    embed.add_field(name="--- END ---")
+    embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+    
+    await ctx.send(embed=embed)
+
 client.run(CONFIG['token'])
