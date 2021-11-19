@@ -3,6 +3,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
+import tempvoice
 import random
 import json
 import pytz
@@ -17,12 +18,16 @@ from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, J_
 client = commands.Bot(command_prefix=[CONFIG['prefix1'], CONFIG['prefix2']], intents = discord.Intents.all())
 
 cogs = [music]
+cogs2 = [tempvoice]
 
 welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
+
+for i in range(len(cogs2)):
+    cogs2[i].setup(client)
 
 
 @client.event #bot_event
