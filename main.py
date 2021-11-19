@@ -339,7 +339,6 @@ async def botinfo(ctx):
     embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
     embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
     embed.add_field(name="Available Commands", value="Check using >help or .help", inline=False)
-    embed.add_field(name="--- END ---")
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
