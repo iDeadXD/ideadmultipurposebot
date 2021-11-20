@@ -36,7 +36,6 @@ Logged in as {0.user}'''.format(client))
 
 @client.event #Send message when someone join
 async def on_member_join(member):
-    ch3 = client.get_channel(int(CHANNEL['channel4']))
     guild = member.guild
     desc = [
         str(J_MESSAGE['j_msg1']).format(member.mention, guild),
@@ -59,7 +58,7 @@ async def on_member_join(member):
     embed.set_image(url=random.choice(imgdata))
     embed.set_footer(text="Joined on: Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
     
-    await ch3.send(embed=embed)
+    await member.send(embed=embed)
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
