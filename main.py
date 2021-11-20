@@ -358,6 +358,7 @@ async def botinfo(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
+@commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
@@ -401,6 +402,7 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         await member.send(embed=banned)
 
 @client.command()
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member=None, *, reason=None):
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
