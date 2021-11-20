@@ -357,7 +357,7 @@ async def botinfo(ctx):
     
     await ctx.send(embed=embed)
 
-@client.commands()
+@client.command()
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
     author = ctx.message.author
@@ -395,7 +395,7 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         await message5.delete()
         await member.send(embed=embed3)
 
-@client.commands()
+@client.command()
 async def kick(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
     author = ctx.message.author
