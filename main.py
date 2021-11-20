@@ -36,7 +36,7 @@ Logged in as {0.user}'''.format(client))
 
 @client.event #Send message when someone join
 async def on_member_join(member):
-    guild = member.guild
+    guild = member.guild.name
     desc = [
         str(J_MESSAGE['j_msg1']).format(member.mention, guild),
         str(J_MESSAGE['j_msg2']).format(guild, member.mention),
