@@ -360,9 +360,9 @@ async def botinfo(ctx):
 @client.command()
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
-    author = ctx.message.author
-    if author.guild_permissions.administrator == False:
-        embed4=discord.Embed(color=discord.Colour.red(), timestamp=datetime.datetime.utcnow(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
+    if ctx.message.author.guild_permissions.administrator == False:
+        embed4=discord.Embed(color=discord.Colour.red(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
+        embed4.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         message1 = await ctx.send(embed=embed4)    
         sleeper=5
         await asyncio.sleep(sleeper) 
@@ -385,8 +385,10 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
     else:
         guild = ctx.guild
         await member.ban()
-        embed2=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title="Member Banned", description=f"Banned: {member.mention}\n Moderator: **{author}** \n Reason: **{reason}**")
-        embed3=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title=f"You've been banned from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{author.mention}** \n Reason: **{reason}**")
+        embed2=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title="Member Banned", description=f"Banned: {member.mention}\n Moderator: **{ctx.message.author.mention}** \n Reason: **{reason}**")
+        embed2.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+        embed3=discord.Embed(color=discord.Colour.green(), title=f"You've been banned from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{ctx.mesaage.author.mention}** \n Reason: **{reason}**")
+        embed3.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         message4 = await ctx.send(embed=embed2)
         message5 = await ctx.send("✔ User has been notified.")
         sleeper=5
@@ -398,8 +400,7 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
 @client.command()
 async def kick(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
-    author = ctx.message.author
-    if author.guild_permissions.administrator == False:
+    if ctx.message.author.guild_permissions.administrator == False:
         embed4=discord.Embed(color=discord.Colour.red(), timestamp=datetime.datetime.utcnow(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
         message1 = await ctx.send(embed=embed4)    
         sleeper=5
@@ -423,8 +424,10 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
     else:
         guild = ctx.guild
         await member.kick()
-        embed2=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title="Member Kicked", description=f"Kicked: {member.mention}\n Moderator: **{author}** \n Reason: **{reason}**")
-        embed3=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title=f"You've been kicked from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{author.mention}** \n Reason: **{reason}**")
+        embed2=discord.Embed(color=discord.Colour.green(), title="Member Kicked", description=f"Kicked: {member.mention}\n Moderator: **{ctx.message.author.mention}** \n Reason: **{reason}**")
+        embed2.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+        embed3=discord.Embed(color=discord.Colour.green(), title=f"You've been kicked from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{ctx.message.author.mention}** \n Reason: **{reason}**")
+        embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         message4 = await ctx.send(embed=embed2)
         message5 = await ctx.send("✔ User has been notified.")
         sleeper=5
