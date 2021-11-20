@@ -358,7 +358,6 @@ async def botinfo(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
-@commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
@@ -371,9 +370,6 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         return
     if member is None:
         await ctx.send("You have to choose a member to get banned. Command Ignored")
-        return
-    if member is ctx.message.author:
-        await ctx.send("You can't ban yourself. Command Ignored")
         return
     else:
         guild = ctx.guild.name
@@ -413,9 +409,6 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         await ctx.send("Owner!!. You can't kick Server Owner")
     if member is None:
         await ctx.send("You have to choose a member to get kicked. Command Ignored")
-        return
-    if member is ctx.message.author:
-        await ctx.send("You can't kick yourself. Command Ignored")
         return
     else:
         guild = ctx.guild.name
