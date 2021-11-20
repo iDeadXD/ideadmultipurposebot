@@ -367,9 +367,16 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         return
     if member is ctx.guild.owner and member != None:
         await ctx.send("Owner!!. You can't ban Server Owner")
+        return
+    if member is None:
+        await ctx.send("You have to choose a member to get banned. Command Ignored")
+        return
+    if member is ctx.message.author:
+        await ctx.send("You can't ban yourself. Command Ignored")
+        return
     else:
         guild = ctx.guild.name
-        await member.kick()
+        await member.ban()
         embed = discord.Embed(
             title="--- Banned Member ---",
             color=discord.Color.red()
@@ -403,6 +410,12 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         return
     if member is ctx.guild.owner and member != None:
         await ctx.send("Owner!!. You can't kick Server Owner")
+    if member is None:
+        await ctx.send("You have to choose a member to get kicked. Command Ignored")
+        return
+    if member is ctx.message.author:
+        await ctx.send("You can't kick yourself. Command Ignored")
+        return
     else:
         guild = ctx.guild.name
         await member.kick()
