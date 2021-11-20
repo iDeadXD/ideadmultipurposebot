@@ -96,6 +96,8 @@ async def waifu(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
     await ctx.send(embed=embed)
+    sleeper=5
+    await asyncio.sleep(sleeper)
     await ctx.message.delete()
 
 @client.command()
@@ -134,9 +136,13 @@ async def hentai(ctx):
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
                 
         await ctx.send(embed=embed)
+        sleeper=5
+        await asyncio.sleep(sleeper)
         await ctx.message.delete()
     else:
         await ctx.send('Note: Write this command in NSFW channel')
+        sleeper=5
+        await asyncio.sleep(sleeper)
         await ctx.message.delete()
 
 @client.command()
@@ -163,6 +169,8 @@ async def kiss(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    sleeper=5
+    await asyncio.sleep(sleeper)
     await ctx.message.delete()
 
 @client.command()
@@ -187,6 +195,8 @@ async def slap(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    sleeper=5
+    await asyncio.sleep(sleeper)
     await ctx.message.delete()
 
 @client.command()
@@ -212,6 +222,8 @@ async def bonk(ctx, member : discord.Member=None):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
     await ctx.send(embed=embed)
+    sleeper=5
+    await asyncio.sleep(sleeper)
     await ctx.message.delete()
 
 @client.command()
@@ -236,6 +248,8 @@ async def meme(ctx):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         
     await ctx.send(embed=embed)
+    sleeper=5
+    await asyncio.sleep(sleeper)
     await ctx.message.delete()
 
 @client.command() #ping
@@ -342,5 +356,81 @@ async def botinfo(ctx):
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
     
     await ctx.send(embed=embed)
+
+@client.commands()
+async def ban(ctx, member : discord.Member=None, *, reason=None):
+    guild = ctx.guild
+    author = ctx.message.author
+    if author.guild_permissions.administrator == False:
+        embed4=discord.Embed(color=discord.Colour.red(), timestamp=datetime.datetime.utcnow(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
+        message1 = await ctx.send(embed=embed4)    
+        sleeper=5
+        await asyncio.sleep(sleeper) 
+        await message1.delete()
+        return  
+    if member.guild_permissions.administrator and member != None:
+        embed=discord.Embed(color=discord.Colour.red(), title="Administrator", description="This user is an administrator and is not allowed to be banned.")
+        message2 = await ctx.send(embed=embed)
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message2.delete()
+        return
+    if reason == None:
+        embed1=discord.Embed(color=discord.Colour.red(), title="Reason Required!", description="You must enter a reason to ban this member.")    
+        message3 = ctx.send(embed=embed1)
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message3.delete()
+        return
+    else:
+        guild = ctx.guild
+        await member.ban()
+        embed2=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title="Member Banned", description=f"Banned: {member.mention}\n Moderator: **{author}** \n Reason: **{reason}**")
+        embed3=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title=f"You've been banned from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{author.mention}** \n Reason: **{reason}**")
+        message4 = await ctx.send(embed=embed2)
+        message5 = await ctx.send("✔ User has been notified.")
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message4.delete()
+        await message5.delete()
+        await member.send(embed=embed3)
+
+@client.commands()
+async def kick(ctx, member : discord.Member=None, *, reason=None):
+    guild = ctx.guild
+    author = ctx.message.author
+    if author.guild_permissions.administrator == False:
+        embed4=discord.Embed(color=discord.Colour.red(), timestamp=datetime.datetime.utcnow(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
+        message1 = await ctx.send(embed=embed4)    
+        sleeper=5
+        await asyncio.sleep(sleeper) 
+        await message1.delete()
+        return  
+    if member.guild_permissions.administrator and member != None:
+        embed=discord.Embed(color=discord.Colour.red(), title="Administrator", description="This user is an administrator and is not allowed to be kicked.")
+        message2 = await ctx.send(embed=embed)
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message2.delete()
+        return
+    if reason == None:
+        embed1=discord.Embed(color=discord.Colour.red(), title="Reason Required!", description="You must enter a reason to kick this member.")    
+        message3 = ctx.send(embed=embed1)
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message3.delete()
+        return
+    else:
+        guild = ctx.guild
+        await member.kick()
+        embed2=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title="Member Kicked", description=f"Kicked: {member.mention}\n Moderator: **{author}** \n Reason: **{reason}**")
+        embed3=discord.Embed(color=discord.Colour.green(), timestamp=datetime.datetime.utcnow(), title=f"You've been kicked from **{guild}**!", description=f"Target: {member.mention}\nModerator: **{author.mention}** \n Reason: **{reason}**")
+        message4 = await ctx.send(embed=embed2)
+        message5 = await ctx.send("✔ User has been notified.")
+        sleeper=5
+        await asyncio.sleep(sleeper)
+        await message4.delete()
+        await message5.delete()
+        await member.send(embed=embed3)
 
 client.run(CONFIG['token'])
