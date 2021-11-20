@@ -47,8 +47,7 @@ async def on_member_join(member):
     imgdata = [
         str(WELCOME['welcome1']),
         str(WELCOME['welcome2']),
-        str(WELCOME['welcome3']),
-        str(WELCOME['welcome4'])
+        str(WELCOME['welcome3'])
     ]
     
     embed = discord.Embed(
