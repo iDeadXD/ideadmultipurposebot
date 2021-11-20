@@ -360,7 +360,7 @@ async def botinfo(ctx):
 @client.command()
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
-    if ctx.message.author.guild_permissions.administrator == False:
+    if ctx.message.author is not ctx.guild.owner:
         embed4=discord.Embed(color=discord.Colour.red(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
         embed4.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         message1 = await ctx.send(embed=embed4)    
@@ -368,14 +368,14 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         await asyncio.sleep(sleeper) 
         await message1.delete()
         return  
-    if member.guild_permissions.administrator and member != None:
+    if member is ctx.guild.owner and member != None:
         embed=discord.Embed(color=discord.Colour.red(), title="Administrator", description="This user is an administrator and is not allowed to be banned.")
         message2 = await ctx.send(embed=embed)
         sleeper=5
         await asyncio.sleep(sleeper)
         await message2.delete()
         return
-    if reason == None:
+    if reason is None:
         embed1=discord.Embed(color=discord.Colour.red(), title="Reason Required!", description="You must enter a reason to ban this member.")    
         message3 = ctx.send(embed=embed1)
         sleeper=5
@@ -400,21 +400,21 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
 @client.command()
 async def kick(ctx, member : discord.Member=None, *, reason=None):
     guild = ctx.guild
-    if ctx.message.author.guild_permissions.administrator == False:
+    if ctx.message.author is not ctx.guild.owner:
         embed4=discord.Embed(color=discord.Colour.red(), timestamp=datetime.datetime.utcnow(), title="Missing Permissions!", description="You don't have the required permissions to use this command!")
         message1 = await ctx.send(embed=embed4)    
         sleeper=5
         await asyncio.sleep(sleeper) 
         await message1.delete()
         return  
-    if member.guild_permissions.administrator and member != None:
+    if member is ctx.guild.owner and member != None:
         embed=discord.Embed(color=discord.Colour.red(), title="Administrator", description="This user is an administrator and is not allowed to be kicked.")
         message2 = await ctx.send(embed=embed)
         sleeper=5
         await asyncio.sleep(sleeper)
         await message2.delete()
         return
-    if reason == None:
+    if reason is None:
         embed1=discord.Embed(color=discord.Colour.red(), title="Reason Required!", description="You must enter a reason to kick this member.")    
         message3 = ctx.send(embed=embed1)
         sleeper=5
