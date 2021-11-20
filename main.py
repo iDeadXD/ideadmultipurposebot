@@ -407,8 +407,6 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         return
     if member is ctx.guild.owner and member != None:
         await ctx.send("Owner!!. You can't kick Server Owner")
-    if member is None:
-        await ctx.send("You have to choose a member to get kicked. Command Ignored")
         return
     else:
         guild = ctx.guild.name
