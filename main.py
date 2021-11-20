@@ -34,32 +34,6 @@ Logged in as {0.user}'''.format(client))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
-@client.event #Send message when someone join
-async def on_member_join(member):
-    guild = member.guild.name
-    desc = [
-        str(J_MESSAGE['j_msg1']).format(member.mention, guild),
-        str(J_MESSAGE['j_msg2']).format(guild, member.mention),
-        str(J_MESSAGE['j_msg3']).format(guild, member.mention)
-    ]
-    
-    imgdata = [
-        str(WELCOME['welcome1']),
-        str(WELCOME['welcome2']),
-        str(WELCOME['welcome3'])
-    ]
-    
-    embed = discord.Embed(
-        color=discord.Color.green(),
-        title="--- New Member Join!! ---",
-        desc=random.choice(desc)
-    )
-    embed.set_thumbnail(url=member.avatar_url)
-    embed.set_image(url=random.choice(imgdata))
-    embed.set_footer(text="Joined on: Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
-    
-    await member.send(embed=embed)
-
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
