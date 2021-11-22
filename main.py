@@ -406,4 +406,60 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         await ctx.send("✔ User has been notified.")
         await member.send(embed=kicked)
 
+@client.command()
+async def sendto(ctx, member : discord.Member=None, *, arg=None):
+    if member is None or member is ctx.message.author:
+        await ctx.send("You can't send DM to yourself")
+        return
+    if arg is None:
+        await ctx.send("Please, write your message")
+        return
+    else:
+        embed = discord.Embed(
+            color=discord.Color.purple(),
+            title="--- Someone DM You ---",
+            description=f"From {ctx.message.author.mention} to {member.mention}"
+        )
+        embed.add_field(name="This is the message", value=args)
+        
+        embed1 = discord.Embed(
+            title=f"✔ The message has been sent. Sent to: {member.mention}"
+        )
+        
+        await ctx.message.delete()
+        await ctx.send(embed=embed1)
+        await asyncio.sleep(5)
+        await member.send(embed=embed)
+
+@client.command()
+async def invite(ctx, *, uses=None):
+    guild = ctx.guild.name
+    if uses is None:
+        await ctx.send("Insert Max Used value (0 for Unlimited Use). Example: >invite 5(Limit Link can Used: 5Times/5User)")
+        return
+    link = await ctx.channel.create_invite(xkcd=True, max_age = 0, max_uses = int(uses))
+    embed = discord.Embed(
+        color=discord.Color.purple(),
+        title="--- Instant Invite Link ---",
+        description="Share this invite link to another user"
+    )
+    embed.add_field(name="This invite link will be directed to: ", value=guild)
+    embed.add_field(name="Max Uses")
+    embed.add_field(name="This your invite link", value=f"[Hold for Copy the link]({link})")
+    
+    await ctx.message.delete()
+    await ctx.send(embed=embed)
+
+@client.command()
+async def invitebot(ctx):
+    link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=433103232119&scope=bot%20applications.commands"
+    embed = discord.Embed(
+        color=discord.Color.green(),
+        title="--- Invite Link ---"
+    )
+    embed.set_thumbnail(url=client.user.avatar_url)
+    embed.add_field(name="Click the link below to invite me to your server!", value=f"[Invite Me!]({link})")
+    
+    await ctx.send(embed=embed)
+
 client.run(CONFIG['token'])
