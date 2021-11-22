@@ -273,23 +273,23 @@ async def supported(ctx):
     await ctx.send(embed=embed)
 
 @client.command(name="clear")
-async def _clear(ctx, amount=0):
-  if amount == 0:
-    fail = await ctx.send("Please enter an amount to delete!")
-    await asyncio.sleep(6)
-    await fail.delete()
-
-  if amount < 3:
-    await ctx.channel.purge(limit=amount)
-    sucess = await ctx.send(f"{amount} messages has been deleted <a:Verified:878231325469974599>") #sending success msg
-    await asyncio.sleep(6) #wait 6 seconds
-    await sucess.delete() #deleting the sucess msg
-
-  else:
+async def clear_(ctx, amount=0):
     if amount == 0:
-        fail = await ctx.send("Please enter an amount to delete!")
-        await asyncio.sleep(6)
-        await fail.delete()
+      fail = await ctx.send ("Please enter an amount to delete!")
+      await asyncio.sleep (6)
+      await fail.delete()
+  
+    if amount < 3:
+      await ctx.channel.purge(limit=amount)
+      sucess = await ctx.send (f"{amount} messages has been deleted <a:Verified:878231325469974599>") #sending success msg
+      await asyncio.sleep (6) #wait 6 seconds
+      await sucess.delete() #deleting the sucess msg
+  
+    else :
+      if amount == 0:
+          fail = await ctx.send ("Please enter an amount to delete!")
+          await asyncio.sleep (6)
+          await fail.delete()
 
 @client.command(name="avatar") #avatar_command
 async def avatar_(ctx, avamem : discord.Member=None):
