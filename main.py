@@ -34,6 +34,24 @@ Logged in as {0.user}'''.format(client))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
+@client.event
+async def on_voice_state_update(member, before, after):
+    channel = discord.utils.get(ctx.guild.voice_channel, name="buat baru")
+    
+    if after.channel != None:
+        if after.channel.name == channel:
+            for guild in client.guilds:
+                maincategory = discord.utils.get(
+                     guild.categories, name=channel)
+                channel2 = guild.create_voice_channel(name=f'Voice {member.display_name}', category=maincategory)
+                await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
+                await member.move_to(channel2)
+
+                def check(x, y, z):
+                    return len(channel2.members) == 0
+                await client.wait_for('voice_state_update', check=check)
+                await channel2.delete()
+
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
@@ -420,6 +438,7 @@ async def sendto(ctx, member : discord.Member=None, *, arg=None):
             title="--- Someone DM You ---",
             description=f"From {ctx.message.author.mention} to {member.mention}"
         )
+        embed.set_thumbnail(url=ctx.message.author.avatar_url)
         embed.add_field(name="This is the message", value=arg)
         embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
 
