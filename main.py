@@ -444,7 +444,7 @@ async def invite(ctx, *, uses=None):
         description="Share this invite link to another user"
     )
     embed.add_field(name="This invite link will be directed to: ", value=guild)
-    embed.add_field(name="Max Uses")
+    embed.add_field(name="Max Uses", value=uses)
     embed.add_field(name="This your invite link", value=f"[Hold for Copy the link]({link})")
     
     await ctx.message.delete()
