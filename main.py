@@ -34,20 +34,6 @@ Logged in as {0.user}'''.format(client))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
-@client.event
-async def on_voice_state_update(member, before, after):
-    if after.channel != None:
-        if after.channel.name == "buat baru":
-            for guild in client.guilds:
-                channel2 = await guild.create_voice_channel(name=f'Voice {member.display_name}')
-                await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
-                await member.move_to(channel2)
-
-                def check(x, y, z):
-                    return len(channel2.members) == 0
-                await client.wait_for('voice_state_update', check=check)
-                await channel2.delete()
-
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
