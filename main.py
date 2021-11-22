@@ -43,7 +43,7 @@ async def on_voice_state_update(member, before, after):
             for guild in client.guilds:
                 maincategory = discord.utils.get(
                      guild.categories, name=channel)
-                channel2 = guild.create_voice_channel(name=f'Voice {member.display_name}', category=maincategory)
+                channel2 = await guild.create_voice_channel(name=f'Voice {member.display_name}', category=maincategory)
                 await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
                 await member.move_to(channel2)
 
