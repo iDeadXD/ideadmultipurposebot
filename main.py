@@ -285,7 +285,7 @@ async def clear(ctx, amount=0):
     await asyncio.sleep(6) #wait 6 seconds
     await sucess.delete() #deleting the sucess msg
 
-  else :
+  else:
     if amount == 0:
         fail = await ctx.send("Please enter an amount to delete!")
         await asyncio.sleep(6)
