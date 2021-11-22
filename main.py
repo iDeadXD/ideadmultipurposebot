@@ -423,8 +423,11 @@ async def sendto(ctx, member : discord.Member=None, *, arg=None):
         embed.add_field(name="This is the message", value=arg)
         
         embed1 = discord.Embed(
-            title=f"✔ The message has been sent. Sent to: {member.mention}"
+            color=discord.Color.green()
         )
+        embed.set_thumbnail(url=member.avatar_url)
+        embed.add_field(name=f"✔ The message has been sent.", value="Sent to: {member.mention}")
+        embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         
         await ctx.message.delete()
         await ctx.send(embed=embed1)
