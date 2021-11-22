@@ -272,8 +272,8 @@ async def supported(ctx):
         
     await ctx.send(embed=embed)
 
-@client.command()
-async def clear(ctx, amount=0):
+@client.command(name="clear")
+async def _clear(ctx, amount=0):
   if amount == 0:
     fail = await ctx.send("Please enter an amount to delete!")
     await asyncio.sleep(6)
