@@ -420,7 +420,7 @@ async def sendto(ctx, member : discord.Member=None, *, arg=None):
             title="--- Someone DM You ---",
             description=f"From {ctx.message.author.mention} to {member.mention}"
         )
-        embed.add_field(name="This is the message", value=args)
+        embed.add_field(name="This is the message", value=arg)
         
         embed1 = discord.Embed(
             title=f"✔ The message has been sent. Sent to: {member.mention}"
