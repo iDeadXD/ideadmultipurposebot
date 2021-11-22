@@ -36,7 +36,7 @@ Logged in as {0.user}'''.format(client))
 
 @client.event
 async def on_voice_state_update(member, before, after):
-    channel = discord.utils.get(ctx.guild.voice_channel, name="buat baru")
+    channel = discord.utils.get(guild.voice_channel, name="buat baru")
     
     if after.channel != None:
         if after.channel.name == channel:
