@@ -418,7 +418,7 @@ async def userinfo(ctx, member : discord.Member=None):
     formats = "%A, %d. %B %Y @ %H:%M:%S"
     
     if member is None:
-       member = ctx.author
+        member = ctx.author
     
     embed = discord.Embed(
         color=discord.Color.magenta(),
