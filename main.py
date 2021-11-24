@@ -3,14 +3,13 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 import music
+import levelsystem
 import random
 import json
 import pytz
 import requests
 import time
 import asyncio
-import pymongo
-from pymongo import MongoClient
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
@@ -19,12 +18,16 @@ from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_
 client = commands.Bot(command_prefix=[CONFIG['prefix1'], CONFIG['prefix2']], intents = discord.Intents.all())
 
 cogs = [music]
+cogs2 = [levelsystem]
 
 welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
+
+for i in range(len(cogs2)):
+    cogs2[i].setup(client)
 
 @client.event #bot_event
 async def on_ready():
@@ -35,53 +38,6 @@ Logged in as {0.user}'''.format(client))
     ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
-
-@client.event
-async def on_message(message):
-    mango_url = "mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-    cluster = MongoClient(mango_url)
-    db = cluster["database1"]
-    collection = db["level"]
-    author_id = message.author.id
-    guild_id = message.guild.id 
-    
-    author = message.author
-    
-    user_id = {"_id": author_id}
-    
-    if message.author == client.user:
-        return
-    
-    if message.author.bot:
-        return
-    
-    if(collection.count_documents({}) == 0):
-        user_info = {"_id": author_id, "GuildID": guild_id, "Level": 1, "XP": 0}
-        collection.insert_one(user_info)
-    
-    if(collection.count_documents(user_id) == 0):
-        user_info = {"_id": author_id, "GuildID": guild_id, "Level": 1, "XP": 0}
-        collection.insert_one(user_info)
-    
-    exp = collection.find(user_id)
-    for xp in exp:
-        cur_xp = xp["XP"]
-    
-        new_xp = cur_xp + 1 
-    
-    collection.update_one({"_id": author_id}, {"$set":{"XP":new_xp}}, upsert=True)
-    
-    #await ctx.channel.send("1 xp up")
-  
-    lvl = collection.find(user_id)
-    for levl in lvl:
-        lvl_start = levl["Level"]
-    
-        new_level = lvl_start + 1
-    
-    if cur_xp >= round(5 * (lvl_start ** 4 / 5)):
-        collection.update_one({"_id": author_id}, {"$set":{"Level":new_level}}, upsert=True)
-        await message.channel.send(f"{author.mention} has leveled up to {new_level}!!")
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
