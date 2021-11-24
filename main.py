@@ -37,22 +37,22 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.event
-async def on_message(ctx):
+async def on_message(message):
     mango_url = "mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     cluster = MongoClient(mango_url)
     db = cluster["database1"]
     collection = db["level"]
-    author_id = ctx.author.id
-    guild_id = ctx.guild.id 
+    author_id = message.author.id
+    guild_id = message.guild.id 
     
-    author = ctx.author
+    author = message.author
     
     user_id = {"_id": author_id}
     
-    if ctx.author == client.user:
+    if message.author == client.user:
         return
     
-    if ctx.author.bot:
+    if message.author.bot:
         return
     
     if(collection.count_documents({}) == 0):
@@ -81,7 +81,7 @@ async def on_message(ctx):
     
     if cur_xp >= round(5 * (lvl_start ** 4 / 5)):
         collection.update_one({"_id": author_id}, {"$set":{"Level":new_level}}, upsert=True)
-        await ctx.channel.send(f"{author.mention} has leveled up to {new_level}!!")
+        await message.channel.send(f"{author.mention} has leveled up to {new_level}!!")
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
