@@ -58,7 +58,7 @@ class levelsystem(commands.Cog):
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
                 embed.set_thumbnail(url=ctx.author.avatar_url)
-                    await ctx.channel.send(embed=embed)
+                await ctx.channel.send(embed=embed)
 
     @commands.command()
     async def leaderboard(self, ctx):
