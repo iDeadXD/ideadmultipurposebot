@@ -419,6 +419,7 @@ async def userinfo(ctx, member: discord.Member=None):
         member = ctx.author
     
     rolelist = [role.mention for role in member.roles if role.mentionable]
+    text = "Nothing was found..." if len(role_mentions) == 0 else ', '.join(role_mentions)
     
     embed = discord.Embed(
         color=discord.Color.magenta(),
@@ -430,7 +431,7 @@ async def userinfo(ctx, member: discord.Member=None):
     embed.add_field(name="Current Status", value=f"{member.status}")
     embed.add_field(name="Mention", value=f"{member.mention}")
     embed.add_field(name="Joined at", value=f"{member.joined_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
-    embed.add_field(name="User Roles", value=f", ".join(rolelist))
+    embed.add_field(name="User Roles", value=text)
     embed.set_footer(text=f"Created at {member.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
     
     await ctx.send(embed=embed)
