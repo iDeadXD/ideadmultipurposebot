@@ -419,7 +419,7 @@ async def userinfo(ctx, member: discord.Member=None):
         member = ctx.author
     
     rolelist = [role.mention for role in member.roles if role.mentionable]
-    text = "Nothing was found..." if len(role_mentions) == 0 else ', '.join(role_mentions)
+    text = "Nothing was found..." if len(rolelist) == 0 else ', '.join(rolelist)
     
     embed = discord.Embed(
         color=discord.Color.magenta(),
