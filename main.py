@@ -414,11 +414,11 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         await member.send(embed=kicked)
 
 @client.command()
-async def userinfo(ctx, member : discord.Member=None):
-    rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
-    
+async def userinfo(ctx, member: discord.Member=None):
     if member is None:
         member = ctx.author
+    
+    rolelist = [role.mention for role in member.roles if role.mentionable]
     
     embed = discord.Embed(
         color=discord.Color.magenta(),
