@@ -414,6 +414,28 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
         await member.send(embed=kicked)
 
 @client.command()
+async def userinfo(ctx, member : discord.Member=None):
+    formats = "%A, %d. %B %Y @ %H:%M:%S"
+    
+    if member is None:
+       member = ctx.author
+    
+    embed = discord.Embed(
+        color=discord.Color.magenta(),
+        title="--- User Information ---"
+    )
+    embed.set_thumbnail(url=member.avatar_url)
+    embed.add_field(name="ID", value=f"{member.id}")
+    embed.add_field(name="Nickname", value=f"{member.display_name}")
+    embed.add_field(name="Current Status", value=f"{member.status}")
+    embed.add_field(name="Mention", value=f"{member.mention}")
+    embed.add_field(name="Joined at", value=f"{pytz.timezone('Asia/Jakarta').fromutc(member.created_at.__format__(formats))}")
+    embed.add_field(name=User Roles", value=f"{member.roles}")
+    embed.set_footer(text=f"Created at {pytz.timezone('Asia/Jakarta').fromutc(member.created_at.__format__(formats))}")
+    
+    await ctx.send(embed=embed)
+
+@client.command()
 async def sendto(ctx, member : discord.Member=None, *, arg=None):
     if member is None or member is ctx.message.author:
         await ctx.send("You can't send DM to yourself")
