@@ -38,7 +38,7 @@ Logged in as {0.user}'''.format(client))
 
 @client.event
 async def on_message(ctx):
-    mango_url = "mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority_id"
+    mango_url = "mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     cluster = MongoClient(mango_url)
     db = cluster["database1"]
     collection = db["level"]
