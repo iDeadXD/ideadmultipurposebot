@@ -15,14 +15,15 @@ class levelsystem(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        stats = collection.find_one({"id": message.author.id})
+        author_id = message.author.id
+        stats = collection.find_one({"_id": author_id})
         if not message.author.bot:
             if stats is None:
-                newuser = {"id": message.author.id, "xp": 100}
+                newuser = {"_id": author_id, "xp": 100}
                 collection.insert_one(newuser)
             else:
                 xp = stats["xp"] + 5
-                collection.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                collection.update_one({"_id": author_id}, {"$set": {"xp": xp}})
                 lvl = 0
                 while True:
                     if xp < ((50 * (lvl ** 2)) + (50 * lvl)):
@@ -34,7 +35,8 @@ class levelsystem(commands.Cog):
 
     @commands.command()
     async def rank(self, ctx):
-        stats = collection.find_one({"id": ctx.author.id})
+        author_id = ctx.author.id
+        stats = collection.find_one({"id": author_id})
         if stats is None:
             embed = discord.Embed(description="You haven't sent any messages, no rank!!!")
             await ctx.channel.send(embed=embed)
@@ -67,7 +69,7 @@ class levelsystem(commands.Cog):
         embed = discord.Embed(title="Rankings:")
         for x in rankings:
             try:
-                temp = ctx.guild.get_member(x["id"])
+                temp = ctx.guild.get_member(x["_id"])
                 tempxp = x["xp"]
                 embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp}", inline=False)
                 i += 1
