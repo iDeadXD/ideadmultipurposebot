@@ -36,7 +36,7 @@ class levelsystem(commands.Cog):
     @commands.command()
     async def rank(self, ctx):
         author_id = ctx.author.id
-        stats = collection.find_one({"id": author_id})
+        stats = collection.find_one({"_id": author_id})
         if stats is None:
             embed = discord.Embed(description="You haven't sent any messages, no rank!!!")
             await ctx.channel.send(embed=embed)
@@ -53,7 +53,7 @@ class levelsystem(commands.Cog):
             rankings = collection.find().sort("xp", -1)
             for x in rankings:
                 rank += 1
-                if stats["id"] == x["id"]:
+                if stats["_id"] == x["_id"]:
                     break
                 embed = discord.Embed(title="{}'s level stats".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
