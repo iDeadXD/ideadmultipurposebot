@@ -4,4 +4,4 @@ youtube-dl
 PyNaCl
 requests
 pytz
-pymongo
+pymongo[srv]
