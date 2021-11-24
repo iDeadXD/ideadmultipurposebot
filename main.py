@@ -415,7 +415,7 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
 
 @client.command()
 async def userinfo(ctx, member : discord.Member=None):
-    rolelist = [r.mention for r in user.roles if r != ctx.guild.default_role]
+    rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
     
     if member is None:
         member = ctx.author
