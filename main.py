@@ -430,7 +430,7 @@ async def userinfo(ctx, member : discord.Member=None):
     embed.add_field(name="Current Status", value=f"{member.status}")
     embed.add_field(name="Mention", value=f"{member.mention}")
     embed.add_field(name="Joined at", value=f"{pytz.timezone('Asia/Jakarta').fromutc(member.created_at.__format__(formats))}")
-    embed.add_field(name=User Roles", value=f"{member.roles}")
+    embed.add_field(name="User Roles", value=f"{member.roles}")
     embed.set_footer(text=f"Created at {pytz.timezone('Asia/Jakarta').fromutc(member.created_at.__format__(formats))}")
     
     await ctx.send(embed=embed)
