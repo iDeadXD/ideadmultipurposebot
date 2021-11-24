@@ -415,6 +415,7 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
 
 @client.command()
 async def userinfo(ctx, member : discord.Member=None):
+    rolelist = [r.mention for r in user.roles if r != ctx.guild.default_role]
     
     if member is None:
         member = ctx.author
@@ -429,7 +430,7 @@ async def userinfo(ctx, member : discord.Member=None):
     embed.add_field(name="Current Status", value=f"{member.status}")
     embed.add_field(name="Mention", value=f"{member.mention}")
     embed.add_field(name="Joined at", value=f"{member.joined_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
-    embed.add_field(name="User Roles", value=f"{member.roles.mention}")
+    embed.add_field(name="User Roles", value=f", ".join(rolelist))
     embed.set_footer(text=f"Created at {member.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
     
     await ctx.send(embed=embed)
