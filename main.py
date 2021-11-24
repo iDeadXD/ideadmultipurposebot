@@ -81,7 +81,7 @@ async def on_message(ctx):
     
     if cur_xp >= round(5 * (lvl_start ** 4 / 5)):
         collection.update_one({"_id": author_id}, {"$set":{"Level":new_level}}, upsert=True)
-        await ctx.channel.send(f"{author.name} has leveled up to {new_level}!")
+        await ctx.channel.send(f"{author.mention} has leveled up to {new_level}!!")
 
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
