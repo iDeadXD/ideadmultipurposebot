@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 import music
 import levelsystem
+import voice_temp
 import random
 import json
 import pytz
@@ -19,6 +20,7 @@ client = commands.Bot(command_prefix=[CONFIG['prefix1'], CONFIG['prefix2']], int
 
 cogs = [music]
 cogs2 = [levelsystem]
+cogs3 = [voice_temp]
 
 welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
@@ -28,6 +30,9 @@ for i in range(len(cogs)):
 
 for i in range(len(cogs2)):
     cogs2[i].setup(client)
+
+for i in range(len(cogs3)):
+    cogs3[i].setup(client)
 
 @client.event #bot_event
 async def on_ready():
