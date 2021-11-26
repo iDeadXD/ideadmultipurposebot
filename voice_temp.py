@@ -158,7 +158,7 @@ class Voice(commands.Cog):
     async def name(self, ctx, names=None):
         vc = ctx.voice_client
         
-        if name is None:
+        if names is None:
             fail1 = discord.Embed(
                   title="",
                   description="Set your voice channel name!!",
@@ -186,8 +186,8 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def listener(self, ctx, channel : discord.VoiceChannel=None):
-        listening = [r.mention for r in channel.members if r != ctx.author.bot]
+    async def listener(self, ctx, channel: discord.VoiceChannel=None):
+        listening = [r.mention for r in channel.members if r != channel.members.bot]
         
         if channel is None:
             fail1 = discord.Embed(
