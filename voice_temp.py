@@ -117,7 +117,7 @@ class Voice(commands.Cog):
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.commands(pass_context=True)
+    @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def bitrate(self, ctx, amount=None):
         
@@ -149,7 +149,7 @@ class Voice(commands.Cog):
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.commands(pass_context=True)
+    @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def name(self, ctx, names=None):
         
@@ -178,7 +178,7 @@ class Voice(commands.Cog):
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.commands(pass_context=True)
+    @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def listener(self, ctx):
         channel = ctx.message.author.voice.channel
