@@ -26,6 +26,8 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
                         return
+        await ctx.guild.create_voice_channel(name="buat baru")
+        return
         
         if len(before.channel.members) == 0:
             await before.channel.delete()
@@ -34,16 +36,14 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def lock(self, ctx):
-        vc = ctx.voice_client
         
-        if not vc or not vc.is_connected():
+        if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
                 description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail1)
-            return
+            return await ctx.send(embed=fail1)
         
         await ctx.channel.purge(limit=1)
         channel = ctx.message.author.voice.channel
@@ -63,16 +63,14 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx):
-        vc = ctx.voice_client
         
-        if not vc or not vc.is_connected():
+        if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
                 description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail1)
-            return
+            return await ctx.send(embed=fail1)
         
         await ctx.channel.purge(limit=1)
         channel = ctx.message.author.voice.channel
@@ -90,7 +88,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def userlimit(self, ctx, amount=None):
-        vc = ctx.voice_client
         
         if amount is None:
             return
@@ -102,16 +99,16 @@ class Voice(commands.Cog):
             )
             await ctx.send(embed=fail1)
             return
-        if not vc or not vc.is_connected():
-            fail2 = discord.Embed(
+        if ctx.message.author.voice is None:
+            fail1 = discord.Embed(
                 title="",
                 description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail2)
-            return
+            return await ctx.send(embed=fail1)
         else:
-            await vc.channel.edit(user_limit=amount)
+            channel = ctx.message.author.voice.channel
+            await channel.edit(user_limit=amount)
             done = discord.Embed(
                 title="",
                 description=f"User Limit has been set to {amount}",
@@ -120,10 +117,9 @@ class Voice(commands.Cog):
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.command(pass_context=True)
+    @commands.commands(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def bitrate(self, ctx, amount=None):
-        vc = ctx.voice_client
         
         if amount is None:
             return
@@ -135,28 +131,27 @@ class Voice(commands.Cog):
             )
             await ctx.send(embed=fail1)
             return
-        if not vc or not vc.is_connected():
-            fail2 = discord.Embed(
+        if ctx.message.author.voice is None:
+            fail1 = discord.Embed(
                 title="",
                 description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail2)
-            return
+            return await ctx.send(embed=fail1)
         else:
-            await vc.channel.edit(bitrate=amount)
+            channel = ctx.message.author.voice.channel
+            await channel.edit(bitrate=amount)
             done = discord.Embed(
                 title="",
-                description=f"Bitrate has been set to {amount}",
+                description=f"Bitrate has been set to {amount}Kbps",
                 color=discord.Color.green()
             )
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.command(pass_context=True)
+    @commands.commands(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def name(self, ctx, names=None):
-        vc = ctx.voice_client
         
         if names is None:
             fail1 = discord.Embed(
@@ -164,18 +159,17 @@ class Voice(commands.Cog):
                   description="Set your voice channel name!!",
                   color=discord.Color.green()
               )
-            await ctx.send(embed=fail1)
-            return
-        if not vc or not vc.is_connected():
-            fail2 = discord.Embed(
+            return await ctx.send(embed=fail1)
+        if ctx.message.author.voice is None:
+            fail1 = discord.Embed(
                 title="",
                 description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail2)
-            return
+            return await ctx.send(embed=fail1)
         else:
-            await vc.channel.edit(name=str(names))
+            channel = ctx.message.author.voice.channel
+            await channel.edit(name=str(names))
             done = discord.Embed(
                 title="",
                 description=f"Channel name has been set to {str(names)}",
@@ -184,35 +178,27 @@ class Voice(commands.Cog):
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             await ctx.send(embed=done)
     
-    @commands.command(pass_context=True)
+    @commands.commands(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def listener(self, ctx, channel: discord.VoiceChannel=None):
-        listening = [r.mention for r in channel.members if r != channel.members.bot]
+    async def listener(self, ctx):
+        channel = ctx.message.author.voice.channel
+        listening = [r.mention for r in channel.members if r != ctx.author.bot]
         
-        if channel is None:
+        if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
-                description="Mention channel specifically!!",
+                description="You're not in Voice Channel. Command Ignored",
                 color=discord.Color.green()
             )
-            await ctx.send(embed=fail1)
-            return
-        if len(channel.members) < 2:
-            fail1 = discord.Embed(
-                title="",
-                description=f"{channel.members.name} is alone in {channel.mention}",
-                color=discord.Color.green()
-            )
-            await ctx.send(embed=fail1)
-            return
-        else:
-            done = discord.Embed(
-                title="--- Channel Listener ---",
-                color=discord.Color.green()
-            )
-            done.add_field(name=f"Listener at {channel.mention}", value=", ".join(listening))
-            done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
-            await ctx.send(embed=done)
+            return await ctx.send(embed=fail1)
+        
+        done = discord.Embed(
+            title="--- Channel Listener ---",
+            color=discord.Color.green()
+        )
+        done.add_field(name=f"Listener at {channel.mention}", value=", ".join(listening))
+        done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=done)
 
 def setup(client):
     client.add_cog(Voice(client))
