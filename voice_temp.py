@@ -87,7 +87,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def userlimit(self, ctx, amount=None):
+    async def userlimit(self, ctx, amount: int=None):
         
         if amount is None:
             return
@@ -119,7 +119,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def bitrate(self, ctx, amount=None):
+    async def bitrate(self, ctx, amount: int=None):
         
         if amount is None:
             return
