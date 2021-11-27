@@ -44,6 +44,12 @@ Logged in as {0.user}'''.format(client))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
+@client.event 
+async def on_command_error(ctx, error): 
+    if isinstance(error, commands.CommandNotFound): 
+        em = discord.Embed(title=f"Error!!!", description=f"Command not found.", color=ctx.author.color) 
+        await ctx.send(embed=em)
+
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
