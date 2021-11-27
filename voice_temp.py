@@ -123,10 +123,10 @@ class Voice(commands.Cog):
         
         if amount is None:
             return
-        if not 0 < amount < 97:
+        if not 7 < amount < 97:
             fail1 = discord.Embed(
                 title="",
-                description="Enter bitrate value: 1 - 96",
+                description="Enter bitrate value: 8 - 96",
                 color=discord.Color.green()
             )
             await ctx.send(embed=fail1)
