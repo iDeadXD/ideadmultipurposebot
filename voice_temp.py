@@ -26,7 +26,7 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
                         return
-        await ctx.guild.create_voice_channel(name="buat baru")
+        await member.guild.create_voice_channel(name="buat baru")
         return
         
         if len(before.channel.members) == 0:
