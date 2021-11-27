@@ -91,7 +91,7 @@ class Voice(commands.Cog):
         
         if amount is None:
             return
-        if not 2 < amount < 50:
+        if not 1 < amount < 51:
             fail1 = discord.Embed(
                 title="",
                 description="Enter limit value: 2 - 50.",
@@ -123,7 +123,7 @@ class Voice(commands.Cog):
         
         if amount is None:
             return
-        if not 1 < amount < 96:
+        if not 0 < amount < 97:
             fail1 = discord.Embed(
                 title="",
                 description="Enter bitrate value: 1 - 96",
@@ -140,7 +140,7 @@ class Voice(commands.Cog):
             return await ctx.send(embed=fail1)
         else:
             channel = ctx.message.author.voice.channel
-            await channel.edit(bitrate=amount)
+            await channel.edit(bitrate=int(round(amount * 1000)))
             done = discord.Embed(
                 title="",
                 description=f"Bitrate has been set to {amount}Kbps",
