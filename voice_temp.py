@@ -91,7 +91,7 @@ class Voice(commands.Cog):
         
         if amount is None:
             return
-        if amount < 2 and amount > 50:
+        if not 2 < amount < 50:
             fail1 = discord.Embed(
                 title="",
                 description="Enter limit value: 2 - 50.",
@@ -123,7 +123,7 @@ class Voice(commands.Cog):
         
         if amount is None:
             return
-        if amount < 1 and amount > 96:
+        if not 1 < amount < 96:
             fail1 = discord.Embed(
                 title="",
                 description="Enter bitrate value: 1 - 96",
@@ -196,7 +196,7 @@ class Voice(commands.Cog):
             title="--- Channel Listener ---",
             color=discord.Color.green()
         )
-        done.add_field(name=f"Listener at {channel.mention}", value=", ".join(listening))
+        done.add_field(name=f"Listener at {channel.name}", value=", ".join(listening))
         done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=done)
 
