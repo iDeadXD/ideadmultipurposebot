@@ -542,4 +542,14 @@ async def report(ctx, reason=None):
     await ctx.send(embed=embed)
     await botdev.send(embed=embed)
 
+@client.command()
+async def showguilds(ctx):
+    listed = discord.Embed(
+        title="--- List Joined Server ---",
+        color=discord.Color.green()
+    )
+    listed.add_field(name="Server List", value="\n".join(client.guilds))
+    listed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    await ctx.send(embed=listed)
+
 client.run(CONFIG['token'])
