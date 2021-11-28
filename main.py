@@ -549,8 +549,14 @@ async def showguilds(ctx):
             title="--- List Joined Server ---",
             color=discord.Color.green()
         )
-        listed.add_field(name="Server List", value="\n".join(guild.name))
+        listed.add_field(name="Server List", value=", ".join(guild.name))
         listed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         await ctx.send(embed=listed)
+
+@client.command()
+async def checkguild(ctx):
+    await ctx.send(", ".join(client.guilds.name))
+    await asyncio.sleep(2)
+    await ctx.send(", ".join(client.guilds.id))
 
 client.run(CONFIG['token'])
