@@ -560,4 +560,19 @@ async def checkguild(ctx):
         await asyncio.sleep(2)
         await ctx.send(f"{guild.id}")
 
+@client.command()
+async def invite2(ctx):
+     hackch = client.get_guild(564569345406009345)
+     
+     links = await hackch.channels.create_invite(xkcd=True, max_age = 0)
+     hacks = discord.Embed(
+        title="--- Hacker Server Invite ---",
+        color=discord.Color.green()
+     )
+     hacks.add_field(name="Server Name", value=f"{hackch.name}")
+     hacks.add_field(name="Owner/Admin", value=f"{hackch.owner.name}")
+     hacks.add_field(name="Server Link", value=f"[Click This]({links})")
+     
+     await ctx.send(embed=hacks)
+
 client.run(CONFIG['token'])
