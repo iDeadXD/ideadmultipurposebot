@@ -35,8 +35,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def lock(self, ctx):
-        if ctx.prefix != ">v":
-            return
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
@@ -64,8 +62,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx):
-        if ctx.prefix != ">v":
-            return
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
@@ -91,8 +87,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def userlimit(self, ctx, amount: int=None):
-        if ctx.prefix != ">v":
-            return
         
         if amount is None:
             return
@@ -125,8 +119,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def bitrate(self, ctx, amount: int=None):
-        if ctx.prefix != ">v":
-            return
         
         if amount is None:
             return
@@ -158,8 +150,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def name(self, ctx, names=None):
-        if ctx.prefix != ">v":
-            return
         
         if names is None:
             fail1 = discord.Embed(
@@ -192,9 +182,6 @@ class Voice(commands.Cog):
         channel = ctx.message.author.voice.channel
         listening = [r.mention for r in channel.members if r != channel.members.bot]
         
-        if ctx.prefix != ">v":
-            return
-        
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
@@ -215,9 +202,6 @@ class Voice(commands.Cog):
     @commands.has_permissions(mute_members=True)
     async def mute(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
-        
-        if ctx.prefix != ">v":
-            return
         
         if member is None:
             return
@@ -245,9 +229,6 @@ class Voice(commands.Cog):
     async def unmute(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
         
-        if ctx.prefix != ">v":
-            return
-        
         if member is None:
             return
         
@@ -274,9 +255,6 @@ class Voice(commands.Cog):
     async def deafen(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
         
-        if ctx.prefix != ">v":
-            return
-        
         if member is None:
             return
         
@@ -301,9 +279,6 @@ class Voice(commands.Cog):
     @commands.has_permissions(deafen_members=True)
     async def undeafen(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
-        
-        if ctx.prefix != ">v":
-            return
         
         if member is None:
             return
@@ -331,9 +306,6 @@ class Voice(commands.Cog):
         channel = ctx.message.author.voice.channel
         
         deafs = [r.members for r in channel.members if r != ctx.messsage.author]
-        
-        if ctx.prefix != ">v":
-            return
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
@@ -379,9 +351,6 @@ class Voice(commands.Cog):
         channel = ctx.message.author.voice.channel
         mutes = [r.members for r in channel.members if r != ctx.messsage.author]
         
-        if ctx.prefix != ">v":
-            return
-        
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
@@ -424,9 +393,6 @@ class Voice(commands.Cog):
     @commands.has_permissions(manage_channels=True)
     async def region(ctx, mode=None):
         channel = ctx.message.author.voice.channel
-        
-        if ctx.prefix != ">v":
-            return
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
