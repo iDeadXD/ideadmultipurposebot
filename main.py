@@ -535,22 +535,9 @@ async def report(ctx, reason=None):
     )
     embed.add_field(name="Reported by", value=f"{ctx.message.author.mention}")
     embed.add_field(name="The problem/bugs", value=f"{str(reason)}")
-    embed1.set_footer(text="Reported at Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+    embed.set_footer(text="Reported at Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
     
     await ctx.send(embed=embed)
     await botdev.send(embed=embed)
-
-@client.command()
-async def prefix(ctx):
-    prfx = discord.Embed(
-        title="--- Available Bot Prefix ---",
-        color=discord.Color.purple()
-    )
-    prfx.add_field(name="Default Prefix", value=f"Using: {str(CONFIG['prefix1'])}")
-    prfx.add_field(name="Music Prefix", value=f"Using: {str(CONFIG['prefix2'])}")
-    prfx.add_field(name="Voice Prefix", value=f"Using: {str(CONFIG['prefix3'])}")
-    prfx.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
-    
-    await ctx.send(embed=prfx)
 
 client.run(CONFIG['token'])
