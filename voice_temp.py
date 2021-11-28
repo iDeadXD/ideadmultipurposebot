@@ -8,7 +8,7 @@ class Voice(commands.Cog):
     
     def __init__(self, client):
         self.client = client
-        self.prefix = CONFIG['voice_prfx']
+        self.prefix = str(CONFIG['voice_prfx'])
     
     async def cog_check(self, ctx):
         return ctx.prefix == self.prefix
