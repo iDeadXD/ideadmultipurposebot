@@ -307,8 +307,8 @@ async def avatar_(ctx, avamem : discord.Member=None):
     useravatar = avamem.avatar_url
     embed = discord.Embed(
         color=discord.Color.green(),
-        title="--- Avatar ---",
-        description=f"{avamem.mention} Profile Avatar",
+        title="--- Profile Avatar ---",
+        description=f"{avamem.mention} Avatar | [Avatar Link](f"{useravatar}")",
     )
     embed.set_image(url=useravatar)
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -359,6 +359,7 @@ async def botinfo(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
+@commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member=None, *, reason=None):
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
@@ -399,6 +400,7 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
         await member.send(embed=banned)
 
 @client.command()
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member=None, *, reason=None):
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
