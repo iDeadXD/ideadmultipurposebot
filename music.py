@@ -177,7 +177,7 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.players = {}
-        self.prefix = CONFIG['music_prfx']
+        self.prefix = str(CONFIG['music_prfx'])
     
     async def cog_check(self, ctx):
         return ctx.prefix == self.prefix
