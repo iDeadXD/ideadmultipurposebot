@@ -391,8 +391,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def region(ctx, mode=None):
-        channel = ctx.message.author.voice.channel
+    async def region(ctx, channel: discord.VoiceChannel, mode=None):
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
