@@ -2,11 +2,16 @@ import discord
 from discord.ext import commands
 from datetime import datetime
 import pytz
+from config import CONFIG
 
 class Voice(commands.Cog):
     
     def __init__(self, client):
         self.client = client
+        self.prefix = CONFIG['voice_prfx']
+    
+    async def cog_check(self, ctx):
+        return ctx.prefix == self.prefix
     
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
