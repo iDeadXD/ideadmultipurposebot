@@ -228,8 +228,7 @@ class Music(commands.Cog):
             will be made.
         This command also handles moving the bot to different channels.
         """
-        if ctx.prefix != ">m":
-            return
+        
         if not channel:
             try:
                 channel = ctx.author.voice.channel
@@ -266,9 +265,6 @@ class Music(commands.Cog):
         search: str [Required]
             The song to search and retrieve using YTDL. This could be a simple search, an ID or URL.
         """
-        if ctx.prefix != ">m":
-            return
-        
         await ctx.trigger_typing()
 
         vc = ctx.voice_client
@@ -288,8 +284,6 @@ class Music(commands.Cog):
     @commands.command(name='pause', description="pauses music")
     async def pause_(self, ctx):
         """Pause the currently playing song."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -305,8 +299,6 @@ class Music(commands.Cog):
     @commands.command(name='resume', description="resumes music")
     async def resume_(self, ctx):
         """Resume the currently paused song."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -322,8 +314,6 @@ class Music(commands.Cog):
     @commands.command(name='skip', description="skips to next song in queue")
     async def skip_(self, ctx):
         """Skip the song."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -341,8 +331,6 @@ class Music(commands.Cog):
     @commands.command(name='remove', aliases=['rm', 'rem'], description="removes specified song from queue")
     async def remove_(self, ctx, pos : int=None):
         """Removes specified song from queue"""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -366,8 +354,6 @@ class Music(commands.Cog):
     @commands.command(name='clear', aliases=['clr', 'cl', 'cr'], description="clears entire queue")
     async def clear_(self, ctx):
         """Deletes entire queue of upcoming songs."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -382,8 +368,6 @@ class Music(commands.Cog):
     @commands.command(name='queue', aliases=['q', 'playlist', 'que'], description="shows the queue")
     async def queue_info(self, ctx):
         """Retrieve a basic queue of upcoming songs."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -418,8 +402,6 @@ class Music(commands.Cog):
     @commands.command(name='np', aliases=['song', 'current', 'currentsong', 'playing'], description="shows the current playing song")
     async def now_playing_(self, ctx):
         """Display information about the currently playing song."""
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -454,8 +436,6 @@ class Music(commands.Cog):
         volume: float or int [Required]
             The volume to set the player to in percentage. This must be between 1 and 100.
         """
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -486,8 +466,6 @@ class Music(commands.Cog):
         !Warning!
             This will destroy the player assigned to your guild, also deleting any queued songs and settings.
         """
-        if ctx.prefix != ">m":
-            return
         
         vc = ctx.voice_client
 
@@ -504,8 +482,6 @@ class Music(commands.Cog):
     @commands.command(name='lyrics', description="showing the current song lyrics")
     async def lyrics(self, ctx, *, arg):
         """Displaying Lyrics for a Song."""
-        if ctx.prefix != ">m":
-            return
         
         data = requests.get(f"https://some-random-api.ml/lyrics?title={arg}").text
         try:
