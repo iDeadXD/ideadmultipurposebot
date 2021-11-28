@@ -16,12 +16,7 @@ from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE
 
-def get_prefixes(client, message):
-    cog_prefixes = (cog.prefix for cog in client.cogs.values() if hasattr(cog, 'prefix'))
-    default_prefixes = (CONFIG['default_prfx'])
-    return (*cog_prefixes, *default_prefixes)
-
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
+client = commands.Bot(command_prefix=[CONFIG['default_prfx']], intents = discord.Intents.all())
 
 cogs = [music]
 cogs2 = [levelsystem]
