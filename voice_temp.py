@@ -180,7 +180,7 @@ class Voice(commands.Cog):
     @commands.has_permissions(manage_channels=True)
     async def listener(self, ctx):
         channel = ctx.message.author.voice.channel
-        listening = [r.mention for r in channel.members if r != channel.members.bot]
+        listening = [r.mention for r in channel.members]
         
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
