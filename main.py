@@ -53,8 +53,7 @@ async def on_command_error(ctx, error):
 @client.command()
 async def waifu(ctx, member : discord.Member=None):
     """Waifu Image for You"""
-    if ctx.prefix != ">":
-        return
+    
     if member is None:
         member = ctx.author
     if ctx.channel.is_nsfw():
@@ -93,8 +92,7 @@ async def waifu(ctx, member : discord.Member=None):
 @client.command()
 async def hentai(ctx):
     """Hentai Anime Image (18+ Warning)"""
-    if ctx.prefix != ">":
-        return
+    
     if ctx.channel.is_nsfw():
         url1 = NSFW['hentai1']
         url2 = NSFW['hentai2']
@@ -139,8 +137,7 @@ async def hentai(ctx):
 
 @client.command()
 async def kiss(ctx, member : discord.Member=None):
-    if ctx.prefix != ">":
-        return
+    
     if member is None:
         await ctx.send("Note: No G*Y/Selfkiss!!! You must tag someone for your kiss partner")
         await ctx.message.delete()
@@ -170,8 +167,7 @@ async def kiss(ctx, member : discord.Member=None):
 @client.command()
 async def slap(ctx, member : discord.Member=None):
     """Slaps your friend or yourself"""
-    if ctx.prefix != ">":
-        return
+    
     if member is None:
         member = ctx.author
     url4 = SFW['slap1']
@@ -198,8 +194,7 @@ async def slap(ctx, member : discord.Member=None):
 @client.command()
 async def bonk(ctx, member : discord.Member=None):
     """Bonk your friends or yourself"""
-    if ctx.prefix != ">":
-        return
+    
     if member is None:
         member = ctx.author
     url5 = SFW['bonk1']
@@ -227,8 +222,7 @@ async def bonk(ctx, member : discord.Member=None):
 @client.command()
 async def meme(ctx):
     """Random Meme Image"""
-    if ctx.prefix != ">":
-        return
+    
     url6 = MEME['meme1']
     r6 = requests.get(url6)
     data6 = r6.json()
@@ -255,8 +249,7 @@ async def meme(ctx):
 @client.command() #ping
 async def ping(ctx):
     """Showing Bot Latency and YouTube Server Status"""
-    if ctx.prefix != ">":
-        return
+    
     pings = requests.get("https://youtube.com")
     titles = "Pong!!"
     selflatency = str(f" {round(client.latency * 1000)}ms")
@@ -274,8 +267,7 @@ async def ping(ctx):
 @client.command() #current_time
 async def time(ctx):
     """Showing Current Time (Local/UTC)"""
-    if ctx.prefix != ">":
-        return
+    
     time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
     time1utc = datetime.utcnow()
     titles = "Current Time (Local/UTC)"
@@ -293,8 +285,7 @@ async def time(ctx):
 @client.command() #supported_link
 async def supported(ctx):
     """Checking supported music links"""
-    if ctx.prefix != ">":
-        return
+    
     titles = "Supported Platform for Music Player"
     desc = "For Now, Only Support YouTube Link"
     author = ctx.message.author.name
@@ -308,8 +299,6 @@ async def supported(ctx):
 
 @client.command(name="clean")
 async def clean_(ctx, amount=100):
-    if ctx.prefix != ">":
-        return
     await ctx.channel.purge(limit=amount)
     done = await ctx.send("👍")
     await asyncio.sleep(6)
@@ -318,8 +307,7 @@ async def clean_(ctx, amount=100):
 @client.command(name="avatar") #avatar_command
 async def avatar_(ctx, avamem : discord.Member=None):
     """Get Avatar Image from Specified User"""
-    if ctx.prefix != ">":
-        return
+    
     if avamem is None:
         avamem = ctx.author
     useravatar = avamem.avatar_url
@@ -335,8 +323,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
 
 @client.command()
 async def serverinfo(ctx):
-    if ctx.prefix != ">":
-        return
+    
     member = ctx.guild.owner
     role_count = len(ctx.guild.roles)
     list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
@@ -358,8 +345,7 @@ async def serverinfo(ctx):
 
 @client.command()
 async def botinfo(ctx):
-    if ctx.prefix != ">":
-        return
+    
     botdev = client.get_user(843132313562513408)
     embed = discord.Embed(
         color=ctx.author.color,
@@ -380,8 +366,6 @@ async def botinfo(ctx):
 
 @client.command()
 async def ban(ctx, member : discord.Member=None, *, reason=None):
-    if ctx.prefix != ">":
-        return
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
         return
@@ -422,8 +406,6 @@ async def ban(ctx, member : discord.Member=None, *, reason=None):
 
 @client.command()
 async def kick(ctx, member : discord.Member=None, *, reason=None):
-    if ctx.prefix != ">":
-        return
     if ctx.message.author is not ctx.guild.owner:
         await ctx.send("You're not Owner in this Server. Command Ignored")
         return
@@ -461,8 +443,6 @@ async def kick(ctx, member : discord.Member=None, *, reason=None):
 
 @client.command()
 async def userinfo(ctx, member: discord.Member=None):
-    if ctx.prefix != ">":
-        return
     if member is None:
         member = ctx.author
     
@@ -486,8 +466,7 @@ async def userinfo(ctx, member: discord.Member=None):
 
 @client.command()
 async def sendto(ctx, member : discord.Member=None, *, arg=None):
-    if ctx.prefix != ">":
-        return
+    
     if member is None or member is ctx.message.author:
         await ctx.send("You can't send DM to yourself")
         return
@@ -519,8 +498,6 @@ async def sendto(ctx, member : discord.Member=None, *, arg=None):
 
 @client.command()
 async def invite(ctx, *, uses=None):
-    if ctx.prefix != ">":
-        return
     guild = ctx.guild.name
     if uses is None:
         await ctx.send("Insert Max Used value (0 for Unlimited Use). Example: >invite 5(Limit Link can Used: 5Times/5User)")
@@ -540,8 +517,6 @@ async def invite(ctx, *, uses=None):
 
 @client.command()
 async def invitebot(ctx):
-    if ctx.prefix != ">":
-        return
     link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=433103232119&scope=bot%20applications.commands"
     embed = discord.Embed(
         color=discord.Color.green(),
@@ -554,8 +529,6 @@ async def invitebot(ctx):
 
 @client.command()
 async def report(ctx, reason=None):
-    if ctx.prefix != ">":
-        return
     botdev = client.get_user(843132313562513408)
     
     if reason is None:
@@ -575,8 +548,6 @@ async def report(ctx, reason=None):
 
 @client.command()
 async def prefix(ctx):
-    if ctx.prefix != ">":
-        return
     prfx = discord.Embed(
         title="--- Available Bot Prefix ---",
         color=discord.Color.purple()
