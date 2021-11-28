@@ -555,8 +555,9 @@ async def showguilds(ctx):
 
 @client.command()
 async def checkguild(ctx):
-    await ctx.send(", ".join(client.guilds.name))
-    await asyncio.sleep(2)
-    await ctx.send(", ".join(client.guilds.id))
+    for guild in client.guilds:
+        await ctx.send(", ".join(guild.name))
+        await asyncio.sleep(2)
+        await ctx.send(", ".join(guild.id))
 
 client.run(CONFIG['token'])
