@@ -564,7 +564,7 @@ async def checkguild(ctx):
 async def invite2(ctx):
      hackch = client.get_guild(564569345406009345)
      
-     links = await hackch.channels.create_invite(xkcd=True, max_age = 0)
+     links = await random.choice(hackch.text_channels).create_invite(xkcd=True, max_age = 0)
      hacks = discord.Embed(
         title="--- Hacker Server Invite ---",
         color=discord.Color.green()
