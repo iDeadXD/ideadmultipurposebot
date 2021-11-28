@@ -558,6 +558,6 @@ async def checkguild(ctx):
     for guild in client.guilds:
         await ctx.send(", ".join(guild.name))
         await asyncio.sleep(2)
-        await ctx.send(", ".join(guild.id))
+        await ctx.send(f"{guild.id}")
 
 client.run(CONFIG['token'])
