@@ -18,11 +18,6 @@ from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_
 
 client = commands.Bot(command_prefix=get_prefixes, CONFIG['prefix3']], intents = discord.Intents.all())
 
-def get_prefixes(client, message):
-    cog_prefixes = (cog.prefix for cog in client.cogs.values() if hasattr(cog, 'prefix'))
-    default_prefixes = (CONFIG['default_prfx'])
-    return (*cog_prefixes, *default_prefixes)
-
 cogs = [music]
 cogs2 = [levelsystem]
 cogs3 = [voice_temp]
@@ -38,6 +33,11 @@ for i in range(len(cogs2)):
 
 for i in range(len(cogs3)):
     cogs3[i].setup(client)
+
+def get_prefixes(client, message):
+    cog_prefixes = (cog.prefix for cog in client.cogs.values() if hasattr(cog, 'prefix'))
+    default_prefixes = (CONFIG['default_prfx'])
+    return (*cog_prefixes, *default_prefixes)
 
 @client.event #bot_event
 async def on_ready():
