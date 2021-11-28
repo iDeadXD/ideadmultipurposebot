@@ -11,6 +11,7 @@ from async_timeout import timeout
 from functools import partial
 import youtube_dl
 from youtube_dl import YoutubeDL
+from config import CONFIG
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -176,7 +177,11 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.players = {}
-
+        self.prefix = CONFIG['music_prfx']
+    
+    async def cog_check(self, ctx):
+        return ctx.prefix == self.prefix
+    
     async def cleanup(self, guild):
         try:
             await guild.voice_client.disconnect()
