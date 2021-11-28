@@ -16,7 +16,7 @@ from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE
 
-client = commands.Bot(command_prefix=get_prefixes, CONFIG['prefix3']], intents = discord.Intents.all())
+client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
 
 cogs = [music]
 cogs2 = [levelsystem]
