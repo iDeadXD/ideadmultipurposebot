@@ -308,7 +308,7 @@ async def avatar_(ctx, avamem : discord.Member=None):
     embed = discord.Embed(
         color=discord.Color.green(),
         title="--- Profile Avatar ---",
-        description=f"{avamem.mention} Avatar | [Avatar Link](f"{useravatar}")",
+        description=f"{avamem.mention} Avatar | [Avatar Link](f'{useravatar}')",
     )
     embed.set_image(url=useravatar)
     embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -544,12 +544,13 @@ async def report(ctx, reason=None):
 
 @client.command()
 async def showguilds(ctx):
-    listed = discord.Embed(
-        title="--- List Joined Server ---",
-        color=discord.Color.green()
-    )
-    listed.add_field(name="Server List", value="\n".join(client.guilds))
-    listed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
-    await ctx.send(embed=listed)
+    for guild in client.guilds:
+        listed = discord.Embed(
+            title="--- List Joined Server ---",
+            color=discord.Color.green()
+        )
+        listed.add_field(name="Server List", value="\n".join(guild.name))
+        listed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
+        await ctx.send(embed=listed)
 
 client.run(CONFIG['token'])
