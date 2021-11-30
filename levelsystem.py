@@ -84,4 +84,4 @@ class LevelSystem(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(levelsystem(client))
+    client.add_cog(LevelSystem(client))
