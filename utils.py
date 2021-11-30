@@ -213,7 +213,7 @@ class Utils(commands.Cog):
         """Showing Bot Latency and YouTube Server Status"""
         pings = requests.get("https://youtube.com")
         titles = "Pong!!"
-        selflatency = str(f" {round(client.latency * 1000)}ms")
+        selflatency = str(f" {round(self.client.latency * 1000)}ms")
         ytlatency = str(f" {pings}")
         author = ctx.message.author.name
         embed = discord.Embed(
@@ -305,16 +305,16 @@ class Utils(commands.Cog):
     @commands.command()
     async def botinfo(self, ctx):
         """Bot Information"""
-        botdev = client.get_user(843132313562513408)
+        botdev = self.client.get_user(843132313562513408)
         embed = discord.Embed(
             color=ctx.author.color,
             title="--- Bot Information ---"
         )
         embed.set_thumbnail(url=client.user.avatar_url)
-        embed.add_field(name="Bot Name", value=f"{client.user.mention}", inline=False)
+        embed.add_field(name="Bot Name", value=f"{self.client.user.mention}", inline=False)
         embed.add_field(name="Real Bot Name", value="Music Player.py#6361", inline=False)
         embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
-        embed.add_field(name='Created At', value=client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
+        embed.add_field(name='Created At', value=self.client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed.add_field(name="Coded in", value="Python3 (discord.py Module)", inline=False)
         embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
         embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
