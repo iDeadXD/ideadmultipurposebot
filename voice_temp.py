@@ -35,7 +35,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def lock(self, ctx):
-        
+        """Lock Current Voice Channel"""
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
@@ -62,7 +62,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx):
-        
+        """Unlock Current Locked Voice Channel (Failed Program)"""
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
@@ -87,7 +87,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def userlimit(self, ctx, amount: int=None):
-        
+        """Set UserLimit for Current Voice Channel"""
         if amount is None:
             return
         if not 1 < amount < 51:
@@ -119,7 +119,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def bitrate(self, ctx, amount: int=None):
-        
+        """Set Bitrate for Current Voice Channel"""
         if amount is None:
             return
         if not 7 < amount < 97:
@@ -150,7 +150,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def name(self, ctx, names=None):
-        
+        """Set Name for Current Voice Channel"""
         if names is None:
             fail1 = discord.Embed(
                   title="",
@@ -179,6 +179,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def listener(self, ctx):
+        """Get a List of Listeners at Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         listening = [r.mention for r in channel.members]
         
@@ -202,7 +203,7 @@ class Voice(commands.Cog):
     @commands.has_permissions(mute_members=True)
     async def mute(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
-        
+        """Mute Someone on Current Voice Channel"""
         if member is None:
             return
         
@@ -228,7 +229,7 @@ class Voice(commands.Cog):
     @commands.has_permissions(mute_members=True)
     async def unmute(ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
-        
+        """Unmute muted User on Current Voice Channel"""
         if member is None:
             return
         
@@ -253,6 +254,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
     async def deafen(ctx, member: discord.Member=None):
+        """Deafen someone on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         
         if member is None:
@@ -278,6 +280,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
     async def undeafen(ctx, member: discord.Member=None):
+        """Undeafen deafened User on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         
         if member is None:
@@ -303,6 +306,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
     async def deafen_all(ctx, mode=None):
+        """Deafen all users at once on Current Voice Channe"""
         channel = ctx.message.author.voice.channel
         
         deafs = [r.members for r in channel.members if r != ctx.messsage.author]
@@ -348,6 +352,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(mute_members=True)
     async def mute_all(ctx, mode=None):
+        """Mute all users at once on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         mutes = [r.members for r in channel.members if r != ctx.messsage.author]
         
@@ -392,7 +397,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
     async def region(ctx, channel: discord.VoiceChannel, mode=None):
-        
+        """Set Voice Channel Region (Failed Program)"""
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
