@@ -5,7 +5,7 @@ import pytz
 from datetime import datetime
 
 class Moderator(commands.Cog):
-    
+    """Moderator related commands. """
     def __init__(self, client):
         self.client = client
     
