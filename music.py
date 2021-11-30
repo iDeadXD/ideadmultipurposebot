@@ -327,7 +327,18 @@ class Music(commands.Cog):
             return
 
         vc.stop()
-    
+   
+    @commands.command(name='loop', description="Looping Current Songs")
+    async def loop_(self, ctx):
+        """Looping Current Songs"""
+        vc = ctx.voice_client
+        
+        if not vc.is_playing():
+            return await ctx.send("Nothing being played at the moment.")
+        
+        vc.loop = not vc.loop
+        await ctx.message.add_reaction('✅')
+     
     @commands.command(name='remove', aliases=['rm', 'rem'], description="removes specified song from queue")
     async def remove_(self, ctx, pos : int=None):
         """Removes specified song from queue"""
