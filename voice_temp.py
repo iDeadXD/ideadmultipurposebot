@@ -4,7 +4,7 @@ from datetime import datetime
 import pytz
 
 class Voice(commands.Cog):
-    
+    """Voice related commands. """
     def __init__(self, client):
         self.client = client
     
