@@ -121,21 +121,12 @@ class MusicPlayer:
         self.queue = asyncio.Queue()
         self.next = asyncio.Event()
 
-        self.loop = False
         self.np = None  # Now playing message
         self.volume = 1.5
         self.current = None
 
         ctx.bot.loop.create_task(self.player_loop())
 
-    @property
-    def loop(self):
-        return self.loop
-    
-    @loop.setter
-    def loop(self, value: bool):
-        self.loop = value
-    
     async def player_loop(self):
         """Our main player loop."""
         await self.bot.wait_until_ready()
@@ -336,18 +327,7 @@ class Music(commands.Cog):
             return
 
         vc.stop()
-   
-    @commands.command(name='loop', description="Looping Current Songs")
-    async def loop_(self, ctx):
-        """Looping Current Songs"""
-        vc = ctx.voice_client
-        
-        if not vc.is_playing():
-            return await ctx.send("Nothing being played at the moment.")
-        
-        vc.loop = not vc.loop
-        await ctx.message.add_reaction('✅')
-     
+
     @commands.command(name='remove', aliases=['rm', 'rem'], description="removes specified song from queue")
     async def remove_(self, ctx, pos : int=None):
         """Removes specified song from queue"""
