@@ -1,26 +1,19 @@
 import os
-from datetime import datetime
 import discord
 from discord.ext import commands
 import music
 import levelsystem
 import voice_temp
-import random
-import json
-import pytz
-import requests
-import time
-import asyncio
-from config import CONFIG
-from imgapi import SFW, NSFW, MEME, WELCOME
-from msg_channel import CHANNEL
-from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE
+import moderation
+import utils
 
 client = commands.Bot(command_prefix=[CONFIG['default_prfx']], intents = discord.Intents.all())
 
 cogs = [music]
 cogs2 = [levelsystem]
 cogs3 = [voice_temp]
+cogs4 = [moderation]
+cogs5 = [utils]
 
 welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
@@ -33,6 +26,12 @@ for i in range(len(cogs2)):
 
 for i in range(len(cogs3)):
     cogs3[i].setup(client)
+
+for i in range(len(cogs4)):
+    cogs4[i].setup(client)
+
+for i in range(len(cogs5)):
+    cogs5[i].setup(client)
 
 @client.event #bot_event
 async def on_ready():
