@@ -18,7 +18,7 @@ class Utils(commands.Cog):
         self.client = client
     
     @commands.command()
-    async def waifu(ctx, member : discord.Member=None):
+    async def waifu(self, ctx, member : discord.Member=None):
         """Waifu Image for You"""
         if member is None:
             member = ctx.author
@@ -56,7 +56,7 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command()
-    async def hentai(ctx):
+    async def hentai(self, ctx):
         """Hentai Anime Image (18+ Warning)"""
         if ctx.channel.is_nsfw():
             url1 = NSFW['hentai1']
@@ -101,7 +101,7 @@ class Utils(commands.Cog):
             await ctx.message.delete()
     
     @commands.command()
-    async def kiss(ctx, member : discord.Member=None):
+    async def kiss(self, ctx, member : discord.Member=None):
         """Give your partner a kiss"""
         if member is None:
             await ctx.send("Note: No G*Y/Selfkiss!!! You must tag someone for your kiss partner")
@@ -130,7 +130,7 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command()
-    async def slap(ctx, member : discord.Member=None):
+    async def slap(self, ctx, member : discord.Member=None):
         """Slaps your friend or yourself"""
         if member is None:
             member = ctx.author
@@ -156,7 +156,7 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command()
-    async def bonk(ctx, member : discord.Member=None):
+    async def bonk(self, ctx, member : discord.Member=None):
         """Bonk your friends or yourself"""
         if member is None:
             member = ctx.author
@@ -183,7 +183,7 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command()
-    async def meme(ctx):
+    async def meme(self, ctx):
         """Random Meme Image"""
         url6 = MEME['meme1']
         r6 = requests.get(url6)
@@ -209,7 +209,7 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command() #ping
-    async def ping(ctx):
+    async def ping(self, ctx):
         """Showing Bot Latency and YouTube Server Status"""
         pings = requests.get("https://youtube.com")
         titles = "Pong!!"
@@ -226,7 +226,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command() #current_time
-    async def time(ctx):
+    async def time(self, ctx):
         """Showing Current Time (Local/UTC)"""
         time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
         time1utc = datetime.utcnow()
@@ -243,7 +243,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command() #supported_link
-    async def supported(ctx):
+    async def supported(self, ctx):
         """Checking supported music links"""
         titles = "Supported Platform for Music Player"
         desc = "For Now, Only Support YouTube Link"
@@ -257,7 +257,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command(name="clean")
-    async def clean_(ctx, amount=100):
+    async def clean_(self, ctx, amount=100):
         """Clearing 100 messages at once"""
         await ctx.channel.purge(limit=amount)
         done = await ctx.send("👍")
@@ -265,7 +265,7 @@ class Utils(commands.Cog):
         await done.delete()
     
     @commands.command(name="avatar") #avatar_command
-    async def avatar_(ctx, avamem : discord.Member=None):
+    async def avatar_(self, ctx, avamem : discord.Member=None):
         """Get Avatar Image from Specified User"""
         if avamem is None:
             avamem = ctx.author
@@ -281,7 +281,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def serverinfo(ctx):
+    async def serverinfo(self, ctx):
         """Get Current Server Information"""
         member = ctx.guild.owner
         role_count = len(ctx.guild.roles)
@@ -303,7 +303,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed2)
     
     @commands.command()
-    async def botinfo(ctx):
+    async def botinfo(self, ctx):
         """Bot Information"""
         botdev = client.get_user(843132313562513408)
         embed = discord.Embed(
@@ -325,7 +325,7 @@ class Utils(commands.Cog):
     
     
     @commands.command()
-    async def userinfo(ctx, member : discord.Member=None):
+    async def userinfo(self, ctx, member : discord.Member=None):
         """Get User Information"""
         rolelist = [r.mention for r in user.roles if r != ctx.guild.default_role]
         
@@ -348,7 +348,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def sendto(ctx, member : discord.Member=None, *, arg=None):
+    async def sendto(self, ctx, member : discord.Member=None, *, arg=None):
         """Send Message to Spesific User using Bot"""
         if member is None or member is ctx.message.author:
             await ctx.send("You can't send DM to yourself")
@@ -380,7 +380,7 @@ class Utils(commands.Cog):
             await member.send(embed=embed)
     
     @commands.command()
-    async def invite(ctx, *, uses=None):
+    async def invite(self, ctx, *, uses=None):
         """Create Instant Invite Link"""
         guild = ctx.guild.name
         if uses is None:
@@ -400,7 +400,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def invitebot(ctx):
+    async def invitebot(self, ctx):
         """Invite Me!!!"""
         link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=433103232119&scope=bot%20applications.commands"
         embed = discord.Embed(
@@ -413,7 +413,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def report(ctx, reason=None):
+    async def report(self, ctx, reason=None):
         """Report your Problem about this Bot"""
         botdev = client.get_user(843132313562513408)
         
