@@ -6,6 +6,8 @@ import levelsystem
 import voice_temp
 import moderation
 import utils
+from config import CONFIG
+from msg_channel import CHANNEL
 
 client = commands.Bot(command_prefix=[CONFIG['default_prfx']], intents = discord.Intents.all())
 
