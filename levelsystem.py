@@ -35,6 +35,7 @@ class levelsystem(commands.Cog):
 
     @commands.command()
     async def rank(self, ctx):
+        """Show your Rank (Failed Program)"""
         author_id = ctx.author.id
         stats = collection.find_one({"_id": author_id})
         if stats is None:
@@ -64,6 +65,7 @@ class levelsystem(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
+        """Show Leaderboard in Current Server"""
         rankings = collection.find().sort("xp", -1)
         i = 1
         embed = discord.Embed(title="Rankings:")
