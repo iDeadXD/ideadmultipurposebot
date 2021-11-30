@@ -13,7 +13,7 @@ from msg_channel import CHANNEL
 from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE
 
 class Utils(commands.Cog):
-    
+    """Utils related commands. """
     def __init__(self, client):
         self.client = client
     
@@ -327,7 +327,7 @@ class Utils(commands.Cog):
     @commands.command()
     async def userinfo(self, ctx, member : discord.Member=None):
         """Get User Information"""
-        rolelist = [r.mention for r in user.roles if r != ctx.guild.default_role]
+        rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
         if member is None:
             member = ctx.author
@@ -407,7 +407,7 @@ class Utils(commands.Cog):
             color=discord.Color.green(),
             title="--- Invite Link ---"
         )
-        embed.set_thumbnail(url=client.user.avatar_url)
+        embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name="Click the link below to invite me to your server!", value=f"[Invite Me!]({link})")
         
         await ctx.send(embed=embed)
@@ -415,7 +415,7 @@ class Utils(commands.Cog):
     @commands.command()
     async def report(self, ctx, reason=None):
         """Report your Problem about this Bot"""
-        botdev = client.get_user(843132313562513408)
+        botdev = self.client.get_user(843132313562513408)
         
         if reason is None:
             await ctx.send("Write down Problems or Bugs that have occurred!!")
