@@ -310,7 +310,7 @@ class Utils(commands.Cog):
             color=ctx.author.color,
             title="--- Bot Information ---"
         )
-        embed.set_thumbnail(url=client.user.avatar_url)
+        embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name="Bot Name", value=f"{self.client.user.mention}", inline=False)
         embed.add_field(name="Real Bot Name", value="Music Player.py#6361", inline=False)
         embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
