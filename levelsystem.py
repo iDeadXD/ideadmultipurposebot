@@ -9,7 +9,8 @@ levelling = cluster["database1"]
 
 collection = levelling["level"]
 
-class levelsystem(commands.Cog):
+class LevelSystem(commands.Cog):
+    """LevelSystem related commands. """
     def __init__(self, client):
         self.client = client
 
