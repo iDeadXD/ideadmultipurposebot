@@ -102,6 +102,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def kiss(ctx, member : discord.Member=None):
+        """Give your partner a kiss"""
         if member is None:
             await ctx.send("Note: No G*Y/Selfkiss!!! You must tag someone for your kiss partner")
             await ctx.message.delete()
@@ -257,6 +258,7 @@ class Utils(commands.Cog):
     
     @commands.command(name="clean")
     async def clean_(ctx, amount=100):
+        """Clearing 100 messages at once"""
         await ctx.channel.purge(limit=amount)
         done = await ctx.send("👍")
         await asyncio.sleep(6)
@@ -280,6 +282,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def serverinfo(ctx):
+        """Get Current Server Information"""
         member = ctx.guild.owner
         role_count = len(ctx.guild.roles)
         list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
@@ -301,6 +304,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def botinfo(ctx):
+        """Bot Information"""
         botdev = client.get_user(843132313562513408)
         embed = discord.Embed(
             color=ctx.author.color,
@@ -322,6 +326,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def userinfo(ctx, member : discord.Member=None):
+        """Get User Information"""
         rolelist = [r.mention for r in user.roles if r != ctx.guild.default_role]
         
         if member is None:
@@ -344,6 +349,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def sendto(ctx, member : discord.Member=None, *, arg=None):
+        """Send Message to Spesific User using Bot"""
         if member is None or member is ctx.message.author:
             await ctx.send("You can't send DM to yourself")
             return
@@ -375,6 +381,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def invite(ctx, *, uses=None):
+        """Create Instant Invite Link"""
         guild = ctx.guild.name
         if uses is None:
             await ctx.send("Insert Max Used value (0 for Unlimited Use). Example: >invite 5(Limit Link can Used: 5Times/5User)")
@@ -394,6 +401,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def invitebot(ctx):
+        """Invite Me!!!"""
         link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=433103232119&scope=bot%20applications.commands"
         embed = discord.Embed(
             color=discord.Color.green(),
@@ -406,6 +414,7 @@ class Utils(commands.Cog):
     
     @commands.command()
     async def report(ctx, reason=None):
+        """Report your Problem about this Bot"""
         botdev = client.get_user(843132313562513408)
         
         if reason is None:
