@@ -121,12 +121,21 @@ class MusicPlayer:
         self.queue = asyncio.Queue()
         self.next = asyncio.Event()
 
+        self.loop = False
         self.np = None  # Now playing message
         self.volume = 1.5
         self.current = None
 
         ctx.bot.loop.create_task(self.player_loop())
 
+    @property
+    def loop(self):
+        return self.loop
+    
+    @loop.setter
+    def loop(self, value: bool):
+        self.loop = value
+    
     async def player_loop(self):
         """Our main player loop."""
         await self.bot.wait_until_ready()
