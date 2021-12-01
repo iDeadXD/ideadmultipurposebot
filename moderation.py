@@ -12,6 +12,7 @@ class Moderator(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_nicknames=True)
     async def changename(self, ctx, names=None):
+        """Change Nickname for Yourself"""
         if names is None:
             fail1 = discord.Embed(
                 title="--- Change Name ---",
@@ -35,6 +36,7 @@ class Moderator(commands.Cog):
     
     @commands.command()
     async def ban(self, ctx, member : discord.Member=None, *, reason=None):
+        """Ban Member from Server"""
         if ctx.message.author is not ctx.guild.owner:
             await ctx.send("You're not Owner in this Server. Command Ignored")
             return
@@ -75,6 +77,7 @@ class Moderator(commands.Cog):
     
     @commands.command()
     async def kick(self, ctx, member : discord.Member=None, *, reason=None):
+        """Kick Member from Server"""
         if ctx.message.author is not ctx.guild.owner:
             await ctx.send("You're not Owner in this Server. Command Ignored")
             return
