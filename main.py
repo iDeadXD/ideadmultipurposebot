@@ -66,7 +66,7 @@ async def on_member_join(member):
     
     welcome = discord.Embed(
         title="--- New Member Joined ---",
-        description=f"Welcome to {client.guilds.name}!!",
+        description=f"Welcome to {member.guild.name}!!",
         color=discord.Color.purple()
     )
     welcome.set_thumbnail(url=member.avatar_url)
@@ -81,7 +81,7 @@ async def on_member_remove(member):
     
     leave = discord.Embed(
         title="--- Member Leave a Server ---",
-        description=f"Someone leave from {client.guilds.name}!!",
+        description=f"Someone leave from {member.guild.name}!!",
         color=discord.Color.red()
     )
     leave.set_thumbnail(url=member.avatar_url)
