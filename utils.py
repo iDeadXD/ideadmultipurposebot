@@ -362,10 +362,10 @@ class Utils(commands.Cog):
     @commands.command()
     async def userinfo(self, ctx, member : discord.Member=None):
         """Get User Information"""
-        rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
-        
         if member is None:
             member = ctx.author
+        
+        rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
         embed = discord.Embed(
             color=discord.Color.magenta(),
