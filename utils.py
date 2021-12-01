@@ -274,7 +274,7 @@ class Utils(commands.Cog):
         await done.delete()
     
     @commands.command(name="clean_user")
-    async def clean_us(ctx, limit: int=None, member: discord.Member=None):
+    async def clean_us(self, ctx, limit: int=None, member: discord.Member=None):
         """Clearing mentioned user messages"""
         await ctx.message.delete()
         msg = []
