@@ -29,6 +29,8 @@ class Voice(commands.Cog):
         
         if len(before.channel.members) == 0:
             await before.channel.delete()
+        
+        return
     
     #lock
     @commands.command(pass_context=True)
