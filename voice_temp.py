@@ -26,7 +26,6 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
                         return
-        return
         
         if len(before.channel.members) == 0:
             await before.channel.delete()
