@@ -257,7 +257,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command(name="clean")
-    async def clean_(self, ctx, amount: int=None):
+    async def clean_all(self, ctx, amount: int=None):
         """Clearing messages at once"""
         if amount is None:
             fail1 = discord.Embed(
@@ -272,6 +272,33 @@ class Utils(commands.Cog):
         done = await ctx.send("👍")
         await asyncio.sleep(6)
         await done.delete()
+    
+    @commands.command(name="clean_user")
+    async def clean_us(ctx, limit: int=None, member: discord.Member=None):
+        """Clearing mentioned user messages"""
+        await ctx.message.delete()
+        msg = []
+        try:
+            limit = int(limit)
+        except:
+            fail1 = discord.Embed(
+                title="",
+                description="Set amount of messages to delete. Example: >clean 100 [user]",
+                color=discord.Color.red()
+            )
+            
+            return await ctx.send(embed=fail1)
+        
+        if not member:
+            await ctx.channel.purge(limit=limit)
+            return await ctx.send(f"Purged {limit} messages", delete_after=3)
+        async for m in ctx.channel.history():
+            if len(msg) == limit:
+                break
+            if m.author == member:
+                msg.append(m)
+        await ctx.channel.delete_messages(msg)
+        await ctx.send(f"Purged {limit} messages of {member.mention}", delete_after=3)
     
     @commands.command(name="avatar") #avatar_command
     async def avatar_(self, ctx, avamem : discord.Member=None):
