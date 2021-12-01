@@ -50,12 +50,12 @@ Logged in as {0.user}'''.format(client))
 @client.event
 async def on_guild_join(guild):
     current_guilds = len(client.guilds)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f">help | in **{current_guilds}** **servers**"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"  >help | in **{current_guilds}** **servers**  "))
 
 @client.event
 async def on_guild_remove(guild):
     current_guilds = len(client.guilds)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f">help | in **{current_guilds}** **servers**"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"  >help | in **{current_guilds}** **servers**  "))
 
 #=== Client Executor ===
 client.run(CONFIG['token'])
