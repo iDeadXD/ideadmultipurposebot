@@ -62,7 +62,7 @@ async def on_guild_remove(guild):
 
 @client.event
 async def on_member_join(member):
-    main_ch = client.guilds.system_channel
+    main_ch = member.guild.system_channel
     
     welcome = discord.Embed(
         title="--- New Member Joined ---",
@@ -77,7 +77,7 @@ async def on_member_join(member):
 
 @client.event
 async def on_member_remove(member):
-    main_ch = client.guilds.system_channel
+    main_ch = member.guild.system_channel
     
     leave = discord.Embed(
         title="--- Member Leave a Server ---",
