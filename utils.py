@@ -257,8 +257,17 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command(name="clean")
-    async def clean_(self, ctx, amount=100):
-        """Clearing 100 messages at once"""
+    async def clean_(self, ctx, amount: int=None):
+        """Clearing messages at once"""
+        if amount is None:
+            fail1 = discord.Embed(
+                title="",
+                description="Set amount of messages to delete. Example: >clean 100",
+                color=discord.Color.red()
+            )
+            
+            return await ctx.send(embed=fail1)
+        
         await ctx.channel.purge(limit=amount)
         done = await ctx.send("👍")
         await asyncio.sleep(6)
