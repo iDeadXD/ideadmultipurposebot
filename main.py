@@ -1,6 +1,8 @@
 import os
 import discord
 from discord.ext import commands
+from datetime import datetime
+import pytz
 import music
 import levelsystem
 import voice_temp
@@ -18,6 +20,7 @@ cogs3 = [voice_temp]
 cogs4 = [moderation]
 cogs5 = [utils]
 
+#=== Welcome Messages ===
 welcome = f"""I'm Online Right Now.
 Author: iDead#9496."""
 
@@ -57,5 +60,36 @@ async def on_guild_remove(guild):
     current_guilds = len(client.guilds)
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"  >help | in **{current_guilds}** **servers**  "))
 
-#=== Client Executor ===
+@client.event
+async def on_member_join(member):
+    main_ch = client.guilds.system_channel
+    
+    welcome = discord.Embed(
+        title="--- New Member Joined ---",
+        description=f"Welcome to {client.guilds.name}!!"
+        color=discord.Color.purple()
+    )
+    welcome.set_thumbnail(url=member.avatar_url)
+    welcome.add_field(name="Member name", value=f"{member.mention}")
+    welcome.add_field(name="Joined at", value=f"Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=client.user.avatar_url)
+    
+    await main_ch.send(embed=welcome)
+
+@client.event
+async def on_member_remove(member):
+    main_ch = client.guilds.system_channel
+    
+    leave = discord.Embed(
+        title="--- Member Leave a Server ---",
+        description=f"Someone leave from {client.guilds.name}!!"
+        color=discord.Color.red()
+    )
+    leave.set_thumbnail(url=member.avatar_url)
+    leave.add_field(name="Member name", value=f"{member.mention}")
+    leave.add_field(name="Leaved at", value=f"Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=client.user.avatar_url)
+    
+    await main_ch.send(embed=leave)
+
+
+#=== Client Account Executor ===
 client.run(CONFIG['token'])
