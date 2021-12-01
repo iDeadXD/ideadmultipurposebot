@@ -37,7 +37,7 @@ for i in range(len(cogs4)):
 for i in range(len(cogs5)):
     cogs5[i].setup(client)
 
-#=== on_ready Client Executor ===
+#=== Client Event Executor ===
 @client.event #bot_event
 async def on_ready():
     print('''Welcome to Discord Music Player Bot.
@@ -47,6 +47,16 @@ Logged in as {0.user}'''.format(client))
     ch2 = client.get_channel(int(CHANNEL['channel2']))
     await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
+
+@client.event
+async def on_guild_join(guild):
+    current_guilds = len(client.guilds)
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(f"in **{current_guilds}** **servers** | prefix >"))
+
+@client.event
+async def on_guild_remove(guild):
+    current_guilds = len(client.guilds)
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(f"in **{current_guilds}** **servers** | prefix >"))
 
 #=== Client Executor ===
 client.run(CONFIG['token'])
