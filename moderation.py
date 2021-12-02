@@ -35,8 +35,10 @@ class Moderator(commands.Cog):
         await ctx.message.author.edit(nick=str(names))
     
     @commands.command()
-    async def ban(self, ctx, member : discord.Member=None, *, reason=None):
-        """Ban Member from Server"""
+    async def ban(ctx, member : discord.Member=None, *, reason=None):
+        yes = ["y", "yes", "Y"]
+        no = ["n", "no", "N"]
+        
         if ctx.message.author is not ctx.guild.owner:
             await ctx.send("You're not Owner in this Server. Command Ignored")
             return
@@ -49,7 +51,16 @@ class Moderator(commands.Cog):
         if member is None:
             await ctx.send("You have to choose a member to get banned. Command Ignored")
             return
-        else:
+        
+        confirm = discord.Embed(
+            title="",
+            description=f"Are you sure you want to ban {member.mention}? (y/n)",
+            color=discord.Color.magenta()
+        )
+        
+        await ctx.send(embed=confirm)
+        msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel.id == ctx.channel)
+        if msg.content in yes:
             guild = ctx.guild.name
             await member.ban()
             embed = discord.Embed(
@@ -74,10 +85,21 @@ class Moderator(commands.Cog):
             await ctx.send(embed=embed)
             await ctx.send("✔ User has been notified.")
             await member.send(embed=banned)
+        
+        if msg.content in no or not msg.content in yes:
+            cancelled = discord.Embed(
+                title="",
+                description=f"Ban {member.mention} cancelled",
+                color=discord.Color.green()
+            )
+            
+            await ctx.send(embed=cancelled)
     
     @commands.command()
-    async def kick(self, ctx, member : discord.Member=None, *, reason=None):
-        """Kick Member from Server"""
+    async def kick(ctx, member : discord.Member=None, *, reason=None):
+        yes = ["y", "yes", "Y"]
+        no = ["n", "no", "N"]
+        
         if ctx.message.author is not ctx.guild.owner:
             await ctx.send("You're not Owner in this Server. Command Ignored")
             return
@@ -87,7 +109,16 @@ class Moderator(commands.Cog):
         if member is ctx.guild.owner and member != None:
             await ctx.send("Owner!!. You can't kick Server Owner")
             return
-        else:
+        
+        confirm = discord.Embed(
+            title="",
+            description=f"Are you sure you want to kick {member.mention}? (y/n)",
+            color=discord.Color.magenta()
+        )
+        
+        await ctx.send(embed=confirm)
+        msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel.id == ctx.channel)
+        if msg.content in yes:
             guild = ctx.guild.name
             await member.kick()
             embed = discord.Embed(
@@ -112,6 +143,15 @@ class Moderator(commands.Cog):
             await ctx.send(embed=embed)
             await ctx.send("✔ User has been notified.")
             await member.send(embed=kicked)
+        
+        if msg.content in no or not msg.content in yes:
+            cancelled = discord.Embed(
+                title="",
+                description=f"Kick {member.mention} cancelled",
+                color=discord.Color.green()
+            )
+            
+            await ctx.send(embed=cancelled)
 
 def setup(client):
     client.add_cog(Moderator(client))
