@@ -6,6 +6,7 @@ import pytz
 import music
 import levelsystem
 import voice_temp
+import guild_utils
 import moderation
 import utils
 from config import CONFIG
@@ -19,6 +20,7 @@ cogs2 = [levelsystem]
 cogs3 = [voice_temp]
 cogs4 = [moderation]
 cogs5 = [utils]
+cogs6 = [guild_utils]
 
 #=== Welcome Messages ===
 welcome = f"""I'm Online Right Now.
@@ -39,6 +41,9 @@ for i in range(len(cogs4)):
 
 for i in range(len(cogs5)):
     cogs5[i].setup(client)
+
+for i in range(len(cogs6)):
+    cogs6[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
