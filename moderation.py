@@ -59,7 +59,7 @@ class Moderator(commands.Cog):
         )
         
         await ctx.send(embed=confirm)
-        msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel.id == ctx.channel)
+        msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
         if msg.content in yes:
             guild = ctx.guild.name
             await member.ban()
@@ -86,7 +86,7 @@ class Moderator(commands.Cog):
             await ctx.send("✔ User has been notified.")
             await member.send(embed=banned)
         
-        if msg.content in no:
+        elif msg.content in no:
             cancelled = discord.Embed(
                 title="",
                 description=f"Ban {member.mention} cancelled",
@@ -117,7 +117,7 @@ class Moderator(commands.Cog):
         )
         
         await ctx.send(embed=confirm)
-        msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel.id == ctx.channel)
+        msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
         if msg.content in yes:
             guild = ctx.guild.name
             await member.kick()
@@ -144,7 +144,7 @@ class Moderator(commands.Cog):
             await ctx.send("✔ User has been notified.")
             await member.send(embed=kicked)
         
-        if msg.content in no:
+        elif msg.content in no:
             cancelled = discord.Embed(
                 title="",
                 description=f"Kick {member.mention} cancelled",
