@@ -367,6 +367,8 @@ class Utils(commands.Cog):
         
         rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
+        text = "No Roles..." if len(rolelist) == 0 else ', '.join(rolelist)
+        
         embed = discord.Embed(
             color=discord.Color.magenta(),
             title="--- User Information ---"
@@ -377,7 +379,7 @@ class Utils(commands.Cog):
         embed.add_field(name="Current Status", value=f"{member.status}")
         embed.add_field(name="Mention", value=f"{member.mention}")
         embed.add_field(name="Joined at", value=f"{member.joined_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
-        embed.add_field(name="User Roles", value=f", ".join(rolelist))
+        embed.add_field(name="User Roles", value=f"{text}")
         embed.set_footer(text=f"Created at {member.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
         
         await ctx.send(embed=embed)
