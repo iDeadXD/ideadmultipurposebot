@@ -10,6 +10,14 @@ class Guilds(commands.Cog):
     async def boostcount(self, ctx):
         booster = len(ctx.guild.premium_subsctibers)
         
+        if booster == 0:
+            no_boost = discord.Embed(
+                title="",
+                description="There are no members who boost this server. Do not be sad",
+                color=discord.Color.purple()
+            )
+            return await ctx.send(embed=no_boost)
+        
         boosted = discord.Embed(
             title="--- Server Booster ---",
             color=discord.Color.magenta()
