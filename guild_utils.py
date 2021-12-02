@@ -8,7 +8,7 @@ class Guilds(commands.Cog):
     
     @commands.command()
     async def boostcount(self, ctx):
-        booster = len(ctx.guild.premium_subsctibers)
+        booster = len(ctx.guild.premium_subscribers)
         
         if booster == 0:
             no_boost = discord.Embed(
