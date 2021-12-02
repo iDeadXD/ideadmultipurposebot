@@ -35,7 +35,7 @@ class Moderator(commands.Cog):
         await ctx.message.author.edit(nick=str(names))
     
     @commands.command()
-    async def ban(ctx, member : discord.Member=None, *, reason=None):
+    async def ban(self, ctx, member : discord.Member=None, *, reason=None):
         yes = ["y", "yes", "Y"]
         no = ["n", "no", "N"]
         
@@ -96,7 +96,7 @@ class Moderator(commands.Cog):
             await ctx.send(embed=cancelled)
     
     @commands.command()
-    async def kick(ctx, member : discord.Member=None, *, reason=None):
+    async def kick(self, ctx, member : discord.Member=None, *, reason=None):
         yes = ["y", "yes", "Y"]
         no = ["n", "no", "N"]
         
