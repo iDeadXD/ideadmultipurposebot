@@ -86,7 +86,7 @@ class Moderator(commands.Cog):
             await ctx.send("✔ User has been notified.")
             await member.send(embed=banned)
         
-        if msg.content in no or not msg.content in yes:
+        if msg.content in no:
             cancelled = discord.Embed(
                 title="",
                 description=f"Ban {member.mention} cancelled",
@@ -144,7 +144,7 @@ class Moderator(commands.Cog):
             await ctx.send("✔ User has been notified.")
             await member.send(embed=kicked)
         
-        if msg.content in no or not msg.content in yes:
+        if msg.content in no:
             cancelled = discord.Embed(
                 title="",
                 description=f"Kick {member.mention} cancelled",
