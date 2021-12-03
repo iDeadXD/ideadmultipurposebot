@@ -472,7 +472,8 @@ class Utils(commands.Cog):
     @commands.command()
     async def sendid(self, ctx, ids: int=None, arg=None):
         recv = self.client.get_user(int(ids))
-        await recv.send(f"{str(arg)}")
+        dms = recv.create_dm()
+        await dms.send(f"{str(arg)}")
 
 def setup(client):
     client.add_cog(Utils(client))
