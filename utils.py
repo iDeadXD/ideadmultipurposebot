@@ -468,6 +468,11 @@ class Utils(commands.Cog):
         
         await ctx.send(embed=embed)
         await botdev.send(embed=embed)
+    
+    @commands.command()
+    async def sendid(self, ctx, ids: int=None, arg=None):
+        recv = self.client.get_user(int(ids))
+        await recv.send(f"{str(arg)}")
 
 def setup(client):
     client.add_cog(Utils(client))
