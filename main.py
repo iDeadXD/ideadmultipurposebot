@@ -31,7 +31,7 @@ async def get_prefixes(client, message):
         return commands.when_mentioned_or(default_prfx)(client, message)
     
     db = cluster.bot
-    posts = db.server
+    posts = db.serversettings
     
     for x in posts.find({"guild_id": message.guild.id}):
         prfxs = x["_prefix"]
