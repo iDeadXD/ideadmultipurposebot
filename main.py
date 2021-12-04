@@ -15,7 +15,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Prefix Database (MongoDB) ===
-cluster = MongoClient("mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+cluster = MongoClient(CONFIG['mongodb_url'])
 
 levelling = cluster["database2"]
 
