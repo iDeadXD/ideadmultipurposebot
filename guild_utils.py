@@ -1,10 +1,35 @@
 import discord
 from discord.ext import commands
+from pymongo import MongoClient
 
 class Guilds(commands.Cog):
     
     def __init__(self, client):
         self.client = client
+    
+    #=== Prefix Database (MongoDB) ===
+    cluster = MongoClient("mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    
+    levelling = cluster["database2"]
+    
+    collection = levelling["prefixes"]
+    
+    #=== Client Prefix Setup ===
+    default_prfx = ">"
+    
+    async def get_prefixes(self, client, message):
+        if not message.guild:
+            return commands.when_mentioned_or(default_prfx)(client, message)
+        
+        try:
+            
+            data = await collection.find(message.guild.id)
+            
+            if not data or "prefixes" not in data:
+                return commands.when_mentioned_or(default_prfx)(client, message)
+            return commands.when_mentioned_or(data["prefixes"])(client, message)
+        except:
+            return commands.when_mentioned_or(default_prfx)(client, message)
     
     @commands.command()
     async def boostcount(self, ctx):
@@ -40,11 +65,11 @@ class Guilds(commands.Cog):
             )
             await ctx.send(embed=fail)
         
-        data = await self.collection.find(ctx.guild.id)
+        data = await collection.find(ctx.guild.id)
         if data is None or "prefixes" not in data:
             data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
         data["_prefix"] = prefixs
-        await self.collection.upsert(data)
+        await collection.upsert(data)
         
         done = discord.Embed(
             title="",
@@ -57,7 +82,7 @@ class Guilds(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def deleteprefix(self, ctx):
-        await self.collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
+        await collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
         
         done = discord.Embed(
             title="",
