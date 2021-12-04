@@ -11,34 +11,11 @@ import guild_utils
 import moderation
 import utils
 from config import CONFIG
+from guild_utils import Guilds
 from msg_channel import CHANNEL
 
-#=== Prefix Database (MongoDB) ===
-cluster = MongoClient("mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-
-levelling = cluster["database2"]
-
-collection = levelling["prefixes"]
-
-#=== Client Prefix Setup ===
-default_prfx = ">"
-
-async def get_prefixes(client, message):
-    if not message.guild:
-        return commands.when_mentioned_or(default_prfx)(client, message)
-    
-    try:
-        
-        data = await collection.find(message.guild.id)
-        
-        if not data or "prefixes" not in data:
-            return commands.when_mentioned_or(default_prfx)(client, message)
-        return commands.when_mentioned_or(data["prefixes"])(client, message)
-    except:
-        return commands.when_mentioned_or(default_prfx)(client, message)
-
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
+client = commands.Bot(command_prefix=Guilds.get_prefixes, intents = discord.Intents.all())
 
 #=== Cog List ===
 cogs = [music]
