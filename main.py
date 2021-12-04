@@ -115,7 +115,7 @@ async def prefix(ctx, prefixs=None):
     """Change bot command prefix"""
     if prefixs is None:
         for prfx1 in collection.find({"guild_id": ctx.guild.id}):
-            prfxs = prfx["_prefix"]
+            prfxs = prfx1["_prefix"]
             fail =discord.Embed(
                 title="",
                 description=f"Enter your prefix to change the current prefix. Current Prefix: {prfxs}",
