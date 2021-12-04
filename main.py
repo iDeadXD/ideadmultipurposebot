@@ -2,6 +2,7 @@ import os
 import discord
 from discord.ext import commands
 from datetime import datetime
+from pymongo import MongoClient
 import pytz
 import music
 import levelsystem
@@ -12,7 +13,32 @@ import utils
 from config import CONFIG
 from msg_channel import CHANNEL
 
-client = commands.Bot(command_prefix=[CONFIG['default_prfx']], intents = discord.Intents.all())
+#=== Prefix Database (MongoDB) ===
+cluster = MongoClient("mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+levelling = cluster["database2"]
+
+collection = levelling["prefixes"]
+
+#=== Client Prefix Setup ===
+default_prfx = ">"
+
+def get_prefixes(client, message):
+    if not message.guild:
+        return commands.when_mentioned_or(default_prfx)(client, message)
+    
+    try:
+        
+        data = await collection.find(message.guild.id)
+        
+        if not data or "prefixes" not in data:
+            return commands.when_mentioned_or(default_prfx)(client, message)
+        return commands.when_mentioned_or(data["prefixes"])(client, message)
+    except:
+        return commands.when_mentioned_or(default_prfx)(client, message)
+
+#=== Client Setup ===
+client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
 
 #=== Cog List ===
 cogs = [music]
