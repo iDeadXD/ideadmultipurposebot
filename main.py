@@ -30,7 +30,7 @@ async def get_prefixes(client, message):
     
     try:
         
-        data = collection.find({"guild_id": message.guild.id})
+        data = collection.find_one({"guild_id": message.guild.id})
         
         if not data or "prefixes" not in data:
             return commands.when_mentioned_or(default_prfx)(client, message)
