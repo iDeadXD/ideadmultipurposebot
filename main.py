@@ -30,7 +30,7 @@ async def get_prefixes(client, message):
     
     try:
         
-        data = await collection.find(message.guild.id)
+        data = await collection.find({"guild_id": message.guild.id})
         
         if not data or "prefixes" not in data:
             return commands.when_mentioned_or(default_prfx)(client, message)
@@ -129,7 +129,7 @@ async def prefix(ctx, prefixs=None):
         
         await ctx.send(embed=fail)
     
-    data = await collection.find(ctx.guild.id)
+    data = await collection.find({"guild_id": ctx.guild.id})
     if data is None or "prefixes" not in data:
         data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
     data["_prefix"] = prefixs
