@@ -117,7 +117,7 @@ async def prefix(ctx, prefixs=None):
     if prefixs is None:
         fail =discord.Embed(
             title="",
-            description=f"Enter your prefix to change the current prefix. Current Prefix: {def_prfx["_prefix"]}",
+            description=f"Enter your prefix to change the current prefix. Current Prefix: {str(def_prfx['_prefix'])}",
             color=discord.Color.green()
         )
         fail.set_thumbnail(url=client.user.avatar_url)
