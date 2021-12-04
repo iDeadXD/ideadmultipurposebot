@@ -22,22 +22,20 @@ levelling = cluster["database2"]
 collection = levelling["prefixes"]
 
 #=== Client Prefix Setup ===
-default_prfx = ">"
 
 async def get_prefixes(client, message):
+    global cluster
+    default_prfx = ">"
+    
     if not message.guild:
         return commands.when_mentioned_or(default_prfx)(client, message)
     
-    try:
-        
-        data = collection.find_one({"guild_id": message.guild.id})
-        
-        if not data or "prefixes" not in data:
-            return commands.when_mentioned_or(default_prfx)(client, message)
-        return commands.when_mentioned_or(data["prefixes"])(client, message)
-    except:
-        return commands.when_mentioned_or(default_prfx)(client, message)
-
+    db = cluster.bot
+    posts = db.server
+    
+    for x in posts.find({"guild_id": message.guild.id}):
+        prfxs = x["_prefix"]
+    return commands.when_mentioned_or(prfxs)(client, message)
 
 #=== Client Setup ===
 client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
@@ -127,13 +125,14 @@ async def prefix(ctx, prefixs=None):
         )
         fail.set_thumbnail(url=client.user.avatar_url)
         
-        await ctx.send(embed=fail)
+        return await ctx.send(embed=fail)
     
     data = collection.find_one({"guild_id": ctx.guild.id})
-    if data is None or "prefixes" not in data:
-        data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
-        collection.insert_one(data)
-    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
+    if data is None:
+        newdata = {"guild_id": ctx.guild.id, "_prefix": prefixs}
+        collection.insert_one(newdata)
+    else:
+        collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
     
     done = discord.Embed(
         title="",
