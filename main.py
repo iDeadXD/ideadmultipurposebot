@@ -129,11 +129,11 @@ async def prefix(ctx, prefixs=None):
         
         await ctx.send(embed=fail)
     
-    data = collection.find({"guild_id": ctx.guild.id})
+    data = collection.find_one({"guild_id": ctx.guild.id})
     if data is None or "prefixes" not in data:
         data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
-    data["_prefix"] = prefixs
-    collection.upsert(data)
+        collection.insert_one(data)
+    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
     
     done = discord.Embed(
         title="",
@@ -148,7 +148,7 @@ async def prefix(ctx, prefixs=None):
 @commands.has_permissions(manage_guild=True)
 async def deleteprefix(ctx):
     """Set changed prefix to default prefix"""
-    collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
+    collection.update_one({"guild_id": ctx.guild.id}, {"$unset": {"_prefix": 1}})
     
     done = discord.Embed(
         title="",
