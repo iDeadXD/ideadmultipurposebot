@@ -113,10 +113,11 @@ async def on_member_remove(member):
 @commands.has_permissions(manage_guild=True)
 async def prefix(ctx, prefixs=None):
     """Change bot command prefix"""
+    def_prfx = collection.find({"guild_id": ctx.guild.id})
     if prefixs is None:
         fail =discord.Embed(
             title="",
-            description="Enter your prefix to change the default prefix. Default Prefix: >",
+            description=f"Enter your prefix to change the current prefix. Current Prefix: {def_prfx["_prefix"]}",
             color=discord.Color.green()
         )
         fail.set_thumbnail(url=client.user.avatar_url)
@@ -143,7 +144,8 @@ async def prefix(ctx, prefixs=None):
 @commands.has_permissions(manage_guild=True)
 async def deleteprefix(ctx):
     """Set changed prefix to default prefix"""
-    collection.update_one({"guild_id": ctx.guild.id}, {"$unset": {"_prefix": 1}})
+    defaults = ">"
+    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": defaults}})
     
     done = discord.Embed(
         title="",
