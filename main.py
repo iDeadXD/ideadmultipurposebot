@@ -114,23 +114,21 @@ async def on_member_remove(member):
 async def prefix(ctx, prefixs=None):
     """Change bot command prefix"""
     if prefixs is None:
-        for prfx1 in collection.find({"guild_id": ctx.guild.id}):
-            prfxs = prfx1["_prefix"]
-            fail =discord.Embed(
-                title="",
-                description=f"Enter your prefix to change the current prefix. Current Prefix: {prfxs}",
-                color=discord.Color.green()
-            )
-            fail.set_thumbnail(url=client.user.avatar_url)
+        fail =discord.Embed(
+            title="",
+            description=f"Enter your prefix to change the current prefix.",
+            color=discord.Color.green()
+        )
+        fail.set_thumbnail(url=client.user.avatar_url)
         
-            return await ctx.send(embed=fail)
+        return await ctx.send(embed=fail)
     
     data = collection.find_one({"guild_id": ctx.guild.id})
     if data is None:
         newdata = {"guild_id": ctx.guild.id, "_prefix": prefixs}
         collection.insert_one(newdata)
-    else:
-        collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
+    
+    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
     
     done = discord.Embed(
         title="",
