@@ -22,20 +22,16 @@ levelling = cluster["database2"]
 collection = levelling["prefixes"]
 
 #=== Client Prefix Setup ===
-
 async def get_prefixes(client, message):
-    global cluster
-    default_prfx = ">"
     
     if not message.guild:
-        return commands.when_mentioned_or(default_prfx)(client, message)
+        return commands.when_mentioned_or(">")(client, message)
     
-    db = cluster.bot
-    posts = db.serversettings
+    default_prfx = ">"
     
-    for x in posts.find({"guild_id": message.guild.id}):
-        prfxs = x["_prefix"]
-    return commands.when_mentioned_or(prfxs)(client, message)
+    for x in collection.find({"guild_id": message.guild.id}):
+        default_prfx = x["_prefix"]
+    return commands.when_mentioned_or(default_prfx)(client, message)
 
 #=== Client Setup ===
 client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
