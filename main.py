@@ -114,6 +114,50 @@ async def on_member_remove(member):
     
     await main_ch.send(embed=leave)
 
+#=== Prefix Commands ===
+@client.command()
+@commands.has_permissions(manage_guild=True)
+async def prefix(ctx, prefixs=None):
+    """Change bot command prefix"""
+    if prefixs is None:
+        fail =discord.Embed(
+            title="",
+            description="Enter your prefix to change the default prefix. Default Prefix: >",
+            color=discord.Color.green()
+        )
+        fail.set_thumbnail(url=client.user.avatar_url)
+        
+        await ctx.send(embed=fail)
+    
+    data = await collection.find(ctx.guild.id)
+    if data is None or "prefixes" not in data:
+        data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
+    data["_prefix"] = prefixs
+    await collection.upsert(data)
+    
+    done = discord.Embed(
+        title="",
+        description=f"{client.user.mention}'s Prefix has been set to {prefixs}",
+        color=discord.Color.green()
+    )
+    done.set_thumbnail(url=client.user.avatar_url)
+    
+    await ctx.send(embed=done)
+    
+@client.command()
+@commands.has_permissions(manage_guild=True)
+async def deleteprefix(ctx):
+    """Set changed prefix to default prefix"""
+    await collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
+    
+    done = discord.Embed(
+        title="",
+        description=f"{client.user.mention}'s Prefix has been set to default ( > )",
+        color=discord.Color.green()
+    )
+    done.set_thumbnail(url=client.user.avatar_url)
+    
+    await ctx.send(embed=done)
 
 #=== Client Account Executor ===
 client.run(CONFIG['token'])
