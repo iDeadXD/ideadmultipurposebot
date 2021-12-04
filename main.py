@@ -30,7 +30,7 @@ async def get_prefixes(client, message):
     
     try:
         
-        data = await collection.find({"guild_id": message.guild.id})
+        data = collection.find({"guild_id": message.guild.id})
         
         if not data or "prefixes" not in data:
             return commands.when_mentioned_or(default_prfx)(client, message)
@@ -129,11 +129,11 @@ async def prefix(ctx, prefixs=None):
         
         await ctx.send(embed=fail)
     
-    data = await collection.find({"guild_id": ctx.guild.id})
+    data = collection.find({"guild_id": ctx.guild.id})
     if data is None or "prefixes" not in data:
         data = {"guild_id": ctx.guild.id, "_prefix": prefixs}
     data["_prefix"] = prefixs
-    await collection.upsert(data)
+    collection.upsert(data)
     
     done = discord.Embed(
         title="",
@@ -148,7 +148,7 @@ async def prefix(ctx, prefixs=None):
 @commands.has_permissions(manage_guild=True)
 async def deleteprefix(ctx):
     """Set changed prefix to default prefix"""
-    await collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
+    collection.unset({"guild_id": ctx.guild.id, "_prefix": 1})
     
     done = discord.Embed(
         title="",
