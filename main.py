@@ -113,16 +113,17 @@ async def on_member_remove(member):
 @commands.has_permissions(manage_guild=True)
 async def prefix(ctx, prefixs=None):
     """Change bot command prefix"""
-    data2 = collection.find().sort("_prefix", -1)
     if prefixs is None:
-        fail =discord.Embed(
-            title="",
-            description=f"Enter your prefix to change the current prefix. Current Prefix: {data2}",
-            color=discord.Color.green()
-        )
-        fail.set_thumbnail(url=client.user.avatar_url)
+        for prfx1 in collection.find({"guild_id": ctx.guild.id}):
+            prfxs = prfx["_prefix"]
+            fail =discord.Embed(
+                title="",
+                description=f"Enter your prefix to change the current prefix. Current Prefix: {prfxs}",
+                color=discord.Color.green()
+            )
+            fail.set_thumbnail(url=client.user.avatar_url)
         
-        return await ctx.send(embed=fail)
+            return await ctx.send(embed=fail)
     
     data = collection.find_one({"guild_id": ctx.guild.id})
     if data is None:
