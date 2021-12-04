@@ -34,7 +34,7 @@ async def get_prefixes(client, message):
     return commands.when_mentioned_or(str(default_prfx))(client, message)
 
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
+client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), help_command=None)
 
 #=== Cog List ===
 cogs = [music]
@@ -154,6 +154,131 @@ async def deleteprefix(ctx):
     done.set_thumbnail(url=client.user.avatar_url)
     
     await ctx.send(embed=done)
+
+#=== Custom Help Commands ===
+@client.command(name="help")
+async def _help(ctx, sub: str=None):
+    list1 = [c.name for c in cogs.get_commands()] #Music
+    list2 = [c.name for c in cogs2.get_commands()] #LevelSystem
+    list3 = [c.name for c in cogs3.get_commands()] #VoiceTemp
+    list4 = [c.name for c in cogs4.get_commands()] #Moderation
+    list5 = [c.name for c in cogs5.get_commands()] #Utils
+    list6 = [c.name for c in cogs6.get_commands()] #Guilds
+    list7 = [c.name for c in client.commands]
+    
+    args1 = ["Music", "music"]
+    args2 = ["LevelSystem", "Levelsystem", "levelsystem"]
+    args3 = ["VoiceTemp", "Voicetemp", "voicetemp"]
+    args4 = ["Moderation", "moderation"]
+    args5 = ["Utils", "utils"]
+    args6 = ["Guilds", "guilds"]
+    
+    if str(sub) is None:
+        default = discord.Embed(
+            title="--- List of Bot Help ---"
+            color=discord.Color.purple()
+        )
+        default.set_thumbnail(url=client.user.avatar_url)
+        default.add_field(name="**Music**", value=str("```" + ", ".join(list1 + "```"))
+        default.add_field(name="**LevelSystem**", value=str("```" + ", ".join(list2 + "```"))
+        default.add_field(name="**VoiceTemp**", value=str("```" + ", ".join(list3) + "```"))
+        default.add_field(name="**Moderation**", value=str("```" + ", ".join(list4) + "```"))
+        default.add_field(name="**Utils**", value=str("```" + ", ".join(list5) + "```"))
+        default.add_field(name="**Guilds**", value=str("```", "".join(list6) + "```"))
+        default.add_field(name="**No Category", value=str("```" + ", ".join(list7) + "```"))
+        default.add_field(name="Another Options", value="You can use ```<your prefix>help separate``` for separate commands list.")
+        default.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        
+        await ctx.send(embed=default)
+    
+    if str(sub) == "separate":
+        choose = discord.Embed(
+            title="--- List of Bot Help ---",
+            description="Write one of the command categories below",
+            color=discord.Color.purple()
+        )
+        choose.add_field(name="Commands Category", value="```Music, LevelSystem, VoiceTemp, Moderation, Utils, Guilds```")
+        
+        await ctx.send(embed=choose)
+        msg = await client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
+        
+        try:
+            if msg.content in args1:
+                musics = discord.Embed(
+                    title="--- Music Commands ---",
+                    color=discord.Color.green()
+                )
+                musics.add_field(name="Music Commands List", value=str("```" + ", ".join(list1) + "```"))
+                musics.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=musics)
+            if msg.content in args2:
+                lvlsys = discord.Embed(
+                    title="--- LevelSystem Commands ---",
+                    color=discord.Color.green()
+                )
+                lvlsys.add_field(name="LevelSystem Commands List", value=str("```" + ", ".join(list2) + "```"))
+                lvlsys.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=lvlsys)
+            if msg.content in args3:
+                vctemp = discord.Embed(
+                    title="--- VoiceTemp Commands ---",
+                    color=discord.Color.green()
+                )
+                vctemp.add_field(name="VoiceTemp Commands List", value=str("```" + ", ".join(list3) + "```"))
+                vctemp.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=vctemp)
+            if msg.content in args4:
+                mods = discord.Embed(
+                    title="--- Moderation Commands ---",
+                    color=discord.Color.green()
+                )
+                mods.add_field(name="Moderation Commands List", value=str("```" + ", ".join(list4) + "```"))
+                mods.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=mods)
+            if msg.content in args5:
+                utils1 = discord.Embed(
+                    title="--- Utils Commands ---",
+                    color=discord.Color.green()
+                )
+                utils1.add_field(name="Utils Commands List", value=str("```" + ", ".join(list5) + "```"))
+                utils1.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=utils1)
+            if msg.content in args6:
+                guilds1 = discord.Embed(
+                    title="--- Guilds Commands ---",
+                    color=discord.Color.green()
+                )
+                guilds1.add_field(name="Guilds Commands List", value=str("```" + ", ".join(list6) + "```"))
+                guilds1.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                
+                await ctx.send(embed=lvlsys)
+            else:
+                return await ctx.send("Invalid Options. Command Ignored")
+        except asyncio.TimeoutError:
+            return await ctx.send("Request Timed Out (Timeout: 10 Seconds)")
+    elif str(sub) is not None:
+        try:
+            listc = [cogs, cogs2, cogs3, cogs4, cogs5, cogs6, client.commands]
+            
+            for comm in len(listc):
+                for commn in comm.get_commands(sub):
+                    comms = discord.Embed(
+                        title="--- Commands Help ---",
+                        color=discord.Color.purple()
+                    )
+                    comms.add_field(name=f"```{sub}``` Command", value=f"Help: {commn.help}")
+                    comms.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+                    
+                    await ctxml.send(embed=comms)
+        except Exception:
+            return await ctx.send("Command Not Found. Ignored")
+    else:
+        return await ctx.send("Invalid Options. Command Ignored")
 
 #=== Client Account Executor ===
 client.run(CONFIG['token'])
