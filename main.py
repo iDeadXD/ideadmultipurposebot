@@ -23,7 +23,7 @@ collection = levelling["prefixes"]
 #=== Client Prefix Setup ===
 default_prfx = ">"
 
-def get_prefixes(client, message):
+async def get_prefixes(client, message):
     if not message.guild:
         return commands.when_mentioned_or(default_prfx)(client, message)
     
