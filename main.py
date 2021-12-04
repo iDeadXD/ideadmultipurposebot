@@ -31,7 +31,7 @@ async def get_prefixes(client, message):
     
     for x in collection.find({"guild_id": message.guild.id}):
         default_prfx = x["_prefix"]
-    return commands.when_mentioned_or(default_prfx)(client, message)
+    return commands.when_mentioned_or(str(default_prfx))(client, message)
 
 #=== Client Setup ===
 client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
