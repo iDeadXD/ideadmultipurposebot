@@ -19,7 +19,7 @@ cluster = MongoClient("mongodb+srv://idead:idead@botdb.kqqpj.mongodb.net/myFirst
 
 levelling = cluster["database2"]
 
-client.collection = levelling["prefixes"]
+collection = levelling["prefixes"]
 
 #=== Client Prefix Setup ===
 default_prfx = ">"
