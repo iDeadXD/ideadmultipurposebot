@@ -175,7 +175,7 @@ async def _help(ctx, sub: str=None):
     
     if str(sub) is None:
         default = discord.Embed(
-            title="--- List of Bot Help ---"
+            title="--- List of Bot Help ---",
             color=discord.Color.purple()
         )
         default.set_thumbnail(url=client.user.avatar_url)
