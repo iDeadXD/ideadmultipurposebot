@@ -149,7 +149,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def name(self, ctx, names=None):
+    async def name(self, ctx, *, names=None):
         """Set Name for Current Voice Channel"""
         if names is None:
             fail1 = discord.Embed(
@@ -201,7 +201,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(mute_members=True)
-    async def mute(ctx, member: discord.Member=None):
+    async def mute(self, ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
         """Mute Someone on Current Voice Channel"""
         if member is None:
@@ -215,7 +215,15 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail1)
         
-        await member.edit(mute=True)
+        if member not in ctx.message.author.voice.channel:
+            fail2 = discord.Embed(
+                title="",
+                description=f"{member.mention} are not in {ctx.message.voice.channel.name}",
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=fail2)
+        
+        await member.voice.channel.edit(mute=True)
         muted = discord.Embed(
             title="",
             color=discord.Color.red()
@@ -227,7 +235,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(mute_members=True)
-    async def unmute(ctx, member: discord.Member=None):
+    async def unmute(self, ctx, member: discord.Member=None):
         channel = ctx.message.author.voice.channel
         """Unmute muted User on Current Voice Channel"""
         if member is None:
@@ -241,7 +249,15 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail1)
         
-        await member.edit(mute=False)
+        if member not in ctx.message.author.voice.channel:
+            fail2 = discord.Embed(
+                title="",
+                description=f"{member.mention} are not in {ctx.message.voice.channel.name}.",
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=fail2)
+        
+        await member.voice.channel.edit(mute=False)
         unmuted = discord.Embed(
             title="",
             color=discord.Color.red()
@@ -253,7 +269,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
-    async def deafen(ctx, member: discord.Member=None):
+    async def deafen(self, ctx, member: discord.Member=None):
         """Deafen someone on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         
@@ -268,6 +284,14 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail1)
         
+        if member not in ctx.message.author.voice.channel:
+            fail2 = discord.Embed(
+                title="",
+                description=f"{member.mention} are not in {ctx.message.voice.channel.name}",
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=fail2)
+        
         await member.edit(deafen=True)
         deaf = discord.Embed(
             title="",
@@ -279,7 +303,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
-    async def undeafen(ctx, member: discord.Member=None):
+    async def undeafen(self, ctx, member: discord.Member=None):
         """Undeafen deafened User on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         
@@ -294,6 +318,14 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail1)
         
+        if member not in ctx.message.author.voice.channel:
+            fail2 = discord.Embed(
+                title="",
+                description=f"{member.mention} are not in {ctx.message.voice.channel.name}",
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=fail2)
+        
         await member.edit(deafen=False)
         undeaf = discord.Embed(
             title="",
@@ -305,7 +337,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(deafen_members=True)
-    async def deafen_all(ctx, mode=None):
+    async def deafen_all(self, ctx, mode=None):
         """Deafen all users at once on Current Voice Channe"""
         channel = ctx.message.author.voice.channel
         
@@ -322,14 +354,14 @@ class Voice(commands.Cog):
         if str(mode) == None:
             fail1 = discord.Embed(
                 title="",
-                description="Enter deafen_all mode: **true / false**",
+                description="Enter deafen_all mode: **true** / **false**",
                 color=discord.Color.red()
             )
             await ctx.send(embed=fail1)
         
         if str(mode) == "true":
             for member in deafs:
-                await member.edit(deafen=True)
+                await member.voice.channel.edit(deafen=True)
                 deaf = discord.Embed(
                     title="",
                     color=discord.Color.red()
@@ -340,7 +372,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "false":
             for member in deafs:
-                await member.edit(deafen=False)
+                await member.voice.channel.edit(deafen=False)
                 undeaf = discord.Embed(
                     title="",
                     color=discord.Color.green()
@@ -351,7 +383,7 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(mute_members=True)
-    async def mute_all(ctx, mode=None):
+    async def mute_all(self, ctx, mode=None):
         """Mute all users at once on Current Voice Channel"""
         channel = ctx.message.author.voice.channel
         mutes = [r.members for r in channel.members if r != ctx.messsage.author]
@@ -367,14 +399,14 @@ class Voice(commands.Cog):
         if str(mode) == None:
             fail1 = discord.Embed(
                 title="",
-                description="Enter mute_all mode: **true / false**",
+                description="Enter mute_all mode: **true** / **false**",
                 color=discord.Color.red()
             )
             await ctx.send(embed=fail1)
         
         if str(mode) == "true":
             for member in mutes:
-                await member.edit(mute=True)
+                await member.voice.channel.edit(mute=True)
                 muted = discord.Embed(
                     title="",
                     color=discord.Color.red()
@@ -385,7 +417,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "false":
             for member in mutes:
-                await member.edit(mute=False)
+                await member.voice.channel.edit(mute=False)
                 unmute = discord.Embed(
                     title="",
                     color=discord.Color.green()
@@ -396,8 +428,10 @@ class Voice(commands.Cog):
     
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_channels=True)
-    async def region(ctx, channel: discord.VoiceChannel, mode=None):
+    async def region(self, ctx, mode=None):
         """Set Voice Channel Region (Failed Program)"""
+        channel = ctx.message.author.voice.channel
+        
         if ctx.message.author.voice is None:
             fail1 = discord.Embed(
                 title="",
@@ -415,10 +449,10 @@ class Voice(commands.Cog):
             fail2.add_field(name="List of Voice Region Name", value="automatic, amsterdam, brazil, dubai, eu_central, eu_west, europe, frankurt, hongkong, india, japan, london, russia, singapore, southafrica, south_korea, sydney, us_central, us_east, us_south, us_west")
             return await ctx.send(embed=fail2)
         
-        await channel.edit(rtc_region=str(mode))
+        await channel.edit(rtc_region=f'{mode}')
         done = discord.Embed(
             title="",
-            description=f"Voice Region has been set to {str(mode)}"
+            description=f"Voice Region has been set to ```{str(mode)}```"
         )
         done.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=done)
