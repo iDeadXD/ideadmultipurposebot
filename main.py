@@ -34,7 +34,7 @@ async def get_prefixes(client, message):
     return commands.when_mentioned_or(str(default_prfx))(client, message)
 
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), help_command=None)
+client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
 
 #=== Cog List ===
 cogs = [music]
@@ -156,7 +156,7 @@ async def deleteprefix(ctx):
     await ctx.send(embed=done)
 
 #=== Custom Help Commands ===
-@client.command(name="help")
+@client.command(name="_help")
 async def _help(ctx, sub: str=None):
     list1 = [c.name for c in cogs.get_commands()] #Music
     list2 = [c.name for c in cogs2.get_commands()] #LevelSystem
