@@ -55,7 +55,7 @@ class Utils(commands.Cog):
         await asyncio.sleep(sleeper)
         await ctx.message.delete()
     
-    @commands.command()
+    @commands.command(hidden=True)
     async def hentai(self, ctx):
         """Hentai Anime Image (18+ Warning)"""
         if ctx.channel.is_nsfw():
