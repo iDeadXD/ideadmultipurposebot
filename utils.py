@@ -450,7 +450,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def report(self, ctx, reason=None):
+    async def report(self, ctx, *, reason=None):
         """Report your Problem about this Bot"""
         botdev = self.client.get_user(843132313562513408)
         
