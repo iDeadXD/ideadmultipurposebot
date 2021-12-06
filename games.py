@@ -27,29 +27,26 @@ class Games(commands.Cog):
             return await ctx.send("Enter number range: 1 - 100000")
         else:
             try:
-                if count.content == int:
-                    if num < int(msg.content):
-                        win = discord.Embed(
-                            title="--- RNG Games ---",
-                            description=f"Congratulation. You Win, {ctx.message.author.mention}",
-                            color=discord.Color.purple()
-                        )
-                        win.add_field(name="Your Number", value=f"{str(msg.content)}")
-                        win.add_field(name="Bot Number", value=str(num))
+                if num < int(msg.content):
+                    win = discord.Embed(
+                        title="--- RNG Games ---",
+                        description=f"Congratulation. You Win, {ctx.message.author.mention}",
+                        color=discord.Color.purple()
+                    )
+                    win.add_field(name="Your Number", value=f"{st (msg.content)}")
+                    win.add_field(name="Bot Number", value=str(num))
                         
-                        await ctx.send(embed=win)
-                    if num > int(msg.content):
-                        lose = discord.Embed(
-                            title="--- RNG Games ---",
-                            description=f"Oh no. You lose, {ctx.message.author.mention}",
-                            color=discord.Color.red()
-                        )
-                        lose.add_field(name="Your Number", value=f"{str(msg.content)}")
-                        lose.add_field(name="Bot Number", value=str(num))
+                    await ctx.send(embed=win)
+                if num > int(msg.content):
+                    lose = discord.Embed(
+                        title="--- RNG Games ---",
+                        description=f"Oh no. You lose, {ctx.message.author.mention}",
+                        color=discord.Color.red()
+                    )
+                    lose.add_field(name="Your Number", value=f"{str(msg.content)}")
+                    lose.add_field(name="Bot Number", value=str(num))
                         
-                        await ctx.send(embed=lose)
-                else:
-                    return await ctx.send("You should enter a number, not a text/string. Ignored")
+                    await ctx.send(embed=lose)
             except asyncio.TimeoutError:
                 return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
 
