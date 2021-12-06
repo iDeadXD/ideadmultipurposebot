@@ -27,23 +27,23 @@ class Games(commands.Cog):
             return await ctx.send("Enter number range: 1 - 100000")
         else:
             try:
-                if num < int(msg.content):
+                if num < int(count.content):
                     win = discord.Embed(
                         title="--- RNG Games ---",
                         description=f"Congratulation. You Win, {ctx.message.author.mention}",
                         color=discord.Color.purple()
                     )
-                    win.add_field(name="Your Number", value=f"{st (msg.content)}")
+                    win.add_field(name="Your Number", value=f"{str(count.content)}")
                     win.add_field(name="Bot Number", value=str(num))
                         
                     await ctx.send(embed=win)
-                if num > int(msg.content):
+                if num > int(count.content):
                     lose = discord.Embed(
                         title="--- RNG Games ---",
                         description=f"Oh no. You lose, {ctx.message.author.mention}",
                         color=discord.Color.red()
                     )
-                    lose.add_field(name="Your Number", value=f"{str(msg.content)}")
+                    lose.add_field(name="Your Number", value=f"{str(count.content)}")
                     lose.add_field(name="Bot Number", value=str(num))
                         
                     await ctx.send(embed=lose)
