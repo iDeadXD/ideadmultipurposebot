@@ -3,6 +3,7 @@ SFW = {
     "slap1": "https://api.waifu.pics/sfw/slap",
     "bonk1": "https://api.waifu.pics/sfw/bonk",
     "kiss1": "https://api.waifu.pics/sfw/kiss",
+    "neko1": "https://api.waifu.pics/sfw/neko"
 }
 
 NSFW = {
