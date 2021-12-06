@@ -199,7 +199,8 @@ class Utils(commands.Cog):
         if member is None:
             embed = discord.Embed(
                 title="--- Cute Neko Image ---",
-                description=random.choice(desc)
+                description=random.choice(desc),
+                color=discord.Color.green()
             )
             embed.set_image(url=imgdata)
             embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
