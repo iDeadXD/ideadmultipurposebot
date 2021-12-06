@@ -183,6 +183,39 @@ class Utils(commands.Cog):
         await ctx.message.delete()
     
     @commands.command()
+    async def neko(self, ctx, member: discord.Member=None):
+        
+        url8 = SFW['neko1']
+        r8 = requests.get(url8)
+        data8 = r8.json()
+        imgdata = data8['url']
+        
+        desc = [
+            str(N_MESSAGE['n_msg1']).format(ctx.message.author.mention),
+            str(N_MESSAGE['n_msg3']).format(ctx.message.author.mention),
+            str(N_MESSAGE['n_msg4']).format(ctx.message.author.mention)
+        ]
+        
+        if member is None:
+            embed = discord.Embed(
+                title="--- Cute Neko Image ---",
+                description=random.choice(desc)
+            )
+            embed.set_image(url=imgdata)
+            embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+            
+            await ctx.send(embed=embed)
+        else:
+            embed = discord.Embed(
+                title="--- Cute Neko Image ---",
+                description=str(N_MESSAGE['n_msg2']).format(ctx.message.author.mention, member.mention)
+            )
+            embed.set_image(url=imgdata)
+            embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+            
+            await ctx.send(embed=embed)
+    
+    @commands.command()
     async def meme(self, ctx):
         """Random Meme Image"""
         url6 = MEME['meme1']
