@@ -54,3 +54,11 @@ K_MESSAGE = {
     "k_msg2": "Kiss from {} to {} !!!",
     "k_msg3": "Are you kissing yourself, {}?"
 }
+
+#Neko Message
+N_MESSAGE = {
+    "n_msg1": "Are you going to keep this cute cat girls, {}?",
+    "n_msg2": "{} think, you should have this cute cat girls, {}.",
+    "n_msg3": "Have some cute cat girls, {}",
+    "n_msg4": "Take care of this cute cat girls, {}"
+}
