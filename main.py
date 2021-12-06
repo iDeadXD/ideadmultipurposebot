@@ -10,6 +10,7 @@ import voice_temp
 import guild_utils
 import moderation
 import utils
+import games
 from config import CONFIG
 from guild_utils import Guilds
 from msg_channel import CHANNEL
@@ -43,6 +44,7 @@ cogs3 = [voice_temp]
 cogs4 = [moderation]
 cogs5 = [utils]
 cogs6 = [guild_utils]
+cogs7 = [games]
 
 #=== Welcome Messages ===
 welcome = f"""I'm Online Right Now.
@@ -66,6 +68,9 @@ for i in range(len(cogs5)):
 
 for i in range(len(cogs6)):
     cogs6[i].setup(client)
+
+for i in range(len(cogs7)):
+    cogs7[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
