@@ -21,7 +21,7 @@ class Games(commands.Cog):
         )
         
         await ctx.send(embed=waits)
-        count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.chhanel, timeout=10)
+        count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
         
         if not 0 < int(count.content) < 100001:
             return await ctx.send("Enter number range: 1 - 100000")
