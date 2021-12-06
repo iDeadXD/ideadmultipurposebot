@@ -10,7 +10,7 @@ import asyncio
 from config import CONFIG
 from imgapi import SFW, NSFW, MEME, WELCOME
 from msg_channel import CHANNEL
-from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE
+from custom_msg import W_MESSAGE, H_MESSAGE, B_MESSAGE, S_MESSAGE, M_MESSAGE, K_MESSAGE, J_MESSAGE, N_MESSAGE
 
 class Utils(commands.Cog):
     """Utils related commands. """
