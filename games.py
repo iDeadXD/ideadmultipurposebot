@@ -47,7 +47,7 @@ class Games(commands.Cog):
                     lose.add_field(name="Bot Number", value=str(num))
                         
                     await ctx.send(embed=lose)
-            except TimeoutError:
+            except asyncio.exceptions.TimeoutError:
                 return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
 
 def setup(client):
