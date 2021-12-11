@@ -499,6 +499,7 @@ class Utils(commands.Cog):
             color=discord.Color.purple()
         )
         embed.add_field(name="Reported by", value=f"{ctx.message.author.mention}")
+        embed.add_field(name="From Server", value=f"{ctx.guild.name}'s server")
         embed.add_field(name="The problem/bugs", value=f"{str(reason)}")
         embed.set_footer(text="Reported at Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         
