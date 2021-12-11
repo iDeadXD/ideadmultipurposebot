@@ -375,6 +375,7 @@ class Utils(commands.Cog):
     async def botinfo(self, ctx):
         """Bot Information"""
         botdev = self.client.get_user(843132313562513408)
+        current_guild = len(client.guilds)
         embed = discord.Embed(
             color=ctx.author.color,
             title="--- Bot Information ---"
@@ -385,6 +386,7 @@ class Utils(commands.Cog):
         embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
         embed.add_field(name='Created At', value=self.client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed.add_field(name="Coded in", value="Python3 (discord.py Module)", inline=False)
+        embed add_field(name="Serving on", value=f"{current_guild} Servers")
         embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
         embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
         embed.add_field(name="Available Commands", value="Check using >help or .help", inline=False)
