@@ -375,7 +375,7 @@ class Utils(commands.Cog):
     async def botinfo(self, ctx):
         """Bot Information"""
         botdev = self.client.get_user(843132313562513408)
-        current_guild = len(client.guilds)
+        current_guild = len(self.client.guilds)
         embed = discord.Embed(
             color=ctx.author.color,
             title="--- Bot Information ---"
