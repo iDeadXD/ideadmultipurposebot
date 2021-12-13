@@ -444,7 +444,7 @@ class Utils(commands.Cog):
                 color=discord.Color.green()
             )
             embed1.set_thumbnail(url=member.avatar_url)
-            embed1.add_field(name=f"✔ The message has been sent.", value=f"Sent to: {member.mention}")
+            embed1.add_field(name=f"✔ The message has been sent.", value=f"Sent to: ```{member.name}```")
             embed1.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
             
             await ctx.message.delete()
