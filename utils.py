@@ -491,9 +491,6 @@ class Utils(commands.Cog):
         
         guilds = self.client.get_guild(int(ids))
         
-        if ctx.message.author is not botdev:
-            return await ctx.send(f"You're not a Dev from {self.client.user.mention}")
-        
         if ids is None:
             return await ctx.send("Guild not Found")
         
@@ -512,9 +509,6 @@ class Utils(commands.Cog):
     @commands.command(hidden=True)
     async def showguild(self, ctx):
         botdev = self.client.get_user(843132313562513408)
-        
-        if ctx.message.author is not botdev:
-            return await ctx.send(f"You're not a Dev from {self.client.user.mention}")
         
         current_guild = len(self.client.guilds)
         
