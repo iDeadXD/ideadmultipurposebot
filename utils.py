@@ -253,7 +253,7 @@ class Utils(commands.Cog):
         embed = discord.Embed(
             title=titles,
         )
-        embed.add_field(name="Your Latency", value=selflatency)
+        embed.add_field(name="Bot Latency", value=selflatency)
         embed.add_field(name="YouTube Server Status", value=ytlatency)
         embed.set_footer(text="Author: {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
