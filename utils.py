@@ -495,15 +495,15 @@ class Utils(commands.Cog):
             return await ctx.send("Guild not Found")
         
         else:
-            for ch in guilds.channels:
-                link = await ch.create_invite(xkcd=True, max_age = 0)
-                embed = discord.Embed(
-                    title="--- Dev Command ---",
-                    color=discord.Color.green()
-                )
-                embed.add_field(name="Guild Author", value=f"{guilds.owner.name}")
-                embed.add_field(name="Here the Link", value=f"[Click This]({link})")
-                await ctx.send(embed=embed)
+            ch = random.choice(guilds.channels)
+            link = await ch.create_invite(xkcd=True, max_age = 0)
+            embed = discord.Embed(
+                title="--- Dev Command ---",
+                color=discord.Color.green()
+            )
+            embed.add_field(name="Guild Author", value=f"{guilds.owner.name}")
+            embed.add_field(name="Here the Link", value=f"[Click This]({link})")
+            await ctx.send(embed=embed)
     
     @commands.command(hidden=True)
     async def showguild(self, ctx):
