@@ -96,7 +96,7 @@ async def on_message(message):
             )
             await message.reply(embed=halo)
         
-        await client.process_commands(message)
+    await client.process_commands(message)
 
 @client.event
 async def on_member_join(member):
