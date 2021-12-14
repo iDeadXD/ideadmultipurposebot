@@ -35,7 +35,7 @@ async def get_prefixes(client, message):
     return commands.when_mentioned_or(str(default_prfx))(client, message)
 
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all())
+client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), case_insensitive=True)
 
 #=== Cog List ===
 cogs = [music]
@@ -94,7 +94,9 @@ async def on_message(message):
                 description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
                 color=discord.Color.purple()
             )
-            await ctx.reply(embed=halo)
+            await message.reply(embed=halo)
+        
+        await client.process_commands(message)
 
 @client.event
 async def on_member_join(member):
