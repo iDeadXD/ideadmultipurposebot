@@ -84,6 +84,19 @@ Logged in as {0.user}'''.format(client))
     await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.event
+async def on_message(message):
+    hello_m = ["halo", "hello", "hola"]
+    
+    for msg in hello_m:
+        if message.content.lower().startswith(str(msg)):
+            halo = discord.Embed(
+                title="",
+                description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
+                color=discord.Color.purple()
+            )
+            await ctx.reply(embed=halo)
+
+@client.event
 async def on_member_join(member):
     main_ch = member.guild.system_channel
     
