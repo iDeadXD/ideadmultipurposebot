@@ -300,5 +300,16 @@ async def _help(ctx, sub: str=None):
     else:
         return await ctx.send("Invalid Options. Command Ignored")
 
+@client.command(hidden=True)
+async def donate(ctx):
+    link = "https://youtu.be/dQw4w9WgXcQ"
+    embed = discord.Embed(
+        title="--- Donate Me ---",
+        description="Donate me for support this project!!",
+        color=discord.Color.green()
+    )
+    embed.add_field(name="Saweria", value=f"[Saweria Link]({link})")
+    await ctx.send(embed=embed)
+
 #=== Client Account Executor ===
 client.run(CONFIG['token'])
