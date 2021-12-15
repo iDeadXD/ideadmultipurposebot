@@ -246,9 +246,16 @@ class Utils(commands.Cog):
     async def ping(self, ctx):
         """Showing Bot Latency and YouTube Server Status"""
         pings = requests.get("https://youtube.com")
+        status = pings.status_code
+        
+        if status == 200:
+            result = "Online/Active"
+        else:
+            result = "Error/Inactive"
+        
         titles = "Pong!!"
         selflatency = str(f" {round(self.client.latency * 1000)}ms")
-        ytlatency = str(f" {pings}")
+        ytlatency = str(f" {result}")
         author = ctx.message.author.name
         embed = discord.Embed(
             title=titles,
