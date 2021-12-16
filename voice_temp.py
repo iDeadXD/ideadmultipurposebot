@@ -15,7 +15,7 @@ class Voice(commands.Cog):
         
         if member.bot:
             return
-        if str(after.channel.name) == "buat baru":
+        if str(after.channel) == "buat baru":
             if str(after) != str(before):
                 guild = member.guild
                 freq = person_freq[0]
@@ -26,7 +26,7 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
                         return
-        
+        return
         
         if len(before.channel.members) == 0:
            return await before.channel.delete()
