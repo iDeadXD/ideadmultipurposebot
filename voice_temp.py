@@ -26,10 +26,14 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
                         return
-        return
-        
-        if len(before.channel.members) == 0:
-           return await before.channel.delete()
+                
+        check = discord.utils.get(guild.voice_channels, name=str(before.channel))
+        if check is None:
+            return
+        else:
+            if len(check.members) == 0:
+                await check.delete(reason=None)
+    
     
     #lock
     @commands.command(pass_context=True)
