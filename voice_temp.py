@@ -27,7 +27,7 @@ class Voice(commands.Cog):
                         await member.move_to(channel)
                         def check(self, x):
                             return len(channel.members) == 0
-                        await self.client.wait_for('voice_channel_update', check = check)
+                        await self.client.wait_for('voice_state_update', check = check)
                         await channel.delete()
     
     
