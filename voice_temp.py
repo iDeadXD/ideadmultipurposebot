@@ -15,7 +15,7 @@ class Voice(commands.Cog):
         
         if member.bot:
             return
-        if str(after.channel) == "buat baru":
+        if str(after.channel.name) == "buat baru":
             if str(after) != str(before):
                 guild = member.guild
                 freq = person_freq[0]
@@ -29,7 +29,7 @@ class Voice(commands.Cog):
         
         
         if len(before.channel.members) == 0:
-            await before.channel.delete()
+           return await before.channel.delete()
     
     #lock
     @commands.command(pass_context=True)
