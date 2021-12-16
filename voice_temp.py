@@ -30,7 +30,7 @@ class Voice(commands.Cog):
                         await member.move_to(channel)
                         return
         
-        if len(check.members) == 0:
+        if len(before.channel.members) == 0:
             await before.channel.delete()
     
     
