@@ -24,12 +24,13 @@ class Voice(commands.Cog):
                     if freq not in act_voice_channels:
                         await after.channel.clone(name=freq)
                         channel = discord.utils.get(guild.voice_channels, name=freq)
+                        await channel.set_permissions(member, connect = True, mute_members = True, move_members = True, manage_channels = True)
+                        await asyncio.sleep(3)
                         await member.move_to(channel)
-                        def checkc(self):
-                            return len(channel.members) == 0
-                        await self.client.wait_for('voice_state_update', check=checkc)
-                        await channel.delete()
                         return
+        
+        if len(check.members) == 0:
+            await before.channel.delete()
     
     
     #lock
