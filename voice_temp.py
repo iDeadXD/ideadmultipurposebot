@@ -25,10 +25,11 @@ class Voice(commands.Cog):
                         await after.channel.clone(name=freq)
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await member.move_to(channel)
-                        def checkc(self, x):
+                        def checkc(self):
                             return len(channel.members) == 0
                         await self.client.wait_for('voice_state_update', check=checkc)
                         await channel.delete()
+                        return
     
     
     #lock
