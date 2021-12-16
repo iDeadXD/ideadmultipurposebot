@@ -29,6 +29,7 @@ class Voice(commands.Cog):
                         await asyncio.sleep(3)
                         await member.move_to(channel)
                         return
+        return
         
         if len(before.channel.members) == 0:
             await before.channel.delete()
