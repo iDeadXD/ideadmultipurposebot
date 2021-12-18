@@ -8,6 +8,7 @@ import music
 import levelsystem
 import voice_temp
 import guild_utils
+import economy
 import moderation
 import utils
 import games
@@ -45,6 +46,7 @@ cogs4 = [moderation]
 cogs5 = [utils]
 cogs6 = [guild_utils]
 cogs7 = [games]
+cogs8 = [economy]
 
 #=== Welcome Messages ===
 welcome = f"""I'm Online Right Now.
@@ -71,6 +73,9 @@ for i in range(len(cogs6)):
 
 for i in range(len(cogs7)):
     cogs7[i].setup(client)
+
+for i in range(len(cogs8)):
+    cogs8[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
