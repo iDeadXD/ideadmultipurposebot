@@ -124,7 +124,7 @@ class Economy(commands.Cog):
                                 done.add_field(name="Reason", value=str(reason))
                                 await ctx.send(embed=done)
                                 await member.send(embed=done)
-                        elif self_data['money'] - amount == 0::
+                        elif self_data['money'] - amount == 0:
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
                             
