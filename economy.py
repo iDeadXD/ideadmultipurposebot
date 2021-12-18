@@ -155,7 +155,14 @@ class Economy(commands.Cog):
                             )
                             fail4.add_field(name="Reason", value="You cannot transfer more money than your current amount (Check your money with ```>balance``` commands)")
                             await ctx.send(embed=fail4)
-                    elif msg.content in no or else:
+                    elif msg.content in no:
+                        cancelled = discord.Embed(
+                            title="",
+                            description="Transfer cancelled!!",
+                            color=discord.Color.green()
+                        )
+                        await ctx.send(embed=cancelled)
+                    else:
                         cancelled = discord.Embed(
                             title="",
                             description="Transfer cancelled!!",
@@ -222,7 +229,7 @@ class Economy(commands.Cog):
                 color=discord.Color.purple()
             )
             done.add_field(name="\u200b", value=f"Your Current Balance: {str(money_data)}")
-            done.add_field(name="\u200b", value=f"Last Activity: {curr_status}")
+            done.add_field(name="\u200b", value=f"Last Activity: {str(curr_status)}")
             
             await ctx.send(embed=done)
 
