@@ -58,7 +58,7 @@ class Economy(commands.Cog):
         else:
             raise error
     
-    @commands.command(alliases=["give", "tf"])
+    @commands.command(aliases=["give", "tf"])
     @commands.cooldown(5, 86400, commands.BucketType.user)
     async def transfer(self, ctx, member: discord.Member=None, amount: int=None, *, reason=None):
         
@@ -205,7 +205,7 @@ class Economy(commands.Cog):
         )
         await ctx.send(embed=fail)
     
-    @commands.command(alliases=["bal", "bl"])
+    @commands.command(aliases=["bal", "bl"])
     async def balance(self, ctx):
         data = balance.find({'_id': ctx.message.author.id})
         
