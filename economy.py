@@ -205,8 +205,8 @@ class Economy(commands.Cog):
         )
         await ctx.send(embed=fail)
     
-    @commands.command(aliases=["bal", "bl"])
-    async def balance(self, ctx):
+    @commands.command(name="balance", aliases=["bal", "bl"])
+    async def balance_(self, ctx):
         data = balance.find({'_id': ctx.message.author.id})
         
         if data is None:
