@@ -31,7 +31,7 @@ class Economy(commands.Cog):
         else:
             daily = random.randint(200, 1000)
             updated = data['money'] + int(daily)
-            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": daily}}, {"$set": {"status": f"{str(daily)} claimed from Daily Claim"}}, upsert=True)
+            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": daily, "status": f"{str(daily)} claimed from Daily Claim"}}, upsert=True)
             done = discord.Embed(
                 title="--- Daily Claim ---",
                 description=f"You got {str(daily)} for daily claim today. Daily Claim cooldown: 24 hours",
@@ -105,7 +105,7 @@ class Economy(commands.Cog):
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
                             
-                            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": data1}}, {"$set": {"status": f"Transfer {amount} to {member.name + '#' + member.discriminator}"}}, upsert=True)
+                            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": data1, "status": f"Transfer {amount} to {member.name + '#' + member.discriminator}"}}, upsert=True)
                             balance.update_one({"_id": member.id}, {"$set": {"money": data2}}, upsert=True)
                             
                             done = discord.Embed(
@@ -128,7 +128,7 @@ class Economy(commands.Cog):
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
                             
-                            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": data1}}, {"$set": {"status": f"Transfer {amount} to {member.id}"}}, upsert=True)
+                            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": data1, "status": f"Transfer {amount} to {member.id}"}}, upsert=True)
                             balance.update_one({"_id": member.id}, {"$set": {"money": data2}}, upsert=True)
                             
                             done = discord.Embed(
