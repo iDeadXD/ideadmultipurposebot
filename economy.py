@@ -31,7 +31,7 @@ class Economy(commands.Cog):
         else:
             daily = random.randint(200, 1000)
             updated = data['money'] + int(daily)
-            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": daily, "status": f"{str(daily)} claimed from Daily Claim"}}, upsert=True)
+            balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": updated, "status": f"{str(daily)} claimed from Daily Claim"}}, upsert=True)
             done = discord.Embed(
                 title="--- Daily Claim ---",
                 description=f"You got {str(daily)} for daily claim today. Daily Claim cooldown: 24 hours",
