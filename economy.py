@@ -217,9 +217,8 @@ class Economy(commands.Cog):
             )
             return await ctx.send(embed=fail)
         else:
-            for curr_data in data:
-                money_data = curr_data['money']
-                status = curr_data['status']
+            money_data = data['money']
+            status = data['status']
             
             
             curr_status = "No activity" if str(status) is None else str(status)
