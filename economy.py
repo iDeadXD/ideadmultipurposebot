@@ -221,6 +221,7 @@ class Economy(commands.Cog):
                 money_data = curr_data['money']
                 status = curr_data['status']
             
+            
             curr_status = "No activity" if str(status) is None else str(status)
             
             done = discord.Embed(
@@ -230,7 +231,7 @@ class Economy(commands.Cog):
             )
             done.add_field(name="\u200b", value=f"Your Current Balance: {str(money_data)}")
             done.add_field(name="\u200b", value=f"Last Activity: {str(curr_status)}")
-            
+            print(curr_data)
             await ctx.send(embed=done)
 
 def setup(client):
