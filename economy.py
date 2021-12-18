@@ -146,7 +146,7 @@ class Economy(commands.Cog):
                             if reason:
                                 done.add_field(name="Reason", value=str(reason))
                                 await ctx.send(embed=done)
-                                await member.send(embed=embed
+                                await member.send(embed=embed)
                         else:
                             fail4 = discord.Embed(
                                 title="",
