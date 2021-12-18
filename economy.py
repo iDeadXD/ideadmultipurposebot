@@ -5,14 +5,14 @@ import asyncio
 import random
 from config import CONFIG
 
+database = MongoClient(CONFIG['mongodb_url'])
+bank = database['database3']
+balance = bank['balance']
+
 class Economy(commands.Cog):
     
     def __init__(self, client):
         self.client = client
-    
-    database = MongoClient(CONFIG['mongodb_url'])
-    bank = database['database3']
-    balance = bank['balance']
     
     @commands.command()
     @commands.cooldown(1, 86400, commands.BucketType.user)
@@ -206,8 +206,8 @@ class Economy(commands.Cog):
         await ctx.send(embed=fail)
     
     @commands.command(name="balance", aliases=["bal", "bl"])
-    async def balance_(self, ctx):
-        data = balance.find({'_id': ctx.message.author.id})
+    async def _balance(self, ctx):
+        data = balance.find_one({'_id': ctx.message.author.id})
         
         if data is None:
             fail = discord.Embed(
