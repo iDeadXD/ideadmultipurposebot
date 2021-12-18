@@ -231,7 +231,7 @@ class Economy(commands.Cog):
             )
             done.add_field(name="\u200b", value=f"Your Current Balance: {str(money_data)}")
             done.add_field(name="\u200b", value=f"Last Activity: {str(curr_status)}")
-            print(curr_data)
+            print(money_data)
             await ctx.send(embed=done)
 
 def setup(client):
