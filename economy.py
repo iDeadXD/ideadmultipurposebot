@@ -63,7 +63,7 @@ class Economy(commands.Cog):
     async def transfer(self, ctx, member: discord.Member=None, amount: int=None, *, reason=None):
         
         if member is ctx.message.author:
-            ignored = Discord.Embed(
+            ignored = discord.Embed(
                 title="",
                 description="You can't transfer to yourself",
                 color=discord.Color.red()
