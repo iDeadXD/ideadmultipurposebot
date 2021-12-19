@@ -109,7 +109,7 @@ class Economy(commands.Cog):
                     msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel, timeout=10)
                     
                     if msg.content in yes:
-                        if self_data['money'] - amount != 0:
+                        if self_data['money'] - amount >= 0:
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
                             
@@ -155,7 +155,7 @@ class Economy(commands.Cog):
                                 done.add_field(name="Reason", value=str(reason))
                                 await ctx.send(embed=done)
                                 await member.send(embed=embed)
-                        else:
+                        elif self_data['money'] - amount <= 0:
                             fail4 = discord.Embed(
                                 title="",
                                 description="Transfer has failed",
