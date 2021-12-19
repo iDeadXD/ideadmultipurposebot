@@ -62,6 +62,14 @@ class Economy(commands.Cog):
     @commands.cooldown(5, 86400, commands.BucketType.user)
     async def transfer(self, ctx, member: discord.Member=None, amount: int=None, *, reason=None):
         
+        if member is ctx.message.author:
+            ignored = Discord.Embed(
+                title="",
+                description="You can't transfer to yourself",
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=ignored)
+        
         if member is None or amount is None:
             fail1 = discord.Embed(
                 title="",
