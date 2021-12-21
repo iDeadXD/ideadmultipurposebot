@@ -56,10 +56,9 @@ class Economy(commands.Cog):
             )
             await ctx.send(embed=embed)
         else:
-            await claim.reset_cooldown(ctx)
             raise error
     
-    @commands.command(aliases=["give", "tf"])
+    @commands.command(aliases=["give", "tf"], cooldown_after_parsing=True)
     @commands.cooldown(5, 86400, commands.BucketType.user)
     async def transfer(self, ctx, member: discord.Member=None, amount: int=None, *, reason=None):
         
@@ -203,7 +202,6 @@ class Economy(commands.Cog):
             )
             await ctx.send(embed=embed)
         else:
-            await transfer.reset_cooldown(ctx)
             raise error
     
     @commands.command()
