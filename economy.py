@@ -56,7 +56,7 @@ class Economy(commands.Cog):
             )
             await ctx.send(embed=embed)
         else:
-            await ctx.command.reset_cooldown(ctx)
+            await claim.reset_cooldown(ctx)
             raise error
     
     @commands.command(aliases=["give", "tf"])
@@ -203,7 +203,7 @@ class Economy(commands.Cog):
             )
             await ctx.send(embed=embed)
         else:
-            await ctx.command.reset_cooldown(ctx)
+            await transfer.reset_cooldown(ctx)
             raise error
     
     @commands.command()
