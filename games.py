@@ -51,50 +51,51 @@ class Games(commands.Cog):
                     await ctx.send(embed=lose)
             except asyncio.TimeoutError:
                 return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
-  @commands.command()
-  async def rps(self, ctx):
-      try:
-          types = ["rock", "paper", "scissor"]
-           
-          bots = random.choice(types)
+
+    @commands.command()
+    async def rps(self, ctx):
+        try:
+            types = ["rock", "paper", "scissor"]
+               
+            bots = random.choice(types)
               
-          await ctx.send("rock/paper/scissor")
-          result = await self.client.wait_for('message', check=lambda message:message.author = ctx.author and message.channel = ctx.channel, timeout=60)
+            await ctx.send("rock/paper/scissor")
+            result = await self.client.wait_for('message', check=lambda message:message.author = ctx.author and message.channel = ctx.channel, timeout=60)
             
-          if msg.content == 'rock':
-              if str(bots) == 'scissor':
-                  await ctx.send(bots)
-                  await ctx.send("You win")
-              elif str(bots) == 'paper':
-                  await ctx.send(bots)
-                  await ctx.send("Bots Win")
-              elif str(bots) == 'rock':
-                  await ctx.send(bots)
-                  await ctx.send("Draw")
-          if msg.content == 'paper':
-              if str(bots) == 'rock':
-                  await ctx.send(bots)
-                  await ctx.send("You win")
-              elif str(bots) == 'scissor':
-                  await ctx.send(bots)
-                  await ctx.send("Bots Win")
-              elif str(bots) == 'paper':
-                  await ctx.send(bots)
-                  await ctx.send("Draw")
-          if msg.content == 'scissor':
-              if str(bots) == 'paper':
-                  await ctx.send(bots)
-                  await ctx.send("You win")
-              elif str(bots) == 'rock':
-                  await ctx.send(bots)
-                  await ctx.send("Bots Win")
-              elif str(bots) == 'scissor:
-                  await ctx.send(bots)
-                  await ctx.send("Draw")
-          else:
-              return #some code
-      except TimeoutError:
-          return await ctx.send("Game Timeout")
+            if msg.content == 'rock':
+                if str(bots) == 'scissor':
+                    await ctx.send(bots)
+                    await ctx.send("You win")
+                elif str(bots) == 'paper':
+                    await ctx.send(bots)
+                    await ctx.send("Bots Win")
+                elif str(bots) == 'rock':
+                    await ctx.send(bots)
+                    await ctx.send("Draw")
+            if msg.content == 'paper':
+                if str(bots) == 'rock':
+                    await ctx.send(bots)
+                    await ctx.send("You win")
+                elif str(bots) == 'scissor':
+                    await ctx.send(bots)
+                    await ctx.send("Bots Win")
+                elif str(bots) == 'paper':
+                    await ctx.send(bots)
+                    await ctx.send("Draw")
+            if msg.content == 'scissor':
+                if str(bots) == 'paper':
+                    await ctx.send(bots)
+                    await ctx.send("You win")
+                elif str(bots) == 'rock':
+                    await ctx.send(bots)
+                    await ctx.send("Bots Win")
+                elif str(bots) == 'scissor:
+                    await ctx.send(bots)
+                    await ctx.send("Draw")
+            else:
+                return #some code
+        except TimeoutError:
+            return await ctx.send("Game Timeout")
 
 def setup(client):
     client.add_cog(Games(client))
