@@ -89,7 +89,7 @@ class Games(commands.Cog):
                 elif str(bots) == 'rock':
                     await ctx.send(bots)
                     await ctx.send("Bots Win")
-                elif str(bots) == 'scissor:
+                elif str(bots) == 'scissor':
                     await ctx.send(bots)
                     await ctx.send("Draw")
             else:
