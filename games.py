@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import random
 import asyncio
-from imgapi import CARD
 
 #Games Class
 class Games(commands.Cog):
