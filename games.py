@@ -52,8 +52,8 @@ class Games(commands.Cog):
             except asyncio.TimeoutError:
                 return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
   
-  @commands.command()
-  async def rps(self, ctx):
+  @commands.command(name="rps")
+  async def _rps(self, ctx):
       try:
           types = ["rock", "paper", "scissor"]
           
