@@ -60,7 +60,7 @@ class Games(commands.Cog):
             bots = random.choice(types)
               
             await ctx.send("rock/paper/scissor")
-            result = await self.client.wait_for('message', check=lambda message:message.author = ctx.author and message.channel = ctx.channel, timeout=60)
+            msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
             
             if msg.content == 'rock':
                 if str(bots) == 'scissor':
