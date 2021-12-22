@@ -39,7 +39,14 @@ async def get_prefixes(client, message):
 client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), case_insensitive=True)
 
 #=== Cog List ===
-cogs = [music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+cogs = [music]
+cogs2 = [levelsystem]
+cogs3 = [voice_temp]
+cogs4 = [moderation]
+cogs5 = [utils]
+cogs6 = [guild_utils]
+cogs7 = [games]
+cogs8 = [economy]
 
 #=== Welcome Messages ===
 welcome = f"""I'm Online Right Now.
@@ -48,6 +55,27 @@ Author: iDead#9496."""
 #=== Cog Executor ===
 for i in range(len(cogs)):
     cogs[i].setup(client)
+
+for i in range(len(cogs2)):
+    cogs2[i].setup(client)
+
+for i in range(len(cogs3)):
+    cogs3[i].setup(client)
+
+for i in range(len(cogs4)):
+    cogs4[i].setup(client)
+
+for i in range(len(cogs5)):
+    cogs5[i].setup(client)
+
+for i in range(len(cogs6)):
+    cogs6[i].setup(client)
+
+for i in range(len(cogs7)):
+    cogs7[i].setup(client)
+
+for i in range(len(cogs8)):
+    cogs8[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
