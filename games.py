@@ -2,7 +2,9 @@ import discord
 from discord.ext import commands
 import random
 import asyncio
+from imgapi import CARD
 
+#Games Class
 class Games(commands.Cog):
     """Simple Games related Commands"""
     
@@ -47,11 +49,11 @@ class Games(commands.Cog):
                     lose.add_field(name="Bot Number", value=str(num))
                         
                     await ctx.send(embed=lose)
-            except asyncio.exceptions.TimeoutError():
+            except asyncio.TimeoutError:
                 return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
-    @commands.command():
+  
+  @commands.command():
   async def rps(self, ctx):
-      
       try:
           types = ["rock", "paper", "scissor"]
           
