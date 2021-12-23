@@ -255,7 +255,7 @@ class Economy(commands.Cog):
                             )
                             done.add_field(name="Item Type", value="XP for Level")
                             done.add_field(name="Total", value=f"{str(wallet)} money")
-                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
+                            done.add_field(name="Number of Items purchased", value=f"{str(xpcount)} XP")
                             done.add_field(name="\u200b", value="Thanks for purchasing.")
                             await ctx.send(embed=done)
                         elif self_data_money['money'] - wallet == 0:
@@ -271,7 +271,7 @@ class Economy(commands.Cog):
                             )
                             done.add_field(name="Item Type", value="XP for Level")
                             done.add_field(name="Total", value=f"{str(wallet)} money (All of your money!!)")
-                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
+                            done.add_field(name="Number of Items purchased", value=f"{str(xpcount)} XP")
                             done.add_field(name="\u200b", value="Thanks for purchasing.")
                             await ctx.send(embed=done)
                         elif self_data_money['money'] - wallet <= 0:
