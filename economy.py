@@ -204,14 +204,94 @@ class Economy(commands.Cog):
         else:
             raise error
     
-    @commands.command()
-    async def buy(self, ctx):
-        fail = discord.Embed(
-            title="",
-            description="For now, this command is still under development (Can not be used)!!",
-            color=discord.Color.green()
-        )
-        await ctx.send(embed=fail)
+    @commands.command(aliases=['buy'])
+    async def purchase(self, ctx, money: int=None):
+        self_data_xp = collection.find_one({"_id": ctx.message.author.id})
+        self_data_money = money.find_one({"_id": ctx.message.author.id})
+        
+        if self_data_money is None:
+            fail1 = discord.Embed(
+                title="",
+                description="You don't have Registered Account. Use ```>claim``` command for register account automatically",
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=fail1)
+        else:
+            if int(self_data_money['money']) == 0:
+                fail2 = discord.Embed(
+                    title="",
+                    description="You have no money at all. You can earn money for free from Daily Claim",
+                    color=discord.Color.red()
+                )
+                return await ctx.send(embed=fail2)
+            else:
+                try:
+                    yes = ['y', 'yes']
+                    no = ['n', 'no']
+                    xpcount = round(15 * int(money))
+                    
+                    confirm = discord.Embed(
+                        title="",
+                        description=f"Are you sure you want to purchase {str(count)} XP for {money} money ? (y/n)",
+                        color=discord.Color.purple()
+                    )
+                    await ctx.send(embed=confirm)
+                    msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
+                    
+                    if msg.content in yes:
+                        if self_data_money['money'] - money >= 0:
+                            money_after = self_data_money['money'] - money
+                            xp_after = self_data_xp['xp'] + xpcount
+                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
+                            collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
+                            
+                            done = discord.Embed(
+                                title="--- Item Purchase ---",
+                                description="Purchase Completed",
+                                color=discord.Color.purple()
+                            )
+                            done.add_field(name="Item Type", value="XP for Level")
+                            done.add_field(name="Total", value=f"{money} money")
+                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
+                            done.add_field(name="\u200b", value="Thanks for purchasing.")
+                            await ctx.send(embed=done)
+                        elif self_data_money['money'] - money == 0:
+                            money_after = self_data_money['money'] - money
+                            xp_after = self_data_xp['xp'] + xpcount
+                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
+                            collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
+                            
+                            done = discord.Embed(
+                                title="--- Item Purchase ---",
+                                description="Purchase Completed",
+                                color=discord.Color.purple()
+                            )
+                            done.add_field(name="Item Type", value="XP for Level")
+                            done.add_field(name="Total", value=f"{money} money (All of your money!!)")
+                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
+                            done.add_field(name="\u200b", value="Thanks for purchasing.")
+                            await ctx.send(embed=done)
+                        elif self_data_money['money'] - money <= 0:
+                            failed = discord.Embed(
+                                title="",
+                                description="Purchase failed!!",
+                                color=discord.Color.red()
+                            )
+                            failed.add_field(name="Reason", value="You cannot purchase using more money than your current amount (Check your money with ```>balance``` commands)")
+                            await ctx.send(embed=failed)
+                    if msg.content in no:
+                        cancelled = discord.Embed(
+                            title="",
+                            description="Purchase cancelled",
+                            color=discord.Color.red()
+                        )
+                        await ctx.send(embed=cancelled)
+                except TimeoutError:
+                    timedout = discord.Embed(
+                        title="",
+                        description="Purchase Timed Out!"
+                    )
+                    return await ctx.send(embed=timedout)
     
     @commands.command(name="balance", aliases=["bal", "bl"])
     async def _balance(self, ctx):
