@@ -231,7 +231,7 @@ class Economy(commands.Cog):
                 try:
                     yes = ['y', 'yes']
                     no = ['n', 'no']
-                    xpcount = round(15 * int(money))
+                    xpcount = round(15 * int(wallet))
                     
                     confirm = discord.Embed(
                         title="",
