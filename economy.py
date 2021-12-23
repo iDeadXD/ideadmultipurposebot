@@ -9,6 +9,9 @@ database = MongoClient(CONFIG['mongodb_url'])
 bank = database['database3']
 balance = bank['balance']
 
+levelling = database['database1']
+collection = levelling['level']
+
 class Economy(commands.Cog):
     
     def __init__(self, client):
