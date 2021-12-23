@@ -208,7 +208,7 @@ class Economy(commands.Cog):
             raise error
     
     @commands.command(aliases=['buy'])
-    async def purchase(self, ctx, money: int=None):
+    async def purchase(self, ctx, wallet: int=None):
         self_data_xp = collection.find_one({"_id": ctx.message.author.id})
         self_data_money = money.find_one({"_id": ctx.message.author.id})
         
@@ -235,15 +235,31 @@ class Economy(commands.Cog):
                     
                     confirm = discord.Embed(
                         title="",
-                        description=f"Are you sure you want to purchase {str(count)} XP for {money} money ? (y/n)",
+                        description=f"Are you sure you want to purchase {str(xpcount)} XP for {str(wallet)} money ? (y/n)",
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=confirm)
                     msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
                     
                     if msg.content in yes:
-                        if self_data_money['money'] - money >= 0:
-                            money_after = self_data_money['money'] - money
+                        if self_data_money['money'] - wallet >= 0:
+                            money_after = self_data_money['money'] - wallet
+                            xp_after = self_data_xp['xp'] + xpcount
+                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(wallet)} money'}}, upsert=True)
+                            collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
+                            
+                            done = discord.Embed(
+                                title="--- Item Purchase ---",
+                                description="Purchase Completed",
+                                color=discord.Color.purple()
+                            )
+                            done.add_field(name="Item Type", value="XP for Level")
+                            done.add_field(name="Total", value=f"{str(wallet)} money")
+                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
+                            done.add_field(name="\u200b", value="Thanks for purchasing.")
+                            await ctx.send(embed=done)
+                        elif self_data_money['money'] - wallet == 0:
+                            money_after = self_data_money['money'] - wallet
                             xp_after = self_data_xp['xp'] + xpcount
                             money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
                             collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
@@ -254,27 +270,11 @@ class Economy(commands.Cog):
                                 color=discord.Color.purple()
                             )
                             done.add_field(name="Item Type", value="XP for Level")
-                            done.add_field(name="Total", value=f"{money} money")
+                            done.add_field(name="Total", value=f"{str(wallet)} money (All of your money!!)")
                             done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
                             done.add_field(name="\u200b", value="Thanks for purchasing.")
                             await ctx.send(embed=done)
-                        elif self_data_money['money'] - money == 0:
-                            money_after = self_data_money['money'] - money
-                            xp_after = self_data_xp['xp'] + xpcount
-                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
-                            collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
-                            
-                            done = discord.Embed(
-                                title="--- Item Purchase ---",
-                                description="Purchase Completed",
-                                color=discord.Color.purple()
-                            )
-                            done.add_field(name="Item Type", value="XP for Level")
-                            done.add_field(name="Total", value=f"{money} money (All of your money!!)")
-                            done.add_field(name="Number of Items purchased", value=f"{str(xp_after)} XP")
-                            done.add_field(name="\u200b", value="Thanks for purchasing.")
-                            await ctx.send(embed=done)
-                        elif self_data_money['money'] - money <= 0:
+                        elif self_data_money['money'] - wallet <= 0:
                             failed = discord.Embed(
                                 title="",
                                 description="Purchase failed!!",
