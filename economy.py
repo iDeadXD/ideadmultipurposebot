@@ -210,7 +210,7 @@ class Economy(commands.Cog):
     @commands.command(aliases=['buy', 'beli'])
     async def purchase(self, ctx, wallet: int=None):
         self_data_xp = collection.find_one({"_id": ctx.message.author.id})
-        self_data_money = money.find_one({"_id": ctx.message.author.id})
+        self_data_money = balance.find_one({"_id": ctx.message.author.id})
         
         if self_data_money is None:
             fail1 = discord.Embed(
@@ -245,7 +245,7 @@ class Economy(commands.Cog):
                         if self_data_money['money'] - wallet >= 0:
                             money_after = self_data_money['money'] - wallet
                             xp_after = self_data_xp['xp'] + xpcount
-                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(wallet)} money'}}, upsert=True)
+                            balance.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(wallet)} money'}}, upsert=True)
                             collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
                             
                             done = discord.Embed(
@@ -261,7 +261,7 @@ class Economy(commands.Cog):
                         elif self_data_money['money'] - wallet == 0:
                             money_after = self_data_money['money'] - wallet
                             xp_after = self_data_xp['xp'] + xpcount
-                            money.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
+                            balance.update_one({'_id': ctx.message.author.id}, {'$set': {'money': money_after, 'status': f'Purchasing {str(xpcount)} for {str(money)} money'}}, upsert=True)
                             collection.update_one({'_id': ctx.message.author.id}, {'$set': {'xp': xp_after}}, upsert=True)
                             
                             done = discord.Embed(
