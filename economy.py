@@ -207,7 +207,7 @@ class Economy(commands.Cog):
         else:
             raise error
     
-    @commands.command(aliases=['buy', 'beli'])
+    @commands.command(aliases=['buy'])
     async def purchase(self, ctx, wallet: int=None):
         self_data_xp = collection.find_one({"_id": ctx.message.author.id})
         self_data_money = balance.find_one({"_id": ctx.message.author.id})
