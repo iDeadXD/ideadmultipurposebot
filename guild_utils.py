@@ -23,7 +23,7 @@ class Guilds(commands.Cog):
             title="--- Server Booster ---",
             color=discord.Color.magenta()
         )
-        boosted.set_thumbnail(url=ctx.guild.icon_url)
+        boosted.set_thumbnail(url=ctx.guild.icon)
         boosted.add_field(name="Booster Count", value=f"{str(ctx.guild.premium_subscription_count)}")
         boosted.add_field(name="List of Booster", value=", ".join(booster.name))
         boosted.set_footer(text="Thanks for boost this server")
