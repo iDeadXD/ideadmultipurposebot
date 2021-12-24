@@ -16,8 +16,6 @@ import games
 from config import CONFIG
 from guild_utils import Guilds
 from msg_channel import CHANNEL
-from helpsource import HelpPageSource
-from menupages import MyMenuPages
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
@@ -40,17 +38,25 @@ async def get_prefixes(client, message):
 
 #=== Custom Help Command ===
 class MyNewHelp(commands.MinimalHelpCommand):
-    def get_command_brief(self, command):
-        return command.short_doc or "Command is not documented."
+    async def send_pages(self):
+        destination = self.get_destination()
+        for page in self.paginator.pages:
+            emby = discord.Embed(description=page, color=discord.Color.purple())
+            emby.set_thumbnail(url=client.user.avatar_url)
+            await destination.send(embed=emby)
     
-    async def send_bot_help(self, mapping):
-        all_commands = list(chain.from_iterable(mapping.values()))
-        formatter = HelpPageSource(all_commands, self)
-        menu = MyMenuPages(formatter, delete_message_after=True)
-        await menu.start(self.context)
+    async def send_command_help(self, command):
+        embed = discord.Embed(title=self.get_command_signature(command))
+        embed.add_field(name="Help", value=command.help, color=discord.Color.purple())
+        alias = command.aliases
+        if alias:
+            embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
+
+        channel = self.get_destination()
+        await channel.send(embed=embed)
     
     async def send_error_message(self, error):
-        embed = discord.Embed(title="Error", description=error)
+        embed = discord.Embed(title="Error", description=error, color=discord.Color.red())
         channel = self.get_destination()
         await channel.send(embed=embed)
 
