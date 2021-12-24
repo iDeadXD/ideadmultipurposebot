@@ -46,8 +46,8 @@ class MyNewHelp(commands.MinimalHelpCommand):
             await destination.send(embed=emby)
     
     async def send_command_help(self, command):
-        embed = discord.Embed(title=self.get_command_signature(command))
-        embed.add_field(name="Help", value=command.help, color=discord.Color.purple())
+        embed = discord.Embed(title=self.get_command_signature(command), color=discord.Color.purple())
+        embed.add_field(name="Help", value=command.help)
         alias = command.aliases
         if alias:
             embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
