@@ -23,5 +23,5 @@ class HelpPageSource(menus.ListPageSource):
             color=0xffcccb
         )
         author = menu.ctx.author
-        embed.set_footer(text=f"Requested by {author}", icon_url=author.avatar_url)  # author.avatar in 2.0
+        embed.set_footer(text=f"Requested by {author}", icon_url=author.avatar.url)  # author.avatar in 2.0
         return embed
