@@ -35,8 +35,27 @@ async def get_prefixes(client, message):
         default_prfx = x["_prefix"]
     return commands.when_mentioned_or(str(default_prfx))(client, message)
 
+#=== Custom Help Command ===
+class MyNewHelp(commands.MinimalHelpCommand):
+    async def send_pages(self):
+        destination = self.get_destination()
+        for page in self.paginator.pages:
+            emby = discord.Embed(description=page, color=discord.Color.purple())
+            await destination.send(embed=emby)
+    
+    async def send_command_help(self, command):
+        embed = discord.Embed(title=self.get_command_signature(command), color=discord.Color.purple())
+        embed.add_field(name="Help", value=command.help)
+        alias = command.aliases
+        if alias:
+            embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
+
+        channel = self.get_destination()
+        await channel.send(embed=embed)
+
 #=== Client Setup ===
 client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), case_insensitive=True)
+client.help_command = MyNewHelp()
 
 #=== Cog List ===
 cogs = [music]
