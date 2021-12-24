@@ -124,7 +124,7 @@ class Economy(commands.Cog):
                                 description="Transfer Completed",
                                 color=discord.Color.purple()
                             )
-                            done.set_thumbnail(url=member.avatar_url)
+                            done.set_thumbnail(url=member.avatar.url)
                             done.add_field(name="From", value=f"{ctx.message.author.name + '#' + ctx.message.author.discriminator}")
                             done.add_field(name="Transfer to", value=f"{member.name + '#' + member.discriminator}")
                             done.add_field(name="Amount", value=f"{str(amount)}")
@@ -147,7 +147,7 @@ class Economy(commands.Cog):
                                 description="Transfer All Completed",
                                 color=discord.Color.purple()
                             )
-                            done.set_thumbnail(url=member.avatar_url)
+                            done.set_thumbnail(url=member.avatar.url)
                             done.add_field(name="From", value=f"{ctx.message.author.name + '#' + ctx.message.author.discriminator}")
                             done.add_field(name="Transfer to", value=f"{member.name + '#' + member.discriminator}")
                             done.add_field(name="Amount", value=f"{str(amount)}")
