@@ -15,6 +15,8 @@ import games
 from config import CONFIG
 from guild_utils import Guilds
 from msg_channel import CHANNEL
+from helpsource import HelpPageSource
+from menupages import MyMenuPages
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
