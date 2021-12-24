@@ -1,8 +1,7 @@
-git+https://github.com/Rapptz/discord.py
+discord.py
 asyncio
 youtube-dl
 PyNaCl
 requests
 pytz
 pymongo[srv]
-git+https://github.com/Rapptz/discord-ext-menus
