@@ -39,19 +39,17 @@ async def get_prefixes(client, message):
 
 #=== Custom Help Command ===
 class MyNewHelp(commands.MinimalHelpCommand):
-    async def send_pages(self):
-        destination = self.get_destination()
-        for page in self.paginator.pages:
-            emby = discord.Embed(description=page, color=discord.Color.purple())
-            await destination.send(embed=emby)
+    def get_command_brief(self, command):
+        return command.short_doc or "Command is not documented."
     
-    async def send_command_help(self, command):
-        embed = discord.Embed(title=self.get_command_signature(command), color=discord.Color.purple())
-        embed.add_field(name="Help", value=command.help)
-        alias = command.aliases
-        if alias:
-            embed.add_field(name="Aliases", value=", ".join(alias), inline=False)
-
+    async def send_bot_help(self, mapping):
+        all_commands = list(chain.from_iterable(mapping.values()))
+        formatter = HelpPageSource(all_commands, self)
+        menu = MyMenuPages(formatter, delete_message_after=True)
+        await menu.start(self.context)
+    
+    async def send_error_message(self, error):
+        embed = discord.Embed(title="Error", description=error)
         channel = self.get_destination()
         await channel.send(embed=embed)
 
