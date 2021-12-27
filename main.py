@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from datetime import datetime
 from itertools import chain
+import time
 from pymongo import MongoClient
 import pytz
 import music
@@ -73,10 +74,7 @@ cogs5 = [utils]
 cogs6 = [guild_utils]
 cogs7 = [games]
 cogs8 = [economy]
-
-#=== Welcome Messages ===
-welcome = f"""I'm Online Right Now.
-Author: iDead#9496."""
+printcogs = [music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
@@ -106,13 +104,16 @@ for i in range(len(cogs8)):
 #=== Client Event Executor ===
 @client.event #bot_event
 async def on_ready():
-    print('''Welcome to Discord Music Player Bot.
-Logged in as {0.user}'''.format(client))
+    curr_cogs = len(printcogs)
+    curr_server = len(client.guilds)
+    print('[*] BOT: Online')
+    time.sleep(0.8)
+    print(f'[*] Username: {client.user}')
+    print(f'[*] Ping: {str(round(client.latency * 1000))}')
+    time.sleep(0.8)
+    print(f'[*] Loaded Cogs: {curr_cogs}')
+    print(f'[*] Serving on: {curr_server}')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
-    ch1 = client.get_channel(int(CHANNEL['channel1']))
-    ch2 = client.get_channel(int(CHANNEL['channel2']))
-    await ch1.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
-    await ch2.send(welcome + f" Bot Latency: {round(client.latency * 1000)}ms")
 
 @client.event
 async def on_message(message):
