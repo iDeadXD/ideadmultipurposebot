@@ -6,7 +6,7 @@ from config import CONFIG
 from datetime import datetime, timedelta
 
 dataclient = MongoClient(CONFIG['mongodb_url'])
-database = dataclient['database5']
+database = dataclient['database4']
 collection = database['reminder']
 
 class Reminder(commands.Cog):
