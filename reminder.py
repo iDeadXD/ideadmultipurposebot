@@ -33,7 +33,7 @@ class Reminder(commands.Cog):
     @commands.command()
     async def remindme(self, ctx, time, *, reminder):
         time_conversion = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800}
-        remindseconds = int(time[0]) * time_conversion[time[-1]]
+        remindseconds = int(time) * time_conversion[time[-1]]
         remindertime = datetime.now() + timedelta(seconds=remindseconds)
         author_id = ctx.author.id
         guild_id = ctx.guild.id
