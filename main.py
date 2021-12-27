@@ -110,10 +110,11 @@ async def on_ready():
     print('[*] BOT: Online')
     time.sleep(0.8)
     print(f'[*] Username: {client.user}')
-    print(f'[*] Ping: {str(round(client.latency * 1000))}')
+    print(f'[*] ID: {str(client.user.id)}')
+    print(f'[*] Ping: {str(round(client.latency * 1000))}ms')
     time.sleep(0.8)
     print(f'[*] Loaded Cogs: {curr_cogs}')
-    print(f'[*] Serving on: {curr_server}')
+    print(f'[*] Serving on: {curr_server} Server')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
 
 @client.event
