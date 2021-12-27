@@ -223,16 +223,9 @@ class Utils(commands.Cog):
         r6 = requests.get(url6)
         data6 = r6.json()
         imgdata = data6['url']
-        desc = [
-            str(M_MESSAGE['m_msg1']).format(ctx.message.author.mention),
-            str(M_MESSAGE['m_msg2']).format(ctx.message.author.mention),
-            str(M_MESSAGE['m_msg3']).format(ctx.message.author.mention),
-            str(M_MESSAGE['m_msg4']).format(ctx.message.author.mention),
-        ]
         embed = discord.Embed(
             color=discord.Color.green(),
             title=data6['title'],
-            description=random.choice(desc)
         )
         embed.set_image(url=imgdata)
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
