@@ -225,7 +225,7 @@ class Utils(commands.Cog):
         imgdata = data6['url']
         embed = discord.Embed(
             color=discord.Color.green(),
-            title=data6['title'],
+            title=data6['title']
         )
         embed.set_image(url=imgdata)
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
