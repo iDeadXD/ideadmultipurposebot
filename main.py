@@ -12,7 +12,6 @@ import voice_temp
 import guild_utils
 import economy
 import moderation
-import reminder
 import utils
 import games
 from config import CONFIG
