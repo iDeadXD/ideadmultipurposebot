@@ -62,7 +62,7 @@ class MyNewHelp(commands.MinimalHelpCommand):
         await channel.send(embed=embed)
 
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents = discord.Intents.all(), case_insensitive=True)
+client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_id=843132313562513408, activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
 client.help_command = MyNewHelp()
 
 #=== Cog List ===
@@ -114,7 +114,6 @@ async def on_ready():
     time.sleep(0.8)
     print(f'[*] Loaded Cogs: {curr_cogs}')
     print(f'[*] Serving on: {curr_server} Server')
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
 
 @client.event
 async def on_message(message):
