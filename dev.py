@@ -18,7 +18,7 @@ class Developer(commands.Cog):
             )
             await ctx.send(embed=getpass)
             
-            passw = self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
+            passw = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
             
             if passw.content == 'idead1511':
                 await passw.delete()
