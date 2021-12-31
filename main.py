@@ -11,6 +11,7 @@ import levelsystem
 import voice_temp
 import guild_utils
 import economy
+import dev
 import moderation
 import utils
 import games
@@ -74,7 +75,8 @@ cogs5 = [utils]
 cogs6 = [guild_utils]
 cogs7 = [games]
 cogs8 = [economy]
-printcogs = [music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+cogs9 = [dev]
+printcogs = [dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
@@ -100,6 +102,9 @@ for i in range(len(cogs7)):
 
 for i in range(len(cogs8)):
     cogs8[i].setup(client)
+
+for i in range(len(cogs9)):
+    cogs9[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
