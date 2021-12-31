@@ -360,7 +360,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Name', value=f"{ctx.guild.name}", inline=False)
         embed2.add_field(name='Owner', value=f"{member.mention}", inline=False)
         embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level), inline=False)
-        embed2.add_field(name='Highest role', value=ctx.guild.roles[0], inline=False)
+        embed2.add_field(name='Highest role', value=ctx.guild.roles[-1], inline=False)
             
         embed2.add_field(name='Number of roles', value=str(role_count), inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
