@@ -20,7 +20,8 @@ class Developer(commands.Cog):
             
             passw = self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
             
-            if passw.content == '<yourpass>':
+            if passw.content == 'idead1511':
+                await passw.delete()
                 for guild in self.client.guilds:
                     for owner in guild.owner:
                         await owner.send("I'm Offline Now (This message is automatically sent when the bot is shutting down.)")
