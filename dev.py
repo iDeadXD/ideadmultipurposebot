@@ -25,9 +25,6 @@ class Developer(commands.Cog):
             
             if passw.content == 'idead1511':
                 await passw.delete()
-                for guild in self.client.guilds:
-                    for owner in len(guild.owner):
-                        await owner.send("I'm Offline Now (This message is automatically sent when the bot is shutting down.)")
                 await asyncio.sleep(1)
                 await ctx.send("Shutting Down...")
                 await asyncio.sleep(3)
