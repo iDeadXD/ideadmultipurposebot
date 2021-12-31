@@ -30,7 +30,7 @@ class Developer(commands.Cog):
                 await asyncio.sleep(3)
                 await ctx.send("Shutdown Completed.")
                 await asyncio.sleep(1)
-                await self.client.logout()
+                await self.client.close()
             else:
                 await ctx.send("Wrong Password!!")
         except asyncio.TimeoutError:
