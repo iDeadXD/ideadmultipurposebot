@@ -210,8 +210,6 @@ async def newyear():
             )
             print(check.strftime("%d/%m, %H:%M:%S"))
             await guild.system_channel.send(embed=congrats)
-    else:
-        return
 
 @newyear.before_loop
 async def newyear_before():
