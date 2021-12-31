@@ -10,6 +10,9 @@ class Developer(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def shutdown(self, ctx):
+        if ctx.author.id != 843132313562513408:
+            return await ctx.send("You're not owner of this bot!")
+        
         try:
             getpass = discord.Embed(
                 title="",
@@ -33,10 +36,10 @@ class Developer(commands.Cog):
                 await self.client.logout()
             else:
                 await ctx.send("Wrong Password!!")
-        except:
+        except asyncio.TimeoutError:
             failed = discord.Embed(
                 title="",
-                description="You're not owner of this bot!!",
+                description="Timed Out!!",
                 color=discord.Color.red()
             )
             return await ctx.send(embed=failed)
