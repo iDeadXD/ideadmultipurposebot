@@ -239,5 +239,8 @@ async def donate(ctx):
     embed.add_field(name="Saweria", value=f"[Saweria Link]({link})")
     await ctx.send(embed=embed)
 
+#=== Tasks Executor ===
+newyear.start()
+
 #=== Client Account Executor ===
 client.run(CONFIG['token'])
