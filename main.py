@@ -208,7 +208,7 @@ async def newyear():
     else:
         return
 
-@newyear.before_loop()
+@newyear.before_loop
 async def newyear_before():
     await client.wait_until_ready()
 
