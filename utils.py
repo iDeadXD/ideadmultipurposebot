@@ -170,7 +170,7 @@ class Utils(commands.Cog):
         imgdata = data8['url']
         
         mvar = random.choice(list(N_MESSAGE.values()))
-        desc = mvar.format(ctx.message.author.mention, member.mention)
+        desc = mvar.format(ctx.message.author.mention)
         
         if member is None:
             embed = discord.Embed(
