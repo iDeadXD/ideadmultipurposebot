@@ -30,22 +30,12 @@ class Utils(commands.Cog):
         r = requests.get(url)
         data = r.json()
         img_url = data['url']
-        desc = [
-            str(W_MESSAGE['w_msg1']).format(member.mention),
-            str(W_MESSAGE['w_msg2']).format(member.mention),
-            str(W_MESSAGE['w_msg3']).format(member.mention),
-            str(W_MESSAGE['w_msg4']).format(member.mention),
-            str(W_MESSAGE['w_msg5']).format(member.mention),
-            str(W_MESSAGE['w_msg6']).format(member.mention),
-            str(W_MESSAGE['w_msg7']).format(member.mention),
-            str(W_MESSAGE['w_msg8']).format(member.mention),
-            str(W_MESSAGE['w_msg9']).format(member.mention),
-            str(W_MESSAGE['w_msg10']).format(member.mention)
-        ]
+        mvar = random.choice(list(W_MESSAGE.values()))
+        desc = mvar.format(member.mention)
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Random Waifu Image ---",
-            description=random.choice(desc)
+            description=desc
         )
         embed.set_image(url=img_url)
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -76,16 +66,12 @@ class Utils(commands.Cog):
                 img_url2,
                 img_url3,
             ]
-            desc = [
-                str(H_MESSAGE['h_msg1']).format(ctx.message.author.mention),
-                str(H_MESSAGE['h_msg2']).format(ctx.message.author.mention),
-                str(H_MESSAGE['h_msg3']).format(ctx.message.author.mention),
-                str(H_MESSAGE['h_msg4']).format(ctx.message.author.mention),
-            ]
+            mvar = random.choice(list(H_MESSAGE.values()))
+            desc = mvar.format(member.mention)
             embed = discord.Embed(
                 color=discord.Color.green(),
                 title="--- 18+ Hentai Image ---",
-                description=random.choice(desc),
+                description=desc,
             )
             embed.set_image(url=random.choice(imgdata))
             embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -111,14 +97,12 @@ class Utils(commands.Cog):
         r7 = requests.get(url7)
         data7 = r7.json()
         imgdata = data7['url']
-        desc = [
-            str(K_MESSAGE['k_msg1']).format(ctx.message.author.mention, member.mention),
-            str(K_MESSAGE['k_msg2']).format(ctx.message.author.mention, member.mention),
-        ]
+        mvar = random.choice(list(K_MESSAGE.values()))
+        desc = mvar.format(ctx.message.author.mention, member.mention)
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Kiss for You ---",
-            description=random.choice(desc)
+            description=desc
         )
             
         embed.set_image(url=imgdata)
@@ -138,10 +122,8 @@ class Utils(commands.Cog):
         r4 = requests.get(url4)
         data4 = r4.json()
         imgdata = data4['url']
-        desc = [
-            str(S_MESSAGE['s_msg1']).format(ctx.message.author.mention, member.mention),
-            str(S_MESSAGE['s_msg2']).format(ctx.message.author.mention, member.mention),
-        ]
+        mvar = random.choice(list(S_MESSAGE.values()))
+        desc = mvar.format(ctx.message.author.mention, member.mention)
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Slap Someone ---",
@@ -164,15 +146,12 @@ class Utils(commands.Cog):
         r5 = requests.get(url5)
         data5 = r5.json()
         imgdata = data5['url']
-        desc = [
-            str(B_MESSAGE['b_msg1']).format(ctx.message.author.mention, member.mention),
-            str(B_MESSAGE['b_msg2']).format(ctx.message.author.mention, member.mention),
-            str(B_MESSAGE['b_msg3']).format(member.mention),
-        ]
+        mvar = random.choice(list(B_MESSAGE.values()))
+        desc = mvar.format(ctx.message.author.mention, member.mention)
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Bonk!! ---",
-            description=random.choice(desc)
+            description=desc
         )
         embed.set_image(url=imgdata)
         embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -190,16 +169,13 @@ class Utils(commands.Cog):
         data8 = r8.json()
         imgdata = data8['url']
         
-        desc = [
-            str(N_MESSAGE['n_msg1']).format(ctx.message.author.mention),
-            str(N_MESSAGE['n_msg3']).format(ctx.message.author.mention),
-            str(N_MESSAGE['n_msg4']).format(ctx.message.author.mention)
-        ]
+        mvar = random.choice(list(N_MESSAGE.values()))
+        desc = mvar.format(ctx.message.author.mention, member.mention)
         
         if member is None:
             embed = discord.Embed(
                 title="--- Cute Neko Image ---",
-                description=random.choice(desc),
+                description=desc,
                 color=discord.Color.green()
             )
             embed.set_image(url=imgdata)
