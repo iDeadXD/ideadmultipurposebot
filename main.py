@@ -132,8 +132,6 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
-        
-    await client.process_commands(message)
 
 @client.event
 async def on_member_join(member):
