@@ -24,7 +24,7 @@ H_MESSAGE = {
 B_MESSAGE = {
     "b_msg1": "{} bonk to {}",
     "b_msg2": "{}: I'll bonk you, {}",
-    "b_msg3": "BONK!!!!, {}"
+    "b_msg3": "{}: BONK!!!!, {}"
 }
 
 #Slap Message
