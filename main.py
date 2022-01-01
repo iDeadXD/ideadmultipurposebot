@@ -121,20 +121,6 @@ async def on_ready():
     print(f'[*] Serving on: {curr_server} Server')
 
 @client.event
-async def on_message(message):
-    hello_m = ["halo", "hello", "hola"]
-    
-    for msg in hello_m:
-        if message.content.lower().startswith(str(msg)):
-            halo = discord.Embed(
-                title="",
-                description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
-                color=discord.Color.purple()
-            )
-            await message.reply(embed=halo)
-    return await client.process_commands(message)
-
-@client.event
 async def on_member_join(member):
     main_ch = member.guild.system_channel
     
