@@ -409,7 +409,7 @@ class Utils(commands.Cog):
             embed = discord.Embed(
                 color=discord.Color.purple(),
                 title="--- Someone DM You ---",
-                description=f"From {ctx.message.author.mention} to {member.mention}"
+                description=f"From {ctx.message.author.name + '#' + ctx.message.author.discriminator} to {member.name + '#' + member.discriminator}"
             )
             embed.set_thumbnail(url=ctx.message.author.avatar_url)
             embed.add_field(name="This is the message", value=arg)
