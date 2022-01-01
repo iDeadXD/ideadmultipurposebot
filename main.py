@@ -196,25 +196,6 @@ async def prefix(ctx, prefixs=None):
     
     await ctx.send(embed=done)
 
-#=== Custom Tasks ===
-@tasks.loop(minutes=1)
-async def newyear():
-    botdev = client.get_user(843132313562513408)
-    check = datetime.now()
-    if check.strftime("%d/%m, %H:%M:%S") == "01/01, 00:00:00":
-        for guild in client.guilds:
-            congrats = discord.Embed(
-                title="--- HAPPY NEW YEAR ---",
-                description=f"Hopefully this year, everything will be better than before (And hopefully this bot project will be more updated).\nDev, __{botdev.name + '#' + botdev.discriminator}__",
-                color=discord.Color.purple()
-            )
-            print(check.strftime("%d/%m, %H:%M:%S"))
-            await guild.system_channel.send(embed=congrats)
-
-@newyear.before_loop
-async def newyear_before():
-    await client.wait_until_ready()
-
 @client.command()
 @commands.has_permissions(manage_guild=True)
 async def deleteprefix(ctx):
@@ -241,9 +222,6 @@ async def donate(ctx):
     )
     embed.add_field(name="Saweria", value=f"[Saweria Link]({link})")
     await ctx.send(embed=embed)
-
-#=== Tasks Executor ===
-newyear.start()
 
 #=== Client Account Executor ===
 client.run(CONFIG['token'])
