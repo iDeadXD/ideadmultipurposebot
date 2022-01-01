@@ -209,4 +209,4 @@ async def donate(ctx):
     await ctx.send(embed=embed)
 
 #=== Client Account Executor ===
-client.run(CONFIG['token'])
+client.run(os.environ.get('TOKEN'))
