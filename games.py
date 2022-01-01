@@ -93,8 +93,13 @@ class Games(commands.Cog):
                     await ctx.send("Draw")
             else:
                 return #some code
-        except TimeoutError:
-            return await ctx.send("Game Timeout")
+        except asyncio.TimeoutError:
+            failed = discord.Embed(
+                title="",
+                description="Game Timeout",
+                color=discord.Color.red()
+            )
+            return await ctx.send()
 
 def setup(client):
     client.add_cog(Games(client))
