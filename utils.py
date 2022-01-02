@@ -67,7 +67,7 @@ class Utils(commands.Cog):
                 img_url3,
             ]
             mvar = random.choice(list(H_MESSAGE.values()))
-            desc = mvar.format(member.mention)
+            desc = mvar.format(ctx.author.mention)
             embed = discord.Embed(
                 color=discord.Color.green(),
                 title="--- 18+ Hentai Image ---",
