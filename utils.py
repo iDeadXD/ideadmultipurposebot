@@ -528,7 +528,7 @@ class Utils(commands.Cog):
         if search is None:
             return
         
-        reg = search.replace("", "-").lower()
+        reg = search.replace("", "_").lower()
         url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{reg}"
         data = requests.get(url).json()
         
@@ -552,6 +552,7 @@ class Utils(commands.Cog):
         result.add_field(name="For more info", value=f"__Mobile__: [Click Here]({mobile})\n__Desktop__: [Click Here]({desktop})")
         result.set_footer(text=f"Requested by {ctx.author.name} | {datetime.now().strftime('%d-%m-%Y, %H:%M:%S')}")
         
+        print(reg)
         await ctx.send(embed=result)
 
 def setup(client):
