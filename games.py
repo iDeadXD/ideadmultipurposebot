@@ -12,22 +12,21 @@ class Games(commands.Cog):
     
     @commands.command()
     async def rng(self, ctx):
-        
-        num = random.randint(1, 100000)
-        
-        waits = discord.Embed(
-            title="",
-            description="Enter your number. Range: 1 - 100000",
-            color=discord.Color.purple()
-        )
-        
-        await ctx.send(embed=waits)
-        count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
-        
-        if not 0 < int(count.content) < 100001:
-            return await ctx.send("Enter number range: 1 - 100000")
-        else:
-            try:
+        try:
+            num = random.randint(1, 100000)
+            
+            waits = discord.Embed(
+                title="",
+                description="Enter your number. Range: 1 - 100000",
+                color=discord.Color.purple()
+            )
+            
+            await ctx.send(embed=waits)
+            count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
+            
+            if not 0 < int(count.content) < 100001:
+                return await ctx.send("Enter number range: 1 - 100000")
+            else:
                 if num < int(count.content):
                     win = discord.Embed(
                         title="--- RNG Games ---",
@@ -36,7 +35,7 @@ class Games(commands.Cog):
                     )
                     win.add_field(name="Your Number", value=f"{str(count.content)}")
                     win.add_field(name="Bot Number", value=str(num))
-                        
+                    
                     await ctx.send(embed=win)
                 if num > int(count.content):
                     lose = discord.Embed(
@@ -46,11 +45,16 @@ class Games(commands.Cog):
                     )
                     lose.add_field(name="Your Number", value=f"{str(count.content)}")
                     lose.add_field(name="Bot Number", value=str(num))
-                        
+                    
                     await ctx.send(embed=lose)
-            except asyncio.TimeoutError:
-                return await ctx.send("Games Timed out. (Timeout: 10 seconds)")
-
+        except asyncio.TimeoutError:
+            failed = discord.Embed(
+                title="",
+                description="Game Timeout",
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=failed)
+    
     @commands.command()
     async def rps(self, ctx):
         try:
