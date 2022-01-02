@@ -522,6 +522,37 @@ class Utils(commands.Cog):
         
         await ctx.send(embed=embed)
         await botdev.send(embed=embed)
+    
+    @commands.command(aliases=["wiki", "wkpd"])
+    async def wikipedia(self, ctx, search: str=None):
+        if search is None:
+            return
+        
+        reg = search.replace("", "-").lower()
+        url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{reg}"
+        data = requests.get(url).json()
+        
+        if data['title'] == "Not Found":
+            failed = discord.Embed(
+                title="",
+                description=data['title'],
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=failed)
+        
+        desktop = data['content_urls']['desktop']['page']
+        mobile = data['content_urls']['mobile']['page']
+        
+        result = discord.Embed(
+            title=data['title'],
+            description=data['extract'],
+            color=discord.Color.green()
+        )
+        result.set_thumbnail(url=data['originalimage']['source'])
+        result.add_field(name="For more info", value=f"__Mobile__: [Click Here]({mobile})\n__Desktop__: [Click Here]({desktop})")
+        result.set_footer(text=f"Requested by {ctx.author.name} | {datetime.now().strftime('%d-%m-%Y, %H:%M:%S')}")
+        
+        await ctx.send(embed=result)
 
 def setup(client):
     client.add_cog(Utils(client))
