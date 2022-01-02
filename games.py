@@ -99,7 +99,7 @@ class Games(commands.Cog):
                 description="Game Timeout",
                 color=discord.Color.red()
             )
-            return await ctx.send()
+            return await ctx.send(embed=failed)
 
 def setup(client):
     client.add_cog(Games(client))
