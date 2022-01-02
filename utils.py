@@ -523,7 +523,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
         await botdev.send(embed=embed)
     
-    @commands.command(aliases=["wiki", "wkpd"])
+    @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
         if search is None:
             return
