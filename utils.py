@@ -451,7 +451,7 @@ class Utils(commands.Cog):
     @commands.command()
     async def invitebot(self, ctx):
         """Invite Me!!!"""
-        link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=433103232119&scope=bot%20applications.commands"
+        link = "https://discord.com/api/oauth2/authorize?client_id=904156026851455006&permissions=8&scope=bot%20applications.commands"
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Invite Link ---"
