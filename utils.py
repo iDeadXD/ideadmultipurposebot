@@ -540,8 +540,8 @@ class Utils(commands.Cog):
             )
             return await ctx.send(embed=failed)
         
-        desktop = data['content_urls']['desktop']['page']
-        mobile = data['content_urls']['mobile']['page']
+        desktop = f"https://en.wikipedia.org/wiki/{data['title']}"
+        mobile = f"https://en.m.wikipedia.org/wiki/{data['title']}"
         
         result = discord.Embed(
             title=data['title'],
