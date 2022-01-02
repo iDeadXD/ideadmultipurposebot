@@ -281,6 +281,8 @@ class Utils(commands.Cog):
         await ctx.message.delete()
         await ctx.channel.purge(limit=amount)
         done = await ctx.send("👍")
+        await asyncio.sleep(3)
+        await done.delete()
     
     @commands.command(name="clean_user")
     async def clean_us(self, ctx, limit: int=None, member: discord.Member=None):
@@ -307,7 +309,9 @@ class Utils(commands.Cog):
             if m.author == member:
                 msg.append(m)
         await ctx.channel.delete_messages(msg)
-        await ctx.send(f"Purged {limit} messages of {member.mention}")
+        done = await ctx.send(f"Purged {limit} messages of {member.mention}")
+        await asyncio.sleep(10)
+        await done.delete()
     
     @commands.command(name="avatar") #avatar_command
     async def avatar_(self, ctx, avamem : discord.Member=None):
