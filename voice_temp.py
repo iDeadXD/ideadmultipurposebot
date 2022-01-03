@@ -25,7 +25,7 @@ class Voice(commands.Cog):
                     if freq not in act_voice_channels:
                         await after.channel.clone(name=freq)
                         channel = discord.utils.get(guild.voice_channels, name=freq)
-                        await channel.set_permissions(member, connect = True, mute_members = True, move_members = True, manage_channels = True)
+                        await channel.set_permissions(member, connect = True, mute_members = True, deafen_members=True, move_members = True, manage_channels = True)
                         await asyncio.sleep(3)
                         await member.move_to(channel)
                         return
@@ -37,7 +37,6 @@ class Voice(commands.Cog):
     
     #lock
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def lock(self, ctx):
         """Lock Current Voice Channel"""
         if ctx.message.author.voice is None:
@@ -64,7 +63,6 @@ class Voice(commands.Cog):
     
     #unlock
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx):
         """Unlock Current Locked Voice Channel (Failed Program)"""
         if ctx.message.author.voice is None:
@@ -89,7 +87,6 @@ class Voice(commands.Cog):
         await ctx.send(embed=done)
     
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def userlimit(self, ctx, amount: int=None):
         """Set UserLimit for Current Voice Channel"""
         if amount is None:
@@ -121,7 +118,6 @@ class Voice(commands.Cog):
             await ctx.send(embed=done)
     
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def bitrate(self, ctx, amount: int=None):
         """Set Bitrate for Current Voice Channel"""
         if amount is None:
@@ -152,7 +148,6 @@ class Voice(commands.Cog):
             await ctx.send(embed=done)
     
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def name(self, ctx, *, names=None):
         """Set Name for Current Voice Channel"""
         if names is None:
@@ -430,7 +425,6 @@ class Voice(commands.Cog):
                 await ctx.send(embed=unmute)
     
     @commands.command(pass_context=True)
-    @commands.has_permissions(manage_channels=True)
     async def region(self, ctx, mode=None):
         """Set Voice Channel Region (Failed Program)"""
         channel = ctx.message.author.voice.channel
