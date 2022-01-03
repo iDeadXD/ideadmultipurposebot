@@ -111,7 +111,7 @@ class Voice(commands.Cog):
             await channel.edit(user_limit=amount)
             done = discord.Embed(
                 title="",
-                description=f"User Limit has been set to {amount}",
+                description=f"User Limit has been set to `{amount}` users",
                 color=discord.Color.green()
             )
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -141,7 +141,7 @@ class Voice(commands.Cog):
             await channel.edit(bitrate=int(round(amount * 1000)))
             done = discord.Embed(
                 title="",
-                description=f"Bitrate has been set to {amount}Kbps",
+                description=f"Bitrate has been set to `{amount}Kbps`",
                 color=discord.Color.green()
             )
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
@@ -169,7 +169,7 @@ class Voice(commands.Cog):
             await channel.edit(name=str(names))
             done = discord.Embed(
                 title="",
-                description=f"Channel name has been set to {str(names)}",
+                description=f"Channel name has been set to `{str(names)}`",
                 color=discord.Color.green()
             )
             done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
