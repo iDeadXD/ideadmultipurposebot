@@ -50,7 +50,7 @@ class Economy(commands.Cog):
     
             cd = round(error.retry_after)
             hours = str(cd // 3600)
-            minutes = str(cd // 60) % 60
+            minutes = str((cd // 60) % 60)
     
             embed.add_field(
                 name="\u200b",
