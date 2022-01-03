@@ -55,7 +55,7 @@ class Economy(commands.Cog):
             embed.add_field(
                 name="\u200b",
                 value=
-                f"Do you want free money?\n Wait for ```{hours}``` hours ```{minutes}``` minutes"
+                f"Do you want free money?\n Wait for `{hours}` hours `{minutes}` minutes"
             )
             await ctx.send(embed=embed)
         else:
@@ -87,7 +87,7 @@ class Economy(commands.Cog):
             if self_data is None or recv_data is None:
                 fail2 = discord.Embed(
                     title="",
-                    description="You or those you mention do not have a balance account. Make sure you or those you mention use the command ```>claim``` for account registration automatically",
+                    description="You or those you mention do not have a balance account. Make sure you or those you mention use the command `>claim` for account registration automatically",
                     color=discord.Color.red()
                 )
                 return await ctx.send(embed=fail2)
@@ -164,7 +164,7 @@ class Economy(commands.Cog):
                                 description="Transfer has failed",
                                 color=discord.Color.red()
                             )
-                            fail4.add_field(name="Reason", value="You cannot transfer more money than your current amount (Check your money with ```>balance``` commands)")
+                            fail4.add_field(name="Reason", value="You cannot transfer more money than your current amount (Check your money with `>balance` commands)")
                             await ctx.send(embed=fail4)
                     elif msg.content in no:
                         cancelled = discord.Embed(
@@ -196,12 +196,12 @@ class Economy(commands.Cog):
     
             cd = round(error.retry_after)
             hours = str(cd // 3600)
-            minutes = str(cd % 60)
+            minutes = str((cd % 60) % 60)
     
             embed.add_field(
                 name="\u200b",
                 value=
-                f"You can only transfer money 5 times a day\n Wait for ```{hours}``` hours ```{minutes}``` minutes"
+                f"You can only transfer money 5 times a day\n Wait for `{hours}` hours `{minutes}` minutes"
             )
             await ctx.send(embed=embed)
         else:
@@ -215,7 +215,7 @@ class Economy(commands.Cog):
         if self_data_money is None:
             fail1 = discord.Embed(
                 title="",
-                description="You don't have Registered Account. Use ```>claim``` command for register account automatically",
+                description="You don't have Registered Account. Use `>claim` command for register account automatically",
                 color=discord.Color.red()
             )
             return await ctx.send(embed=fail1)
@@ -280,7 +280,7 @@ class Economy(commands.Cog):
                                 description="Purchase failed!!",
                                 color=discord.Color.red()
                             )
-                            failed.add_field(name="Reason", value="You cannot purchase using more money than your current amount (Check your money with ```>balance``` commands)")
+                            failed.add_field(name="Reason", value="You cannot purchase using more money than your current amount (Check your money with `>balance` commands)")
                             await ctx.send(embed=failed)
                     if msg.content in no:
                         cancelled = discord.Embed(
@@ -289,7 +289,7 @@ class Economy(commands.Cog):
                             color=discord.Color.red()
                         )
                         await ctx.send(embed=cancelled)
-                except TimeoutError:
+                except asyncio.TimeoutError:
                     timedout = discord.Embed(
                         title="",
                         description="Purchase Timed Out!"
@@ -303,7 +303,7 @@ class Economy(commands.Cog):
         if data is None:
             fail = discord.Embed(
                 title="",
-                description="Please claim daily rewards for the first time. Use ```>claim``` command",
+                description="Please claim daily rewards for the first time. Use `>claim` command",
                 color=discord.Color.green()
             )
             return await ctx.send(embed=fail)
