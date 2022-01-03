@@ -284,7 +284,7 @@ class Utils(commands.Cog):
         
         if not member:
             await ctx.channel.purge(limit=limit)
-            done = return await ctx.send(f"Purged {limit} messages")
+            return done = await ctx.send(f"Purged {limit} messages")
             await asyncio.sleep(10)
             await done.delete()
         async for m in ctx.channel.history():
