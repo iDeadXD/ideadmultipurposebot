@@ -63,7 +63,7 @@ class MyNewHelp(commands.MinimalHelpCommand):
         await channel.send(embed=embed)
 
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_id=843132313562513408, activity=discord.Activity(type=discord.ActivityType.listening, name=">help"))
+client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_id=843132313562513408, activity=discord.Activity(type=discord.ActivityType.listening, name="<prefix>help"))
 client.help_command = MyNewHelp()
 
 #=== Cog List ===
