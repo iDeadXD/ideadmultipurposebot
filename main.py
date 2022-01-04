@@ -193,6 +193,7 @@ async def prefix(ctx, prefixs=None):
     )
     done.set_thumbnail(url=client.user.avatar_url)
     
+    await client.get_guild(ctx.guild.id).get_member(client.user.id).edit(nick=f"Music Player [{str(prefixs)}]")
     await ctx.send(embed=done)
 
 @client.command()
@@ -209,6 +210,7 @@ async def deleteprefix(ctx):
     )
     done.set_thumbnail(url=client.user.avatar_url)
     
+    await client.get_guild(ctx.guild.id).get_member(client.user.id).edit(nick=f"Music Player [{str(defaults)}]")
     await ctx.send(embed=done)
 
 @client.command(hidden=True)
