@@ -103,7 +103,7 @@ class Moderator(commands.Cog):
     
     @ban.error
     async def ban_error(self, ctx, error):
-        if isinstance(error, MissingPermissions):
+        if isinstance(error, commands.MissingPermissions):
             await ctx.send("You are missing permission(s) to run this command.")
         else:
             raise error
@@ -173,7 +173,7 @@ class Moderator(commands.Cog):
     
     @kick.error
     async def kick_error(self, ctx, error):
-        if isinstance(error, MissingPermissions):
+        if isinstance(error, commands.MissingPermissions):
             await ctx.send("You are missing permission(s) to run this command.")
         else:
             raise error
