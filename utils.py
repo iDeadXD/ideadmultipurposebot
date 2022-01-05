@@ -544,6 +544,35 @@ class Utils(commands.Cog):
         em.add_field(name = 'Available Memory', value = f"{str(psutil.virtual_memory().available >> 20) + 'MB, From ' + str(psutil.virtual_memory().total >> 20)}", inline = False)
         await ctx.send(embed = em)
     
+    @commands.command(aliases=['remindme'])
+    async def reminder(self, ctx, times=None, *, args: str=None):
+        """
+        Set reminder for you.
+        """
+        if times is None or args is None:
+            return await ctx.send("Set reminder for you")
+        else:
+            settime = 0
+            if times:
+                if times.content.endswith('s'):
+                    settime = int(times.replace('s', ''))
+                elif times.content.endswith('m'):
+                    settime = 60 * int(times.replace('m', ''))
+                elif times.content.endswith('h'):
+                    settime = 60 * 60 * int(times.replace('h', ''))
+            else:
+                return await ctx.send('Set time reminder')
+            
+            if args:
+                done = await ctx.send('Set Reminder for You!')
+                await asyncio.sleep(settime)
+                await ctx.message.delete()
+                await done.delete()
+                await ctx.send(f'{ctx.author.mention}, {args}')
+            
+            else:
+                return await ctx.send('Set message reminder!')
+    
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
         if search is None:
