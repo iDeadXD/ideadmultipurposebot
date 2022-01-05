@@ -526,7 +526,7 @@ class Utils(commands.Cog):
         vcpu=psutil.cpu_percent()
         
         result = discord.Embed(
-            title="--- Bot Status ---"
+            title="--- Bot Status ---",
             description=f'Total number of CPUs : {str(vcc)}\nTotal CPUs utilized percentage : {str(vcpu)}%\nTotal Memory : {mem_T} MB\nUsed Memory : {mem_U} MB\nFree Memory : {mem_F} MB',
             color=self.client.user.color
         )
