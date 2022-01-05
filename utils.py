@@ -542,7 +542,7 @@ class Utils(commands.Cog):
         em.add_field(name = 'CPU Usage', value = f'{psutil.cpu_percent()}%', inline = False)
         em.add_field(name = 'Memory Usage', value = f'{psutil.virtual_memory().percent}%', inline = False)
         em.add_field(name = 'Available Memory', value = f'{psutil.virtual_memory().available * 100 / psutil.virtual_memory().total}%', inline = False)
-        await ctx.send(embed = em) 
+        await ctx.send(embed = em)
     
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
