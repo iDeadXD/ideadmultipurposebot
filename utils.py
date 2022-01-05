@@ -554,11 +554,11 @@ class Utils(commands.Cog):
         else:
             settime = 0
             if times:
-                if times.content.endswith('s'):
+                if times.endswith('s'):
                     settime = int(times.replace('s', ''))
-                elif times.content.endswith('m'):
+                elif times.endswith('m'):
                     settime = 60 * int(times.replace('m', ''))
-                elif times.content.endswith('h'):
+                elif times.endswith('h'):
                     settime = 60 * 60 * int(times.replace('h', ''))
             else:
                 return await ctx.send('Set time reminder')
