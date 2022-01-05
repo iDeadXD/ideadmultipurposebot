@@ -568,7 +568,7 @@ class Utils(commands.Cog):
                 await asyncio.sleep(settime)
                 await ctx.message.delete()
                 await done.delete()
-                await ctx.send(f'{ctx.author.mention}, {args}')
+                await ctx.send(f'{ctx.author.mention}, Your reminder: {args}')
             
             else:
                 return await ctx.send('Set message reminder!')
