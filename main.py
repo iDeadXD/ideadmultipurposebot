@@ -120,6 +120,10 @@ async def on_ready():
     mem_U=mem_G1[0:S2_ind]
     mem_F=mem_G1[S2_ind+8:]
     
+    #=== CPU Indentifier ===
+    vcc=psutil.cpu_count()
+    vcpu=psutil.cpu_percent()
+    
     #=== Client Indicator ===
     curr_cogs = len(printcogs)
     curr_server = len(client.guilds)
@@ -132,7 +136,9 @@ async def on_ready():
     print(f'[*] Loaded Cogs: {curr_cogs}')
     print(f'[*] Serving on: {curr_server} Server')
     time.sleep(0.8)
-    print('[*] --- Memory/RAM Information ---')
+    print('[*] --- System Information ---')
+    print ('Total number of CPUs :',vcc)
+    print ('Total CPUs utilized percentage :',vcpu,'%')
     print('[*] Total Memory = ' + mem_T +' MB')
     print('[*] Used Memory = ' + mem_U +' MB')
     print('[*] Free Memory = ' + mem_F +' MB')
