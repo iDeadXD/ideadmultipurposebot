@@ -5,3 +5,4 @@ PyNaCl
 requests
 pytz
 pymongo[srv]
+psutil
