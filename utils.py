@@ -508,6 +508,32 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
         await botdev.send(embed=embed)
     
+    @commands.command()
+    async def status(self, ctx):
+        #=== Memory Identifier ===
+        mem=str(os.popen('free -t -m').readlines())
+        T_ind=mem.index('T')
+        mem_G=mem[T_ind+14:-4]
+        S1_ind=mem_G.index(' ')
+        mem_T=mem_G[0:S1_ind]
+        mem_G1=mem_G[S1_ind+8:]
+        S2_ind=mem_G1.index(' ')
+        mem_U=mem_G1[0:S2_ind]
+        mem_F=mem_G1[S2_ind+8:]
+        
+        #=== CPU Identifier ===
+        vcc=psutil.cpu_count()
+        vcpu=psutil.cpu_percent()
+        
+        result = discord.Embed(
+            title="--- Bot Status ---"
+            description=f'Total number of CPUs : {str(vcc)}\nTotal CPUs utilized percentage : {str(vcpu)}%\nTotal Memory : {mem_T} MB\nUsed Memory : {mem_U} MB\nFree Memory : {mem_F} MB',
+            color=self.client.user.color
+        )
+        result.set_thumbnail(url=self.client.user.avatar_url)
+        
+        await ctx.send(embed=result)
+    
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
         if search is None:
