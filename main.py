@@ -180,8 +180,13 @@ async def on_member_join(member):
 @client.event
 async def on_guild_join(guild):
     if guild.id in blacklist:
-        await guild.owner.send(f'Your server, {guild.name} has been blacklisted!!. Auto leave triggered')
-        await asyncio.sleep(3)
+        warn = discord.Embed(
+            title='--- Warning!! ---',
+            description='Your Server has been Blacklisted!!. Auto Leave Triggered',
+            color=discord.Color.red()
+        )
+        await guild.owner.send(embed=warn)
+        await asyncio.sleep(5)
         await guild.leave()
 
 @client.event
