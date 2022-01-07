@@ -185,6 +185,9 @@ async def on_guild_join(guild):
             description='Your Server has been Blacklisted!!. Auto Leave Triggered',
             color=discord.Color.red()
         )
+        warn.add_field(name='Server Name', value=f'**{guild.name}**')
+        warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
+        warn.add_field(name='\u200b', value='__Blacklisted!!__')
         await guild.owner.send(embed=warn)
         await asyncio.sleep(5)
         await guild.leave()
