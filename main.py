@@ -20,6 +20,9 @@ from config import CONFIG
 from guild_utils import Guilds
 from msg_channel import CHANNEL
 
+#=== Server Blacklist ===
+blacklist = [915484457165803522]
+
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
 
@@ -172,6 +175,13 @@ async def on_member_join(member):
     welcome.add_field(name="Joined at", value="Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%H:%M:%S')))
     
     await main_ch.send(embed=welcome)
+
+@client.event
+async def on_guild_join(guild):
+    if guild.id in blacklist:
+        await guild.owner.send(f'Your server, {guild.name} has been blacklisted!!. Auto leave triggered')
+        await asyncio.sleep(3)
+        await guild.leave()
 
 @client.event
 async def on_member_remove(member):
