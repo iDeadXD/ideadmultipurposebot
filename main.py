@@ -178,6 +178,16 @@ async def on_member_join(member):
     await main_ch.send(embed=welcome)
 
 @client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        failed = discord.Embed(
+            title='Error',
+            description=error,
+            color=discord.Color.red()
+        )
+        await ctx.send(embed=failed)
+
+@client.event
 async def on_guild_join(guild):
     if guild.id in blacklist:
         warn = discord.Embed(
