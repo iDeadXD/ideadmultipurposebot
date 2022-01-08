@@ -321,17 +321,19 @@ class Utils(commands.Cog):
         """Get Current Server Information"""
         member = ctx.guild.owner
         role_count = len(ctx.guild.roles)
+        roles = [role.mention for role in ctx.guild.roles]
         list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
             
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
+        embed2.add_field(name='ID', value=f'{ctx.guild.id}')
         embed2.add_field(name='Name', value=f"{ctx.guild.name}", inline=False)
-        embed2.add_field(name='Owner', value=f"{member.mention}", inline=False)
+        embed2.add_field(name='Owner', value=f"{member.name + '#' + member.discriminator}", inline=False)
         embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level), inline=False)
         embed2.add_field(name='Highest role', value=ctx.guild.roles[-1], inline=False)
-            
-        embed2.add_field(name='Number of roles', value=str(role_count), inline=False)
+        embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice')
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
-        embed2.add_field(name='Bots:', value=(', '.join(list_of_bots)))
+        embed2.add_field(name='Roles', value=str(roles), inline=False)
+        embed2.add_field(name='Bots', value=(', '.join(list_of_bots)))
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
