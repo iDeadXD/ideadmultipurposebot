@@ -575,6 +575,12 @@ class Utils(commands.Cog):
             else:
                 return await ctx.send('Set message reminder!')
     
+    @commands.command()
+    async def test_tts(self, ctx, *, msg: str=None):
+        if msg is None:
+            return
+        await ctx.reply(msg, tts=True)
+    
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
         if search is None:
