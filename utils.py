@@ -332,7 +332,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Highest role', value=ctx.guild.roles[-1], inline=False)
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice')
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
-        embed2.add_field(name='Roles', value=str(roles), inline=False)
+        embed2.add_field(name='Roles', value=(', '.join(roles)), inline=False)
         embed2.add_field(name='Bots', value=(', '.join(list_of_bots)))
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
