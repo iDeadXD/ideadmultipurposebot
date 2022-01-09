@@ -61,25 +61,25 @@ class Moderator(commands.Cog):
             msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
             if msg.content in yes:
                 guild = ctx.guild.name
-                await member.ban()
+                await member.ban(reason=reason)
                 embed = discord.Embed(
                     title="--- Banned Member ---",
-                    color=discord.Color.red()
+                    color=discord.Color.red(),
+                    timestamp=ctx.message.created_at
                 )
                 embed.add_field(name="Member Name", value=f"{member.mention}")
                 embed.add_field(name="Punishment", value="Banned from Server")
                 embed.add_field(name="Reason", value=f"{reason}")
                 embed.add_field(name="Moderator", value=f"{ctx.message.author.mention}")
-                embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
                 
                 banned = discord.Embed(
                     title="--- You have been Banned ---",
-                    color=discord.Color.red()
+                    color=discord.Color.red(),
+                    timestamp=ctx.message.created_at
                 )
                 banned.add_field(name="Punishment", value="Banned from Server")
                 banned.add_field(name="Reason", value=f"{reason}")
                 banned.add_field(name="Moderator", value=f"{ctx.message.author.mention}")
-                banned.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
                 
                 await ctx.send(embed=embed)
                 await ctx.send("✔ User has been notified.")
@@ -132,25 +132,25 @@ class Moderator(commands.Cog):
             msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
             if msg.content in yes:
                 guild = ctx.guild.name
-                await member.kick()
+                await member.kick(reason=reason)
                 embed = discord.Embed(
                     title="--- Kicked Member ---",
-                    color=discord.Color.red()
+                    color=discord.Color.red(),
+                    timestamp=ctx.message.created_a
                 )
                 embed.add_field(name="Member Name", value=f"{member.mention}")
                 embed.add_field(name="Punishment", value="Kicked from Server")
                 embed.add_field(name="Reason", value=f"{reason}")
                 embed.add_field(name="Moderator", value=f"{ctx.message.author.mention}")
-                embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
                 
                 kicked = discord.Embed(
                     title="--- You have been Kicked ---",
-                    color=discord.Color.red()
+                    color=discord.Color.red(),
+                    timestamp=ctx.message.created_at
                 )
                 kicked.add_field(name="Punishment", value="Kicked from Server")
                 kicked.add_field(name="Reason", value=f"{reason}")
                 kicked.add_field(name="Moderator", value=f"{ctx.message.author.mention}")
-                kicked.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
                 
                 await ctx.send(embed=embed)
                 await ctx.send("✔ User has been notified.")
