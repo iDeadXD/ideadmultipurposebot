@@ -37,10 +37,11 @@ class Utils(commands.Cog):
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Random Waifu Image ---",
-            description=desc
+            description=desc,
+            timestamp=ctx.message.created_at
         )
         embed.set_image(url=img_url)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
                 
         await ctx.send(embed=embed)
         sleeper=5
@@ -74,9 +75,10 @@ class Utils(commands.Cog):
                 color=discord.Color.green(),
                 title="--- 18+ Hentai Image ---",
                 description=desc,
+                timestamp=ctx.message.created_at
             )
             embed.set_image(url=random.choice(imgdata))
-            embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+            embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
                     
             await ctx.send(embed=embed)
             sleeper=5
@@ -104,11 +106,12 @@ class Utils(commands.Cog):
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Kiss for You ---",
-            description=desc
+            description=desc,
+            timestamp=ctx.message.created_at
         )
             
         embed.set_image(url=imgdata)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
         sleeper=5
@@ -130,9 +133,10 @@ class Utils(commands.Cog):
             color=discord.Color.green(),
             title="--- Slap Someone ---",
             description=desc,
+            timestamp=ctx.message.created_at
         )
         embed.set_image(url=imgdata)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
         sleeper=5
@@ -153,10 +157,11 @@ class Utils(commands.Cog):
         embed = discord.Embed(
             color=discord.Color.green(),
             title="--- Bonk!! ---",
-            description=desc
+            description=desc,
+            timestamp=ctx.message.created_at
         )
         embed.set_image(url=imgdata)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
                 
         await ctx.send(embed=embed)
         sleeper=5
@@ -178,10 +183,11 @@ class Utils(commands.Cog):
             embed = discord.Embed(
                 title="--- Cute Neko Image ---",
                 description=desc,
-                color=discord.Color.green()
+                color=discord.Color.green(),
+                timestamp=ctx.message.created_at
             )
             embed.set_image(url=imgdata)
-            embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+            embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
             await ctx.send(embed=embed)
         else:
@@ -203,10 +209,11 @@ class Utils(commands.Cog):
         imgdata = data6['url']
         embed = discord.Embed(
             color=discord.Color.green(),
-            title=data6['title']
+            title=data6['title'],
+            timestamp=ctx.message.created_at
         )
         embed.set_image(url=imgdata)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
         sleeper=5
@@ -227,13 +234,14 @@ class Utils(commands.Cog):
         titles = "Pong!!"
         selflatency = str(f" {round(self.client.latency * 1000)}ms")
         ytlatency = str(f" {result}")
-        author = ctx.message.author.name
         embed = discord.Embed(
             title=titles,
+            color=ctx.author.color,
+            timestamp=ctx.message.created_at
         )
         embed.add_field(name="Bot Latency", value=selflatency)
         embed.add_field(name="YouTube Server Status", value=ytlatency)
-        embed.set_footer(text="Author: {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
     
@@ -263,8 +271,9 @@ class Utils(commands.Cog):
         embed = discord.Embed(
             title=titles,
             description=desc,
+            timestamp=ctx.message.created_at
         )
-        embed.set_footer(text="Author: {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
     
@@ -312,7 +321,7 @@ class Utils(commands.Cog):
             description=f"{avamem.mention} Profile Avatar",
         )
         embed.set_image(url=useravatar)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
     
@@ -336,7 +345,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Bots', value=(', '.join(list_of_bots)))
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
-        embed2.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed2)
     
@@ -347,7 +356,8 @@ class Utils(commands.Cog):
         current_guild = len(self.client.guilds)
         embed = discord.Embed(
             color=ctx.author.color,
-            title="--- Bot Information ---"
+            title="--- Bot Information ---",
+            timestamp=ctx.message.created_at
         )
         embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name="Bot Name", value=f"{self.client.user.mention}", inline=False)
@@ -359,7 +369,7 @@ class Utils(commands.Cog):
         embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
         embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
         embed.add_field(name="Available Commands", value="Check using >help or .help", inline=False)
-        embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
         
         await ctx.send(embed=embed)
     
@@ -400,25 +410,26 @@ class Utils(commands.Cog):
             return
         else:
             embed = discord.Embed(
+                timestamp=ctx.message.created_at,
                 color=discord.Color.purple(),
                 title="--- Someone DM You ---",
                 description=f"From {ctx.message.author.name + '#' + ctx.message.author.discriminator} to {member.name + '#' + member.discriminator}"
             )
             embed.set_thumbnail(url=ctx.message.author.avatar_url)
             embed.add_field(name="This is the message", value=arg)
-            embed.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
-    
+            
             
             embed1 = discord.Embed(
-                color=discord.Color.green()
+                color=discord.Color.green(),
+                timestamp=ctx.message.created_at
             )
             embed1.set_thumbnail(url=member.avatar_url)
             embed1.add_field(name=f"✔ The message has been sent.", value=f"Sent to: `{member.name + '#' + member.discriminator}`")
-            embed1.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
             
             await ctx.message.delete()
-            await ctx.send(embed=embed1)
-            await asyncio.sleep(5)
+            done = await ctx.send(embed=embed1)
+            await asyncio.sleep(2)
+            await done.delete()
             await member.send(embed=embed)
     
     @commands.command()
@@ -502,12 +513,12 @@ class Utils(commands.Cog):
         
         embed = discord.Embed(
             title="--- Bot Problem Report ---",
-            color=discord.Color.purple()
+            color=discord.Color.purple(),
+            timestamp=ctx.message.created_at
         )
         embed.add_field(name="Reported by", value=f"{ctx.message.author.mention}")
         embed.add_field(name="From Server", value=f"{ctx.guild.name}'s server")
         embed.add_field(name="The problem/bugs", value=f"{str(reason)}")
-        embed.set_footer(text="Reported at Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")))
         
         await ctx.send(embed=embed)
         await botdev.send(embed=embed)
@@ -575,7 +586,7 @@ class Utils(commands.Cog):
             else:
                 return await ctx.send('Set message reminder!')
     
-    @commands.command()
+    @commands.command(hidden=True)
     async def test_tts(self, ctx, *, msg: str=None):
         if msg is None:
             return
