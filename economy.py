@@ -296,6 +296,42 @@ class Economy(commands.Cog):
                     )
                     return await ctx.send(embed=timedout)
     
+    @commands.command(aliases=['addmoney', 'addbl'])
+    @commands.is_owner()
+    async def addbalance(self, ctx, amount: int=None):
+        if amount is None:
+            return await ctx.send('Enter the amount of money to be added!!')
+        
+        data = balance.find_one({'_id': ctx.message.author.id})
+        if data is None:
+            fail = discord.Embed(
+                title="",
+                description="Please claim daily rewards for the first time. Use `>claim` command",
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=fail)
+        
+        setmoney = data['money'] + amount
+        balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": setmoney}}, upsert=True)
+        done = discord.Embed(
+            title='--- Dev Command ---',
+            description=f'Added {amount} money to your account',
+            color=discord.Color.purple()
+        )
+        await ctx.reply(embed=done)
+    
+    @addbalance.error
+    async def addbalance_error(self, ctx, error):
+        if isinstance(error, commands.NotOwner):
+            failed = discord.Embed(
+                title='Error',
+                description="You're not owner of this bot!!",
+                color=discord.Color.red()
+            )
+            await ctx.send(embed=failed)
+        else:
+            raise error
+    
     @commands.command(name="balance", aliases=["bal", "bl"])
     async def _balance(self, ctx):
         data = balance.find_one({'_id': ctx.message.author.id})
