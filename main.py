@@ -31,7 +31,9 @@ levelling = cluster["database2"]
 
 collection = levelling["prefixes"]
 
-devinfo = cluster[]
+devinfo = cluster['database4']
+
+devage = devinfo['reminder']
 
 #=== Client Prefix Setup ===
 async def get_prefixes(client, message):
@@ -223,13 +225,21 @@ async def on_member_remove(member):
 @tasks.loop(minutes=5)
 async def dev_hbd():
     now = datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%d/%m, %H:%M:%S")
-    age_now = 
+    devdata = devage.find_one({'devid': 843132313562513408})
     dev = client.get_user(843132313562513408)
     if now == '13/01, 00:00:00':
+        age_now = devdata['age'] + 1
         congrats = discord.Embed(
             title='--- Announcement ---',
-            description=f'Dev ({dev.name + "#" + dev.discriminator}), Today is his birthday'
+            description=f'Dev ({dev.name + "#" + dev.discriminator}): Today is my birthday. My current age is {str(age_now)} years old.\nHopefully I can be better at developing this bot.\n(This message is sent automatically)',
+            color=discord.Color.purple()
         )
+        print(f"Happy Birthday, {dev.name + "#" + dev.discriminator}")
+        await client.guilds.system_channel.send(embed=congrats)
+
+@dev_hbd.before_loop
+async def dev_hbd_before():
+    await client.wait_until_ready()
 
 #=== Prefix Commands ===
 @client.command()
@@ -290,6 +300,9 @@ async def donate(ctx):
     )
     embed.add_field(name="Saweria", value=f"[Saweria Link]({link})")
     await ctx.send(embed=embed)
+
+#=== Tasks Runner ===
+dev_hdb.start()
 
 #=== Client Account Executor ===
 client.run(os.environ.get('TOKEN'))
