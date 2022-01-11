@@ -235,7 +235,7 @@ async def dev_hbd():
             description=f'Dev ({dev.name + "#" + dev.discriminator}): Today is my birthday. My current age is {str(age_now)} years old.\nHopefully I can be better at developing this bot.\n(This message is sent automatically)',
             color=discord.Color.purple()
         )
-        print(f"Happy Birthday, {dev.name + "#" + dev.discriminator}")
+        print(f"Happy Birthday, {dev.name + '#' + dev.discriminator}")
         await client.guilds.system_channel.send(embed=congrats)
 
 @dev_hbd.before_loop
