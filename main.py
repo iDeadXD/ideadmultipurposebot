@@ -31,6 +31,8 @@ levelling = cluster["database2"]
 
 collection = levelling["prefixes"]
 
+devinfo = cluster[]
+
 #=== Client Prefix Setup ===
 async def get_prefixes(client, message):
     
@@ -216,6 +218,18 @@ async def on_member_remove(member):
     leave.add_field(name="Leaved at", value="Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%H:%M:%S')))
     
     await main_ch.send(embed=leave)
+
+#=== Custom Tasks ===
+@tasks.loop(minutes=5)
+async def dev_hbd():
+    now = datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%d/%m, %H:%M:%S")
+    age_now = 
+    dev = client.get_user(843132313562513408)
+    if now == '13/01, 00:00:00':
+        congrats = discord.Embed(
+            title='--- Announcement ---',
+            description=f'Dev ({dev.name + "#" + dev.discriminator}), Today is his birthday'
+        )
 
 #=== Prefix Commands ===
 @client.command()
