@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+import sys
 import asyncio
 
 #Games Class
@@ -13,19 +14,17 @@ class Games(commands.Cog):
     @commands.command()
     async def rng(self, ctx):
         try:
-            num = random.randint(1, 100000)
+            num = random.randint(1, sys.maxsize)
             
             waits = discord.Embed(
                 title="",
-                description="Enter your number. Range: 1 - 100000",
+                description="Enter your number.",
                 color=discord.Color.purple()
             )
             
             await ctx.send(embed=waits)
             count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
             
-            if not 0 < int(count.content) < 100001:
-                return await ctx.send("Enter number range: 1 - 100000")
             else:
                 if num < int(count.content):
                     win = discord.Embed(
