@@ -25,27 +25,26 @@ class Games(commands.Cog):
             await ctx.send(embed=waits)
             count = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
             
-            else:
-                if num < int(count.content):
-                    win = discord.Embed(
-                        title="--- RNG Games ---",
-                        description=f"Congratulation. You Win, {ctx.message.author.mention}",
-                        color=discord.Color.purple()
-                    )
-                    win.add_field(name="Your Number", value=f"{str(count.content)}")
-                    win.add_field(name="Bot Number", value=str(num))
+            if num < int(count.content):
+                win = discord.Embed(
+                    title="--- RNG Games ---",
+                    description=f"Congratulation. You Win, {ctx.message.author.mention}",
+                    color=discord.Color.purple()
+                )
+                win.add_field(name="Your Number", value=f"{str(count.content)}")
+                win.add_field(name="Bot Number", value=str(num))
                     
-                    await ctx.send(embed=win)
-                if num > int(count.content):
-                    lose = discord.Embed(
-                        title="--- RNG Games ---",
-                        description=f"Oh no. You lose, {ctx.message.author.mention}",
-                        color=discord.Color.red()
-                    )
-                    lose.add_field(name="Your Number", value=f"{str(count.content)}")
-                    lose.add_field(name="Bot Number", value=str(num))
-                    
-                    await ctx.send(embed=lose)
+                await ctx.send(embed=win)
+            if num > int(count.content):
+                lose = discord.Embed(
+                    title="--- RNG Games ---",
+                    description=f"Oh no. You lose, {ctx.message.author.mention}",
+                    color=discord.Color.red()
+                )
+                lose.add_field(name="Your Number", value=f"{str(count.content)}")
+                lose.add_field(name="Bot Number", value=str(num))
+                  
+                await ctx.send(embed=lose)
         except asyncio.TimeoutError:
             failed = discord.Embed(
                 title="",
