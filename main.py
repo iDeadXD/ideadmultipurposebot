@@ -229,7 +229,7 @@ async def dev_hbd():
     dev = client.get_user(843132313562513408)
     if now == '13/01, 00:00:00':
         age_now = devdata['age'] + 1
-        devage.update_one({'devid': 843132313562513408}, '$set': {'age': age_now})
+        devage.update_one({'devid': 843132313562513408}, {'$set': {'age': age_now}})
         congrats = discord.Embed(
             title='--- Announcement ---',
             description=f'Dev ({dev.name + "#" + dev.discriminator}): Today is my birthday. My current age is {str(age_now)} years old.\nHopefully I can be better at developing this bot.\n(This message is sent automatically)',
