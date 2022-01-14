@@ -35,6 +35,10 @@ devinfo = cluster['database4']
 
 devage = devinfo['reminder']
 
+dataclient = cluster['database6']
+
+savedch = dataclient['msgchannel']
+
 #=== Client Prefix Setup ===
 async def get_prefixes(client, message):
     
@@ -168,7 +172,10 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    main_ch = member.guild.system_channel
+    data = savedch.find_one({'_id': member.guild.id})
+    main_ch = data['welcome_ch']
+    if data is None:
+        main_ch = member.guild.system_channel
     
     welcome = discord.Embed(
         title="--- New Member Joined ---",
@@ -208,7 +215,10 @@ async def on_guild_join(guild):
 
 @client.event
 async def on_member_remove(member):
-    main_ch = member.guild.system_channel
+    data = savedch.find_one({'_id': member.guild.id})
+    main_ch = data['leave_ch']
+    if data is None:
+        main_ch = member.guild.system_channel
     
     leave = discord.Embed(
         title="--- Member Leave a Server ---",
