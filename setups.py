@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from config import CONFIG
 
 dataclient = MongoClient(CONFIG['mongodb_url'])
-database = dataclient['database4']
+database = dataclient['database6']
 saved = database['msgchannel']
 
 class Setup(commands.Cog):
