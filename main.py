@@ -191,7 +191,7 @@ async def on_member_join(member):
     )
     welcome.set_thumbnail(url=member.avatar_url)
     welcome.add_field(name="Member name", value=f"{member.name + '#' + member.discriminator}")
-    welcome.add_field(name="Joined at", value="Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%H:%M:%S')))
+    welcome.add_field(name="Joined at", value="{}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%A, %d/%m/%Y, %H:%M:%S')))
     
     await main_ch.send(embed=welcome)
 
@@ -234,7 +234,7 @@ async def on_member_remove(member):
     )
     leave.set_thumbnail(url=member.avatar_url)
     leave.add_field(name="Member name", value=f"{member.name + '#' + member.discriminator}")
-    leave.add_field(name="Leaved at", value="Today, {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%H:%M:%S')))
+    leave.add_field(name="Leaved at", value="{}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%A, %d/%m/%Y, %H:%M:%S')))
     
     await main_ch.send(embed=leave)
 
