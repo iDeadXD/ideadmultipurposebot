@@ -45,14 +45,14 @@ class Moderator(commands.Cog):
                 if data is None:
                     new_data = {'_id': message.guild.id, 'authorid': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}'}
                     saved.insert_one(new_data)
-                    await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nChannel: {message.channel.mention}')
+                    await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nChannel: {message.channel.mention}\n-----------------------')
                 else:
                     saved.update_one({'_id': message.guild.id}, {'$set': {'author_id': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}'}})
-                    await dev.send(f'Embed Data has been Updated!\nTimestamp: {now}\nChannel: {message.channel.mention}')
+                    await dev.send(f'Embed Data has been Updated!\nTimestamp: {now}\nChannel: {message.channel.mention}\n-----------------------')
             except Exception as e:
                 return print(e)
     
-    @commands.command(aliases=['se'])
+    @commands.command(aliases=['se'], hidden=True)
     async def snipe_embed(self, ctx):
         data = saved.find_one({'_id': ctx.guild.id})
         
