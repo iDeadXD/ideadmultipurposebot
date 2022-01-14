@@ -16,6 +16,8 @@ class LevelSystem(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.guild.id == 836464932236165140:
+            return
         author_id = message.author.id
         stats = collection.find_one({"_id": author_id})
         if not message.author.bot:
@@ -37,6 +39,8 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def rank(self, ctx):
         """Show your Rank (Failed Program)"""
+        if ctx.guild.id == 836464932236165140:
+            return await ctx.send('Command has been disabled on this server!!')
         author_id = ctx.author.id
         stats = collection.find_one({"_id": author_id})
         if stats is None:
@@ -67,6 +71,8 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         """Show Leaderboard in Current Server"""
+        if ctx.guild.id == 836464932236165140:
+            return await ctx.send('Command has been disabled on this server!!')
         rankings = collection.find().sort("xp", -1)
         i = 1
         embed = discord.Embed(title="Rankings:")
