@@ -180,7 +180,7 @@ async def on_member_join(member):
     if member.guild.id == 836464932236165140:
         return
     data = savedch.find_one({'_id': member.guild.id})
-    main_ch = data['welcome_ch']
+    main_ch = client.get_channel(data['welcome_ch'])
     if data is None:
         main_ch = member.guild.system_channel
     
@@ -223,7 +223,7 @@ async def on_guild_join(guild):
 @client.event
 async def on_member_remove(member):
     data = savedch.find_one({'_id': member.guild.id})
-    main_ch = data['leave_ch']
+    main_ch = client.get_channel(data['leave_ch'])
     if data is None:
         main_ch = member.guild.system_channel
     
