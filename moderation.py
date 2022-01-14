@@ -52,7 +52,7 @@ class Moderator(commands.Cog):
             except Exception as e:
                 return print(e)
     
-    @client.command(aliases=['se'])
+    @commands.command(aliases=['se'])
     async def snipe_embed(self, ctx):
         data = saved.find_one({'_id': ctx.guild.id})
         
