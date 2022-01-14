@@ -177,6 +177,8 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
+    if member.guild.id == 836464932236165140:
+        return
     data = savedch.find_one({'_id': member.guild.id})
     main_ch = data['welcome_ch']
     if data is None:
