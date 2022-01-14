@@ -13,7 +13,7 @@ class Setup(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command()
+    @commands.command(aliases=['sch'])
     @commands.has_permissions(manage_guild=True)
     async def setchannelhere(self, ctx, types: str=None):
         ch_data = saved.find_one({'_id': ctx.guild.id})
