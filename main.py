@@ -8,6 +8,7 @@ import time
 from pymongo import MongoClient
 import asyncio
 import pytz
+import setups
 import music
 import levelsystem
 import voice_temp
@@ -89,7 +90,8 @@ cogs6 = [guild_utils]
 cogs7 = [games]
 cogs8 = [economy]
 cogs9 = [dev]
-printcogs = [dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+cogs10 = [setups]
+printcogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
@@ -118,6 +120,9 @@ for i in range(len(cogs8)):
 
 for i in range(len(cogs9)):
     cogs9[i].setup(client)
+
+for i in range(len(cogs10)):
+    cogs10[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
