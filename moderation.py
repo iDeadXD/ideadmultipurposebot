@@ -21,7 +21,7 @@ class Moderator(commands.Cog):
         
         if message.embeds:
             try:
-                dev = client.get_user(843132313562513408)
+                dev = self.client.get_user(843132313562513408)
                 now = datetime.now(pytz.timezone('Asia/Jakarta'))
                 
                 embed = message.embeds[0]
