@@ -204,6 +204,14 @@ async def on_command_error(ctx, error):
             color=discord.Color.red()
         )
         await ctx.send(embed=failed)
+    
+    if isinstance(error, commands.NotOwner):
+        failed = discord.Embed(
+            title='Error',
+            description=error,
+            color=discord.Color.red()
+        )
+        await ctx.send(embed=failed)
 
 @client.event
 async def on_guild_join(guild):
