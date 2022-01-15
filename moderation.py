@@ -8,7 +8,7 @@ from config import CONFIG
 
 dataclient = MongoClient(CONFIG['mongodb_url'])
 database = dataclient['database5']
-saved = database['saved']
+saved = database['saved_2']
 
 class Moderator(commands.Cog):
     """Moderator related commands. """
