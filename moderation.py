@@ -17,6 +17,9 @@ class Moderator(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_delete(self, message):
+        if message.guild.id == 836464932236165140:
+            return
+        
         data = saved.find_one({'_id': message.guild.id})
         
         if message.embeds:
