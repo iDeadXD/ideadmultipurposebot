@@ -22,6 +22,10 @@ class Developer(commands.Cog):
             passw = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
             
             if passw.content == 'idead1511':
+                await ctx.send('Authenticating...')
+                await asyncio.sleep(3)
+                await ctx.send('Password Authenticated')
+                await asyncio.sleep(3)
                 await sendconfirm.delete()
                 await passw.delete()
                 await asyncio.sleep(1)
@@ -31,18 +35,13 @@ class Developer(commands.Cog):
                 await asyncio.sleep(1)
                 await self.client.close()
             else:
+                await ctx.send('Authenticating...')
+                await asyncio.sleep(3)
                 await ctx.send("Wrong Password!!")
         except asyncio.TimeoutError:
             failed = discord.Embed(
                 title="",
                 description="Timed Out!!",
-                color=discord.Color.red()
-            )
-            return await ctx.send(embed=failed)
-        except commands.NotOwner:
-            failed = discord.Embed(
-                title="",
-                description="You're not owner of this bot!!",
                 color=discord.Color.red()
             )
             return await ctx.send(embed=failed)
