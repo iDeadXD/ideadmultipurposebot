@@ -437,15 +437,14 @@ class Utils(commands.Cog):
         """Create Instant Invite Link"""
         guild = ctx.guild.name
         if uses is None:
-            await ctx.send("Insert Max Used value (0 for Unlimited Use). Example: >invite 5(Limit Link can Used: 5Times/5User)")
-            return
+            return await ctx.send("Insert Max Used value (0 for Unlimited Use). Example: >invite 5(Limit Link can Used: 5Times/5User)")
         link = await ctx.channel.create_invite(xkcd=True, max_age = 0, max_uses = int(uses))
         embed = discord.Embed(
             color=discord.Color.purple(),
             title="--- Instant Invite Link ---",
             description="Share this invite link to another user"
         )
-        embed.add_field(name="This invite link will be directed to: ", value=guild)
+        embed.add_field(name="This invite link will be redirected to: ", value=guild)
         embed.add_field(name="Max Uses", value=uses)
         embed.add_field(name="This your invite link", value=f"[Hold for Copy the link]({link})")
         
