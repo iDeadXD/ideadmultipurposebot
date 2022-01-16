@@ -166,14 +166,15 @@ async def on_ready():
 async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
     devmention = [
-        'Wait...',
-        'Waiting for response...',
-        'Looks like he's busy. (Maybe)'
+        "Wait...",
+        "Waiting for response...",
+        "Looks like he's busy. (Maybe)"
     ]
     
     devoffline = [
-        'Maybe he is offline',
-        'Wait until he is online'
+        "Maybe he is offline",
+        "Wait until he is online",
+        "He is offline"
     ]
     
     dev = client.get_user(843132313562513408)
