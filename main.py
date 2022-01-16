@@ -177,7 +177,7 @@ async def on_message(message):
         "He is offline"
     ]
     
-    dev = client.get_user(843132313562513408)
+    dev = client.get_guild(message.guild.id).get_member(843132313562513408)
     
     for msg in hello_m: #Check if message content in hello_m
         if message.content.lower().startswith(str(msg)):
