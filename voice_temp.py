@@ -178,8 +178,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     async def s_listener(self, ctx, *, channel: discord.StageChannel=None):
         """Get a List of Listeners at Current Stage Channel"""
-        if channel is not discord.StageChannel:
-            return
         
         if channel is None:
             channel = ctx.author.voice.channel
@@ -206,8 +204,6 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     async def v_listener(self, ctx, *, channel: discord.VoiceChannel=None):
         """Get a List of Listeners at Current Voice Channel"""
-        if channel is not discord.VoiceChannel:
-            return
         
         if channel is None:
             channel = ctx.author.voice.channel
