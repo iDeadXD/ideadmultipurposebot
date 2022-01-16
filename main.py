@@ -168,13 +168,13 @@ async def on_message(message):
     devmention = [
         "Wait...",
         "Waiting for response...",
-        "Looks like he's busy. (Maybe)"
+        "Looks like he's busy rn. (Maybe)",
     ]
     
     devoffline = [
-        "Maybe he is offline",
+        "Maybe he is offline...",
         "Wait until he is online",
-        "He is offline"
+        "He is offline rn"
     ]
     
     dev = client.get_guild(message.guild.id).get_member(843132313562513408)
@@ -194,7 +194,7 @@ async def on_message(message):
         if message.author == dev:
             return await message.reply('My Developer.')
         else:
-            if dev.status.offline:
+            if dev.status is discord.Status.offline:
                 offmsg = random.choice(devoffline)
                 return await message.reply(offmsg)
             
