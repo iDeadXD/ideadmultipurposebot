@@ -181,21 +181,22 @@ class Voice(commands.Cog):
         if channel is None:
             channel = ctx.message.author.voice.channel
         
-        listening = [r.mention for r in channel.members]
-        
-        if ctx.message.author.voice is None:
-            fail1 = discord.Embed(
-                title="",
-                description="You're not in Voice Channel. Command Ignored",
-                color=discord.Color.green()
+        if channel not in ctx.guild.voice_channels:
+            failed = discord.Embed(
+                title='Error',
+                description=f'Channel "{channel.name}" not found',
+                color=discord.Color.red()
             )
-            return await ctx.send(embed=fail1)
+            return await ctx.send(embed=failed)
+        
+        memberlist = [r.mention for r in channel.members]
+        listening = f'No member listening on {channel.name}' if len(memberlist) == 0 else ", ".join(memberlist)
         
         done = discord.Embed(
             title="--- Voice Channel Listener ---",
             color=discord.Color.green()
         )
-        done.add_field(name=f"Listener at {channel.name}", value=", ".join(listening))
+        done.add_field(name=f"Listener at {channel.name}", value=listening)
         done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=done)
     
