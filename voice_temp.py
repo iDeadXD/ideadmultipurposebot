@@ -176,10 +176,41 @@ class Voice(commands.Cog):
             await ctx.send(embed=done)
     
     @commands.command(pass_context=True)
-    async def listener(self, ctx, *, channel: discord.VoiceChannel=None):
-        """Get a List of Listeners at Current Voice Channel"""
+    async def s_listener(self, ctx, *, channel: discord.StageChannel=None):
+        """Get a List of Listeners at Current Stage Channel"""
+        if channel is not discord.StageChannel:
+            return
+        
         if channel is None:
-            channel = ctx.message.author.voice.channel
+            channel = ctx.author.voice.channel
+        
+        if channel not in ctx.guild.stage_channels:
+            failed = discord.Embed(
+                title='Error',
+                description=f'Channel "{channel.name}" not found',
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=failed)
+        
+        memberlist = [r.mention for r in channel.members]
+        listening = f'No member listening on {channel.name}' if len(memberlist) == 0 else ", ".join(memberlist)
+        
+        done = discord.Embed(
+            title="--- Stage Channel Listener ---",
+            color=discord.Color.purple()
+        )
+        done.add_field(name=f"Listener at {channel.name}", value=listening)
+        done.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=done)
+    
+    @commands.command(pass_context=True)
+    async def v_listener(self, ctx, *, channel: discord.VoiceChannel=None):
+        """Get a List of Listeners at Current Voice Channel"""
+        if channel is not discord.VoiceChannel:
+            return
+        
+        if channel is None:
+            channel = ctx.author.voice.channel
         
         if channel not in ctx.guild.voice_channels:
             failed = discord.Embed(
