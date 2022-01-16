@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from datetime import datetime
 from itertools import chain
+import random
 import psutil
 import time
 from pymongo import MongoClient
@@ -164,6 +165,18 @@ async def on_ready():
 @client.event #on_message
 async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
+    devmention = [
+        'Wait...',
+        'Waiting for response...',
+        'Looks like he's busy. (Maybe)'
+    ]
+    
+    devoffline = [
+        'Maybe he is offline',
+        'Wait until he is online'
+    ]
+    
+    dev = client.get_user(843132313562513408)
     
     for msg in hello_m: #Check if message content in hello_m
         if message.content.lower().startswith(str(msg)):
@@ -173,6 +186,20 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
+    
+    if dev.mentioned_in(message):
+        if message.author.bot:
+            return
+        if message.author == dev:
+            return await message.reply('My Developer.')
+        else:
+            if dev.status.offline:
+                offmsg = random.choice(devoffline)
+                return await message.reply(offmsg)
+            
+            msg = random.choice(devmention)
+            await message.reply(msg)
+    
     await client.process_commands(message)
 
 @client.event
