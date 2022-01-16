@@ -176,9 +176,11 @@ class Voice(commands.Cog):
             await ctx.send(embed=done)
     
     @commands.command(pass_context=True)
-    async def listener(self, ctx):
+    async def listener(self, ctx, *, channel: discord.VoiceChannel=None):
         """Get a List of Listeners at Current Voice Channel"""
-        channel = ctx.message.author.voice.channel
+        if channel is None:
+            channel = ctx.message.author.voice.channel
+        
         listening = [r.mention for r in channel.members]
         
         if ctx.message.author.voice is None:
