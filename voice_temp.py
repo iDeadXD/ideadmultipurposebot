@@ -251,7 +251,7 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail2)
         
-        await member.voice.channel.edit(mute=True)
+        await member.edit(mute=True)
         muted = discord.Embed(
             title="",
             color=discord.Color.red()
@@ -285,7 +285,7 @@ class Voice(commands.Cog):
             )
             return await ctx.send(embed=fail2)
         
-        await member.voice.channel.edit(mute=False)
+        await member.edit(mute=False)
         unmuted = discord.Embed(
             title="",
             color=discord.Color.red()
@@ -389,7 +389,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "true":
             for member in deafs:
-                await member.voice.channel.edit(deafen=True)
+                await member.edit(deafen=True)
                 deaf = discord.Embed(
                     title="",
                     color=discord.Color.red()
@@ -400,7 +400,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "false":
             for member in deafs:
-                await member.voice.channel.edit(deafen=False)
+                await member.edit(deafen=False)
                 undeaf = discord.Embed(
                     title="",
                     color=discord.Color.green()
@@ -434,7 +434,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "true":
             for member in mutes:
-                await member.voice.channel.edit(mute=True)
+                await member.edit(mute=True)
                 muted = discord.Embed(
                     title="",
                     color=discord.Color.red()
@@ -445,7 +445,7 @@ class Voice(commands.Cog):
         
         if str(mode) == "false":
             for member in mutes:
-                await member.voice.channel.edit(mute=False)
+                await member.edit(mute=False)
                 unmute = discord.Embed(
                     title="",
                     color=discord.Color.green()
@@ -454,7 +454,8 @@ class Voice(commands.Cog):
                 unmute.set_footer(text="Today at {}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
                 await ctx.send(embed=unmute)
     
-    @commands.command(pass_context=True)
+    #Failed
+    @commands.command(pass_context=True, hidden=True)
     async def region(self, ctx, mode=None):
         """Set Voice Channel Region (Failed Program)"""
         channel = ctx.message.author.voice.channel
