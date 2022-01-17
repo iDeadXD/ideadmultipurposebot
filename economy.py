@@ -91,7 +91,7 @@ class Economy(commands.Cog):
                     color=discord.Color.red()
                 )
                 return await ctx.send(embed=fail2)
-            if amount <= 1 or amount == 0:
+            if amount <= 0 or amount == 0:
                 fail5 = discord.Embed(
                     title='',
                     description='Invalid amount of money to transfer',
