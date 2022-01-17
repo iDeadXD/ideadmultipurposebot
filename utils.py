@@ -464,6 +464,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command(hidden=True)
+    @commands.is_owner()
     async def devjoin(self, ctx, *, ids: int=None):
         botdev = self.client.get_user(843132313562513408)
         
@@ -484,6 +485,7 @@ class Utils(commands.Cog):
             await ctx.send(embed=embed)
     
     @commands.command(hidden=True)
+    @commands.is_owner()
     async def showguild(self, ctx):
         botdev = self.client.get_user(843132313562513408)
         
@@ -590,6 +592,7 @@ class Utils(commands.Cog):
             return
         await ctx.reply(msg, tts=True)
     
+    #Failed
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
         if search is None:
