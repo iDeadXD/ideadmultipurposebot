@@ -191,7 +191,7 @@ async def on_message(message):
     if dev.mentioned_in(message):
         if message.author.bot:
             return
-        if message.author == dev:
+        elif message.author == dev:
             return await message.reply('My Developer.')
         else:
             if dev.status is discord.Status.offline:
