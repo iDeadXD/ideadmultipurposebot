@@ -549,7 +549,7 @@ class Utils(commands.Cog):
     
     @commands.command(hidden=True)
     async def status2(self, ctx):
-        em = discord.Embed(title = 'System Resource Usage', description = 'See CPU and memory usage of the system.')
+        em = discord.Embed(type='rich', title = 'System Resource Usage', description = 'See CPU and memory usage of the system.')
         em.add_field(name = 'CPU Usage', value = f'{psutil.cpu_percent()}%', inline = False)
         em.add_field(name = 'Memory Usage', value = f'{psutil.virtual_memory().percent}%', inline = False)
         em.add_field(name = 'Available Memory', value = f"{str(psutil.virtual_memory().available >> 20) + 'MB, From ' + str(psutil.virtual_memory().total >> 20)}", inline = False)
