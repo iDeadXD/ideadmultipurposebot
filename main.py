@@ -167,14 +167,14 @@ async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
     devmention = [
         "Wait...",
-        "Waiting for response...",
-        "Looks like he's busy rn. (Maybe)",
+        "Waiting for {} response...",
+        "Looks like, {} is busy rn. (Maybe)",
     ]
     
     devoffline = [
-        "Maybe he is offline...",
-        "Wait until he is online",
-        "He is offline rn"
+        "Maybe {} is offline...",
+        "Wait until {} is online",
+        "{} is offline rn"
     ]
     
     dev = client.get_guild(message.guild.id).get_member(843132313562513408)
@@ -188,7 +188,7 @@ async def on_message(message):
             )
             await message.reply(embed=halo)
     
-    if dev.mention in message.content:
+    if dev in message.mentions:
         if message.author.bot:
             return
         elif message.author == dev:
@@ -196,10 +196,10 @@ async def on_message(message):
         else:
             if dev.status is discord.Status.offline:
                 offmsg = random.choice(devoffline)
-                return await message.reply(offmsg)
+                return await message.reply(offmsg.format(dev.mention))
             
             msg = random.choice(devmention)
-            await message.reply(msg)
+            await message.reply(msg.format(dev.mention))
     
     await client.process_commands(message)
 
