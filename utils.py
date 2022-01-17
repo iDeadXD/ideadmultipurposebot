@@ -341,7 +341,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
         embed2.add_field(name=f'Roles ({str(role_count)})', value=(', '.join(roles)), inline=False)
-        embed2.add_field(name=f'Bots ({list_of_bots})', value=(', '.join(list_of_bots)), inline=False)
+        embed2.add_field(name=f'Bots ({str(len(list_of_bots))})', value=(', '.join(list_of_bots)), inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
