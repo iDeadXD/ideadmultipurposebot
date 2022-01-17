@@ -188,7 +188,7 @@ async def on_message(message):
             )
             await message.reply(embed=halo)
     
-    if dev.mentioned_in(message):
+    if dev.mention in message.content:
         if message.author.bot:
             return
         elif message.author == dev:
