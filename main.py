@@ -295,6 +295,16 @@ async def dev_hbd():
 async def dev_hbd_before():
     await client.wait_until_ready()
 
+@tasks.loop(seconds=5, count=10)
+async def sendtest():
+    dev = client.get_user(843132313562513408)
+    await dev.send('Test')
+    print('Test')
+
+@sendtest.before_loop
+async def sendtest_before():
+    await client.wait_until_ready()
+
 #=== Prefix Commands ===
 @client.command()
 @commands.has_permissions(manage_guild=True)
@@ -357,6 +367,7 @@ async def donate(ctx):
 
 #=== Tasks Runner ===
 dev_hbd.start()
+sendtest.start()
 
 #=== Client Account Executor ===
 client.run(os.environ.get('TOKEN'))
