@@ -180,7 +180,7 @@ async def on_message(message):
     dev = client.get_guild(message.guild.id).get_member(843132313562513408)
     
     for msg in hello_m: #Check if message content in hello_m
-        if msg in message.content:
+        if msg in message.content.lower():
             halo = discord.Embed(
                 title="",
                 description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
