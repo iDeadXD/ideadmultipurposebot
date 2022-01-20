@@ -135,7 +135,7 @@ class Moderator(commands.Cog):
             )
             
             await ctx.send(embed=confirm)
-            msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
+            msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel, timeout=10)
             if msg.content in yes:
                 guild = ctx.guild.name
                 await member.ban(reason=reason)
@@ -206,7 +206,7 @@ class Moderator(commands.Cog):
             )
             
             await ctx.send(embed=confirm)
-            msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel)
+            msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel, timeout=10)
             if msg.content in yes:
                 guild = ctx.guild.name
                 await member.kick(reason=reason)
