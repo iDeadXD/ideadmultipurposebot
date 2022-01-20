@@ -213,7 +213,7 @@ class Moderator(commands.Cog):
                 embed = discord.Embed(
                     title="--- Kicked Member ---",
                     color=discord.Color.red(),
-                    timestamp=ctx.message.created_a
+                    timestamp=ctx.message.created_at
                 )
                 embed.add_field(name="Member Name", value=f"{member.mention}")
                 embed.add_field(name="Punishment", value="Kicked from Server")
