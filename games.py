@@ -61,9 +61,10 @@ class Games(commands.Cog):
             bots = random.choice(types)
               
             await ctx.send("rock/paper/scissor")
-            msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
+            response = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
+            msg = response.content.lower()
             
-            if msg.content == 'rock':
+            if msg == 'rock':
                 if str(bots) == 'scissor':
                     await ctx.send(bots)
                     await ctx.send("You win")
@@ -73,7 +74,7 @@ class Games(commands.Cog):
                 elif str(bots) == 'rock':
                     await ctx.send(bots)
                     await ctx.send("Draw")
-            if msg.content == 'paper':
+            if msg == 'paper':
                 if str(bots) == 'rock':
                     await ctx.send(bots)
                     await ctx.send("You win")
@@ -83,7 +84,7 @@ class Games(commands.Cog):
                 elif str(bots) == 'paper':
                     await ctx.send(bots)
                     await ctx.send("Draw")
-            if msg.content == 'scissor':
+            if msg == 'scissor':
                 if str(bots) == 'paper':
                     await ctx.send(bots)
                     await ctx.send("You win")
