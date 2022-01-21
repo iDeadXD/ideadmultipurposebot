@@ -196,7 +196,7 @@ async def on_message(message):
             cmd_prefix = '>'
         
         if message.content.lower().startswith(cmd_prefix):
-            return
+            return await client.process_commands(message)
         if message.author.bot:
             return
         elif message.author == dev:
