@@ -600,6 +600,7 @@ class Utils(commands.Cog):
             fail = await ctx.send('Failed')
             return await fail.delete()
         
+        await ctx.message.delete()
         for i in range(multiplier):
             await ctx.send(message)
     
