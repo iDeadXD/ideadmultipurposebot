@@ -189,11 +189,13 @@ async def on_message(message):
             )
             await message.reply(embed=halo)
     
-    for x in collection.find({"guild_id": message.guild.id}):
-        default_prfx = x["_prefix"]
-    
     if dev in message.mentions:
-        if message.content.lower().startswith(str(default_prfx)) or message.content.lower().startswith('>'):
+        data = collection.find_one({'guild_id': message.guild.id})
+        cmd_prefix = data['_prefix']
+        if data is None:
+            cmd_prefix = '>'
+        
+        if message.content.lower().startswith(cmd_prefix):
             return
         if message.author.bot:
             return
