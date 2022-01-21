@@ -592,6 +592,17 @@ class Utils(commands.Cog):
             return
         await ctx.reply(msg, tts=True)
     
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def repeat(self, ctx, multiplier: int=None, *, message: str=None):
+        if multiplier is None or message is None:
+            await ctx.message.delete()
+            fail = await ctx.send('Failed')
+            return await fail.delete()
+        
+        for i in range(multiplier):
+            await ctx.send(message)
+    
     #Failed
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
