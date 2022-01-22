@@ -82,48 +82,11 @@ client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all()
 client.help_command = MyNewHelp()
 
 #=== Cog List ===
-cogs = [music]
-cogs2 = [levelsystem]
-cogs3 = [voice_temp]
-cogs4 = [moderation]
-cogs5 = [utils]
-cogs6 = [guild_utils]
-cogs7 = [games]
-cogs8 = [economy]
-cogs9 = [dev]
-cogs10 = [setups]
-printcogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+cogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
     cogs[i].setup(client)
-
-for i in range(len(cogs2)):
-    cogs2[i].setup(client)
-
-for i in range(len(cogs3)):
-    cogs3[i].setup(client)
-
-for i in range(len(cogs4)):
-    cogs4[i].setup(client)
-
-for i in range(len(cogs5)):
-    cogs5[i].setup(client)
-
-for i in range(len(cogs6)):
-    cogs6[i].setup(client)
-
-for i in range(len(cogs7)):
-    cogs7[i].setup(client)
-
-for i in range(len(cogs8)):
-    cogs8[i].setup(client)
-
-for i in range(len(cogs9)):
-    cogs9[i].setup(client)
-
-for i in range(len(cogs10)):
-    cogs10[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
@@ -144,7 +107,7 @@ async def on_ready():
     vcpu=psutil.cpu_percent()
     
     #=== Client Indicator ===
-    curr_cogs = len(printcogs)
+    curr_cogs = len(cogs)
     curr_server = len(client.guilds)
     print('[*] BOT: Online')
     time.sleep(0.8)
@@ -216,9 +179,11 @@ async def on_member_join(member):
     if member.guild.id == 836464932236165140:
         return
     data = savedch.find_one({'_id': member.guild.id})
-    main_ch = client.get_channel(data['welcome_ch'])
+    
     if data is None:
         main_ch = member.guild.system_channel
+    else:
+        main_ch = client.get_channel(data['welcome_ch'])
     
     welcome = discord.Embed(
         title="--- New Member Joined ---",
@@ -258,9 +223,11 @@ async def on_guild_join(guild):
 @client.event
 async def on_member_remove(member):
     data = savedch.find_one({'_id': member.guild.id})
-    main_ch = client.get_channel(data['leave_ch'])
+    
     if data is None:
         main_ch = member.guild.system_channel
+    else:
+        main_ch = client.get_channel(data['leave_ch'])
     
     leave = discord.Embed(
         title="--- Member Leave a Server ---",
@@ -368,5 +335,5 @@ print('[*] Connected to Discord!')
 time.sleep(0.5)
 print('[*] Running...')
 time.sleep(2)
-print('----------------')
+print('[*] ----------------')
 client.run(os.environ.get('TOKEN'))
