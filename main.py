@@ -156,7 +156,7 @@ async def on_message(message):
         try:
             def check():
                 return message.author == dev
-            await self.client.wait_for('message', check=check, timeout=180)
+            await client.wait_for('message', check=check, timeout=180)
             
             data = collection.find_one({'guild_id': message.guild.id})
             
