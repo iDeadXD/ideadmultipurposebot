@@ -153,26 +153,31 @@ async def on_message(message):
             await message.reply(embed=halo)
     
     if dev in message.mentions:
-        data = collection.find_one({'guild_id': message.guild.id})
-        
-        if data is None:
-            cmd_prefix = '>'
-        else:
-            cmd_prefix = data['_prefix']
-        
-        if message.content.lower().startswith(cmd_prefix):
-            return await client.process_commands(message)
-        if message.author.bot:
-            return
-        elif message.author == dev:
-            return await message.reply('My Developer.')
-        else:
-            if dev.status is discord.Status.offline:
-                offmsg = random.choice(devoffline)
-                return await message.reply(offmsg.format(dev.mention))
+        try:
+            def check():
+                return message.author == dev
+            await self.client.wait_for('message', check=check, timeout=180)
             
+            data = collection.find_one({'guild_id': message.guild.id})
+            
+            if data is None:
+                cmd_prefix = '>'
+            else:
+                cmd_prefix = data['_prefix']
+            
+            if message.content.lower().startswith(cmd_prefix):
+                return await client.process_commands(message)
+            if message.author.bot:
+                return
+            elif message.author == dev:
+                return await message.reply('My Developer.')
+            else:
+                if dev.status is discord.Status.offline:
+                    offmsg = random.choice(devoffline)
+                    await message.reply(offmsg.format(dev.mention))
+        except asyncio.TimeoutError:
             msg = random.choice(devmention)
-            await message.reply(msg.format(dev.mention))
+            return await message.reply(msg.format(dev.mention))
     
     await client.process_commands(message)
 
