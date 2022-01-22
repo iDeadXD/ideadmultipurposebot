@@ -157,8 +157,8 @@ async def on_message(message):
         
         if data is None:
             cmd_prefix = '>'
-        
-        cmd_prefix = data['_prefix']
+        else:
+            cmd_prefix = data['_prefix']
         
         if message.content.lower().startswith(cmd_prefix):
             return await client.process_commands(message)
