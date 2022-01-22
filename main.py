@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from datetime import datetime
 from itertools import chain
+import re
 import random
 import psutil
 import time
@@ -155,15 +156,8 @@ async def on_message(message):
     
     if dev in message.mentions:
         try:
-            data = collection.find_one({'guild_id': message.guild.id})
-            
-            if data is None:
-                cmd_prefix = '>'
-            else:
-                cmd_prefix = data['_prefix']
-            
-            if message.content.lower().startswith(cmd_prefix):
-                return await client.process_commands(message)
+            if re.match('^[a-zA-Z]+', message.content) is None:
+                return
             if message.author.bot:
                 return
             elif message.author == dev:
