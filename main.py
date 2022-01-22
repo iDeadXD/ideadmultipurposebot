@@ -358,4 +358,14 @@ async def donate(ctx):
 dev_hbd.start()
 
 #=== Client Account Executor ===
+print('[*] Creating Connection to Discord...')
+time.sleep(2)
+print('[*] Authenticating Connection...')
+time.sleep(2)
+print('[*] Connecting to Discord...')
+time.sleep(1)
+print('[*] Connected to Discord!')
+time.sleep(0.5)
+print('[*] Running...')
+time.sleep(0.8)
 client.run(os.environ.get('TOKEN'))
