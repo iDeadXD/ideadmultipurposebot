@@ -24,7 +24,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Server Blacklist ===
-blacklist = [915484457165803522]
+blacklist = []
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
@@ -218,7 +218,7 @@ async def on_guild_join(guild):
         warn.add_field(name='\u200b', value='__Blacklisted!!__')
         await guild.owner.send(embed=warn)
         await asyncio.sleep(5)
-        await guild.leave()
+        return await guild.leave()
     
     dev = client.get_user(843132313562513408)
     owner = guild.owner
