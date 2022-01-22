@@ -156,7 +156,7 @@ async def on_message(message):
     
     if dev in message.mentions:
         try:
-            if re.match('^[a-zA-Z]+', message.content) is None:
+            if re.match('^[a-zA-Z<]+', message.content) is None:
                 return await client.process_commands(message)
             if message.author.bot:
                 return
