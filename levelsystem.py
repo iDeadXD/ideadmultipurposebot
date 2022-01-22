@@ -57,11 +57,11 @@ class LevelSystem(commands.Cog):
             xp -= ((50 * ((lvl - 1) ** 2)) + (50 * (lvl - 1)))
             boxes = int((xp / (200 * ((1 / 2) * lvl))) * 20)
             rankings = collection.find().sort("xp", -1)
+            embed = discord.Embed(title="{}'s level stats".format(ctx.author.name))
             for x in rankings:
                 rank += 1
                 if stats["_id"] == x["_id"]:
                     break
-                embed = discord.Embed(title="{}'s level stats".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
