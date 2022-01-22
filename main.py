@@ -172,9 +172,7 @@ async def on_message(message):
                     offmsg = random.choice(devoffline)
                     return await message.reply(offmsg.format(dev.mention))
                 
-                def check():
-                    return message.author == dev
-                await client.wait_for('message', check=check, timeout=180)
+                await client.wait_for('message', check=lambda message:message.author == dev, timeout=180)
         except asyncio.TimeoutError:
             msg = random.choice(devmention)
             return await message.reply(msg.format(dev.mention))
