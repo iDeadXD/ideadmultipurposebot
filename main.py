@@ -154,10 +154,6 @@ async def on_message(message):
     
     if dev in message.mentions:
         try:
-            def check():
-                return message.author == dev
-            await client.wait_for('message', check=check, timeout=180)
-            
             data = collection.find_one({'guild_id': message.guild.id})
             
             if data is None:
@@ -174,7 +170,11 @@ async def on_message(message):
             else:
                 if dev.status is discord.Status.offline:
                     offmsg = random.choice(devoffline)
-                    await message.reply(offmsg.format(dev.mention))
+                    return await message.reply(offmsg.format(dev.mention))
+                
+                def check():
+                    return message.author == dev
+                await client.wait_for('message', check=check, timeout=180)
         except asyncio.TimeoutError:
             msg = random.choice(devmention)
             return await message.reply(msg.format(dev.mention))
