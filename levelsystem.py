@@ -62,10 +62,10 @@ class LevelSystem(commands.Cog):
                 rank += 1
                 if stats["_id"] == x["_id"]:
                     break
-                embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
-                embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.set_thumbnail(url=ctx.author.avatar_url)
+            embed.add_field(name="Name", value=ctx.author.mention, inline=True)
+            embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
+            embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
             await ctx.channel.send(embed=embed)
 
     @commands.command()
