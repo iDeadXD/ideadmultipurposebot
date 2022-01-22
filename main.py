@@ -154,9 +154,11 @@ async def on_message(message):
     
     if dev in message.mentions:
         data = collection.find_one({'guild_id': message.guild.id})
-        cmd_prefix = data['_prefix']
+        
         if data is None:
             cmd_prefix = '>'
+        
+        cmd_prefix = data['_prefix']
         
         if message.content.lower().startswith(cmd_prefix):
             return await client.process_commands(message)
