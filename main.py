@@ -156,7 +156,13 @@ async def on_message(message):
     
     if dev in message.mentions:
         try:
-            if re.match('^[a-zA-Z<]+', message.content) is None:
+            data = collection.find_one({'guild_id': message.guild.id})
+            if data is None:
+                cmd_prefix = '>'
+            else:
+                cmd_prefix = data['_prefix']
+            
+            if message.content.lower().startswith(cmd_prefix):
                 return await client.process_commands(message)
             if message.author.bot:
                 return
