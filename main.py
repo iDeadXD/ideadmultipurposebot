@@ -129,6 +129,14 @@ async def on_ready():
 @client.event #on_message
 async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
+    
+    profanity = [
+        'ajg',
+        'jnck',
+        'kntl',
+        'mmk'
+    ]
+    
     devmention = [
         "Wait...",
         "Waiting for {} response...",
@@ -153,6 +161,11 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
+    
+    if profanity in message.content.lower():
+        await message.delete()
+        await message.channel.send('No Profanity please')
+
     
     if dev in message.mentions:
         try:
