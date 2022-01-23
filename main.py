@@ -161,10 +161,10 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
-    
-    if profanity in message.content.lower():
-        await message.delete()
-        await message.channel.send('No Profanity please')
+    for args in profanity:
+        if args in message.content.lower():
+            await message.delete()
+            await message.channel.send('No Profanity please')
 
     
     if dev in message.mentions:
