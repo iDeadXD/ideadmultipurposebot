@@ -223,9 +223,7 @@ class Utils(commands.Cog):
     @commands.command() #ping
     async def ping(self, ctx):
         """Showing Bot Latency and YouTube Server Status"""
-        start_time = time.time()
         msg = await ctx.send('Testing Connection...')
-        end_time = time.time()
         
         pings = requests.get("https://youtube.com")
         status = pings.status_code
@@ -235,8 +233,9 @@ class Utils(commands.Cog):
         else:
             result = "Error/Inactive"
         
+        now = datetime.now().total_seconds()
         titles = "Pong!!"
-        selflatency = str(f" {round((start_time - end_time) * 1000)}ms")
+        selflatency = str(f" {round((now - ctx.message.created_at.total_seconds()) * 1000)}ms")
         botlatency = str(f" {round(self.client.latency * 1000)}ms")
         ytlatency = str(f" {result}")
         embed = discord.Embed(
