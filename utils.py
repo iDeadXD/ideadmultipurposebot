@@ -223,9 +223,9 @@ class Utils(commands.Cog):
     @commands.command() #ping
     async def ping(self, ctx):
         """Showing Bot Latency and YouTube Server Status"""
-        start_time = time.perf_counter()
+        start_time = time.time()
         msg = await ctx.send('Testing Connection...')
-        end_time = time.perf_counter()
+        end_time = time.time()
         
         pings = requests.get("https://youtube.com")
         status = pings.status_code
