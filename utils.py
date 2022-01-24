@@ -223,6 +223,10 @@ class Utils(commands.Cog):
     @commands.command() #ping
     async def ping(self, ctx):
         """Showing Bot Latency and YouTube Server Status"""
+        start_time = time.perf_counter()
+        msg = await ctx.send('Testing Connection...')
+        end_time = time.perf_counter()
+        
         pings = requests.get("https://youtube.com")
         status = pings.status_code
         
@@ -232,17 +236,21 @@ class Utils(commands.Cog):
             result = "Error/Inactive"
         
         titles = "Pong!!"
-        selflatency = str(f" {round(self.client.latency * 1000)}ms")
+        selflatency = str(f" {round((start_time - end_time) * 1000)}ms")
+        botlatency = str(f" {round(self.client.latency * 1000)}ms")
         ytlatency = str(f" {result}")
         embed = discord.Embed(
             title=titles,
             color=ctx.author.color,
             timestamp=ctx.message.created_at
         )
-        embed.add_field(name="Bot Latency", value=selflatency)
+        embed.add_field(name="Your Latency", value=selflatency)
+        embed.add_field(name="Client Latency", value=botlatency)
         embed.add_field(name="YouTube Server Status", value=ytlatency)
         embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
-            
+        
+        await asyncio.sleep(0.8)
+        await msg.delete()
         await ctx.send(embed=embed)
     
     @commands.command() #current_time
@@ -266,7 +274,7 @@ class Utils(commands.Cog):
     async def supported(self, ctx):
         """Checking supported music links"""
         titles = "Supported Platform for Music Player"
-        desc = "For Now, Only Support YouTube Link"
+        desc = "=> YouTube Link\n=> SoundCloud Link"
         author = ctx.message.author.name
         embed = discord.Embed(
             title=titles,
