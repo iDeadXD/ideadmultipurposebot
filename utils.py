@@ -231,24 +231,23 @@ class Utils(commands.Cog):
         else:
             result = "Error/Inactive"
         
-        start_time = time.monotonic()
-        msg = await ctx.send('Testing Connection...')
-        end_time = time.monotonic()
+        start_time = time.perf_counter()
+        await ctx.trigger_typing()
+        end_time = time.perf_counter()
         
         titles = "Pong!!"
-        selflatency = str(f" {round((start_time - end_time) * 1000)}ms")
-        botlatency = str(f" {round(self.client.latency * 1000)}ms")
         ytlatency = str(f" {result}")
         embed = discord.Embed(
             title=titles,
             color=ctx.author.color,
             timestamp=ctx.message.created_at
         )
-        embed.add_field(name="Your Latency", value=selflatency)
-        embed.add_field(name="Client Latency", value=botlatency)
+        embed.add_field(name="Your Latency", value=str(f" {round((start_time - end_time) * 1000)}ms"))
+        embed.add_field(name="Client Latency", value=str(f" {round(self.client.latency * 1000)}ms"))
         embed.add_field(name="YouTube Server Status", value=ytlatency)
         embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
         
+        msg = await ctx.send('Testing Connection...')
         await asyncio.sleep(0.8)
         await msg.delete()
         await ctx.send(embed=embed)
