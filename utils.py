@@ -340,7 +340,7 @@ class Utils(commands.Cog):
                 break
             roles.append(r.mention)
             i += 1
-        list_role = ', '.join(map(str, roles))
+        list_role = ', '.join(roles)
         
         b = 0
         for m in ctx.guild.members:
@@ -349,7 +349,7 @@ class Utils(commands.Cog):
                     break
                 bots.append(m.mention)
                 b += 1
-        list_bot = ', '.join(map(str, bots))
+        list_bot = ', '.join(bots)
         
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
         embed2.add_field(name='ID', value=f'{ctx.guild.id}')
@@ -359,7 +359,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
         embed2.add_field(name=f'Roles (Showing Up to {len(roles)} Roles)', value=list_role, inline=False)
-        embed2.add_field(name=f'Bots (Showing Up to {len(bots)} Bots)', value=list_role, inline=False)
+        embed2.add_field(name=f'Bots (Showing Up to {len(bots)} Bots)', value=list_bot, inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
