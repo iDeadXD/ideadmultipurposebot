@@ -85,7 +85,7 @@ class LevelSystem(commands.Cog):
             if i == 11:
                 break
         if ctx.guild.id == 836464932236165140:
-            embed.set_footer(text='This is a history of LevelSystem.\nLevelSystem currently has been disabled on this server!')
+            embed.set_footer(text='This is a history of LevelSystem.\nLevelSystem currently has been disabled on this server!\n You can add XP by:\n-> Level up on the server where I am\n-> Buy XP using buy command')
         await ctx.channel.send(embed=embed)
 
 
