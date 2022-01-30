@@ -331,25 +331,8 @@ class Utils(commands.Cog):
     async def serverinfo(self, ctx):
         """Get Current Server Information"""
         member = ctx.guild.owner
-        roles = []
-        bots = []
-        
-        i = 0
-        for r in ctx.guild.roles:
-            if i <= 11:
-                break
-            roles.append(r.mention)
-            i += 1
-        list_role = ', '.join(map(str, roles))
-        
-        b = 0
-        for m in ctx.guild.members:
-            if m.bot:
-                if b <= 11:
-                    break
-                bots.append(m.mention)
-                b += 1
-        list_bot = ', '.join(map(str, bots))
+        roles = [r.mention for r in ctx.guild.roles if len(r) <= 11]
+        bots = [b.mention for b in ctx.guild.members if b == b.bot and if len(b) <= 11]
         
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
         embed2.add_field(name='ID', value=f'{ctx.guild.id}')
@@ -358,8 +341,8 @@ class Utils(commands.Cog):
         embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level).capitalize(), inline=False)
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
-        embed2.add_field(name=f'Roles (Showing Up to {len(roles)} Roles)', value=str(list_role), inline=False)
-        embed2.add_field(name=f'Bots (Showing Up to {len(bots)} Bots)', value=str(list_bot), inline=False)
+        embed2.add_field(name=f'Roles (Showing Up to {len(roles)} Roles)', value=(', '.join(roles)), inline=False)
+        embed2.add_field(name=f'Bots (Showing Up to {len(bots)} Bots)', value=(', '.join(bots)), inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
