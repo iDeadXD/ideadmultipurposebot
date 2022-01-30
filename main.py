@@ -152,8 +152,7 @@ async def on_message(message):
     dev = client.get_guild(message.guild.id).get_member(843132313562513408)
     
     for msg in hello_m: #Check if message content in hello_m
-        if message.guild.id == 836464932236165140:
-            return
+        
         if message.content.lower().startswith(msg):
             halo = discord.Embed(
                 title="",
