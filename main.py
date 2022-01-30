@@ -217,14 +217,12 @@ async def on_member_join(member):
 
 @client.event
 async def on_command_error(ctx, error):
-    raise error
     failed = discord.Embed(
         title='Error',
         description=error,
         color=discord.Color.red()
     )
     await ctx.send(embed=failed)
-    await ctx.author.send(embed=failed)
 
 @client.event
 async def on_guild_join(guild):
