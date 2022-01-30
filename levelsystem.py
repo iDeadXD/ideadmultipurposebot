@@ -71,8 +71,6 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         """Show Leaderboard in Current Server"""
-        if ctx.guild.id == 836464932236165140:
-            return await ctx.send('Command has been disabled on this server!!')
         rankings = collection.find().sort("xp", -1)
         i = 1
         embed = discord.Embed(title="Rankings:")
@@ -86,6 +84,8 @@ class LevelSystem(commands.Cog):
                  pass
             if i == 11:
                 break
+        if ctx.guild.id == 836464932236165140:
+            embed.set_footer(text='This is a history of LevelSystem.\nLevelSystem currently has been disabled on this server!')
         await ctx.channel.send(embed=embed)
 
 
