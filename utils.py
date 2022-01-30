@@ -332,7 +332,7 @@ class Utils(commands.Cog):
         """Get Current Server Information"""
         member = ctx.guild.owner
         roles = [r.mention for r in ctx.guild.roles if len(r) <= 11]
-        bots = [b.mention for b in ctx.guild.members if b == b.bot and if len(b) <= 11]
+        bots = [b.mention for b in ctx.guild.members if b == b.bot and len(b) <= 11]
         
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
         embed2.add_field(name='ID', value=f'{ctx.guild.id}')
