@@ -340,7 +340,7 @@ class Utils(commands.Cog):
                 break
             roles.append(r.mention)
             i += 1
-        list_role = ', '.join(roles)
+        list_role = ', '.join(map(str, roles))
         
         b = 0
         for m in ctx.guild.members:
@@ -349,7 +349,7 @@ class Utils(commands.Cog):
                     break
                 bots.append(m.mention)
                 b += 1
-        list_bot = ', '.join(bots)
+        list_bot = ', '.join(map(str, bots))
         
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
         embed2.add_field(name='ID', value=f'{ctx.guild.id}')
