@@ -16,8 +16,6 @@ class LevelSystem(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.guild.id == 836464932236165140:
-            return
         author_id = message.author.id
         stats = collection.find_one({"_id": author_id})
         if not message.author.bot:
