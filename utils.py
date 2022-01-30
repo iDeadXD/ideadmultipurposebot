@@ -332,14 +332,22 @@ class Utils(commands.Cog):
         """Get Current Server Information"""
         member = ctx.guild.owner
         roles = []
-        list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
+        list_of_bots = []
         
         i = 0
         for r in ctx.guild.roles:
-            if i <= 10:
+            if i <= 11:
                 break
             roles.append(r.mention)
             i += 1
+        
+        b = 0
+        for m in ctx.guild.members:
+            if m.bot:
+                if b <= 11:
+                    break
+                list_of_bots.append(m.mention)
+                b += 1
         
         embed2 = discord.Embed(timestamp=ctx.message.created_at, color=ctx.author.color)
         embed2.add_field(name='ID', value=f'{ctx.guild.id}')
@@ -348,7 +356,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level).capitalize(), inline=False)
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
-        embed2.add_field(name=f'Roles (Showing Up to {i} Roles)', value=(', '.join(map(str, roles))), inline=False)
+        embed2.add_field(name=f'Roles (Showing Up to {i} Roles)', value=(', '.join(roles)), inline=False)
         embed2.add_field(name=f'Bots ({str(len(list_of_bots))})', value=(', '.join(list_of_bots)), inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
