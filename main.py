@@ -223,6 +223,7 @@ async def on_command_error(ctx, error):
         color=discord.Color.red()
     )
     await ctx.send(embed=failed)
+    await ctx.author.send(embed=failed)
     
     raise error
 
