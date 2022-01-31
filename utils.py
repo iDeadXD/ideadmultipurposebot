@@ -599,6 +599,7 @@ class Utils(commands.Cog):
         if multiplier is None or message is None:
             await ctx.message.delete()
             fail = await ctx.send('Failed')
+            await asyncio.sleep(3)
             return await fail.delete()
         
         await ctx.message.delete()
