@@ -102,7 +102,11 @@ async def on_ready():
     #=== Client Indicator ===
     curr_cogs = len(cogs)
     curr_server = len(client.guilds)
-    curr_user = len(client.guilds.members)
+    
+    for guild in client.guilds:
+        for member in guild.members:
+            curr_user = len(member)
+    
     print('[*] BOT: Online')
     time.sleep(0.8)
     print(f'[*] Username: {client.user}')
