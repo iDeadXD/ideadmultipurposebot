@@ -104,8 +104,7 @@ async def on_ready():
     curr_server = len(client.guilds)
     
     for guild in client.guilds:
-        for member in guild.members:
-            curr_user = len(member)
+        curr_user = len(guild.members)
     
     print('[*] BOT: Online')
     time.sleep(0.8)
