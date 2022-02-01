@@ -103,10 +103,6 @@ async def on_ready():
     curr_cogs = len(cogs)
     curr_server = len(client.guilds)
     
-    for guild in client.guilds:
-        for i in range(len(guild)):
-            curr_user = str(guild[i].member_count)
-    
     print('[*] BOT: Online')
     time.sleep(0.8)
     print(f'[*] Username: {client.user}')
@@ -114,12 +110,14 @@ async def on_ready():
     print(f'[*] Ping: {str(round(client.latency * 1000))}ms')
     time.sleep(0.8)
     print(f'[*] Loaded Cogs: {curr_cogs}')
-    print(f'[*] Serving on: {curr_server} Server ({curr_user} User)')
+    print(f'[*] Serving on: {curr_server} Server')
     time.sleep(0.8)
-    print('[*] --- System Information ---')
+    print('[*] --- Advance Information ---')
     print('[*] Total number of CPUs :' + str(vcc))
     print('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
     print('[*] Memory usage percentage :' + str(vmem) + '%')
+    print('[*] Discord.py Version: ' + discord.__version__)
+    print('[*] PyMongo Version: ' + pymongo.version)
 
 @client.event #on_message
 async def on_message(message):
