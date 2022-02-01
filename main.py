@@ -93,15 +93,7 @@ for i in range(len(cogs)):
 @client.event #bot_event
 async def on_ready():
     #=== Memory Indentifier ===
-    mem=str(os.popen('free -t -m').readlines())
-    T_ind=mem.index('T')
-    mem_G=mem[T_ind+14:-4]
-    S1_ind=mem_G.index(' ')
-    mem_T=mem_G[0:S1_ind]
-    mem_G1=mem_G[S1_ind+8:]
-    S2_ind=mem_G1.index(' ')
-    mem_U=mem_G1[0:S2_ind]
-    mem_F=mem_G1[S2_ind+8:]
+    vmem=psutil.virtual_memory().percent
     
     #=== CPU Indentifier ===
     vcc=psutil.cpu_count()
@@ -110,6 +102,7 @@ async def on_ready():
     #=== Client Indicator ===
     curr_cogs = len(cogs)
     curr_server = len(client.guilds)
+    curr_user = len(client.guilds.members)
     print('[*] BOT: Online')
     time.sleep(0.8)
     print(f'[*] Username: {client.user}')
@@ -117,14 +110,12 @@ async def on_ready():
     print(f'[*] Ping: {str(round(client.latency * 1000))}ms')
     time.sleep(0.8)
     print(f'[*] Loaded Cogs: {curr_cogs}')
-    print(f'[*] Serving on: {curr_server} Server')
+    print(f'[*] Serving on: {curr_server} Server ({curr_user} User)')
     time.sleep(0.8)
     print('[*] --- System Information ---')
-    print ('[*] Total number of CPUs :' + str(vcc))
-    print ('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
-    print('[*] Total Memory = ' + mem_T +' MB')
-    print('[*] Used Memory = ' + mem_U +' MB')
-    print('[*] Free Memory = ' + mem_F +' MB')
+    print('[*] Total number of CPUs :' + str(vcc))
+    print('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
+    print('[*] Memory usage percentage :' + str(vmem) + '%')
 
 @client.event #on_message
 async def on_message(message):
