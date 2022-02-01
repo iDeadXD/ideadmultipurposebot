@@ -286,17 +286,19 @@ async def dev_hbd_before():
 @commands.has_permissions(manage_guild=True)
 async def prefix(ctx, prefixs=None):
     """Change bot command prefix"""
+    data = collection.find_one({"guild_id": ctx.guild.id})
+    curr_prefix = '>' if data is None else data['_prefix']
+    
     if prefixs is None:
         fail =discord.Embed(
             title="",
-            description=f"Enter your prefix to change the current prefix.",
+            description=f"Enter your prefix to change the current prefix.\nMy Current Prefix: {curr_prefix}",
             color=discord.Color.green()
         )
         fail.set_thumbnail(url=client.user.avatar_url)
         
         return await ctx.send(embed=fail)
     
-    data = collection.find_one({"guild_id": ctx.guild.id})
     if data is None:
         newdata = {"guild_id": ctx.guild.id, "_prefix": prefixs}
         collection.insert_one(newdata)
