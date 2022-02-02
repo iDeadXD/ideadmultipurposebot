@@ -187,7 +187,7 @@ class Economy(commands.Cog):
                             color=discord.Color.green()
                         )
                         await ctx.send(embed=cancelled)
-                except TimeoutError:
+                except asyncio.TimeoutError:
                     failed = discord.Embed(
                         title="",
                         description="Confirmation Timed out",
