@@ -76,7 +76,7 @@ class Economy(commands.Cog):
         if member is None or amount is None:
             fail1 = discord.Embed(
                 title="",
-                description="Transfer money to whoever you want to give. Example: ```>transfer @iDead#0000 50000 reason(Optional)```",
+                description="Transfer money to whoever you want to give. Example: `transfer @iDead#0000 50000 reason(Optional)`",
                 color=discord.Color.red()
             )
             return await ctx.send(embed=fail1)
@@ -87,7 +87,7 @@ class Economy(commands.Cog):
             if self_data is None or recv_data is None:
                 fail2 = discord.Embed(
                     title="",
-                    description="You or those you mention do not have a balance account. Make sure you or those you mention use the command `>claim` for account registration automatically",
+                    description="You or those you mention do not have a balance account. Make sure you or those you mention use the command `claim` for account registration automatically",
                     color=discord.Color.red()
                 )
                 return await ctx.send(embed=fail2)
@@ -112,13 +112,13 @@ class Economy(commands.Cog):
                     
                     confirm = discord.Embed(
                         title="",
-                        description=f"Are you sure want to transfer {str(amount)} to {member.name + '#' + member.discriminator} ? (y/n) (Make sure to check your money first with ```>balance``` commands)",
+                        description=f"Are you sure want to transfer {str(amount)} to {member.name + '#' + member.discriminator} ? (y/n) (Make sure to check your money first with `balance` command)",
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=confirm)
                     msg = await self.client.wait_for('message', check=lambda message : message.author == ctx.author and message.channel == ctx.channel, timeout=10)
                     
-                    if msg.content in yes:
+                    if msg.content.lower() in yes:
                         if self_data['money'] - amount >= 0:
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
@@ -171,9 +171,9 @@ class Economy(commands.Cog):
                                 description="Transfer has failed",
                                 color=discord.Color.red()
                             )
-                            fail4.add_field(name="Reason", value="You cannot transfer more money than your current amount (Check your money with `>balance` commands)")
+                            fail4.add_field(name="Reason", value="You cannot transfer more money than your current amount (Check your money with `balance` command)")
                             await ctx.send(embed=fail4)
-                    elif msg.content in no:
+                    elif msg.content.lower() in no:
                         cancelled = discord.Embed(
                             title="",
                             description="Transfer cancelled!!",
@@ -222,7 +222,7 @@ class Economy(commands.Cog):
         if self_data_money is None:
             fail1 = discord.Embed(
                 title="",
-                description="You don't have Registered Account. Use `>claim` command for register account automatically",
+                description="You don't have Registered Account. Use `claim` command for register account automatically",
                 color=discord.Color.red()
             )
             return await ctx.send(embed=fail1)
@@ -246,9 +246,9 @@ class Economy(commands.Cog):
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=confirm)
-                    msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=60)
+                    msg = await self.client.wait_for('message', check=lambda message:message.author == ctx.author and message.channel == ctx.channel, timeout=10)
                     
-                    if msg.content in yes:
+                    if msg.content.lower() in yes:
                         if self_data_money['money'] - wallet >= 0:
                             money_after = self_data_money['money'] - wallet
                             xp_after = self_data_xp['xp'] + xpcount
@@ -289,7 +289,7 @@ class Economy(commands.Cog):
                             )
                             failed.add_field(name="Reason", value="You cannot purchase using more money than your current amount (Check your money with `>balance` commands)")
                             await ctx.send(embed=failed)
-                    if msg.content in no:
+                    if msg.content.lower() in no:
                         cancelled = discord.Embed(
                             title="",
                             description="Purchase cancelled",
@@ -313,7 +313,7 @@ class Economy(commands.Cog):
         if data is None:
             fail = discord.Embed(
                 title="",
-                description="Please claim daily rewards for the first time. Use `>claim` command",
+                description="Please claim daily rewards for the first time. Use `claim` command",
                 color=discord.Color.green()
             )
             return await ctx.send(embed=fail)
@@ -346,7 +346,7 @@ class Economy(commands.Cog):
         if data is None:
             fail = discord.Embed(
                 title="",
-                description="Please claim daily rewards for the first time. Use `>claim` command",
+                description="Please claim daily rewards for the first time. Use `claim` command",
                 color=discord.Color.green()
             )
             return await ctx.send(embed=fail)
