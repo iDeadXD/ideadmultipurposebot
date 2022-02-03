@@ -7,6 +7,7 @@ from config import CONFIG
 dataclient = MongoClient(CONFIG['mongodb_url'])
 database = dataclient['database6']
 saved = database['msgchannel']
+settings = database['settings']
 
 class Setup(commands.Cog):
     
@@ -68,6 +69,76 @@ class Setup(commands.Cog):
                     await ctx.send(embed=failed)
             except Exception as e:
                 return print(e)
+    
+    @commands.command()
+    @commands.has_permissions(manage_guild=True)
+    async def togglelvlsystem(self, ctx, mode: str=None):
+        data = settings.find_one({'_id': ctx.guild.id})
+        
+        if mode is None:
+            return await ctx.send('Available mode: `true/false`')
+        true = ['true', 'on', 'enable']
+        false = ['false', 'off', 'disable']
+        
+        if mode in true:
+            if data['togglelvlsys'] == 'true':
+                enabled = discord.Embed(
+                    title='',
+                    description='LevelSystem is already enabled',
+                    color=discord.Color.green()
+                )
+                return await ctx.send(embed=enabled)
+            
+            if data is None:
+                new_data = {'_id': ctx.guild.id, 'togglelvlsys': 'true'}
+                settings.insert_one(new_data)
+                done = discord.Embed(
+                    title='',
+                    description='LevelSystem has been set to True (Enabled)',
+                    color=discord.Color.green()
+                )
+                await ctx.send(embed=done)
+            
+            settings.update_one({'_id': ctx.guild.id, '$set': {'togglelvlsys': 'true'}})
+            done = discord.Embed(
+                title='',
+                description='LevelSystem has been updated to True (Enabled)',
+                color=discord.Color.green()
+            )
+            await ctx.send(embed=done)
+        elif mode in false:
+            if data['togglelvlsys'] == 'false':
+                enabled = discord.Embed(
+                    title='',
+                    description='LevelSystem is already disabled',
+                    color=discord.Color.green()
+                )
+                return await ctx.send(embed=enabled)
+            
+            if data is None:
+                new_data = {'_id': ctx.guild.id, 'togglelvlsys': 'false'}
+                settings.insert_one(new_data)
+                done = discord.Embed(
+                    title='',
+                    description='LevelSystem has been set to False (Disabled)',
+                    color=discord.Color.green()
+                )
+                await ctx.send(embed=done)
+            
+            settings.update_one({'_id': ctx.guild.id, '$set': {'togglelvlsys': 'false'}})
+            done = discord.Embed(
+                title='',
+                description='LevelSystem has been updated to False (Disabled)',
+                color=discord.Color.green()
+            )
+            await ctx.send(embed=done)
+        else:
+            failed = discord.Embed(
+                title='',
+                description='Invalid Option!!',
+                color=discord.Color.red()
+            )
+            await ctx.send(embed=failed)
 
 def setup(client):
     client.add_cog(Setup(client))
