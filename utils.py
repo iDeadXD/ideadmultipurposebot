@@ -493,8 +493,8 @@ class Utils(commands.Cog):
         current_guild = len(self.client.guilds)
         
         gname = [g.name for g in self.client.guilds]
-        gid = str([g.id for g in self.client.guilds])
-        gmem = str([g.member_count for g in self.client.guilds])
+        gid = [str(g.id) for g in self.client.guilds]
+        gmem = [str(g.member_count) for g in self.client.guilds]
         
         curguild = discord.Embed(
             title="--- Dev Command ---",
