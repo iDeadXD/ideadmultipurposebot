@@ -502,8 +502,8 @@ class Utils(commands.Cog):
             color=discord.Color.green()
         )
         curguild.add_field(name="Guild name", value="\n".join(gname))
-        curguild.add_field(name="Guild ID", value=f"\n".join(gid))
-        curguild.add_field(name="Guild Members", value="\n".join(gmem))
+        curguild.add_field(name="Guild ID", value=f"\n".join(str(gid)))
+        curguild.add_field(name="Guild Members", value="\n".join(str(gmem)))
         
         await ctx.send(embed=curguild)
     
