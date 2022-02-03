@@ -75,25 +75,32 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         """Show Leaderboard in Current Server"""
-        setting = saved.find_one({'_id': ctx.guild.id})
-        rankings = collection.find().sort("xp", -1)
-        i = 1
-        embed = discord.Embed(title="Rankings:")
-        for x in rankings:
-            try:
-                temp = ctx.guild.get_member(x["_id"])
-                tempxp = x["xp"]
-                embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp}", inline=False)
-                i += 1
-            except:
-                 pass
-            if i == 11:
-                break
-        if setting['togglelvlsys'] == 'false':
-            embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
-        if setting is None or setting['togglelvlsys'] == 'true':
-            await ctx.channel.send(embed=embed)
-
+        try:
+            setting = saved.find_one({'_id': ctx.guild.id})
+            rankings = collection.find().sort("xp", -1)
+            i = 1
+            embed = discord.Embed(title="Rankings:")
+            for x in rankings:
+                try:
+                    temp = ctx.guild.get_member(x["_id"])
+                    tempxp = x["xp"]
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp}", inline=False)
+                    i += 1
+                except:
+                    pass
+                if i == 11:
+                    break
+            if setting['togglelvlsys'] == 'false':
+                embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
+            if setting is None or setting['togglelvlsys'] == 'true':
+                await ctx.channel.send(embed=embed)
+        except TypeError:
+            failed = discord.Embed(
+                title='',
+                description='Enable LevelSystem using `togglelvlsystem` command',
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=failed)
 
 def setup(client):
     client.add_cog(LevelSystem(client))
