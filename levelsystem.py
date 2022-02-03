@@ -91,7 +91,7 @@ class LevelSystem(commands.Cog):
                 break
         if setting['togglelvlsys'] == 'false':
             embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
-        if setting['togglelvlsys'] is None or setting['togglelvlsys'] == 'true':
+        if setting is None or setting['togglelvlsys'] == 'true':
             await ctx.channel.send(embed=embed)
 
 
