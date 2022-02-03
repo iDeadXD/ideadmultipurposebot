@@ -81,7 +81,7 @@ class Setup(commands.Cog):
         true = ['true', 'on', 'enable']
         false = ['false', 'off', 'disable']
         
-        if true in mode:
+        if mode.lower() in true:
             if data['togglelvlsys'] == 'true':
                 enabled = discord.Embed(
                     title='',
@@ -107,7 +107,7 @@ class Setup(commands.Cog):
                 color=discord.Color.green()
             )
             await ctx.send(embed=done)
-        elif false in mode:
+        elif mode.lower() in false:
             if data['togglelvlsys'] == 'false':
                 enabled = discord.Embed(
                     title='',
