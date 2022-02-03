@@ -492,16 +492,20 @@ class Utils(commands.Cog):
         
         current_guild = len(self.client.guilds)
         
-        for curr in self.client.guilds:
-            curguild = discord.Embed(
-                title="--- Dev Command ---",
-                description=f"Serving on {str(current_guild)}",
-                color=discord.Color.green()
-            )
-            curguild.add_field(name="Guild name", value=", ".join(curr.name))
-            curguild.add_field(name="Guild ID", value=f"{str(curr.id)}")
-            
-            await ctx.send(embed=curguild)
+        gname = [g.name for g in self.client.guilds]
+        gid = [g.id for g in self.client.guilds]
+        gmem = [g.member_count for g in self.client.guilds]
+        
+        curguild = discord.Embed(
+            title="--- Dev Command ---",
+            description=f"Serving on {str(current_guild)}",
+            color=discord.Color.green()
+        )
+        curguild.add_field(name="Guild name", value="\n".join(gname))
+        curguild.add_field(name="Guild ID", value=f"\n".join(gid))
+        curguild.add_field(name="Guild Members", value="\n".join(gmem))
+        
+        await ctx.send(embed=curguild)
     
     @commands.command()
     async def report(self, ctx, *, reason=None):
