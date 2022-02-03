@@ -82,14 +82,6 @@ class Setup(commands.Cog):
         false = ['false', 'off', 'disable']
         
         if mode.lower() in true:
-            if data['togglelvlsys'] == 'true':
-                enabled = discord.Embed(
-                    title='',
-                    description='LevelSystem is already enabled',
-                    color=discord.Color.green()
-                )
-                return await ctx.send(embed=enabled)
-            
             if data is None:
                 new_data = {'_id': ctx.guild.id, 'togglelvlsys': 'true'}
                 settings.insert_one(new_data)
@@ -107,15 +99,7 @@ class Setup(commands.Cog):
                 color=discord.Color.green()
             )
             await ctx.send(embed=done)
-        elif mode.lower() in false:
-            if data['togglelvlsys'] == 'false':
-                enabled = discord.Embed(
-                    title='',
-                    description='LevelSystem is already disabled',
-                    color=discord.Color.green()
-                )
-                return await ctx.send(embed=enabled)
-            
+        elif mode.lower() in false: 
             if data is None:
                 new_data = {'_id': ctx.guild.id, 'togglelvlsys': 'false'}
                 settings.insert_one(new_data)
