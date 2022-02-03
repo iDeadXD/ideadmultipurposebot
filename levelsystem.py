@@ -18,7 +18,7 @@ class LevelSystem(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        setting = settings.find_one({'_id': message.guild.id})
+        setting = saved.find_one({'_id': message.guild.id})
         if setting['togglelvlsys'] == 'false':
             return
         author_id = message.author.id
@@ -42,7 +42,7 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def rank(self, ctx):
         """Show your Rank (Failed Program)"""
-        setting = settings.find_one({'_id': ctx.guild.id})
+        setting = saved.find_one({'_id': ctx.guild.id})
         if setting['togglelvlsys'] == 'false':
             return await ctx.send('LevelSystem has been disabled on this server!!')
         author_id = ctx.author.id
@@ -75,7 +75,7 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         """Show Leaderboard in Current Server"""
-        setting = settings.find_one({'_id': ctx.guild.id})
+        setting = saved.find_one({'_id': ctx.guild.id})
         rankings = collection.find().sort("xp", -1)
         i = 1
         embed = discord.Embed(title="Rankings:")
