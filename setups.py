@@ -100,7 +100,7 @@ class Setup(commands.Cog):
                 )
                 await ctx.send(embed=done)
             
-            settings.update_one({'_id': ctx.guild.id, '$set': {'togglelvlsys': 'true'}})
+            settings.update_one({'_id': ctx.guild.id}, {'$set': {'togglelvlsys': 'true'}})
             done = discord.Embed(
                 title='',
                 description='LevelSystem has been updated to True (Enabled)',
@@ -126,7 +126,7 @@ class Setup(commands.Cog):
                 )
                 await ctx.send(embed=done)
             
-            settings.update_one({'_id': ctx.guild.id, '$set': {'togglelvlsys': 'false'}})
+            settings.update_one({'_id': ctx.guild.id}, {'$set': {'togglelvlsys': 'false'}})
             done = discord.Embed(
                 title='',
                 description='LevelSystem has been updated to False (Disabled)',
