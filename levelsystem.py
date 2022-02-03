@@ -90,10 +90,12 @@ class LevelSystem(commands.Cog):
                     pass
                 if i == 11:
                     break
-            if setting['togglelvlsys'] == 'false':
+            if setting['togglelvlsys'] == 'true':
+                pass
+            elif setting['togglelvlsys'] == 'true':
                 embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
-            if setting is None or setting['togglelvlsys'] == 'true':
-                await ctx.channel.send(embed=embed)
+            
+            await ctx.channel.send(embed=embed)
         except TypeError:
             failed = discord.Embed(
                 title='',
