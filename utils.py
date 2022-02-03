@@ -493,8 +493,8 @@ class Utils(commands.Cog):
         current_guild = len(self.client.guilds)
         
         gname = [g.name for g in self.client.guilds]
-        gid = [g.id for g in self.client.guilds]
-        gmem = [g.member_count for g in self.client.guilds]
+        gid = str([g.id for g in self.client.guilds])
+        gmem = str([g.member_count for g in self.client.guilds])
         
         curguild = discord.Embed(
             title="--- Dev Command ---",
@@ -502,8 +502,8 @@ class Utils(commands.Cog):
             color=discord.Color.green()
         )
         curguild.add_field(name="Guild name", value="\n".join(gname))
-        curguild.add_field(name="Guild ID", value=f"\n".join(str(gid)))
-        curguild.add_field(name="Guild Members", value="\n".join(str(gmem)))
+        curguild.add_field(name="Guild ID", value="\n".join(gid))
+        curguild.add_field(name="Guild Members", value="\n".join(gmem))
         
         await ctx.send(embed=curguild)
     
