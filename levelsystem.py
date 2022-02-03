@@ -6,8 +6,10 @@ from pymongo import MongoClient
 cluster = MongoClient(CONFIG['mongodb_url'])
 
 levelling = cluster["database1"]
+settings = cluster['database6']
 
 collection = levelling["level"]
+saved = settings['settings']
 
 class LevelSystem(commands.Cog):
     """LevelSystem related commands. """
@@ -16,7 +18,8 @@ class LevelSystem(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.guild.id == 836464932236165140:
+        setting = settings.find_one({'_id': message.guild.id})
+        if setting['togglelvlsys'] == 'false':
             return
         author_id = message.author.id
         stats = collection.find_one({"_id": author_id})
@@ -39,8 +42,9 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def rank(self, ctx):
         """Show your Rank (Failed Program)"""
-        if ctx.guild.id == 836464932236165140:
-            return await ctx.send('Command has been disabled on this server!!')
+        setting = settings.find_one({'_id': ctx.guild.id})
+        if setting['togglelvlsys'] == 'false':
+            return await ctx.send('LevelSystem has been disabled on this server!!')
         author_id = ctx.author.id
         stats = collection.find_one({"_id": author_id})
         if stats is None:
@@ -71,6 +75,7 @@ class LevelSystem(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         """Show Leaderboard in Current Server"""
+        setting = settings.find_one({'_id': ctx.guild.id})
         rankings = collection.find().sort("xp", -1)
         i = 1
         embed = discord.Embed(title="Rankings:")
@@ -84,8 +89,8 @@ class LevelSystem(commands.Cog):
                  pass
             if i == 11:
                 break
-        if ctx.guild.id == 836464932236165140:
-            embed.set_footer(text='\nThis is a history of LevelSystem.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am\n-> Buy XP using buy command')
+        if setting['togglelvlsys'] == 'false':
+            embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
         await ctx.channel.send(embed=embed)
 
 
