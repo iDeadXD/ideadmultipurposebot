@@ -85,7 +85,7 @@ client.help_command = MyNewHelp()
 
 #=== Cog + Task List ===
 cogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
-tasks = ['good_morning']
+task = ['good_morning']
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
@@ -103,7 +103,7 @@ async def on_ready():
     
     #=== Client Indicator ===
     curr_cogs = len(cogs)
-    curr_looptask = len(tasks)
+    curr_looptask = len(task)
     curr_server = len(client.guilds)
     
     print('[*] BOT: Online')
