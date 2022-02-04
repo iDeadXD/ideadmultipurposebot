@@ -37,7 +37,7 @@ class Economy(commands.Cog):
             balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": updated, "status": f"{str(daily)} claimed from Daily Claim"}}, upsert=True)
             done = discord.Embed(
                 title="--- Daily Claim ---",
-                description=f"You got {str(daily)} for daily claim today. Daily Claim cooldown: 24 hours",
+                description=f"You got {daily:,} for daily claim today. Daily Claim cooldown: 24 hours",
                 color=discord.Color.purple()
             )
             await ctx.send(embed=done)
@@ -112,7 +112,7 @@ class Economy(commands.Cog):
                     
                     confirm = discord.Embed(
                         title="",
-                        description=f"Are you sure want to transfer {str(amount)} to {member.name + '#' + member.discriminator} ? (y/n) (Make sure to check your money first with `balance` command)",
+                        description=f"Are you sure want to transfer {amount:,} to {member.name + '#' + member.discriminator} ? (y/n) (Make sure to check your money first with `balance` command)",
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=confirm)
@@ -134,14 +134,12 @@ class Economy(commands.Cog):
                             done.set_thumbnail(url=member.avatar_url)
                             done.add_field(name="From", value=f"{ctx.message.author.name + '#' + ctx.message.author.discriminator}")
                             done.add_field(name="Transfer to", value=f"{member.name + '#' + member.discriminator}")
-                            done.add_field(name="Amount", value=f"{str(amount)}")
-                            await ctx.send(embed=done)
-                            await member.send(embed=done)
+                            done.add_field(name="Amount", value=f"{amount:,}")
                             
                             if reason:
                                 done.add_field(name="Reason", value=str(reason))
-                                await ctx.send(embed=done)
-                                await member.send(embed=done)
+                            await ctx.send(embed=done)
+                            await member.send(embed=done)
                         elif self_data['money'] - amount == 0:
                             data1 = self_data['money'] - amount
                             data2 = recv_data['money'] + amount
@@ -157,14 +155,12 @@ class Economy(commands.Cog):
                             done.set_thumbnail(url=member.avatar_url)
                             done.add_field(name="From", value=f"{ctx.message.author.name + '#' + ctx.message.author.discriminator}")
                             done.add_field(name="Transfer to", value=f"{member.name + '#' + member.discriminator}")
-                            done.add_field(name="Amount", value=f"{str(amount)}")
-                            await ctx.send(embed=done)
-                            await member.send(embed=done)
+                            done.add_field(name="Amount", value=f"{amount:,}")
                             
                             if reason:
                                 done.add_field(name="Reason", value=str(reason))
-                                await ctx.send(embed=done)
-                                await member.send(embed=embed)
+                            await ctx.send(embed=done)
+                            await member.send(embed=embed)
                         elif self_data['money'] - amount <= 0:
                             fail4 = discord.Embed(
                                 title="",
@@ -242,7 +238,7 @@ class Economy(commands.Cog):
                     
                     confirm = discord.Embed(
                         title="",
-                        description=f"Are you sure you want to purchase {str(xpcount)} XP for {str(wallet)} money ? (y/n)",
+                        description=f"Are you sure you want to purchase {xpcount:,} XP for {wallet:,} money ? (y/n)",
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=confirm)
@@ -261,8 +257,8 @@ class Economy(commands.Cog):
                                 color=discord.Color.purple()
                             )
                             done.add_field(name="Item Type", value="XP for Level")
-                            done.add_field(name="Total", value=f"{str(wallet)} money")
-                            done.add_field(name="Number of Items purchased", value=f"{str(xpcount)} XP")
+                            done.add_field(name="Total", value=f"{wallet:,} money")
+                            done.add_field(name="Number of Items purchased", value=f"{xpcount:,} XP")
                             done.add_field(name="\u200b", value="Thanks for purchasing.")
                             await ctx.send(embed=done)
                         elif self_data_money['money'] - wallet == 0:
@@ -277,8 +273,8 @@ class Economy(commands.Cog):
                                 color=discord.Color.purple()
                             )
                             done.add_field(name="Item Type", value="XP for Level")
-                            done.add_field(name="Total", value=f"{str(wallet)} money (All of your money!!)")
-                            done.add_field(name="Number of Items purchased", value=f"{str(xpcount)} XP")
+                            done.add_field(name="Total", value=f"{wallet:,} money (All of your money!!)")
+                            done.add_field(name="Number of Items purchased", value=f"{xpcount:,} XP")
                             done.add_field(name="\u200b", value="Thanks for purchasing.")
                             await ctx.send(embed=done)
                         elif self_data_money['money'] - wallet <= 0:
@@ -322,7 +318,7 @@ class Economy(commands.Cog):
         balance.update_one({"_id": ctx.message.author.id}, {"$set": {"money": setmoney}}, upsert=True)
         done = discord.Embed(
             title='--- Dev Command ---',
-            description=f'Added {amount} money to your account',
+            description=f'Added {amount:,} money to your account',
             color=discord.Color.purple()
         )
         await ctx.reply(embed=done)
@@ -358,11 +354,11 @@ class Economy(commands.Cog):
             
             done = discord.Embed(
                 title="--- Current Balance ---",
-                description=f"{ctx.message.author.name}'s Balance",
+                description=f"{ctx.message.author.name + '#' + ctx.message.author.discriminator} Balance",
                 color=discord.Color.purple()
             )
-            done.add_field(name="\u200b", value=f"Your Current Balance: {str(money_data)}")
-            done.add_field(name="\u200b", value=f"Last Activity: {str(curr_status)}")
+            done.add_field(name="Your Current Balance:", value=f"{money_data:,}")
+            done.add_field(name="Last Activity:", value=f"{curr_status}")
             print(money_data)
             await ctx.send(embed=done)
 
