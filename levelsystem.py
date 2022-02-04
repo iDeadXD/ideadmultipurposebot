@@ -19,8 +19,11 @@ class LevelSystem(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         setting = saved.find_one({'_id': message.guild.id})
-        if setting['togglelvlsys'] == 'false':
+        if setting['togglelvlsys'] == 'true':
+            pass
+        elif setting['togglelvlsys'] == 'false':
             return
+        
         author_id = message.author.id
         stats = collection.find_one({"_id": author_id})
         if not message.author.bot:
@@ -43,8 +46,11 @@ class LevelSystem(commands.Cog):
     async def rank(self, ctx):
         """Show your Rank (Failed Program)"""
         setting = saved.find_one({'_id': ctx.guild.id})
+        if setting['togglelvlsys'] == 'true':
+            pass
         if setting['togglelvlsys'] == 'false':
             return await ctx.send('LevelSystem has been disabled on this server!!')
+        
         author_id = ctx.author.id
         stats = collection.find_one({"_id": author_id})
         if stats is None:
