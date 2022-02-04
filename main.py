@@ -357,15 +357,18 @@ async def donate(ctx):
 
 @client.command(aliases=['gm'], hidden=True)
 @commands.is_owner()
-async def good_morning(ctx, channel_id):
+async def good_morning(ctx, channel_id: int=None):
+    if channel_id is None:
+        return
     channel = client.get_channel(int(channel_id))
     morning = discord.Embed(
         title='',
         description='',
         color=discord.Color.green()
     )
-    morning.set_image(url='https://imgur.com/a/40lEJZp')
+    morning.set_image(url='https://ibb.co/StwMwmv')
     await channel.send(embed=morning)
+    await ctx.send('Done!')
 
 #=== Tasks Runner ===
 dev_hbd.start()
@@ -382,5 +385,4 @@ time.sleep(0.5)
 print('[*] Running...')
 time.sleep(2)
 print('[*] ----------------')
-client.loop.create_task(good_morning(840594344939356183, 'https://imgur.com/a/40lEJZp'))
 client.run(os.environ.get('TOKEN'))
