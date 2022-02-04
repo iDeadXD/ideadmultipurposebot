@@ -567,29 +567,29 @@ class Utils(commands.Cog):
         """
         Set reminder for you.
         """
-        if times is None or args is None:
-            return await ctx.send("Set reminder for you")
+        settime = 0
+        if times:
+            if times.endswith('s'):
+                settime = int(times.replace('s', ''))
+            elif times.endswith('m'):
+                settime = 60 * int(times.replace('m', ''))
+            elif times.endswith('h'):
+                settime = 60 * 60 * int(times.replace('h', ''))
+            elif times.endswith('d'):
+                settime = 60 * 60 * 24 * int(times.replace('d', ''))
+            else:
+                return await ctx.send('Invalid Time Format!!\nSupported Time Format: `Seconds/s, Minutes/m, Hours/h, Days/d`')
         else:
-            settime = 0
-            if times:
-                if times.endswith('s'):
-                    settime = int(times.replace('s', ''))
-                elif times.endswith('m'):
-                    settime = 60 * int(times.replace('m', ''))
-                elif times.endswith('h'):
-                    settime = 60 * 60 * int(times.replace('h', ''))
-            else:
-                return await ctx.send('Set time reminder')
+            return await ctx.send('Set reminder time!')
             
-            if args:
-                done = await ctx.send('Set Reminder for You!')
-                await asyncio.sleep(settime)
-                await ctx.message.delete()
-                await done.delete()
-                await ctx.send(f'{ctx.author.mention}, Your reminder: {args}')
-            
-            else:
-                return await ctx.send('Set message reminder!')
+        if args:
+            done = await ctx.send('Set Reminder for You!')
+            await asyncio.sleep(settime)
+            await ctx.message.delete()
+            await done.delete()
+            await ctx.send(f'{ctx.author.mention}, Your reminder: {args}')
+        else:
+            return await ctx.send('Set reminder message!')
     
     @commands.command(hidden=True)
     async def test_tts(self, ctx, *, msg: str=None):
