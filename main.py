@@ -355,6 +355,18 @@ async def donate(ctx):
     embed.add_field(name="Saweria", value=f"[Saweria Link]({link})")
     await ctx.send(embed=embed)
 
+@client.command(aliases=['gm'], hidden=True)
+@commands.is_owner()
+async def good_morning(ctx, channel_id):
+    channel = client.get_channel(int(channel_id))
+    morning = discord.Embed(
+        title='',
+        description='',
+        color=discord.Color.green()
+    )
+    morning.set_image(url='https://imgur.com/a/40lEJZp')
+    await channel.send(embed=morning)
+
 #=== Tasks Runner ===
 dev_hbd.start()
 
