@@ -361,13 +361,7 @@ async def good_morning(ctx, channel_id: int=None):
     if channel_id is None:
         return
     channel = client.get_channel(int(channel_id))
-    morning = discord.Embed(
-        title='',
-        description='',
-        color=discord.Color.green()
-    )
-    morning.set_image(url='https://ibb.co/StwMwmv')
-    await channel.send(embed=morning)
+    await channel.send(file=discord.File('ohayou.jpg'))
     await ctx.send('Done!')
 
 #=== Tasks Runner ===
