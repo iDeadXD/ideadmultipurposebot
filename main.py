@@ -83,8 +83,9 @@ class MyNewHelp(commands.MinimalHelpCommand):
 client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_ids=[843132313562513408, 695390633505849424], activity=discord.Activity(type=discord.ActivityType.listening, name="<prefix>help"), strip_after_prefix=True)
 client.help_command = MyNewHelp()
 
-#=== Cog List ===
+#=== Cog + Task List ===
 cogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+tasks = ['good_morning']
 
 #=== Cog Executor ===
 for i in range(len(cogs)):
@@ -102,6 +103,7 @@ async def on_ready():
     
     #=== Client Indicator ===
     curr_cogs = len(cogs)
+    curr_looptask = len(tasks)
     curr_server = len(client.guilds)
     
     print('[*] BOT: Online')
@@ -112,6 +114,7 @@ async def on_ready():
     time.sleep(0.8)
     print(f'[*] Loaded Cogs: {curr_cogs}')
     print(f'[*] Serving on: {curr_server} Server')
+    print(f'[*] {curr_looptask} Loop Tasks Started.')
     time.sleep(0.8)
     print('[*] --- Advance Information ---')
     print('[*] Total number of CPUs :' + str(vcc))
@@ -275,6 +278,21 @@ async def dev_hbd():
 async def dev_hbd_before():
     await client.wait_until_ready()
 
+async def good_morning(channel_id, imglink):
+    await client.wait_until_ready()
+    channel = client.get_channel(int(channel_id))
+    now = datetime.now(pytz.timezone('Asia/Jakarta'))
+    while not client.is_closed():
+        if now.strftime('%H:%M:%S') == '00:00:00':
+            morning = discord.Embed(
+                title='',
+                description='',
+                color=discord.Color.green()
+            )
+            morning.set_image(url=imglink)
+            await channel.send(embed=morning)
+        await asyncio.sleep(30)
+
 #=== Prefix Commands ===
 @client.command()
 @commands.has_permissions(manage_guild=True)
@@ -352,4 +370,5 @@ time.sleep(0.5)
 print('[*] Running...')
 time.sleep(2)
 print('[*] ----------------')
+client.loop.create_task(good_morning(840594344939356183, 'https://imgur.com/a/40lEJZp'))
 client.run(os.environ.get('TOKEN'))
