@@ -56,7 +56,7 @@ async def get_prefixes(client, message):
     return commands.when_mentioned_or(str(default_prfx))(client, message)
 
 #=== Custom Help Command ===
-class MyNewHelp(commands.MinimalHelpCommand):
+class MyNewHelp(commands.HelpCommand):
     async def send_pages(self):
         destination = self.get_destination()
         for page in self.paginator.pages:
