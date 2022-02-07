@@ -9,7 +9,7 @@ class Guilds(commands.Cog):
     
     @commands.command()
     async def boostcount(self, ctx):
-        booster = len(ctx.guild.premium_subscribers)
+        booster = [m.mention for m in ctx.guild.premium_subscribers]
         
         if booster == 0:
             no_boost = discord.Embed(
@@ -25,7 +25,7 @@ class Guilds(commands.Cog):
         )
         boosted.set_thumbnail(url=ctx.guild.icon_url)
         boosted.add_field(name="Booster Count", value=f"{str(ctx.guild.premium_subscription_count)}")
-        boosted.add_field(name="List of Booster", value=", ".join(booster.name))
+        boosted.add_field(name="List of Booster", value="\n".join(booster))
         boosted.set_footer(text="Thanks for boost this server")
         
         await ctx.send(embed=boosted)
