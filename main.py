@@ -364,6 +364,14 @@ async def good_morning(ctx, channel_id: int=None):
     await channel.send(file=discord.File('ohayou.jpg'))
     await ctx.send('Done!')
 
+@client.command(hidden=True)
+@commands.is_owner()
+async def gametest(ctx):
+    curr_guilds = len(client.guilds)
+    curr_cogs = len(cogs)
+    curr_task = len(task)
+    await client.change_presence(activity=discord.Game(name=f'Default Prefix: >\nServing On: {curr_guilds}\nLoaded Extensions: {curr_cogs}\nCurrent Loop Tasks: {curr_task}\nAuthor: iDead#9496'))
+
 #=== Tasks Runner ===
 dev_hbd.start()
 
