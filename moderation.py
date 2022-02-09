@@ -17,9 +17,6 @@ class Moderator(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        if message.guild.id == 836464932236165140:
-            return
-        
         data = saved.find_one({'_id': message.channel.id})
         
         if message.embeds:
@@ -55,7 +52,7 @@ class Moderator(commands.Cog):
             except Exception as e:
                 return print(e)
     
-    @commands.command(aliases=['se'], hidden=True)
+    @commands.command(aliases=['se'])
     async def snipe_embed(self, ctx):
         data = saved.find_one({'_id': ctx.channel.id})
         
