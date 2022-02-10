@@ -141,6 +141,10 @@ async def on_message(message):
     
     dev = client.get_guild(message.guild.id).get_member(843132313562513408)
     
+    if message.mentions:
+        for user in message.mentions:
+            await user.send(f'Just for Test\nJump URL: {message.jump_url}')
+    
     for msg in hello_m: #Check if message content in hello_m
         if message.guild.id == 836464932236165140:
             continue
