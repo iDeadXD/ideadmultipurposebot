@@ -7,7 +7,7 @@ class Guilds(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    def cog_check(ctx):
+    def cog_check(self, ctx):
         if ctx.guild.id == 840594344939356181:
             return print('Disabled for Now')
     
