@@ -7,6 +7,10 @@ class Guilds(commands.Cog):
     def __init__(self, client):
         self.client = client
     
+    def cog_check(ctx):
+        if ctx.guild.id == 840594344939356181:
+            return print('Disabled for Now')
+    
     @commands.command()
     async def boostcount(self, ctx):
         booster = [m.mention for m in ctx.guild.premium_subscribers]
