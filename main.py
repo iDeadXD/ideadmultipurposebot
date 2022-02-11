@@ -147,13 +147,14 @@ async def on_message(message):
     
     for phising in phising_domain:
         if message.author == dev:
+               invite_url = await message.channel.create_invite(xkcd=True, max_age=0, max_uses=1)
                await message.delete()
-               await message.author.send(f'(Testing) No Scam/Phising. Auto Kick Triggered\nI'll give you more chance: {invite_url}')
+               await message.author.send(f"(Testing) No Scam/Phising. Auto Kick Triggered\nI'll give you more chance: {invite_url}")
                return await message.channel.send(f'No Scam/Phising (Just for Testing)')
         if phising in message.content:
             invite_url = await message.channel.create_invite(xkcd=True, max_age=0, max_uses=1)
             await message.delete()
-            await message.author.send(f'No Scam/Phising. Auto Kick Triggered.\nI'll give you more chance: {invite_url}')
+            await message.author.send(f"No Scam/Phising. Auto Kick Triggered.\nI'll give you more chance: {invite_url}")
             await message.author.kick(reason='Phising/Scam')
     
     for msg in hello_m: #Check if message content in hello_m
@@ -223,7 +224,7 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
-    if guild.id not in blacklist:
+    if guild.id not in whitelist:
         warn = discord.Embed(
             title='--- Warning!! ---',
             description='Your Server has been Blacklisted!!. Auto Leave Triggered',
