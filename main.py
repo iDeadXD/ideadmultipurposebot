@@ -26,7 +26,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Server Blacklist ===
-blacklist = []
+blacklist = [836464932236165140]
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
