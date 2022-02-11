@@ -279,7 +279,7 @@ async def anti_phising(message):
                 await message.delete()
                 await message.author.send(f'(Testing) Jangan Share Phising. Kick dulu ya.\nKalo mau masuk lagi (1x pakai): [Masuk Lagi]({invite_url})')
                 return await message.channel.send(f'No Scam/Phising (Just for Testing)\nRole for Tester Access: `{role1.name}`, `{role2.name}`, `{role3.name}`\nKalo rolenya gak masuk di list Tester Access, bakal di kick')
-        if phising in message.content.lower():
+        if phising in message.content:
             await message.delete()
             await message.author.send(f'Jangan Share Phising. Kick dulu ya.\nKalo mau masuk lagi(1x pakai): [Masuk Lagi]({invite_url})')
             await messsage.author.kick(reason='Phising/Scam')
