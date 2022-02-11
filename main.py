@@ -264,6 +264,7 @@ async def on_member_remove(member):
 #=== Custom on_message Listener ===
 @client.listen('on_message')
 async def anti_phising(message):
+    await asyncio.sleep(3600)
     role_tester = [
         882887346566078504,
         836473048424513536,
