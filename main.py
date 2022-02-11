@@ -43,6 +43,10 @@ dataclient = cluster['database6']
 
 savedch = dataclient['msgchannel']
 
+#=== Saved Phising List ===
+with open('phising_list.txt') as phising_list:
+    phising_domain = phising_list.read().splitlines()
+
 #=== Client Prefix Setup ===
 async def get_prefixes(client, message):
     
@@ -256,6 +260,29 @@ async def on_member_remove(member):
     leave.add_field(name="Leaved at", value="{}".format(datetime.now(pytz.timezone('Asia/Jakarta')).strftime('%A, %d/%m/%Y, %H:%M:%S')))
     
     await main_ch.send(embed=leave)
+
+#=== Custom on_message Listener ===
+@client.listen('on_message')
+async def anti_phising(message):
+    role_tester = [
+        882887346566078504,
+        836473048424513536,
+        872049447859814451
+    ]
+    role1 = discord.utils.get(message.guild.roles, id=882887346566078504)
+    role2 = discord.utils.get(message.guild.roles, id=836473048424513536)
+    role3 = discord.utils.get(message.guild.roles, id=872049447859814451)
+    invite_url = await message.channel.create_invite(xkcd=True, max_age=0, max_uses=1)
+    for phising in phising_domain:
+        for role in message.author.roles:
+            if role.id in role_tester:
+                await message.delete()
+                await message.author.send(f'(Testing) Jangan Share Phising. Kick dulu ya.\nKalo mau masuk lagi (1x pakai): [Masuk Lagi]({invite_url})')
+                return await message.channel.send(f'No Scam/Phising (Just for Testing)\nRole for Tester Access: `{role1.name}`, `{role2.name}`, `{role3.name}`\nKalo rolenya gak masuk di list Tester Access, bakal di kick')
+        if phising in message.content.lower():
+            await message.delete()
+            await message.author.send(f'Jangan Share Phising. Kick dulu ya.\nKalo mau masuk lagi(1x pakai): [Masuk Lagi]({invite_url})')
+            await messsage.author.kick(reason='Phising/Scam')
 
 #=== Custom Tasks ===
 @tasks.loop(minutes=5)
