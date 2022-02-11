@@ -25,8 +25,8 @@ from config import CONFIG
 from guild_utils import Guilds
 from msg_channel import CHANNEL
 
-#=== Server Blacklist ===
-blacklist = [836464932236165140]
+#=== Server Whitelist ===
+whitelist = [840594344939356181, 851745883825373225]
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
@@ -223,7 +223,7 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
-    if guild.id in blacklist:
+    if guild.id not in blacklist:
         warn = discord.Embed(
             title='--- Warning!! ---',
             description='Your Server has been Blacklisted!!. Auto Leave Triggered',
