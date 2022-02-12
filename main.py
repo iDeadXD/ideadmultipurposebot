@@ -212,7 +212,12 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
+    date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
     if guild.id not in whitelist:
+        dev = client.get_user(843132313562513408)
+        randch = random.choice(guild.text_channels)
+        inv_url = await randch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
+        
         warn = discord.Embed(
             title='--- Warning!! ---',
             description='Your Server has been Blacklisted!!. Auto Leave Triggered',
@@ -222,17 +227,26 @@ async def on_guild_join(guild):
         warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
         warn.add_field(name='\u200b', value='__Blacklisted!!__')
         await guild.owner.send(embed=warn)
-        await asyncio.sleep(5)
+        
+        blacklist_join = discord.Embed(
+            title='--- Blacklist Server ---',
+            description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({inv_url})',
+            color=discord.Color.red()
+        )
+        blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
+        blacklist_join.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
+        blacklist_join.set_footer(text='Blacklisted server try to invite me!!')
+        await dev.send(embed=blacklist_join)
+        await asyncio.sleep(10)
         return await guild.leave()
     
-    dev = client.get_user(843132313562513408)
     owner = guild.owner
     ch = random.choice(guild.text_channels)
     link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
     
     joined = discord.Embed(
         title='--- Server Joined ---',
-        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nInvite Link: [Click This]({link})',
+        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({link})',
         color=discord.Color.purple()
     )
     await dev.send(embed=joined)
