@@ -213,6 +213,7 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_guild_join(guild):
     if guild.id not in whitelist:
+        blacklist_owner = guild.owner
         date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
         dev = client.get_user(843132313562513408)
         randch = random.choice(guild.text_channels)
@@ -229,7 +230,7 @@ async def on_guild_join(guild):
         
         blacklist_join = discord.Embed(
             title='--- Blacklist Server ---',
-            description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({inv_url})',
+            description=f'Joined to **{guild.name}**\nAuthor: __{blacklist_owner.name + "#" + blacklist_owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({inv_url})',
             color=discord.Color.red()
         )
         blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
