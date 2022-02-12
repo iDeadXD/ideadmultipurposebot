@@ -212,8 +212,8 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
-    date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
     if guild.id not in whitelist:
+        date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
         dev = client.get_user(843132313562513408)
         randch = random.choice(guild.text_channels)
         inv_url = await randch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
@@ -226,7 +226,6 @@ async def on_guild_join(guild):
         warn.add_field(name='Server Name', value=f'**{guild.name}**')
         warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
         warn.add_field(name='\u200b', value='__Blacklisted!!__')
-        await guild.owner.send(embed=warn)
         
         blacklist_join = discord.Embed(
             title='--- Blacklist Server ---',
@@ -236,7 +235,9 @@ async def on_guild_join(guild):
         blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
         blacklist_join.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
         blacklist_join.set_footer(text='Blacklisted server try to invite me!!')
+        
         await dev.send(embed=blacklist_join)
+        await guild.owner.send(embed=warn)
         await asyncio.sleep(10)
         return await guild.leave()
     
