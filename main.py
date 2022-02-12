@@ -212,10 +212,10 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
+    dev = client.get_user(843132313562513408)
     if guild.id not in whitelist:
         blacklist_owner = guild.owner
         date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
-        dev = client.get_user(843132313562513408)
         randch = random.choice(guild.text_channels)
         inv_url = await randch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
         
