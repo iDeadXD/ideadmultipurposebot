@@ -112,7 +112,7 @@ class MyNewHelpv2(commands.MinimalHelpCommand):
 
 #=== Client Setup ===
 client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_ids=[843132313562513408, 695390633505849424], activity=discord.Activity(type=discord.ActivityType.listening, name="<prefix>help"), strip_after_prefix=True)
-client.help_command = MyNewHelpv2()
+client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
 cogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
