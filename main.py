@@ -110,8 +110,32 @@ class MyNewHelpv2(commands.MinimalHelpCommand):
         channel = self.get_destination()
         await channel.send(embed=embed)
 
+#=== RPC Timestamp Setup ===
+presentDate = datetime.now(pytz.timezone('Asia/Jakarta')) 
+unix_timestamp = datetime.timestamp(presentDate)*1000
+
 #=== Client Setup ===
-client = commands.Bot(command_prefix=get_prefixes, intents=discord.Intents.all(), case_insensitive=True, owner_ids=[843132313562513408, 695390633505849424], activity=discord.Activity(type=discord.ActivityType.listening, name="<prefix>help"), strip_after_prefix=True)
+client = commands.Bot(
+    command_prefix=get_prefixes,
+    intents=discord.Intents.all(),
+    case_insensitive=True,
+    strip_after_prefix=True,
+    owner_ids=[843132313562513408, 695390633505849424],
+    activity=discord.Activity(
+        application_id=904156026851455006,
+        type=discord.ActivityType.playing,
+        name=f"Logged in: {client.user}",
+        state=f'Serving on {len(client.guilds)} |  <prefix>help',
+        details=f'Author: iDead#9496',
+        assets={
+            'large_text': 'Porta',
+            'large_image': 'img_20220216_095257'
+        },
+        timestamps={
+            'start': unix_timestamp
+        }
+    )
+)
 client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
