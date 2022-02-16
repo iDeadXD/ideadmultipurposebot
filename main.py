@@ -28,7 +28,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Server Whitelist ===
-whitelist = [840594344939356181, 851745883825373225]
+whitelist = [840594344939356181, 851745883825373225, 919177496669351956]
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
@@ -205,13 +205,13 @@ async def on_message(message):
             if message.author.bot:
                 return
             elif message.author == dev:
-                return await message.reply('My Developer.')
+                return await message.reply('My Developer.', delete_after=5)
             else:
                 if dev.status is discord.Status.offline:
                     offmsg = random.choice(devoffline)
                     return await message.reply(offmsg.format(dev.mention))
                 
-                await client.wait_for('message', check=lambda message:message.author == dev, timeout=180)
+                await client.wait_for('message', check=lambda message:message.author == dev, timeout=300)
         except asyncio.TimeoutError:
             msg = random.choice(devmention)
             return await message.reply(msg.format(dev.mention))
