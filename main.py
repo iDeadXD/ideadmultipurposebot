@@ -121,20 +121,7 @@ client = commands.Bot(
     case_insensitive=True,
     strip_after_prefix=True,
     owner_ids=[843132313562513408, 695390633505849424],
-    activity=discord.Activity(
-        application_id=904156026851455006,
-        type=discord.ActivityType.playing,
-        name=f"Logged in: {client.user}",
-        state=f'Serving on {len(client.guilds)} |  <prefix>help',
-        details=f'Author: iDead#9496',
-        assets={
-            'large_text': 'Porta',
-            'large_image': 'img_20220216_095257'
-        },
-        timestamps={
-            'start': unix_timestamp
-        }
-    )
+    activity=discord.Activity(type=discord.ActivityType.listening, name='<prefix>help')
 )
 client.help_command = MyNewHelpv1()
 
@@ -433,11 +420,21 @@ async def good_morning(ctx, channel_id: int=None):
 
 @client.command(hidden=True)
 @commands.is_owner()
-async def gametest(ctx):
-    curr_guilds = len(client.guilds)
-    curr_cogs = len(cogs)
-    curr_task = len(task)
-    await client.change_presence(activity=discord.Game(name=f'Default Prefix: >\nServing On: {curr_guilds}\nLoaded Extensions: {curr_cogs}\nCurrent Loop Tasks: {curr_task}\nAuthor: iDead#9496'))
+async def rpctest(ctx):
+    await client.change_presence(activity=activity=discord.Activity(
+        application_id=904156026851455006,
+        type=discord.ActivityType.playing,
+        name=f"Logged in: {client.user}",
+        state=f'Serving on {len(client.guilds)} |  <prefix>help',
+        details=f'Author: iDead#9496',
+        assets={
+            'large_text': 'Porta',
+            'large_image': 'img_20220216_095257'
+        },
+        timestamps={
+            'start': unix_timestamp
+        }
+    )
 
 #=== Tasks Runner ===
 dev_hbd.start()
