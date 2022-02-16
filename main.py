@@ -201,7 +201,7 @@ async def on_message(message):
                 cmd_prefix = data['_prefix']
             
             if message.content.lower().startswith(cmd_prefix):
-                continue
+                pass
             if message.author.bot:
                 return
             elif message.author == dev:
