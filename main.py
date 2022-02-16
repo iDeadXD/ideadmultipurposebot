@@ -427,14 +427,7 @@ async def rpctest(ctx):
             type=discord.ActivityType.playing,
             name=f"Logged in: {client.user}",
             state=f'Serving on {len(client.guilds)} |  <prefix>help',
-            details=f'Author: iDead#9496',
-            assets={
-                'large_text': 'Porta',
-                'large_image': 'img_20220216_095257'
-            },
-            timestamps={
-                'start': unix_timestamp
-            }
+            details=f'Author: iDead#9496'
         )
     )
 
