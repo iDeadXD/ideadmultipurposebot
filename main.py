@@ -121,7 +121,8 @@ client = commands.Bot(
     case_insensitive=True,
     strip_after_prefix=True,
     owner_ids=[843132313562513408, 695390633505849424],
-    activity=discord.Activity(type=discord.ActivityType.listening, name='<prefix>help')
+    activity=discord.Activity(type=discord.ActivityType.listening, name='<prefix>help'),
+    self_bot=True
 )
 client.help_command = MyNewHelpv1()
 
