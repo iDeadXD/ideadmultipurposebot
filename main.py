@@ -421,19 +421,21 @@ async def good_morning(ctx, channel_id: int=None):
 @client.command(hidden=True)
 @commands.is_owner()
 async def rpctest(ctx):
-    await client.change_presence(activity=discord.Activity(
-        application_id=904156026851455006,
-        type=discord.ActivityType.playing,
-        name=f"Logged in: {client.user}",
-        state=f'Serving on {len(client.guilds)} |  <prefix>help',
-        details=f'Author: iDead#9496',
-        assets={
-            'large_text': 'Porta',
-            'large_image': 'img_20220216_095257'
-        },
-        timestamps={
-            'start': unix_timestamp
-        }
+    await client.change_presence(
+        activity=discord.Activity(
+            application_id=904156026851455006,
+            type=discord.ActivityType.playing,
+            name=f"Logged in: {client.user}",
+            state=f'Serving on {len(client.guilds)} |  <prefix>help',
+            details=f'Author: iDead#9496',
+            assets={
+                'large_text': 'Porta',
+                'large_image': 'img_20220216_095257'
+            },
+            timestamps={
+                'start': unix_timestamp
+            }
+        )
     )
 
 #=== Tasks Runner ===
