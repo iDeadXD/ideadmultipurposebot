@@ -361,7 +361,7 @@ class Utils(commands.Cog):
         )
         embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name="Bot Name", value=f"{self.client.user.mention}", inline=False)
-        embed.add_field(name="Real Bot Name", value=f"{client.user}", inline=False)
+        embed.add_field(name="Real Bot Name", value=f"{self.client.user}", inline=False)
         embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
         embed.add_field(name='Created At', value=self.client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed.add_field(name="Written in", value="Python3 (discord.py Module)", inline=False)
@@ -383,7 +383,8 @@ class Utils(commands.Cog):
         rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
         text = "No Roles..." if len(rolelist) == 0 else ', '.join(rolelist)
-        voice_state = 'None' if member.voice.channel == None else f'Connected, in {member.voice.channel.mention}'
+        vc_mention = [ch.mention if member.voice.channel != None]
+        voice_state = 'None' if member.voice.channel == None else f'Connected, in {vc_mention}'
         is_bot = 'True' if member.bot else 'False'
         is_mobile = 'True' if member.is_on_mobile() == True else 'False'
         
