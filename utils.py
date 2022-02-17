@@ -265,7 +265,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.command() #supported_link
-    async def supported(self, ctx):
+    async def providers(self, ctx):
         """Checking supported music links"""
         titles = "Supported Platform for Music Player"
         desc = "=> YouTube Link\n=> SoundCloud Link"
@@ -341,8 +341,8 @@ class Utils(commands.Cog):
         embed2.add_field(name='Verification Level', value=str(ctx.guild.verification_level).capitalize(), inline=False)
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
-        embed2.add_field(name=f'Roles (Showing Up to {len(roles)} Roles)', value=(', '.join(roles)), inline=False)
-        embed2.add_field(name=f'Bots (Showing Up to {len(bots)} Bots)', value=(', '.join(bots)), inline=False)
+        embed2.add_field(name=f'Roles', value=(', '.join(roles)), inline=False)
+        embed2.add_field(name=f'Available Bots', value=(', '.join(bots)), inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
@@ -361,14 +361,14 @@ class Utils(commands.Cog):
         )
         embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name="Bot Name", value=f"{self.client.user.mention}", inline=False)
-        embed.add_field(name="Real Bot Name", value="Music Player.py#6361", inline=False)
+        embed.add_field(name="Real Bot Name", value=f"{client.user}", inline=False)
         embed.add_field(name="Bot Author", value=f"{botdev.mention}", inline=False)
         embed.add_field(name='Created At', value=self.client.user.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
-        embed.add_field(name="Coded in", value="Python3 (discord.py Module)", inline=False)
+        embed.add_field(name="Written in", value="Python3 (discord.py Module)", inline=False)
         embed.add_field(name="Serving on", value=f"{current_guild} Servers", inline=False)
         embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
         embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
-        embed.add_field(name="Available Commands", value="Check using >help or .help", inline=False)
+        embed.add_field(name="Available Commands", value="Check using >help", inline=False)
         embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
         
         await ctx.send(embed=embed)
@@ -383,6 +383,9 @@ class Utils(commands.Cog):
         rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
         text = "No Roles..." if len(rolelist) == 0 else ', '.join(rolelist)
+        voice_state = f'Connected, in {member.voice.channel.mention}' if member.voice == True else 'None'
+        is_bot = 'True' if member.bot else 'False'
+        is_mobile = 'True' if member.is_on_mobile() == True else 'False'
         
         embed = discord.Embed(
             color=discord.Color.magenta(),
@@ -390,10 +393,13 @@ class Utils(commands.Cog):
         )
         embed.set_thumbnail(url=member.avatar_url)
         embed.add_field(name="ID", value=f"{member.id}")
-        embed.add_field(name="Nickname", value=f"{member.display_name}")
-        embed.add_field(name="Current Status", value=f"{member.status}")
+        embed.add_field(name="Nickname", value=f"{member.display_name + '#' + member.discriminator}")
+        embed.add_field(name="In Voice", value=voice_state)
+        embed.add_field(name="Current Status / On Mobile", value=f"{str(member.status).capitalize()} / {is_mobile}")
+        embed.add_field(name="Bot", value=is_bot)
         embed.add_field(name="Mention", value=f"{member.mention}")
         embed.add_field(name="Joined at", value=f"{member.joined_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
+        embed.add_field(name="Highest Role", value=f"{member.top_role.mention}")
         embed.add_field(name="User Roles", value=f"{text}")
         embed.set_footer(text=f"Created at {member.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S')} UTC")
         
@@ -569,13 +575,13 @@ class Utils(commands.Cog):
         """
         settime = 0
         if times:
-            if times.endswith('s'):
+            if times.lower().endswith('s'):
                 settime = int(times.replace('s', ''))
-            elif times.endswith('m'):
+            elif times.lower().endswith('m'):
                 settime = 60 * int(times.replace('m', ''))
-            elif times.endswith('h'):
+            elif times.lower().endswith('h'):
                 settime = 60 * 60 * int(times.replace('h', ''))
-            elif times.endswith('d'):
+            elif times.lower().endswith('d'):
                 settime = 60 * 60 * 24 * int(times.replace('d', ''))
             else:
                 return await ctx.send('Invalid Time Format!!\nSupported Time Format: `Seconds/s, Minutes/m, Hours/h, Days/d`')
