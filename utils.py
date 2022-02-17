@@ -383,7 +383,7 @@ class Utils(commands.Cog):
         rolelist = [r.mention for r in member.roles if r != ctx.guild.default_role]
         
         text = "No Roles..." if len(rolelist) == 0 else ', '.join(rolelist)
-        voice_state = 'None' if member.voice.channel == None else f'Connected'
+        voice_state = 'None' if member.voice == None else f'Connected'
         is_bot = 'True' if member.bot else 'False'
         is_mobile = 'True' if member.is_on_mobile() == True else 'False'
         
