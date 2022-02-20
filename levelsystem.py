@@ -21,7 +21,7 @@ class LevelSystem(commands.Cog):
         setting = saved.find_one({'_id': message.guild.id})
         author_id = message.author.id
         stats = collection.find_one({"_id": author_id})
-        if setting['togglelvlsys'] == 'true':
+        if setting.get('togglelvlsys') == 'true':
             if not message.author.bot:
                 if stats is None:
                     newuser = {"_id": author_id, "xp": 100}
@@ -39,7 +39,7 @@ class LevelSystem(commands.Cog):
                         await message.channel.send(f"Well done {message.author.mention}! You leveled up to **Level: {lvl}**!")
             return
         
-        elif setting['togglelvlsys'] == 'false':
+        elif setting.get('togglelvlsys') == 'false':
             return
 
     @commands.command()
@@ -47,7 +47,7 @@ class LevelSystem(commands.Cog):
         """Show your Rank (Failed Program)"""
         setting = saved.find_one({'_id': ctx.guild.id})
         
-        if setting['togglelvlsys'] == 'false':
+        if setting.get('togglelvlsys') == 'false':
             return await ctx.send('LevelSystem has been disabled on this server!!')
         
         author_id = ctx.author.id
@@ -95,9 +95,9 @@ class LevelSystem(commands.Cog):
                     pass
                 if i == 11:
                     break
-            if setting['togglelvlsys'] == 'true':
+            if setting.get('togglelvlsys') == 'true':
                 pass
-            elif setting['togglelvlsys'] == 'false':
+            elif setting.get('togglelvlsys') == 'false':
                 embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
             
             await ctx.channel.send(embed=embed)
