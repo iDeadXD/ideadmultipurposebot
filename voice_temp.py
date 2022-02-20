@@ -28,8 +28,6 @@ class Voice(commands.Cog):
                         await channel.set_permissions(member, connect = True, mute_members = True, deafen_members=True, move_members = True, manage_channels = True)
                         await asyncio.sleep(3)
                         await member.move_to(channel)
-                        return
-        return
         
         if len(before.channel.members) == 0:
             await before.channel.delete()
@@ -91,10 +89,10 @@ class Voice(commands.Cog):
         """Set UserLimit for Current Voice Channel"""
         if amount is None:
             return
-        if not 1 < amount < 51:
+        if not 1 < amount < 100:
             fail1 = discord.Embed(
                 title="",
-                description="Enter limit value: 2 - 50.",
+                description="Enter limit value: 2 - 99.",
                 color=discord.Color.green()
             )
             await ctx.send(embed=fail1)
