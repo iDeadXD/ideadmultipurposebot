@@ -257,7 +257,7 @@ async def on_command_error(ctx, error):
         color=discord.Color.red()
     )
     await ctx.send(embed=failed)
-    raise ErrorHandler(f'Error: {error.original}')
+    raise ErrorHandler(f'{error}')
 
 @client.event
 async def on_guild_join(guild):
