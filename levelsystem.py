@@ -36,7 +36,7 @@ class LevelSystem(commands.Cog):
                         lvl += 1
                     xp -= ((50 * ((lvl - 1) ** 2)) + (50 * (lvl - 1)))
                     if xp == 0:
-                        await message.channel.send(f"Well done {message.author.mention}! You leveled up to **Level: {lvl}**!")
+                        return await message.channel.send(f"Well done {message.author.mention}! You leveled up to **Level: {lvl}**!")
         elif setting['togglelvlsys'] == 'false':
             return
 
@@ -44,8 +44,7 @@ class LevelSystem(commands.Cog):
     async def rank(self, ctx):
         """Show your Rank (Failed Program)"""
         setting = saved.find_one({'_id': ctx.guild.id})
-        if setting['togglelvlsys'] == 'true':
-            pass
+        
         if setting['togglelvlsys'] == 'false':
             return await ctx.send('LevelSystem has been disabled on this server!!')
         
