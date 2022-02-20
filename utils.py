@@ -199,6 +199,8 @@ class Utils(commands.Cog):
             embed.set_footer(text="Requested by {} | Today at {}".format(ctx.message.author.name, datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%H:%M:%S")), icon_url=ctx.message.author.avatar_url)
             
             await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await ctx.message.delete()
     
     @commands.command()
     async def meme(self, ctx):
@@ -261,21 +263,6 @@ class Utils(commands.Cog):
         embed.add_field(name="Local Time", value=time1)
         embed.add_field(name="UTC Time", value=time1utc)
         embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
-            
-        await ctx.send(embed=embed)
-    
-    @commands.command() #supported_link
-    async def providers(self, ctx):
-        """Checking supported music links"""
-        titles = "Supported Platform for Music Player"
-        desc = "=> YouTube Link\n=> SoundCloud Link"
-        author = ctx.message.author.name
-        embed = discord.Embed(
-            title=titles,
-            description=desc,
-            timestamp=ctx.message.created_at
-        )
-        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
             
         await ctx.send(embed=embed)
     
