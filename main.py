@@ -11,6 +11,7 @@ import pymongo
 from pymongo import MongoClient
 import asyncio
 import logging
+import sys
 import pytz
 import setups
 import music
@@ -45,6 +46,11 @@ devage = devinfo['reminder']
 dataclient = cluster['database6']
 
 savedch = dataclient['msgchannel']
+
+#=== Logging Stream -> Console ===
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 #=== Saved Phising List ===
 with open('phising_list.txt') as phising_list:
@@ -154,22 +160,22 @@ async def on_ready():
     curr_server = len(client.guilds)
     curr_user = len(client.get_all_members())
     
-    logging.info('[*] BOT: Online')
+    logger.info('[*] BOT: Online')
     time.sleep(0.8)
-    logging.infi(f'[*] Username: {client.user}')
-    logging.info(f'[*] ID: {str(client.user.id)}')
-    logging.info(f'[*] Latency: {str(round(client.latency * 1000))}ms')
+    logger.infi(f'[*] Username: {client.user}')
+    logger.info(f'[*] ID: {str(client.user.id)}')
+    logger.info(f'[*] Latency: {str(round(client.latency * 1000))}ms')
     time.sleep(0.8)
-    logging.info(f'[*] Loaded Cogs: {curr_cogs}')
-    logging.info(f'[*] Serving on: {curr_server} Server / {curr_member} User')
-    logging.info(f'[*] {curr_looptask} Loop Tasks Started.')
+    logger.info(f'[*] Loaded Cogs: {curr_cogs}')
+    logger.info(f'[*] Serving on: {curr_server} Server / {curr_member} User')
+    logger.info(f'[*] {curr_looptask} Loop Tasks Started.')
     time.sleep(0.8)
-    logging.info('[*] --- Advance Information ---')
-    logging.info('[*] Total number of CPUs :' + str(vcc))
-    logging.info('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
-    logging.info('[*] Memory usage percentage :' + str(vmem) + '%')
-    logging.info('[*] Discord.py Version: ' + discord.__version__)
-    logging.info('[*] PyMongo Version: ' + pymongo.version)
+    logger.info('[*] --- Advance Information ---')
+    logger.info('[*] Total number of CPUs :' + str(vcc))
+    logger.info('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
+    logger.info('[*] Memory usage percentage :' + str(vmem) + '%')
+    logger.info('[*] Discord.py Version: ' + discord.__version__)
+    logger.info('[*] PyMongo Version: ' + pymongo.version)
 
 @client.event #on_message
 async def on_message(message):
@@ -442,15 +448,15 @@ async def rpctest(ctx):
 dev_hbd.start()
 
 #=== Client Account Executor ===
-logging.info('[*] Creating Connection to Discord...')
+logger.info('[*] Creating Connection to Discord...')
 time.sleep(5)
-logging.info('[*] Authenticating Connection...')
+logger.info('[*] Authenticating Connection...')
 time.sleep(4)
-logging.info('[*] Connecting to Discord...')
+logger.info('[*] Connecting to Discord...')
 time.sleep(5)
-logging.info('[*] Connected to Discord!')
+logger.info('[*] Connected to Discord!')
 time.sleep(0.5)
-logging.info('[*] Running...')
+logger.info('[*] Running...')
 time.sleep(2)
-logging.info('[*] ----------------')
+logger.info('[*] ----------------')
 client.run(os.environ.get('TOKEN'))
