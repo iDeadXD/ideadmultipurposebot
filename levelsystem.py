@@ -36,7 +36,9 @@ class LevelSystem(commands.Cog):
                         lvl += 1
                     xp -= ((50 * ((lvl - 1) ** 2)) + (50 * (lvl - 1)))
                     if xp == 0:
-                        return await message.channel.send(f"Well done {message.author.mention}! You leveled up to **Level: {lvl}**!")
+                        await message.channel.send(f"Well done {message.author.mention}! You leveled up to **Level: {lvl}**!")
+            return
+        
         elif setting['togglelvlsys'] == 'false':
             return
 
