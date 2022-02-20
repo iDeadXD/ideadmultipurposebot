@@ -10,6 +10,7 @@ import time
 import pymongo
 from pymongo import MongoClient
 import asyncio
+import logging
 import pytz
 import setups
 import music
@@ -60,6 +61,10 @@ async def get_prefixes(client, message):
     for x in collection.find({"guild_id": message.guild.id}):
         default_prfx = x["_prefix"]
     return commands.when_mentioned_or(str(default_prfx))(client, message)
+
+#=== Custom Error Class ===
+class ErrorHandler(commands.CommandError):
+    pass
 
 #=== Custom Help Command ===
 class MyNewHelpv1(commands.MinimalHelpCommand):
@@ -143,27 +148,28 @@ async def on_ready():
     vcc=psutil.cpu_count()
     vcpu=psutil.cpu_percent()
     
-    #=== Client Indicator ===
+    #=== Client System Indicator ===
     curr_cogs = len(cogs)
     curr_looptask = len(task)
     curr_server = len(client.guilds)
+    curr_user = len(client.get_all_members())
     
-    print('[*] BOT: Online')
+    logging.info('[*] BOT: Online')
     time.sleep(0.8)
-    print(f'[*] Username: {client.user}')
-    print(f'[*] ID: {str(client.user.id)}')
-    print(f'[*] Ping: {str(round(client.latency * 1000))}ms')
+    logging.infi(f'[*] Username: {client.user}')
+    logging.info(f'[*] ID: {str(client.user.id)}')
+    logging.info(f'[*] Latency: {str(round(client.latency * 1000))}ms')
     time.sleep(0.8)
-    print(f'[*] Loaded Cogs: {curr_cogs}')
-    print(f'[*] Serving on: {curr_server} Server')
-    print(f'[*] {curr_looptask} Loop Tasks Started.')
+    logging.info(f'[*] Loaded Cogs: {curr_cogs}')
+    logging.info(f'[*] Serving on: {curr_server} Server / {curr_member} User')
+    logging.info(f'[*] {curr_looptask} Loop Tasks Started.')
     time.sleep(0.8)
-    print('[*] --- Advance Information ---')
-    print('[*] Total number of CPUs :' + str(vcc))
-    print('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
-    print('[*] Memory usage percentage :' + str(vmem) + '%')
-    print('[*] Discord.py Version: ' + discord.__version__)
-    print('[*] PyMongo Version: ' + pymongo.version)
+    logging.info('[*] --- Advance Information ---')
+    logging.info('[*] Total number of CPUs :' + str(vcc))
+    logging.info('[*] Total CPUs utilized percentage :' + str(vcpu) + '%')
+    logging.info('[*] Memory usage percentage :' + str(vmem) + '%')
+    logging.info('[*] Discord.py Version: ' + discord.__version__)
+    logging.info('[*] PyMongo Version: ' + pymongo.version)
 
 @client.event #on_message
 async def on_message(message):
@@ -205,7 +211,7 @@ async def on_message(message):
             if message.author.bot:
                 return
             elif message.author == dev:
-                return await message.reply('My Developer.', delete_after=5)
+                await message.reply('My Developer.', delete_after=5)
             else:
                 if dev.status is discord.Status.offline:
                     offmsg = random.choice(devoffline)
@@ -242,11 +248,11 @@ async def on_member_join(member):
 async def on_command_error(ctx, error):
     failed = discord.Embed(
         title='Error',
-        description=error,
+        description=f'`{error}`',
         color=discord.Color.red()
     )
     await ctx.send(embed=failed)
-    raise error
+    raise ErrorHandler(f'Error: {error.original}')
 
 @client.event
 async def on_guild_join(guild):
@@ -430,20 +436,21 @@ async def rpctest(ctx):
             details=f'Author: iDead#9496'
         )
     )
+    await ctx.send('Done!', delete_after=5)
 
 #=== Tasks Runner ===
 dev_hbd.start()
 
 #=== Client Account Executor ===
-print('[*] Creating Connection to Discord...')
+logging.info('[*] Creating Connection to Discord...')
 time.sleep(5)
-print('[*] Authenticating Connection...')
+logging.info('[*] Authenticating Connection...')
 time.sleep(4)
-print('[*] Connecting to Discord...')
+logging.info('[*] Connecting to Discord...')
 time.sleep(5)
-print('[*] Connected to Discord!')
+logging.info('[*] Connected to Discord!')
 time.sleep(0.5)
-print('[*] Running...')
+logging.info('[*] Running...')
 time.sleep(2)
-print('[*] ----------------')
+logging.info('[*] ----------------')
 client.run(os.environ.get('TOKEN'))
