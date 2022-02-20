@@ -27,10 +27,10 @@ class Voice(commands.Cog):
                         channel = discord.utils.get(guild.voice_channels, name=freq)
                         await channel.set_permissions(member, connect = True, mute_members = True, deafen_members=True, move_members = True, manage_channels = True)
                         await asyncio.sleep(3)
-                        await member.move_to(channel)
-        
-        if len(before.channel.members) == 0:
-            await before.channel.delete()
+                        return await member.move_to(channel)
+                if len(before.channel.members) == 0:
+                    await before.channel.delete()
+        return
     
     
     #lock
