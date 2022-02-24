@@ -34,7 +34,7 @@ class VoiceV2(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         data = saved.find_one({
-            'authorID': member.id
+            'guildID': member.guild.id
         })
         
         guildSettings = saved_guild.find_one({
@@ -46,56 +46,53 @@ class VoiceV2(commands.Cog):
         else:
             voiceID = guildSettings['voiceID']
             
-            try:
-                if after.channel.id == voiceID:
-                    categoryID = guildSettings['categoryID']
-                    globalLimit = guildSettings['globalLimit']
-                    userLimit = data['userLimit']
-                    channelName = data['channelName']
-                    channelBitrate = data['channelBitrate']
-                    settings = [channelName, userLimit, channelBitrate]
-                   
-                    if len(settings) == 0:
-                        name = f"{member.name}'s Channel"
-                        bitrate = 64000
-                        if globalLimit is None:
-                            limit = 0
-                        else:
-                            limit = globalLimit
+            if after.channel.id == voiceID:
+                categoryID = guildSettings['categoryID']
+                globalLimit = guildSettings['globalLimit']
+                userLimit = data['userLimit']
+                channelName = data['channelName']
+                channelBitrate = data['channelBitrate']
+                settings = [channelName, userLimit, channelBitrate]
+               
+                if len(settings) == 0:
+                    name = f"{member.name}'s Channel"
+                    bitrate = 64000
+                    if globalLimit is None:
+                        limit = 0
                     else:
-                        if globalLimit is None:
-                            name = settings[0]
-                            limit = settings[1]
-                            bitrate = settings[2]
-                        elif globalLimit is not None and settings[1] == 0:
-                            name = settings[0]
-                            bitrate = settings[2]
-                            limit = globalLimit
-                        else:
-                            name = settings[0]
-                            limit = settings[1]
-                            bitrate = settings[2]
-                    
-                    category = self.client.get_channel(categoryID)
-                    channel2 = await member.guild.create_voice_channel(name, category=category)
-                    await member.move_to(channel2)
-                    await channel2.set_permissions(self.client.user, connect=True, read_messages=True)
-                    await channel2.edit(name=name, user_limit=limit, bitrate=bitrate)
-                    saved.insert_one({
-                        'guildID': member.guild.id,
-                        'authorID': member.id,
-                        'channelID': channel2.id
-                    })
-                    def check(a,b,c):
-                        return len(before.channel.members) == 0
-                    await self.client.wait_for('voice_state_update', check=check)
-                    await channel2.delete()
-                    await asyncio.sleep(5)
-                    saved.delete_one({
-                        'authorID': member.id
-                    })
-            except:
-                pass
+                        limit = globalLimit
+                else:
+                    if globalLimit is None:
+                        name = settings[0]
+                        limit = settings[1]
+                        bitrate = settings[2]
+                    elif globalLimit is not None and settings[1] == 0:
+                        name = settings[0]
+                        bitrate = settings[2]
+                        limit = globalLimit
+                    else:
+                        name = settings[0]
+                        limit = settings[1]
+                        bitrate = settings[2]
+                
+                category = self.client.get_channel(categoryID)
+                channel2 = await member.guild.create_voice_channel(name, category=category)
+                await member.move_to(channel2)
+                await channel2.set_permissions(self.client.user, connect=True, read_messages=True)
+                await channel2.edit(name=name, user_limit=limit, bitrate=bitrate)
+                saved.insert_one({
+                    'guildID': member.guild.id,
+                    'authorID': member.id,
+                    'channelID': channel2.id
+                })
+                def check(a,b,c):
+                    return len(before.channel.members) == 0
+                await self.client.wait_for('voice_state_update', check=check)
+                await channel2.delete()
+                await asyncio.sleep(5)
+                saved.delete_one({
+                    'authorID': member.id
+                })
     
     @commands.command(
         name='v-fetch_id',
