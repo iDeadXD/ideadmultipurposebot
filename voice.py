@@ -567,7 +567,7 @@ class VoiceV2(commands.Cog):
                 )
                 return await ctx.send(embed=fail)
             else:
-                list_id [member.id for member in channel.members]
+                list_id = [member.id for member in channel.members]
                 if data['authorID'] in list_id:
                     owner = ctx.guild.get_member(data['authorID'])
                     failed = discord.Embed(
