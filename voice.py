@@ -1107,9 +1107,6 @@ class VoiceV2(commands.Cog):
             if msg == region_list[20]:
                 set_region = VoiceRegion.us_west
                 replymsg = region_list[20]
-            else:
-                set_region = None
-                replymsg = region_list[0]
             
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
