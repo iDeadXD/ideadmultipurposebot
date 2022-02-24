@@ -449,7 +449,7 @@ class VoiceV2(commands.Cog):
         aliases=['v-vkick']
     )
     async def vkick(self, ctx, member: discord.Member=None):
-        data saved.find_one({
+        data.saved.find_one({
             'authorID': ctx.author.id
         })
         voice_state = ctx.author.voice
