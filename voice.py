@@ -316,7 +316,7 @@ class VoiceV2(commands.Cog):
             saved.update_one(
                 {
                     'authorID': ctx.author.id
-                }
+                },
                 {'$set': 
                     {
                         'channelName': name
@@ -1231,7 +1231,7 @@ class VoiceV2(commands.Cog):
             saved.update_one(
                 {
                     'authorID': ctx.author.id
-                }
+                },
                 {'$set': 
                     {
                         'channelBitrate': set_bitrate
