@@ -82,7 +82,7 @@ class VoiceV2(commands.Cog):
                     await channel2.set_permissions(self.client.user, connect=True, read_messages=True)
                     await channel2.edit(name=name, user_limit=limit, bitrate=bitrate)
                     saved.insert_one({
-                        'guildID': member.guild.id
+                        'guildID': member.guild.id,
                         'authorID': member.id,
                         'channelID': channel2.id
                     })
