@@ -1015,7 +1015,7 @@ class VoiceV2(commands.Cog):
             'us west'
         ]
         if region is None:
-            listed = ", ".join(region_list.capitalized())
+            listed = ", ".join(region_list.capitalize())
             fail = discord.Embed(
                 title='',
                 description=f'Available Regions: {listed}',
