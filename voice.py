@@ -48,7 +48,6 @@ class VoiceV2(commands.Cog):
             
             if after.channel.id == voiceID:
                 categoryID = guildSettings['categoryID']
-                globalLimit = guildSettings['globalLimit']
                 userLimit = data['userLimit']
                 channelName = data['channelName']
                 channelBitrate = data['channelBitrate']
@@ -57,24 +56,12 @@ class VoiceV2(commands.Cog):
                 if len(settings) == 0:
                     name = f"{member.name}'s Channel"
                     bitrate = 64000
-                    if globalLimit is None:
-                        limit = 0
-                    else:
-                        limit = globalLimit
+                    limit = 0
                 else:
-                    if globalLimit is None:
-                        name = settings[0]
-                        limit = settings[1]
-                        bitrate = settings[2]
-                    elif globalLimit is not None and settings[1] == 0:
-                        name = settings[0]
-                        bitrate = settings[2]
-                        limit = globalLimit
-                    else:
-                        name = settings[0]
-                        limit = settings[1]
-                        bitrate = settings[2]
-                
+                    name = settings[0]
+                    limit = settings[1]
+                    bitrate = settings[2]
+                 
                 category = self.client.get_channel(categoryID)
                 channel2 = await member.guild.create_voice_channel(name, category=category)
                 await member.move_to(channel2)
