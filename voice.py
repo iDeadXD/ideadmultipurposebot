@@ -34,7 +34,7 @@ class VoiceV2(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         data = saved.find_one({
-            'guildID': member.guild.id
+            'authorID': member.id
         })
         
         guildSettings = saved_guild.find_one({
