@@ -993,17 +993,11 @@ class VoiceV2(commands.Cog):
         voice_state = ctx.author.voice
         region_list = [
             'automatic',
-            'amsterdam',
             'brazil',
-            'dubai',
-            'eu central',
-            'eu west',
             'europe',
-            'frankurt',
             'hongkong',
             'india',
             'japan',
-            'london',
             'russia',
             'singapore',
             'south africa',
@@ -1014,14 +1008,28 @@ class VoiceV2(commands.Cog):
             'us south',
             'us west'
         ]
+        region_list_cap = [
+            'Automatic',
+            'Brazil',
+            'Europe',
+            'Hongkong',
+            'India',
+            'Japan',
+            'Russia',
+            'Singapore',
+            'South Africa',
+            'South Korea',
+            'Sydney',
+            'US Central',
+            'US East',
+            'US South',
+            'US West'
+        ]
         if region is None:
-            list_cap = []
-            for reg in region_list:
-                list_cap.append(reg.capitalize())
-            listed = ", ".join(list_cap)
+            listed = ", ".join(region_list_cap)
             fail = discord.Embed(
                 title='',
-                description=f'Available Regions: {listed}',
+                description=f'Available Regions: `{listed}`',
                 color=discord.Color.purple(),
                 timestamp=ctx.message.created_at
             )
@@ -1047,66 +1055,51 @@ class VoiceV2(commands.Cog):
             if msg == region_list[0]:
                 set_region = None
                 replymsg = region_list[0]
-            if msg == region_list[1]:
-                set_region = VoiceRegion.amsterdam
-                replymsg = region_list[1]
-            if msg == region_list[2]:
+            elif msg == region_list[1]:
                 set_region = VoiceRegion.brazil
-                replymsg = region_list[2]
-            if msg == region_list[3]:
-                set_region = VoiceRegion.dubai
-                replymsg = region_list[3]
-            if msg == region_list[4]:
-                set_region = VoiceRegion.eu_central
-                replymsg = region_list[4]
-            if msg == region_list[5]:
-                set_region = VoiceRegion.eu_west
-                replymsg = region_list[5]
-            if msg == region_list[6]:
+                replymsg = region_list[1]
+            elif msg == region_list[2]:
                 set_region = VoiceRegion.europe
-                replymsg = region_list[6]
-            if msg == region_list[7]:
-                set_region = VoiceRegion.frankurt
-                replymsg = region_list[7]
-            if msg == region_list[8]:
+                replymsg = region_list[2]
+            elif msg == region_list[3]:
                 set_region = VoiceRegion.hongkong
-                replymsg = region_list[8]
-            if msg == region_list[9]:
+                replymsg = region_list[3]
+            elif msg == region_list[4]:
                 set_region = VoiceRegion.india
-                replymsg = region_list[9]
-            if msg == region_list[10]:
+                replymsg = region_list[4]
+            elif msg == region_list[5]:
                 set_region = VoiceRegion.japan
-                replymsg = region_list[10]
-            if msg == region_list[11]:
-                set_region = VoiceRegion.london
-                replymsg = region_list[11]
-            if msg == region_list[12]:
+                replymsg = region_list[5]
+            elif msg == region_list[6]:
                 set_region = VoiceRegion.russia
-                replymsg = region_list[12]
-            if msg == region_list[13]:
+                replymsg = region_list[6]
+            elif msg == region_list[7]:
                 set_region = VoiceRegion.singapore
-                replymsg = region_list[13]
-            if msg == region_list[14]:
+                replymsg = region_list[7]
+            elif msg == region_list[8]:
                 set_region = VoiceRegion.south_africa
-                replymsg = region_list[14]
-            if msg == region_list[15]:
+                replymsg = region_list[8]
+            elif msg == region_list[9]:
                 set_region = VoiceRegion.south_korea
-                replymsg = region_list[15]
-            if msg == region_list[16]:
+                replymsg = region_list[9]
+            elif msg == region_list[10]:
                 set_region = VoiceRegion.sydney
-                replymsg = region_list[16]
-            if msg == region_list[17]:
+                replymsg = region_list[10]
+            elif msg == region_list[11]:
                 set_region = VoiceRegion.us_central
-                replymsg = region_list[17]
-            if msg == region_list[18]:
+                replymsg = region_list[11]
+            elif msg == region_list[12]:
                 set_region = VoiceRegion.us_east
-                replymsg = region_list[18]
-            if msg == region_list[19]:
+                replymsg = region_list[12]
+            elif msg == region_list[13]:
                 set_region = VoiceRegion.us_south
-                replymsg = region_list[19]
-            if msg == region_list[20]:
+                replymsg = region_list[13]
+            elif msg == region_list[14]:
                 set_region = VoiceRegion.us_west
-                replymsg = region_list[20]
+                replymsg = region_list[14]
+            else:
+                set_region = None
+                replymsg = region_list[0]
             
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
