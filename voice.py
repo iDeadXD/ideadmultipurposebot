@@ -208,7 +208,7 @@ class VoiceV2(commands.Cog):
                             )
                             await ctx.send(embed=done)
                         else:
-                            saved_guild.update_one({'guildID': ctx.guild.id, 'ownerID': ctx.guild.owner.id}, {'$set: {'voiceID': get_ch.id, 'categoryID': get_cat.id}}, upsert=True)
+                            saved_guild.update_one({'guildID': ctx.guild.id}, {'$set: {'voiceID': get_ch.id, 'categoryID': get_cat.id}}, upsert=True)
                             done = discord.Embed(
                                 title='',
                                 description='(Updated) All setup has completed and ready to go!',
