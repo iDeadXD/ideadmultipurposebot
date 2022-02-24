@@ -208,14 +208,19 @@ class VoiceV2(commands.Cog):
                             )
                             await ctx.send(embed=done)
                         else:
-                            saved_guild.update_one({
-                                'guildID': ctx.guild.id,
-                                'ownerID': ctx.guild.owner.id,
-                                {'$set': {
-                                    'voiceID': get_ch.id,
-                                    'categoryID': get_cat.id
-                                }}
-                            }, upsert=True)
+                            saved_guild.update_one(
+                                {
+                                    'guildID': ctx.guild.id,
+                                    'ownerID': ctx.guild.owner.id
+                                },
+                                {'$set': 
+                                    {
+                                        'voiceID': get_ch.id,
+                                        'categoryID': get_cat.id
+                                    }
+                                },
+                                upsert=True
+                            )
                             done = discord.Embed(
                                 title='',
                                 description='(Updated) All setup has completed and ready to go!',
@@ -252,12 +257,17 @@ class VoiceV2(commands.Cog):
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
             await channel.edit(user_limit=limit)
-            saved.update_one({
-                'authorID': ctx.author.id,
-                {'$set': {
-                    'userLimit': limit
-                }}
-            }, upsert=True)
+            saved.update_one(
+                {
+                    'authorID': ctx.author.id
+                },
+                {'$set': 
+                    {
+                        'userLimit': limit
+                    }
+                },
+                upsert=True
+            )
             if limit <= 1:
                 done = discord.Embed(
                     title='',
@@ -303,12 +313,17 @@ class VoiceV2(commands.Cog):
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
             await channel.edit(name=name)
-            saved.update_one({
-                'authorID': ctx.author.id,
-                {'$set': {
-                    'channelName': name
-                }}
-            }, upsert=True)
+            saved.update_one(
+                {
+                    'authorID': ctx.author.id
+                }
+                {'$set': 
+                    {
+                        'channelName': name
+                    }
+                },
+                upsert=True
+            )
             done = discord.Embed(
                 title='',
                 description=f"Channel name has been changed to `{name}`",
@@ -424,7 +439,7 @@ class VoiceV2(commands.Cog):
         aliases=['v-vkick']
     )
     async def vkick(self, ctx, member: discord.Member=None):
-        data.saved.find_one({
+        data = saved.find_one({
             'authorID': ctx.author.id
         })
         voice_state = ctx.author.voice
@@ -554,12 +569,17 @@ class VoiceV2(commands.Cog):
                     await ctx.send(embed=failed)
                     x = True
             if x == False:
-                saved.update_one({
-                    'channelID': channel.id,
-                    {'$set': {
-                        'authorID': ctx.author.id
-                    }}
-                }, upsert=True)
+                saved.update_one(
+                    {
+                        'channelID': channel.id
+                    },
+                    {'$set': 
+                        {
+                            'authorID': ctx.author.id
+                        }
+                    },
+                    upsert=True
+                )
                 done = discord.Embed(
                     title='',
                     description=f'{channel.mention} owner has been changed to {ctx.author.mention}',
@@ -602,12 +622,17 @@ class VoiceV2(commands.Cog):
                     timestamp=ctx.message.created_at
                 )
                 return await ctx.send(embed=fail)
-            saved.update_one({
-                'channelID': channel.id,
-                {'$set': {
-                    'authorID': member.id
-                }}
-            }, upsert=True)
+            saved.update_one(
+                {
+                    'channelID': channel.id
+                },
+                {'$set': 
+                    {
+                        'authorID': member.id
+                    }
+                },
+                upsert=True
+            )
             done = discord.Embed(
                 title='',
                 description=f'Transfer ownership succesfull!\nNew owner: {member.mention}',
@@ -836,12 +861,17 @@ class VoiceV2(commands.Cog):
                 channel = self.client.get_channel(vc_id)
                 activity_name = ctx.author.activity.name
                 await channel.edit(name=activity_name)
-                saved.update_one({
-                    'authorID': ctx.author.id,
-                    {'$set': {
-                        'channelName': activity_name
-                    }}
-                }, upsert=True)
+                saved.update_one(
+                    {
+                        'authorID': ctx.author.id
+                    },
+                    {'$set': 
+                        {
+                            'channelName': activity_name
+                        }
+                    },
+                    upsert=True
+                )
                 done = discord.Embed(
                     title='',
                     description=f"(Game Mode Enabled) Channel name has been changed to `{name}`",
@@ -1198,12 +1228,17 @@ class VoiceV2(commands.Cog):
             channel = self.client.get_channel(vc_id)
             set_bitrate = round(rate * 1000)
             await channel.edit(bitrate=set_bitrate)
-            saved.update_one({
-                'authorID': ctx.author.id,
-                {'$set': {
-                    'channelBitrate': set_bitrate
-                }}
-            }, upsert=True)
+            saved.update_one(
+                {
+                    'authorID': ctx.author.id
+                }
+                {'$set': 
+                    {
+                        'channelBitrate': set_bitrate
+                    }
+                },
+                upsert=True
+            )
             done = discord.Embed(
                 title='',
                 description=f'Changed the channel bitrate to `{rate}Kbps`.',
