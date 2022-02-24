@@ -1116,7 +1116,7 @@ class VoiceV2(commands.Cog):
             await channel.edit(rtc_region=set_region)
             done = discord.Embed(
                 title='',
-                description=f'Succesfully changed your channels region to {replymsg.capitalized()}',
+                description=f'Succesfully changed your channels region to {replymsg.capitalize()}',
                 color=discord.Color.purple(),
                 timestamp=ctx.message.created_at
             )
