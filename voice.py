@@ -829,7 +829,7 @@ class VoiceV2(commands.Cog):
         name='v-pushtotalk_on',
         aliases=['v-setpushtotalk', 'v-ptt']
     )
-    async def _pushtotalk(self, ctx):
+    async def _pushtotalk_on(self, ctx):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
@@ -867,7 +867,7 @@ class VoiceV2(commands.Cog):
         name='v-pushtotalk_off',
         aliases=['v-nonpushtotalk', 'v-nonptt']
     )
-    async def _pushtotalk(self, ctx):
+    async def _pushtotalk_off(self, ctx):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
