@@ -220,7 +220,7 @@ class VoiceV2(commands.Cog):
         name='v-userlimit',
         aliases=['v-ul', 'v-limit']
     )
-    async def _userlimit(self, ctx, amount: int=None):
+    async def _userlimit(self, ctx, limit: int=None):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
