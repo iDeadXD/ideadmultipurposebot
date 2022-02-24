@@ -16,7 +16,7 @@ import pytz
 import setups
 import music
 import levelsystem
-import voice_temp
+import voice
 import guild_utils
 import economy
 import dev
@@ -137,7 +137,7 @@ client = commands.Bot(
 client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
-cogs = [setups, dev, music, levelsystem, voice_temp, moderation, utils, guild_utils, games, economy]
+cogs = [setups, dev, music, levelsystem, voice, moderation, utils, guild_utils, games, economy]
 task = ['good_morning']
 
 #=== Cog Executor ===
