@@ -266,7 +266,7 @@ class VoiceV2(commands.Cog):
         name='v-name',
         aliases=['v-changename', 'v-rename']
     )
-    async def _name(self, ctx, name):
+    async def _name(self, ctx, *, name):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
