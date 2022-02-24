@@ -64,7 +64,7 @@ class VoiceV2(commands.Cog):
                     'channelID': channel2.id
                 })
                 def check(a,b,c):
-                    return len(before.channel.members) == 0
+                    return len(channel2.members) == 0
                 await self.client.wait_for('voice_state_update', check=check)
                 await channel2.delete()
                 await asyncio.sleep(5)
