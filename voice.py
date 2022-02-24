@@ -48,20 +48,11 @@ class VoiceV2(commands.Cog):
             
             if after.channel.id == voiceID:
                 categoryID = guildSettings['categoryID']
-                userLimit = data['userLimit']
-                channelName = data['channelName']
-                channelBitrate = data['channelBitrate']
-                settings = [channelName, userLimit, channelBitrate]
-               
-                if len(settings) == 0:
-                    name = f"{member.name}'s Channel"
-                    bitrate = 64000
-                    limit = 0
-                else:
-                    name = settings[0]
-                    limit = settings[1]
-                    bitrate = settings[2]
-                 
+                
+                name = f"{member.name}'s Channel"
+                bitrate = 64000
+                limit = 0
+                
                 category = self.client.get_channel(categoryID)
                 channel2 = await member.guild.create_voice_channel(name, category=category)
                 await member.move_to(channel2)
