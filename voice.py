@@ -483,7 +483,7 @@ class VoiceV2(commands.Cog):
             if member not in channel.members:
                 failed = discord.Embed(
                     title='',
-                    description=f'{} currently not in your channel',
+                    description=f'{member.mention} currently not in your channel',
                     color=discord.Color.red(),
                     timestamp=ctx.message.created_at
                 )
@@ -679,7 +679,7 @@ class VoiceV2(commands.Cog):
             if member not in channel.members:
                 failed = discord.Embed(
                     title='',
-                    description=f'{} currently not in your channel',
+                    description=f'{member.mention} currently not in your channel',
                     color=discord.Color.red(),
                     timestamp=ctx.message.created_at
                 )
@@ -734,7 +734,7 @@ class VoiceV2(commands.Cog):
             if member not in channel.members:
                 failed = discord.Embed(
                     title='',
-                    description=f'{} currently not in your channel',
+                    description=f'{member.mention} currently not in your channel',
                     color=discord.Color.red(),
                     timestamp=ctx.message.created_at
                 )
