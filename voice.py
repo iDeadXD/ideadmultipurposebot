@@ -316,14 +316,14 @@ class VoiceV2(commands.Cog):
                 timestamp=ctx.message.created_at
             )
             return await ctx.send(embed=fail)
-         if voice_state is None:
-            fail = discord.Embed(
-                title='',
-                description="You're not in voice channel. Please use this command in voice channel.",
-                color=discord.Color.red(),
-                timestamp=ctx.message.created_at
-            )
-            return await ctx.send(embed=fail)
+          if voice_state is None:
+              fail = discord.Embed(
+                  title='',
+                  description="You're not in voice channel. Please use this command in voice channel.",
+                  color=discord.Color.red(),
+                 timestamp=ctx.message.created_at
+              )
+              return await ctx.send(embed=fail)
         else:
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
@@ -603,7 +603,19 @@ class VoiceV2(commands.Cog):
         })
         voice_state = ctx.author.voice
         if member is None:
-            
+            fail = discord.Embed(
+                title='',
+                description='Please specify a user to transfer ownership'
+            )
+            return await ctx.send(embed=fail)
+        if data is None:
+            fail = discord.Embed(
+                title='',
+                description=f"You don't own a channel!",
+                color=discord.Color.red(),
+                timestamp=ctx.message.created_at
+            )
+            return await ctx.send(embed=fail)
         else:
             vc_id = data['channelID']
             channel = self.client.get_channel(vc_id)
