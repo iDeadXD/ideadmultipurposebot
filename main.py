@@ -180,20 +180,6 @@ async def on_ready():
 async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
     
-    devmention = [
-        "Wait...",
-        "Waiting for {} response...",
-        "Looks like, {} is busy rn. (Maybe)",
-    ]
-    
-    devoffline = [
-        "Maybe {} is offline...",
-        "Wait until {} is online",
-        "{} is offline rn"
-    ]
-    
-    dev = client.get_guild(message.guild.id).get_member(843132313562513408)
-    
     for msg in hello_m: #Check if message content in hello_m
         if message.content.lower().startswith(msg):
             halo = discord.Embed(
@@ -202,30 +188,6 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
-    
-    if dev in message.mentions:
-        try:
-            data = collection.find_one({'guild_id': message.guild.id})
-            if data is None:
-                cmd_prefix = '>'
-            else:
-                cmd_prefix = data['_prefix']
-            
-            if message.content.lower().startswith(cmd_prefix):
-                pass
-            if message.author.bot:
-                return
-            elif message.author == dev:
-                await message.reply('My Developer.', delete_after=5)
-            else:
-                if dev.status is discord.Status.offline:
-                    offmsg = random.choice(devoffline)
-                    return await message.reply(offmsg.format(dev.mention))
-                
-                await client.wait_for('message', check=lambda message:message.author == dev, timeout=300)
-        except asyncio.TimeoutError:
-            msg = random.choice(devmention)
-            return await message.reply(msg.format(dev.mention))
     
     await client.process_commands(message)
 
