@@ -304,7 +304,7 @@ class VoiceV2(commands.Cog):
         name='v-ban',
         aliases=['v-banuser']
     )
-    async def _ban(self, ctx, member: discord.Member=None, *, reason=None):
+    async def _ban(self, ctx, member: discord.Member=None):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
@@ -361,7 +361,7 @@ class VoiceV2(commands.Cog):
         name='v-kick',
         aliases=['v-kickuser']
     )
-    async def _kick(self, ctx, member: discord.Member=None, *, reason=None):
+    async def _kick(self, ctx, member: discord.Member=None):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
@@ -986,7 +986,7 @@ class VoiceV2(commands.Cog):
         name='v-region',
         aliases=['v-reg', 'v-changeregion']
     )
-    async def _region(self, ctx, region=None):
+    async def _region(self, ctx, *, region=None):
         data = saved.find_one({
             'authorID': ctx.author.id
         })
