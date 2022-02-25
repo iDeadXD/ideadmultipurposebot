@@ -465,8 +465,7 @@ class VoiceV2(commands.Cog):
                     )
                     if react_count.member.id not in member_id:
                         return
-                    if react_count:
-                        yes += 1
+                    yes += 1
                 except asyncio.TimeoutError:
                     done = discord.Embed(
                         title='',
