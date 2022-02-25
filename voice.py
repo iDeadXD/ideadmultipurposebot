@@ -460,12 +460,13 @@ class VoiceV2(commands.Cog):
                 try:
                     react_count = await self.client.wait_for(
                           'raw_reaction_add',
-                          check=lambda payload:payload.emoji ==  '✔️' and payload.message_id == vote.id and payload.channel_id == ctx.channel.id,
+                          check=lambda payload:payload.message_id == vote.id and payload.channel_id == ctx.channel.id,
                           timeout=15
                     )
                     if react_count.member.id not in member_id:
                         return
-                    yes += 1
+                    if react_count.emoji == '✔️':
+                        yes += 1
                 except asyncio.TimeoutError:
                     done = discord.Embed(
                         title='',
