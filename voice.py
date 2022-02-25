@@ -474,7 +474,7 @@ class VoiceV2(commands.Cog):
                         color=discord.Color.purple()
                     )
                     await ctx.send(embed=done)
-                else:
+                    
                     raw_res = discord.Embed(
                         title='--- Vote Result ---',
                         description=f'Yes: {yes}\nNo: {no}',
