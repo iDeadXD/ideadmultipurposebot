@@ -1143,7 +1143,7 @@ class VoiceV2(commands.Cog):
             elif ctx.guild.premium_tier == 3:
                 maxrate = 384
             
-            if not 7 < rate < maxrate+1:
+            if rate is None or not 7 < rate < maxrate+1:
                 failed = discord.Embed(
                     title='',
                     description=f'Enter bitrate value: 8 - {str(maxrate)}',
