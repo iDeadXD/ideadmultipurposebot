@@ -45,32 +45,34 @@ class VoiceV2(commands.Cog):
             pass
         else:
             voiceID = guildSettings['voiceID']
-            
-            if after.channel.id == voiceID:
-                categoryID = guildSettings['categoryID']
-                
-                name = f"{member.name}'s Channel"
-                bitrate = 64000
-                limit = 0
-                
-                category = self.client.get_channel(categoryID)
-                channel2 = await member.guild.create_voice_channel(name, category=category)
-                await member.move_to(channel2)
-                await channel2.set_permissions(self.client.user, connect=True, read_messages=True)
-                await channel2.edit(name=name, user_limit=limit, bitrate=bitrate)
-                saved.insert_one({
-                    'guildID': member.guild.id,
-                    'authorID': member.id,
-                    'channelID': channel2.id
-                })
-                def check(a,b,c):
-                    return len(channel2.members) == 0
-                await self.client.wait_for('voice_state_update', check=check)
-                await channel2.delete()
-                await asyncio.sleep(5)
-                saved.delete_one({
-                    'authorID': member.id
-                })
+            try:
+                if after.channel.id == voiceID:
+                    categoryID = guildSettings['categoryID']
+                   
+                    name = f"{member.name}'s Channel"
+                    bitrate = 64000
+                    limit = 0
+                   
+                    category = self.client.get_channel(categoryID)
+                    channel2 = await member.guild.create_voice_channel(name, category=category)
+                    await member.move_to(channel2)
+                    await channel2.set_permissions(self.client.user, connect=True, read_messages=True)
+                    await channel2.edit(name=name, user_limit=limit, bitrate=bitrate)
+                    saved.insert_one({
+                        'guildID': member.guild.id,
+                        'authorID': member.id,
+                        'channelID': channel2.id
+                    })
+                    def check(a,b,c):
+                        return len(channel2.members) == 0
+                    await self.client.wait_for('voice_state_update', check=check)
+                    await channel2.delete()
+                    await asyncio.sleep(5)
+                    saved.delete_one({
+                        'authorID': member.id
+                    })
+            except:
+                pass
     
     @commands.command(
         name='v-fetch_id',
