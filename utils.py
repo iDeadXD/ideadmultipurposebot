@@ -323,7 +323,7 @@ class Utils(commands.Cog):
         
         i = 0
         for role in reversed(ctx.guild.roles):
-            if i <= 11:
+            if i >= 11:
                 break
             i += 1
             roles.append(role.mention)
