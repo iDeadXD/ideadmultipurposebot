@@ -84,7 +84,7 @@ class LevelSystem(commands.Cog):
                 description='Enable LevelSystem using `togglelvlsystem` command',
                 color=discord.Color.red()
             )
-            return await ctx.send(embed=failed
+            return await ctx.send(embed=failed)
 
     @commands.command()
     async def leaderboard(self, ctx):
