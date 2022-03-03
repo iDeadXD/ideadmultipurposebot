@@ -91,22 +91,21 @@ class LevelSystem(commands.Cog):
         """Show Leaderboard in Current Server"""
         try:
             setting = saved.find_one({'_id': ctx.guild.id})
-            rankings = collection.find().sort("xp", -1)
-            i = 1
-            embed = discord.Embed(title="Rankings:")
-            for x in rankings:
-                try:
-                    temp = ctx.guild.get_member(x["_id"])
-                    tempxp = x["xp"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp:,}", inline=False)
-                    i += 1
-                except:
-                    pass
-                if i == 11:
-                    break
-            if setting.get('togglelvlsys') == 'true':
-                pass
-            elif setting.get('togglelvlsys') == 'false':
+            if setting['togglelvlsys'] == 'true':
+                rankings = collection.find().sort("xp", -1)
+                i = 1
+                embed = discord.Embed(title="Rankings:")
+                for x in rankings:
+                    try:
+                        temp = ctx.guild.get_member(x["_id"])
+                        tempxp = x["xp"]
+                        embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp:,}", inline=False)
+                        i += 1
+                    except:
+                        pass
+                    if i == 11:
+                        break
+            elif setting['togglelvlsys'] == 'false':
                 embed.set_footer(text='\nThis is a LevelSystem history on this server.\nLevelSystem currently has been disabled on this server!\nYou can add XP by:\n-> Level up on the another server where I am in\n-> Buy XP using buy command')
             
             await ctx.channel.send(embed=embed)
