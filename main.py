@@ -30,7 +30,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Server Whitelist ===
-whitelist = [840594344939356181, 851745883825373225, 919177496669351956, 939164890705297418]
+whitelist = [948593220324057129, 840594344939356181, 851745883825373225, 919177496669351956, 939164890705297418]
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
