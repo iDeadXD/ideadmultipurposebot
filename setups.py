@@ -74,7 +74,11 @@ class Setup(commands.Cog):
     @commands.has_permissions(manage_guild=True)
     async def togglelvlsystem(self, ctx, mode: str=None):
         data = settings.find_one({'_id': ctx.guild.id})
-        curr_mode = 'Enabled' if data['togglelvlsys'] == 'true' else 'Disabled'
+        
+        try:
+            curr_mode = 'Enabled' if data['togglelvlsys'] == 'true' else 'Disabled'
+        except:
+            curr_mode = 'Disabled'
         
         if mode is None:
             return await ctx.send(f'Available mode: `true/false`\nCurrently {curr_mode}')
