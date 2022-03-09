@@ -189,12 +189,12 @@ async def on_message(message):
                 color=discord.Color.purple()
             )
             await message.reply(embed=halo)
-    
-    if test_msg in message.content.lower():
-        if message.author.permissions_in(message.channel).administrator:
-            return await message.channel.send('Yes (Test)')
-        await message.delete()
-        await message.channel.send('No (Test)')
+    for msg_test in test_msg:
+        if msg_test in message.content.lower():
+            if message.author.permissions_in(message.channel).administrator:
+                return await message.channel.send('Yes (Test)')
+            await message.delete()
+            await message.channel.send('No (Test)')
     
     await client.process_commands(message)
 
