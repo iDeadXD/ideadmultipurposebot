@@ -191,7 +191,7 @@ async def on_message(message):
             await message.reply(embed=halo)
     for msg_test in test_msg:
         if msg_test in message.content.lower():
-            for perms in message.author.guild_permission:
+            for perms in message.author.guild_permissions:
                 if perms.administrator:
                     return await message.channel.send('Yes (Test)')
             await message.delete()
