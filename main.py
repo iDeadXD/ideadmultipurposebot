@@ -228,26 +228,23 @@ async def on_guild_join(guild):
     if guild.id not in whitelist:
         blacklist_owner = guild.owner
         date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
-        randch = random.choice(guild.text_channels)
-        inv_url = await randch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
-        
         warn = discord.Embed(
             title='--- Warning!! ---',
-            description='Your Server has been Blacklisted!!. Auto Leave Triggered',
+            description='Your Server is not registered!!. Auto Leave Triggered\nYou can request to Dev for registering your Server and invite me again after registration\nReason: BETA Version (Still Under Development)',
             color=discord.Color.red()
         )
         warn.add_field(name='Server Name', value=f'**{guild.name}**')
         warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
-        warn.add_field(name='\u200b', value='__Blacklisted!!__')
+        warn.add_field(name='\u200b', value='__Not Registered!!__')
         
         blacklist_join = discord.Embed(
-            title='--- Blacklist Server ---',
-            description=f'Joined to **{guild.name}**\nAuthor: __{blacklist_owner.name + "#" + blacklist_owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({inv_url})',
+            title='--- Server is not registered ---',
+            description=f'Joined to **{guild.name}**\nAuthor: __{blacklist_owner.name + "#" + blacklist_owner.discriminator}__\nTime: {date_now}',
             color=discord.Color.red()
         )
         blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
         blacklist_join.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
-        blacklist_join.set_footer(text='Blacklisted server try to invite me!!')
+        blacklist_join.set_footer(text='Unregistered server try to invite me!!')
         
         await dev.send(embed=blacklist_join)
         await guild.owner.send(embed=warn)
