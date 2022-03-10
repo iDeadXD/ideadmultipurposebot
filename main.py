@@ -30,7 +30,7 @@ from guild_utils import Guilds
 from msg_channel import CHANNEL
 
 #=== Server Whitelist ===
-whitelist = [948593220324057129, 840594344939356181, 851745883825373225, 919177496669351956, 939164890705297418]
+whitelist = [785349273242959883, 948593220324057129, 840594344939356181, 851745883825373225, 919177496669351956, 939164890705297418]
 
 #=== Prefix Database (MongoDB) ===
 cluster = MongoClient(CONFIG['mongodb_url'])
@@ -181,20 +181,14 @@ async def on_message(message):
     hello_m = ["halo", "hello", "hola"]
     test_msg = ['kntl_is_kntl', 'mmk_is_mmk']
     
-    for msg in hello_m: #Check if message content in hello_m
-        if message.content.lower().startswith(msg):
-            halo = discord.Embed(
-                title="",
-                description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
-                color=discord.Color.purple()
-            )
-            await message.reply(embed=halo)
-    for msg_test in test_msg:
-        if msg_test in message.content.lower():
-            if message.channel.permissions_for(message.author).administrator:
-                return await message.channel.send('Yes (Test)')
-            await message.delete()
-            await message.channel.send('No (Test)')
+    #for msg in hello_m: Check if message content in hello_m
+        #if message.content.lower().startswith(msg):
+            #halo = discord.Embed(
+                #title="",
+                #description=f"Halo juga {message.author.mention}, Semoga Hari mu Menyenangkan.",
+                #color=discord.Color.purple()
+            #)
+            #await message.reply(embed=halo)
     
     await client.process_commands(message)
 
@@ -203,7 +197,7 @@ async def on_member_join(member):
     data = savedch.find_one({'_id': member.guild.id})
     
     if data is None:
-        main_ch = member.guild.system_channel
+        return
     else:
         main_ch = client.get_channel(data['welcome_ch'])
     
@@ -276,7 +270,7 @@ async def on_member_remove(member):
     data = savedch.find_one({'_id': member.guild.id})
     
     if data is None:
-        main_ch = member.guild.system_channel
+        return
     else:
         main_ch = client.get_channel(data['leave_ch'])
     
