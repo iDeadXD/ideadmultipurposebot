@@ -324,12 +324,12 @@ async def good_morning(channel_id, imglink):
 #=== Prefix Commands ===
 @client.command()
 @commands.has_permissions(manage_guild=True)
-async def prefix(ctx, prefixs=None):
+async def prefix(ctx, prefix=None):
     """Change bot command prefix"""
     data = collection.find_one({"guild_id": ctx.guild.id})
     curr_prefix = '>' if data is None else data['_prefix']
     
-    if prefixs is None:
+    if prefix is None:
         fail =discord.Embed(
             title="",
             description=f"Enter your prefix to change the current prefix.\nMy Current Prefix: {curr_prefix}",
@@ -340,14 +340,14 @@ async def prefix(ctx, prefixs=None):
         return await ctx.send(embed=fail)
     
     if data is None:
-        newdata = {"guild_id": ctx.guild.id, "_prefix": prefixs}
+        newdata = {"guild_id": ctx.guild.id, "_prefix": prefix}
         collection.insert_one(newdata)
     
-    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefixs}}, upsert=True)
+    collection.update_one({"guild_id": ctx.guild.id}, {"$set": {"_prefix": prefix}}, upsert=True)
     
     done = discord.Embed(
         title="",
-        description=f"{client.user.mention}'s Prefix has been set to {prefixs}",
+        description=f"{client.user.mention}'s Prefix has been set to {prefix}",
         color=discord.Color.green()
     )
     done.set_thumbnail(url=client.user.avatar_url)
