@@ -175,13 +175,6 @@ class Moderator(commands.Cog):
             )
             return await ctx.send(embed=failed)
     
-    @ban.error
-    async def ban_error(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You are missing permission(s) to run this command.")
-        else:
-            raise error
-    
     @commands.command()
     @commands.has_permissions(manage_guild=True, kick_members=True)
     async def kick(self, ctx, member : discord.Member=None, *, reason=None):
@@ -244,13 +237,6 @@ class Moderator(commands.Cog):
                 description="Kick Timeout!!"
             )
             return await ctx.send(embed=failed)
-    
-    @kick.error
-    async def kick_error(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You are missing permission(s) to run this command.")
-        else:
-            raise error
 
 def setup(client):
     client.add_cog(Moderator(client))
