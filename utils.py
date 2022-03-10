@@ -48,6 +48,49 @@ class Utils(commands.Cog):
         await asyncio.sleep(sleeper)
         await ctx.message.delete()
     
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def myhentai(self, ctx):
+        """Hentai Anime Image (18+ Warning)"""
+        if not ctx.channel.is_nsfw():
+            url1 = NSFW['hentai1']
+            url2 = NSFW['hentai2']
+            url3 = NSFW['hentai3']
+            r1 = requests.get(url1)
+            r2 = requests.get(url2)
+            r3 = requests.get(url3)
+            data1 = r1.json()
+            data2 = r2.json()
+            data3 = r3.json()
+            img_url1 = data1['url']
+            img_url2 = data2['url']
+            img_url3 = data3['url']
+            imgdata = [
+                img_url1,
+                img_url2,
+                img_url3,
+            ]
+            mvar = random.choice(list(H_MESSAGE.values()))
+            desc = mvar.format(ctx.author.mention)
+            embed = discord.Embed(
+                color=discord.Color.green(),
+                title="--- 18+ Hentai Image ---",
+                description=desc,
+                timestamp=ctx.message.created_at
+            )
+            embed.set_image(url=random.choice(imgdata))
+            embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
+                    
+            await ctx.send(embed=embed)
+            sleeper=5
+            await asyncio.sleep(sleeper)
+            await ctx.message.delete()
+        else:
+            await ctx.send('Note: Write this command outside NSFW channel')
+            sleeper=5
+            await asyncio.sleep(sleeper)
+            await ctx.message.delete()
+    
     @commands.command()
     async def hentai(self, ctx):
         """Hentai Anime Image (18+ Warning)"""
