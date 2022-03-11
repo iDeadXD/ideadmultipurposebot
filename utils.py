@@ -404,7 +404,6 @@ class Utils(commands.Cog):
         embed.add_field(name="Written in", value="Python3 (discord.py Module)", inline=False)
         embed.add_field(name="Serving on", value=f"{current_guild} Servers", inline=False)
         embed.add_field(name="Bot Category", value="Music Bot (Soon, this bot will be a MultiPurpose bot)", inline=False)
-        embed.add_field(name="Auxiliaries", value="Heroku Server (So that bots can always be online)", inline=False)
         embed.add_field(name="Available Commands", value="Check using >help", inline=False)
         embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
         
