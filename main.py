@@ -222,45 +222,45 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=failed)
     raise ErrorHandler(f'{error}')
 
-@client.event
-async def on_guild_join(guild):
-    dev = client.get_user(843132313562513408)
-    if guild.id not in whitelist:
-        blacklist_owner = guild.owner
-        date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
-        warn = discord.Embed(
-            title='--- Warning!! ---',
-            description='Your Server is not registered!!. Auto Leave Triggered\nYou can request to Dev for registering your Server and invite me again after registration\nReason: BETA Version (Still Under Development)',
-            color=discord.Color.red()
-        )
-        warn.add_field(name='Server Name', value=f'**{guild.name}**')
-        warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
-        warn.add_field(name='\u200b', value='__Not Registered!!__')
+#@client.event
+#async def on_guild_join(guild):
+    #dev = client.get_user(843132313562513408)
+    #if guild.id not in whitelist:
+        #blacklist_owner = guild.owner
+        #date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
+        #warn = discord.Embed(
+            #title='--- Warning!! ---',
+            #description='Your Server is not registered!!. Auto Leave Triggered\nYou can request to Dev for registering your Server and invite me again after registration\nReason: BETA Version (Still Under Development)',
+            #color=discord.Color.red()
+        #)
+        #warn.add_field(name='Server Name', value=f'**{guild.name}**')
+        #warn.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
+        #warn.add_field(name='\u200b', value='__Not Registered!!__')
         
-        blacklist_join = discord.Embed(
-            title='--- Server is not registered ---',
-            description=f'Joined to **{guild.name}**\nAuthor: __{blacklist_owner.name + "#" + blacklist_owner.discriminator}__\nTime: {date_now}',
-            color=discord.Color.red()
-        )
-        blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
-        blacklist_join.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
-        blacklist_join.set_footer(text='Unregistered server try to invite me!!')
+        #blacklist_join = discord.Embed(
+            #title='--- Server is not registered ---',
+            #description=f'Joined to **{guild.name}**\nAuthor: __{blacklist_owner.name + "#" + blacklist_owner.discriminator}__\nTime: {date_now}',
+            #color=discord.Color.red()
+        #)
+        #blacklist_join.add_field(name='Server Name', value=f'**{guild.name}**')
+        #blacklist_join.add_field(name='Status', value=f'{len(guild.members)} User, {len(guild.roles)} Roles, {len(guild.channels)} Channel')
+        #blacklist_join.set_footer(text='Unregistered server try to invite me!!')
         
-        await dev.send(embed=blacklist_join)
-        await guild.owner.send(embed=warn)
-        await asyncio.sleep(10)
-        return await guild.leave()
+        #await dev.send(embed=blacklist_join)
+        #await guild.owner.send(embed=warn)
+        #await asyncio.sleep(10)
+        #return await guild.leave()
     
-    owner = guild.owner
-    ch = random.choice(guild.text_channels)
-    link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
+    #owner = guild.owner
+    #ch = random.choice(guild.text_channels)
+    #link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
     
-    joined = discord.Embed(
-        title='--- Server Joined ---',
-        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({link})',
-        color=discord.Color.purple()
-    )
-    await dev.send(embed=joined)
+    #joined = discord.Embed(
+        #title='--- Server Joined ---',
+        #description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({link})',
+        #color=discord.Color.purple()
+    #)
+    #await dev.send(embed=joined)
 
 @client.event
 async def on_member_remove(member):
