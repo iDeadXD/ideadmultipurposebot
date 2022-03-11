@@ -251,7 +251,7 @@ async def on_guild_join(guild):
         #await asyncio.sleep(10)
         #return await guild.leave()
     
-    #owner = guild.owner
+    owner = guild.owner
     #ch = random.choice(guild.text_channels)
     #link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
     
@@ -349,7 +349,7 @@ async def prefix(ctx, prefix=None):
     )
     done.set_thumbnail(url=client.user.avatar_url)
     
-    await client.get_guild(ctx.guild.id).get_member(client.user.id).edit(nick=f"Music Player [{str(prefixs)}]")
+    await client.get_guild(ctx.guild.id).get_member(client.user.id).edit(nick=f"Music Player [{str(prefix)}]")
     await ctx.send(embed=done)
 
 @client.command()
