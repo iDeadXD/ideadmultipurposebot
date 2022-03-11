@@ -256,9 +256,9 @@ async def on_guild_join(guild):
     #link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
     
     joined = discord.Embed(
-        #title='--- Server Joined ---',
-        #description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]()',
-        #color=discord.Color.purple()
+        title='--- Server Joined ---',
+        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]()',
+        color=discord.Color.purple()
     )
     await dev.send(embed=joined)
 
