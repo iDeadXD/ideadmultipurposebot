@@ -222,8 +222,8 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=failed)
     raise ErrorHandler(f'{error}')
 
-#@client.event
-#async def on_guild_join(guild):
+@client.event
+async def on_guild_join(guild):
     #dev = client.get_user(843132313562513408)
     #if guild.id not in whitelist:
         #blacklist_owner = guild.owner
@@ -255,12 +255,12 @@ async def on_command_error(ctx, error):
     #ch = random.choice(guild.text_channels)
     #link = await ch.create_invite(xkcd=True, max_age = 0, max_uses = 0)
     
-    #joined = discord.Embed(
+    joined = discord.Embed(
         #title='--- Server Joined ---',
-        #description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]({link})',
+        #description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]()',
         #color=discord.Color.purple()
-    #)
-    #await dev.send(embed=joined)
+    )
+    await dev.send(embed=joined)
 
 @client.event
 async def on_member_remove(member):
