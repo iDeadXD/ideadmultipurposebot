@@ -143,7 +143,7 @@ class VoiceV2(commands.Cog):
         else:
             try:
                 get_cat = self.client.get_channel(int(category.content))
-            except:
+            except AttributeError:
                 fail = discord.Embed(
                     title='',
                     description='Category Not Found',
@@ -180,7 +180,7 @@ class VoiceV2(commands.Cog):
                 else:
                     try:
                         get_ch = self.client.get_channel(int(channel.content))
-                    except:
+                    except AttributeError:
                         fail = discord.Embed(
                             title='',
                             description='Channel Not Found',
