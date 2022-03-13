@@ -143,7 +143,7 @@ class VoiceV2(commands.Cog):
         else:
             try:
                 get_cat = self.client.get_channel(int(category.content))
-            except commands.ChannelNotFound:
+            except AtrributeError:
                 fail = discord.Embed(
                     title='',
                     description='Category Not Found',
@@ -160,7 +160,7 @@ class VoiceV2(commands.Cog):
             else:
                 second_question = discord.Embed(
                     title='',
-                    description='Enter the name of the voice channel that you have created (Make sure the channel in the same category)',
+                    description='Enter the ID of the voice channel that you have created (Make sure the channel in the same category)',
                     color=discord.Color.purple()
                 )
                 await ctx.send(embed=second_question)
@@ -180,7 +180,7 @@ class VoiceV2(commands.Cog):
                 else:
                     try:
                         get_ch = self.client.get_channel(int(channel.content))
-                    except commands.ChannelNotFound:
+                    except AtrributeError:
                         fail = discord.Embed(
                             title='',
                             description='Channel Not Found',
