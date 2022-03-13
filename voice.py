@@ -86,7 +86,7 @@ class VoiceV2(commands.Cog):
             channel = ctx.author.voice.channel
         try:
             target_ch = self.client.get_channel(channel.id)
-        except commands.ChannelNotFound:
+        except AttributeError:
             failed = discord.Embed(
                 title='',
                 description='Channel Not Found!!',
@@ -143,7 +143,7 @@ class VoiceV2(commands.Cog):
         else:
             try:
                 get_cat = self.client.get_channel(int(category.content))
-            except AtrributeError:
+            except AttributeError:
                 fail = discord.Embed(
                     title='',
                     description='Category Not Found',
@@ -180,7 +180,7 @@ class VoiceV2(commands.Cog):
                 else:
                     try:
                         get_ch = self.client.get_channel(int(channel.content))
-                    except AtrributeError:
+                    except AttributeError:
                         fail = discord.Embed(
                             title='',
                             description='Channel Not Found',
