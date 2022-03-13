@@ -219,8 +219,9 @@ async def on_command_error(ctx, error):
         description=f'`{error}`',
         color=discord.Color.red()
     )
-    await ctx.send(embed=failed)
-    raise ErrorHandler(f'{error}')
+    await ctx.message.delete()
+    await ctx.send(embed=failed, delete_after=5)
+    raise error
 
 @client.event
 async def on_guild_join(guild):
