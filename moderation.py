@@ -32,6 +32,8 @@ class Moderator(commands.Cog):
                 embfields = embed.fields
                 embimage = embed.image.url
                 embthumbnail = embed.thumbnail.url
+                embauthoricon = embed.author.icon_url
+                embauthorname = embed.author.name
                 
                 #Identifier
                 title = 'None' if len(embtitle) == 0 else embtitle
@@ -41,13 +43,15 @@ class Moderator(commands.Cog):
                 image = 'None' if len(embimage) == 0 else embimage
                 fields = 'None' if len(embfields) == 0 else str(len(embfields))
                 thumbnail = 'None' if len(embthumbnail) == 0 else embthumbnail
+                authoricon = 'None' if len(embauthoricon) == 0 else embauthoricon
+                authorname = 'None' if len(embauthorname) == 0 else embauthorname
                 
                 if data is None:
-                    new_data = {'_id': message.channel.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}
+                    new_data = {'_id': message.channel.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'embed_author_name': authorname, 'embed_author_icon': authoricon, 'author': message.author.id}
                     saved.insert_one(new_data)
                     await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nServer: {message.guild.name}\nChannel: {message.channel.mention}\n-----------------------')
                 else:
-                    saved.update_one({'_id': message.channel.id}, {'$set': {'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}})
+                    saved.update_one({'_id': message.channel.id}, {'$set': {'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'embed_author_name': authorname, 'embed_author_icon': authoricon, 'author': message.author.id}})
                     await dev.send(f'Embed Data has been Updated!\nTimestamp: {now}\nServer: {message.guild.name}\nChannel: {message.channel.mention}\n-----------------------')
             except Exception as e:
                 return print(e)
@@ -79,6 +83,8 @@ class Moderator(commands.Cog):
         recreate.add_field(name='Thumbnail URL', value=f'{data["thumbnail"]}')
         recreate.add_field(name='Image URL', value=f'{data["image"]}')
         recreate.add_field(name='Author', value=f'{author.name + "#" + author.discriminator} / {author.mention}')
+        recreate.add_field(name='Embed Author Name', value=f'{data["embed_author_name"]}')
+        recreate.add_field(name='Embed Author Icon', value=f'{data["embed_author_icon"]}')
         recreate.set_footer(text=f'Sniped by {ctx.author.name + "#" + ctx.author.discriminator}')
         
         await ctx.send(embed=recreate)
