@@ -225,7 +225,7 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_guild_join(guild):
-    #dev = client.get_user(843132313562513408)
+    dev = client.get_user(843132313562513408)
     #if guild.id not in whitelist:
         #blacklist_owner = guild.owner
         #date_now = datetime.now(pytz.timezone('Asia/Jakarta'))
@@ -258,7 +258,7 @@ async def on_guild_join(guild):
     
     joined = discord.Embed(
         title='--- Server Joined ---',
-        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}\nInvite Link: [Click This]()',
+        description=f'Joined to **{guild.name}**\nAuthor: __{owner.name + "#" + owner.discriminator}__\nTime: {date_now}',
         color=discord.Color.purple()
     )
     await dev.send(embed=joined)
