@@ -486,7 +486,7 @@ class Music(commands.Cog):
         data = requests.get(f"https://some-random-api.ml/lyrics?title={arg}").text
         try:
             jsontxt = json.loads(data)
-            title = jsontxt["title"]
+            mtitle = jsontxt["title"]
             author = jsontxt["author"]
             lyrics = jsontxt["lyrics"]
         except Exception as e:
@@ -494,7 +494,7 @@ class Music(commands.Cog):
             print("Error occured | "+str(e) + " | "+str(data))
         try:
             embed = discord.Embed(
-                title = f":musical_note: Lyrics | {title} | {author}",
+                title = f":musical_note: Lyrics | {mtitle} | {author}",
                 description = lyrics if len(lyrics) <= 2048 else lyrics[:2048],
                 timestamp=ctx.message.created_at,
                 colour = discord.Color.dark_blue()
