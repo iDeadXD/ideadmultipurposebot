@@ -492,16 +492,17 @@ class Music(commands.Cog):
         except Exception as e:
             await ctx.send("<:information:773048990534991882> Sorry, I can't found the lyrics for the song you mentioned.")
             print("Error occured | "+str(e) + " | "+str(data))
-        try:
-            embed = discord.Embed(
-                title = f":musical_note: Lyrics | {mtitle} | {author}",
-                description = lyrics if len(lyrics) <= 2048 else lyrics[:2048],
-                timestamp=ctx.message.created_at,
-                colour = discord.Color.dark_blue()
-            )
-            await ctx.send(embed = embed)
-        except Exception as e:
-            await ctx.send(f"<:no:773048990727143464> Seems like an error has occurred: ```{e}```")
+        else:
+            try:
+                embed = discord.Embed(
+                    title = f":musical_note: Lyrics | {mtitle} | {author}",
+                    description = lyrics if len(lyrics) <= 2048 else lyrics[:2048],
+                    timestamp=ctx.message.created_at,
+                    colour = discord.Color.dark_blue()
+                )
+                await ctx.send(embed = embed)
+            except Exception as e:
+                await ctx.send(f"<:no:773048990727143464> Seems like an error has occurred: ```{e}```")
 
 def setup(bot):
     bot.add_cog(Music(bot))
