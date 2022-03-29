@@ -18,7 +18,7 @@ youtube_dl.utils.bug_reports_message = lambda: ''
 ytdlopts = {
     'format': 'bestaudio/best',
     'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
-    'buffersize': 36000,
+    'buffersize': 48000,
     'restrictfilenames': True,
     'noplaylist': True,
     'nocheckcertificate': True,
