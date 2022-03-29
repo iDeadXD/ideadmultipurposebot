@@ -22,6 +22,7 @@ import economy
 import dev
 import moderation
 import utils
+import premium
 import games
 from menupages import MyMenuPages
 from helpsource import HelpPageSource
@@ -137,7 +138,7 @@ client = commands.Bot(
 client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
-cogs = [setups, dev, music, levelsystem, voice, moderation, utils, guild_utils, games, economy]
+cogs = [premium, setups, dev, music, levelsystem, voice, moderation, utils, guild_utils, games, economy]
 task = ['good_morning']
 
 #=== Cog Executor ===
