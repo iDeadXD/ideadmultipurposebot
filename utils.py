@@ -652,6 +652,22 @@ class Utils(commands.Cog):
         for i in range(multiplier):
             await ctx.send(message)
     
+    @commands.command(aliases=['anon', 'send_anon'], hidden=True)
+    async def anonymous(self, ctx, msg_type, channel_id, *, message):
+        channel = self.client.get_channel(int(channel_id))
+        text = ['0', 'txt', 'text', '-']
+        emb = ['1', 'emb', 'embed', '+']
+        if msg_type.lower() in text:
+            return await channel.send(message)
+        elif msg_type.lower() in emb:
+            embed = discord.Embed(
+                title='',
+                description=message,
+                timestamp=ctx.message.created_at,
+                color=ctx.author.color
+            )
+            return await channel.send(embed=embed)
+    
     #Failed
     @commands.command(aliases=["wiki", "wkpd"], hidden=True)
     async def wikipedia(self, ctx, search: str=None):
