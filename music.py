@@ -479,6 +479,32 @@ class Music(commands.Cog):
 
         await self.cleanup(ctx.guild)
     
+    @commands.command(name='providers', aliases=['supported'], description='list supported music providers')
+    async def providers(self, ctx):
+        embed = discord.Embed(
+            title='Supported Providers',
+            color=discord.Color.purple(),
+            timestamp=ctx.message.created_at
+        )
+        embed.add_field(
+            name='YouTube',
+            value="Listen to [YouTube](https://www.youtube.com) videos (Playlist doesn't supported)."
+        )
+        embed.add_field(
+            name='Twitch',
+            value="Listen to livestreams or clips from [Twitch](https://twitch.tv)."
+        )
+        embed.add_field(
+            name='SoundCloud',
+            value="Listen to [SoundCloud](https://www.soundcloud.com) songs (Playlist doesn't supported)."
+        )
+        embed.add_field(
+            name='Clyp',
+            value="Listen to [Clyp.it](http://clyp.it) songs."
+        )
+        embed.set_thumbnail(url=self.client.user.avatar_url)
+        await ctx.send(embed=embed)
+    
     @commands.command(name='lyrics', description="showing the current song lyrics")
     async def lyrics(self, ctx, *, arg):
         """Displaying Lyrics for a Song."""
