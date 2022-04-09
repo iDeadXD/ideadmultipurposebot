@@ -481,6 +481,7 @@ class Music(commands.Cog):
     
     @commands.command(name='providers', aliases=['supported'], description='list supported music providers')
     async def providers(self, ctx):
+        """Get list of supported providers"""
         embed = discord.Embed(
             title='Supported Providers',
             color=discord.Color.purple(),
