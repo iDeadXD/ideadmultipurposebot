@@ -480,7 +480,7 @@ class Music(commands.Cog):
         await self.cleanup(ctx.guild)
     
     @commands.command(name='providers', aliases=['supported'], description='list supported music providers')
-    async def providers(self, ctx):
+    async def _providers(self, ctx):
         """Get list of supported providers"""
         embed = discord.Embed(
             title='Supported Providers',
@@ -503,7 +503,7 @@ class Music(commands.Cog):
             name='Clyp',
             value="Listen to [Clyp.it](http://clyp.it) songs."
         )
-        embed.set_thumbnail(url=self.client.user.avatar_url)
+        embed.set_thumbnail(url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
     
     @commands.command(name='lyrics', description="showing the current song lyrics")
