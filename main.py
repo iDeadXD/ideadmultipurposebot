@@ -179,8 +179,8 @@ async def on_ready():
 
 @client.event #on_message
 async def on_message(message):
-    hello_m = ["halo", "hello", "hola"]
-    test_msg = ['kntl_is_kntl', 'mmk_is_mmk']
+    #hello_m = ["halo", "hello", "hola"]
+    #test_msg = ['kntl_is_kntl', 'mmk_is_mmk']
     
     #for msg in hello_m: Check if message content in hello_m
         #if message.content.lower().startswith(msg):
@@ -190,6 +190,12 @@ async def on_message(message):
                 #color=discord.Color.purple()
             #)
             #await message.reply(embed=halo)
+    
+    if message.channel.id == 906005326086692904:
+        msg_att = message.attachments
+        if msg_att.content_type == 'image':
+            emoji_list = ['👌', '👍', '💯', '❤️']
+            await message.add_reaction(random.choice(emoji_list))
     
     await client.process_commands(message)
 
