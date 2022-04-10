@@ -193,10 +193,8 @@ async def on_message(message):
     
     if message.channel.id == 906005326086692904:
         if message.attachments:
-            for msg_att in message.attachments:
-                if msg_att.content_type == 'image':
-                    emoji_list = ['👌', '👍', '💯', '❤️']
-                    await message.add_reaction(random.choice(emoji_list))
+            emoji_list = ['👌', '👍', '💯', '❤️']
+            await message.add_reaction(random.choice(emoji_list))
     
     await client.process_commands(message)
 
