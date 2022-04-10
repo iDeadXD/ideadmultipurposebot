@@ -192,10 +192,10 @@ async def on_message(message):
             #await message.reply(embed=halo)
     
     if message.channel.id == 906005326086692904:
-        msg_att = message.attachments
-        if msg_att.content_type == 'image':
-            emoji_list = ['👌', '👍', '💯', '❤️']
-            await message.add_reaction(random.choice(emoji_list))
+        for msg_att in messsge.attachments:
+            if msg_att.content_type == 'image':
+                emoji_list = ['👌', '👍', '💯', '❤️']
+                await message.add_reaction(random.choice(emoji_list))
     
     await client.process_commands(message)
 
