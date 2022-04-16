@@ -1607,7 +1607,7 @@ class VoiceV2(commands.Cog):
                     done = discord.Embed(
                         title='',
                         description='Settings saved',
-                        color=discord.color.green(),
+                        color=discord.Color.green(),
                         timestamp=ctx.message.created_at
                     )
                     await ctx.send(embed=done)
@@ -1615,7 +1615,7 @@ class VoiceV2(commands.Cog):
                     cancelled = discord.Embed(
                         title='',
                         description='Save settings cancelled',
-                        color=discord.color.green(),
+                        color=discord.Color.green(),
                         timestamp=ctx.message.created_at
                     )
                     await ctx.send(embed=cancelled)
@@ -1623,7 +1623,7 @@ class VoiceV2(commands.Cog):
                     failed = discord.Embed(
                         title='',
                         description='Invalid option!!',
-                        color=discord.color.red(),
+                        color=discord.Color.red(),
                         timestamp=ctx.message.created_at
                     )
                     await ctx.send(embed=failed)
