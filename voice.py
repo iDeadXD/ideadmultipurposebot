@@ -28,6 +28,113 @@ def generate_password(length=8):
     )
     return result
 
+class VoiceVoteManager:
+    def __init__(
+        self,
+        ctx: commands.Context
+    ):
+        self.ctx = ctx
+    
+    async def start_votekick(
+        self,
+        member: discord.Member,
+        channel: discord.VoiceChannel,
+        timeout: int
+    ):
+        voting = discord.Embed(
+            title='--- Vote Kick ---',
+            description=f"Waiting vote to kick {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}",
+            color=discord.Color.blurple()
+        )
+        
+        vote = await self.ctx.send(embed=voting)
+        await vote.add_reaction(':white_check_mark:')
+        await vote.add_reaction(':x:')
+        await asyncio.sleep(timeout)
+        
+        embvoteend = discord.Embed(
+            description='Voting is done!!.\nCounting result...',
+            color=discord.Color.green()
+        )
+        voteend = await self.ctx.send(embed=embvoteend)
+        
+        yes = vote.reactions[0].count
+        no = vote.reactions[1].count
+        
+        await voteend.delete()
+        raw_res = discord.Embed(
+            title='--- Vote Result ---',
+            description=f'Yes: {yes}\nNo: {no}',
+            color=discord.Color.purple()
+        )
+        await self.ctx.send(embed=raw_res)
+        await asyncio.sleep(3)
+        
+        if yes > no:
+            await member.move_to(None)
+            result = discord.Embed(
+                title='',
+                description=f'{member.mention} has been kicked from your channel',
+                color=discord.Color.purple()
+            )
+        elif yes < no or yes == no:
+            result = discord.Embed(
+                title='',
+                description=f'Kick {member.mention} from your channel cancelled',
+                color=discord.Color.purple()
+            )
+        await self.ctx.send(embed=result)
+    
+    async def start_voteban(
+        self,
+        member: discord.Member,
+        channel: discord.VoiceChannel,
+        timeout: int
+    ):
+        voting = discord.Embed(
+            title='--- Vote Ban ---',
+            description=f"Waiting vote to ban {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}",
+            color=discord.Color.blurple()
+        )
+        
+        vote = await self.ctx.send(embed=voting)
+        await vote.add_reaction(':white_check_mark:')
+        await vote.add_reaction(':x:')
+        await asyncio.sleep(timeout)
+        
+        embvoteend = discord.Embed(
+            description='Voting is done!!.\nCounting result...',
+            color=discord.Color.green()
+        )
+        voteend = await self.ctx.send(embed=embvoteend)
+        
+        yes = vote.reactions[0].count
+        no = vote.reactions[1].count
+        
+        await voteend.delete()
+        raw_res = discord.Embed(
+            title='--- Vote Result ---',
+            description=f'Yes: {yes}\nNo: {no}',
+            color=discord.Color.purple()
+        )
+        await self.ctx.send(embed=raw_res)
+        await asyncio.sleep(3)
+        
+        if yes > no:
+            await member.move_to(None)
+            result = discord.Embed(
+                title='',
+                description=f'{member.mention} has been banned from your channel',
+                color=discord.Color.purple()
+            )
+        elif yes < no or yes == no:
+            result = discord.Embed(
+                title='',
+                description=f'Ban {member.mention} from your channel cancelled',
+                color=discord.Color.purple()
+            )
+        await self.ctx.send(embed=result)
+
 class VoiceV2(commands.Cog):
     def __init__(self, client: commands.Bot): 
         self.client = client
@@ -574,53 +681,12 @@ class VoiceV2(commands.Cog):
                 )
                 return await ctx.send(embed=failed)
             else:
-                voting = discord.Embed(
-                    title='--- Vote Kick ---',
-                    description=f"Waiting vote to kick {member.mention}\n15 Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}",
-                    color=discord.Color.blurple()
+                voting = VoiceVoteManager(ctx)
+                await voting.start_votekick(
+                    member,
+                    channel,
+                    15
                 )
-                vote = await ctx.send(embed=voting)
-                await vote.add_reaction(':white_check_mark:')
-                await vote.add_reaction(':x:')
-                try:
-                    react_count = await self.client.wait_for(
-                          'reaction_add',
-                          check=lambda reaction, user:reaction.message.id == vote.id and user.id in member_list,
-                          timeout=15
-                    )
-                except asyncio.TimeoutError:
-                    done = discord.Embed(
-                        title='',
-                        description='Voting is Done!!\nCounting result...',
-                        color=discord.Color.purple()
-                    )
-                    counting = await ctx.send(embed=done)
-                    
-                    yes = react_count.count if str(react_count.emoji) == ':white_check_mark:'
-                    no = react_count.count if str(react_count.emoji) == ':x:'
-                    
-                    await counting.delete()
-                    raw_res = discord.Embed(
-                        title='--- Vote Result ---',
-                        description=f'Yes: {yes}\nNo: {no}',
-                        color=discord.Color.purple()
-                    )
-                    await ctx.send(embed=raw_res)
-                    await asyncio.sleep(3)
-                    if yes > no:
-                        await member.move_to(None)
-                        result = discord.Embed(
-                            title='',
-                            description=f'{member.mention} has been kicked from your channel',
-                            color=discord.Color.purple()
-                        )
-                    elif yes < no or yes == no:
-                        result = discord.Embed(
-                            title='',
-                            description=f'Kick {member.mention} from your channel cancelled',
-                            color=discord.Color.purple()
-                        )
-                    await ctx.send(embed=result)
     
     @commands.command(
         name='v-voteban',
@@ -671,56 +737,12 @@ class VoiceV2(commands.Cog):
                 )
                 return await ctx.send(embed=failed)
             else:
-                voting = discord.Embed(
-                    title='--- Vote Ban ---',
-                    description=f"Waiting vote to ban {member.mention}\n15 Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}",
-                    color=discord.Color.blurple()
+                voting = VoiceVoteManager(ctx)
+                await voting.start_voteban(
+                    member,
+                    channel,
+                    15
                 )
-                vote = await ctx.send(embed=voting)
-                await vote.add_reaction(':white_check_mark:')
-                await vote.add_reaction(':x:')
-                try:
-                    react_count = await self.client.wait_for(
-                          'reaction_add',
-                          check=lambda reaction, user:reaction.message.id == vote.id and user.id in member_list,
-                          timeout=15
-                    )
-                except asyncio.TimeoutError:
-                    done = discord.Embed(
-                        title='',
-                        description='Voting is Done!!\nCounting result...',
-                        color=discord.Color.purple()
-                    )
-                    counting = await ctx.send(embed=done)
-                    
-                    yes = react_count.count if str(react_count.emoji) == ':white_check_mark:'
-                    no = react_count.count if str(react_count.emoji) == ':x:'
-                    
-                    await counting.delete()
-                    raw_res = discord.Embed(
-                        title='--- Vote Result ---',
-                        description=f'Yes: {yes}\nNo: {no}',
-                        color=discord.Color.purple()
-                    )
-                    await ctx.send(embed=raw_res)
-                    await asyncio.sleep(3)
-                    if yes > no:
-                        await member.move_to(None)
-                        overwrite = channel.overwrites_for(member)
-                        overwrite.connect = False
-                        await channel.set_permissions(member, overwrite=overwrite)
-                        result = discord.Embed(
-                            title='',
-                            description=f'{member.mention} has been banned from your channel',
-                            color=discord.Color.purple()
-                        )
-                    elif yes < no or yes == no:
-                        result = discord.Embed(
-                            title='',
-                            description=f'Ban {member.mention} from your channel cancelled',
-                            color=discord.Color.purple()
-                        )
-                    await ctx.send(embed=result)
     
     @commands.command(
         name='v-claim'
