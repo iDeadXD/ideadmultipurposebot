@@ -1583,7 +1583,7 @@ class VoiceV2(commands.Cog):
                 color=discord.Color.purple()
             )
             await ctx.send(embed=embed)
-            try
+            try:
                 response: discord.Message = await self.client.wait_for(
                     'message',
                     check=lambda m:m.author == ctx.author and m.channel == ctx.channel,
