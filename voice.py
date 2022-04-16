@@ -57,6 +57,8 @@ class VoiceVoteManager:
             color=discord.Color.green()
         )
         voteend = await self.ctx.send(embed=embvoteend)
+        await asyncio.sleep(3)
+        print(len(vote.reactions))
         
         yes = vote.reactions[0].count
         no = vote.reactions[1].count
@@ -107,6 +109,8 @@ class VoiceVoteManager:
             color=discord.Color.green()
         )
         voteend = await self.ctx.send(embed=embvoteend)
+        await asyncio.sleep(3)
+        print(len(vote.reactions))
         
         yes = vote.reactions[0].count
         no = vote.reactions[1].count
