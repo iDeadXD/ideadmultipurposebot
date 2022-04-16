@@ -48,8 +48,8 @@ class VoiceVoteManager:
         )
         
         vote = await self.ctx.send(embed=voting)
-        await vote.add_reaction(':white_check_mark:')
-        await vote.add_reaction(':x:')
+        await vote.add_reaction('✅')
+        await vote.add_reaction('❌')
         await asyncio.sleep(timeout)
         
         embvoteend = discord.Embed(
@@ -98,8 +98,8 @@ class VoiceVoteManager:
         )
         
         vote = await self.ctx.send(embed=voting)
-        await vote.add_reaction(':white_check_mark:')
-        await vote.add_reaction(':x:')
+        await vote.add_reaction('✅')
+        await vote.add_reaction('❌')
         await asyncio.sleep(timeout)
         
         embvoteend = discord.Embed(
