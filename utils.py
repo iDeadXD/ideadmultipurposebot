@@ -267,47 +267,22 @@ class Utils(commands.Cog):
     
     @commands.command() #ping
     async def ping(self, ctx):
-        """Showing Bot Latency and YouTube Server Status"""
-        pings = requests.get("https://youtube.com")
-        status = pings.status_code
+        """Pong!"""
+        start = time.perf_counter()
         
-        if status == 200:
-            result = "Online/Active"
-        else:
-            result = "Error/Inactive"
+        pinging = await ctx.send('Pinging')
         
-        titles = "Pong!!"
-        ytlatency = str(f" {result}")
-        embed = discord.Embed(
-            title=titles,
-            color=ctx.author.color,
-            timestamp=ctx.message.created_at
-        )
-        embed.add_field(name="Client Latency", value=str(f" {round(self.client.latency * 1000)}ms"))
-        embed.add_field(name="YouTube Server Status", value=ytlatency)
-        embed.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
+        i = 0
+        for _ in range(4):
+            i += 1
+            await pinging.edit(f'Pinging{"."*i}')
         
-        msg = await ctx.send('Testing Connection...')
-        await asyncio.sleep(0.8)
-        await msg.delete()
-        await ctx.send(embed=embed)
-    
-    @commands.command() #current_time
-    async def time(self, ctx):
-        """Showing Current Time (Local/UTC)"""
-        time1 = datetime.now(pytz.timezone('Asia/Jakarta'))
-        time1utc = datetime.utcnow()
-        titles = "Current Time (Local/UTC)"
-        author = ctx.message.author.name
-            
-        embed = discord.Embed(
-            title=titles,
-        )
-        embed.add_field(name="Local Time", value=time1)
-        embed.add_field(name="UTC Time", value=time1utc)
-        embed.set_footer(text="Author: {}".format(author), icon_url=ctx.message.author.avatar_url)
-            
-        await ctx.send(embed=embed)
+        end = time.perf_counter()
+        
+        duration = (start - end) * 1000
+        ws_latency = round(self.client.latency * 1000)
+        
+        await pinging.edit(f'🏓**Pong!**\n🛰️**Web socket latency:** {ws_latency}ms\n**📶Total latency:** {duration:.0f}ms')
     
     @commands.command(name="clean")
     async def _clean(self, ctx, limit: int=None, member: discord.Member=None):
