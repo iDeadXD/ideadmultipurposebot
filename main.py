@@ -138,7 +138,7 @@ client = commands.Bot(
 client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
-cogs = [premium, setups, dev, music, levelsystem, voice, moderation, utils, guild_utils, games, economy]
+cogs = [premium, setups, dev, music, levelsystem, moderation, utils, guild_utils, games, economy]
 task = ['good_morning']
 
 #=== Cog Executor ===
