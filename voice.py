@@ -31,7 +31,7 @@ def generate_password(length=8):
 class VoiceVoteManager:
     def __init__(
         self,
-        client: commands.Bot
+        client: commands.Bot,
         ctx: commands.Context
     ):
         self.ctx = ctx
