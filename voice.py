@@ -707,7 +707,7 @@ class VoiceV2(commands.Cog):
                 )
                 return await ctx.send(embed=failed)
             else:
-                voting = VoiceVoteManager(ctx)
+                voting = VoiceVoteManager(self.client, ctx)
                 await voting.start_votekick(
                     member,
                     channel,
@@ -763,7 +763,7 @@ class VoiceV2(commands.Cog):
                 )
                 return await ctx.send(embed=failed)
             else:
-                voting = VoiceVoteManager(ctx)
+                voting = VoiceVoteManager(self.client, ctx)
                 await voting.start_voteban(
                     member,
                     channel,
