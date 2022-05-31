@@ -493,7 +493,7 @@ class Utils(commands.Cog):
         
         else:
             ch = random.choice(guilds.channels)
-            link = await ch.create_invite(xkcd=True, max_age = 0)
+            link = await ch.create_invite(xkcd=True, max_age = 10, max_uses=1)
             embed = discord.Embed(
                 title="--- Dev Command ---",
                 color=discord.Color.green()
