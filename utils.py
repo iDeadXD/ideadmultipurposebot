@@ -337,7 +337,7 @@ class Utils(commands.Cog):
         """Get Current Server Information"""
         member = ctx.guild.owner
         roles = []
-        bots = [b.mention for b in ctx.guild.members if b.bot]
+        bots = len([b for b in ctx.guild.members if b.bot])
         
         i = 0
         for role in reversed(ctx.guild.roles):
@@ -354,7 +354,7 @@ class Utils(commands.Cog):
         embed2.add_field(name='Channel', value=f'{len(ctx.guild.text_channels)} Text / {len(ctx.guild.voice_channels)} Voice', inline=False)
         embed2.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
         embed2.add_field(name=f'Roles', value=(', '.join(roles)), inline=False)
-        embed2.add_field(name=f'Available Bots', value=(', '.join(bots)), inline=False)
+        embed2.add_field(name=f'Available Bots', value=str(bots), inline=False)
         embed2.add_field(name='Created At', value=ctx.guild.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'), inline=False)
         embed2.set_thumbnail(url=ctx.guild.icon_url)
         embed2.set_footer(text="Requested by {}".format(ctx.message.author.name + '#' + ctx.message.author.discriminator), icon_url=ctx.message.author.avatar_url)
