@@ -57,14 +57,13 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
+            global react_count
             react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
                 timeout=timeout
             )
         except asyncio.TimeoutError:
-            pass
-        else:
             embvoteend = discord.Embed(
                 description='Voting is done!!.\nCounting result...',
                 color=discord.Color.green()
@@ -120,6 +119,7 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
+            global react_count
             react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
