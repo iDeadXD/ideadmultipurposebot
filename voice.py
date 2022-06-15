@@ -46,7 +46,7 @@ class VoiceVoteManager:
         
         voting = discord.Embed(
             title='--- Vote Kick ---',
-            description=f"Waiting vote to kick {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}\nNot voting = No",
+            description=f"Waiting vote to kick {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(member_list)}\nNot voting = No",
             color=discord.Color.blurple()
         )
         
@@ -57,13 +57,14 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
-            global react_count
             react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
                 timeout=timeout
             )
         except asyncio.TimeoutError:
+            pass
+        else:
             embvoteend = discord.Embed(
                 description='Voting is done!!.\nCounting result...',
                 color=discord.Color.green()
@@ -108,7 +109,7 @@ class VoiceVoteManager:
 
         voting = discord.Embed(
             title='--- Vote Ban ---',
-            description=f"Waiting vote to ban {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}\nNot voting = No",
+            description=f"Waiting vote to ban {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(member_list)}\nNot voting = No",
             color=discord.Color.blurple()
         )
         
@@ -119,7 +120,6 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
-            global react_count
             react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
