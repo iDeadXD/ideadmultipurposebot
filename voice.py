@@ -31,11 +31,10 @@ def generate_password(length=8):
 class VoiceVoteManager:
     def __init__(
         self,
-        client: commands.Bot,
         ctx: commands.Context
-    ):
+    ) -> None:
         self.ctx = ctx
-        self.client = client
+        self.client: commands.Bot = ctx.bot
     
     async def start_votekick(
         self,
@@ -58,12 +57,14 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
-            react_count = await self.client.wait_for(
+            react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
                 timeout=timeout
             )
         except asyncio.TimeoutError:
+            pass
+        else:
             embvoteend = discord.Embed(
                 description='Voting is done!!.\nCounting result...',
                 color=discord.Color.green()
@@ -104,6 +105,8 @@ class VoiceVoteManager:
         channel: discord.VoiceChannel,
         timeout: int
     ):
+        member_list = [mem.id for mem in channel.members if not mem.bot]
+
         voting = discord.Embed(
             title='--- Vote Ban ---',
             description=f"Waiting vote to ban {member.mention}\n{str(timeout)} Seconds from now\nCurrent member can vote in {channel.mention}: {len(channel.members)}\nNot voting = No",
@@ -117,12 +120,14 @@ class VoiceVoteManager:
             return reaction.message.id == vote.id and reaction.emoji == '✅' and user.id in member_list
         
         try:
-            react_count = await self.client.wait_for(
+            react_count: discord.Reaction = await self.client.wait_for(
                 'reaction_add',
                 check=check,
                 timeout=timeout
             )
         except asyncio.TimeoutError:
+            pass
+        else:
             embvoteend = discord.Embed(
                 description='Voting is done!!.\nCounting result...',
                 color=discord.Color.green()
