@@ -23,7 +23,6 @@ import dev
 import moderation
 import utils
 import premium
-import games
 from menupages import MyMenuPages
 from helpsource import HelpPageSource
 from config import CONFIG
@@ -138,12 +137,12 @@ client = commands.Bot(
 client.help_command = MyNewHelpv1()
 
 #=== Cog + Task List ===
-cogs = [voice, setups, dev, music, levelsystem, moderation, utils, guild_utils, games, economy]
+#cogs = [voice, setups, dev, music, levelsystem, moderation, utils, guild_utils, games, economy]
 task = ['good_morning']
 
 #=== Cog Executor ===
-for i in range(len(cogs)):
-    cogs[i].setup(client)
+#for i in range(len(cogs)):
+#    cogs[i].setup(client)
 
 #=== Client Event Executor ===
 @client.event #bot_event
@@ -395,6 +394,12 @@ async def good_morning(ctx, channel_id: int=None):
     channel = client.get_channel(int(channel_id))
     await channel.send(file=discord.File('ohayou.jpg'))
     await ctx.send('Done!')
+
+@client.command()
+@commands.is_owner()
+async def load_music(ctx):
+    await music.setup(cliient)
+    await ctx.send("Music Loaded")
 
 @client.command(hidden=True)
 @commands.is_owner()
