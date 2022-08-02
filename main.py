@@ -288,42 +288,6 @@ async def on_member_remove(member):
     
     await main_ch.send(embed=leave)
 
-#=== Custom Tasks ===
-@tasks.loop(minutes=5)
-async def dev_hbd():
-    now = datetime.now(pytz.timezone('Asia/Jakarta')).strftime("%d/%m, %H:%M:%S")
-    devdata = devage.find_one({'devid': 843132313562513408})
-    dev = client.get_user(843132313562513408)
-    if now == '13/01, 00:00:00':
-        age_now = devdata['age'] + 1
-        devage.update_one({'devid': 843132313562513408}, {'$set': {'age': age_now}})
-        congrats = discord.Embed(
-            title='--- Announcement ---',
-            description=f'Dev ({dev.name + "#" + dev.discriminator}): Today is my birthday. My current age is {str(age_now)} years old.\nHopefully I can be better at developing this bot.\n(This message is sent automatically)',
-            color=discord.Color.purple()
-        )
-        print(f"Happy Birthday, {dev.name + '#' + dev.discriminator}")
-        await client.guilds.system_channel.send(embed=congrats)
-
-@dev_hbd.before_loop
-async def dev_hbd_before():
-    await client.wait_until_ready()
-
-async def good_morning(channel_id, imglink):
-    await client.wait_until_ready()
-    channel = client.get_channel(int(channel_id))
-    now = datetime.now(pytz.timezone('Asia/Jakarta'))
-    while not client.is_closed():
-        if now.strftime('%H:%M:%S') == '00:00:00':
-            morning = discord.Embed(
-                title='',
-                description='',
-                color=discord.Color.green()
-            )
-            morning.set_image(url=imglink)
-            await channel.send(embed=morning)
-        await asyncio.sleep(30)
-
 #=== Prefix Commands ===
 @client.command()
 @commands.has_permissions(manage_guild=True)
@@ -414,9 +378,6 @@ async def rpctest(ctx):
         )
     )
     await ctx.send('Done!', delete_after=5)
-
-#=== Tasks Runner ===
-dev_hbd.start()
 
 #=== Client Account Executor ===
 if __name__ == "__main__":
